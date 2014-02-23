@@ -1,0 +1,15 @@
+<li>
+  <%= gravatar_for user, size: 52 %>
+  <%= link_to user.name, user %>
+  <!--add !current_user.nil? && to the predicate below so that
+      attempting to reach the followers/following pages of a
+      particular user while not signed in does not cause an error.
+      If you are not signed in, current_user is nil and thus we
+      cannot call the admin? method on that object at that time.-->
+  <% if !current_user.nil? && current_user.admin? && !current_user?(user) %>
+    | <%= link_to "delete",
+                  user,
+                  method: :delete,
+                  data: { confirm: "You sure?" } %>
+  <% end %>
+</li>

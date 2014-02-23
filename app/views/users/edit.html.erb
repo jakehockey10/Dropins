@@ -1,0 +1,19 @@
+<% provide(:title, "Edit user") %>
+<h1>Update your profile</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@user) do |f| %>
+      <%= render partial: 'users/fields', locals: { f: f } %>
+      <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
+    <% end %>
+
+    <%= gravatar_for @user %>
+    <a href="http://gravatar.com/emails" target="_blank">change</a>
+
+    <%= debug("user password present: #{@user.password.present?}\n" +
+              "user password_confirmation present: #{@user.password_confirmation.present?}\n" +
+              "user is valid: #{@user.valid?}\n" +
+              "user is active: #{@user.active?}") if Rails.env.development? %>
+  </div>
+</div>
