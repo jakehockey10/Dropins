@@ -40,5 +40,11 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 
+  # Use color in STDOUT
+  config.color_enabled = true
+
+  # Use the specified formatter
+  config.formatter = :progress # :documentation, :progress, :html, :textmate
+
   config.include Capybara::DSL
 end
