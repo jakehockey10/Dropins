@@ -1,17 +1,30 @@
 <div class="center hero-unit">
-  <h1>Welcome to Rosenbridge Beta</h1>
+  <h1>Rosenbridge</h1>
+
+  <%= image_tag("rosenbridge222x200.gif") %>
 
   <h2>
-    This is the home page for <a href="#">Rosenbridge Beta</a>
+    Speak a language TODAY!
   </h2>
 
-  <%= link_to "Sign up now!",
-              signup_path,
-              class: "btn btn-large btn-primary" %>
-</div>
+  <div class="row" style="margin-bottom: 30px;">
+    <div style="display: inline;">
+      <%= link_to "Sign up",
+                  signup_path,
+                  class: "btn btn-large" %>
+    </div>
+    <div style="display: inline;">
+      <%= link_to "Sign in",
+                  signin_path,
+                  class: "btn btn-large" %>
+    </div>
+  </div>
 
-<p><strong>Greg,</strong></p>
-<p><strong>Should we just remove this?  Do you have an icon image you would like to replace this with?</strong></p>
-<%= link_to image_tag("rails.png",
-                      alt: "Rails"),
-            'http://rubyonrails.org/' %>
+  <h2 class="text-center">
+    or
+  </h2>
+
+  <h4 class="text-center">
+    <%= link_to "Sign up", signup_path, class: "link" %> to be a teacher
+  </h4>
+</div>
