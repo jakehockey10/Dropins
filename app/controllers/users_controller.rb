@@ -27,7 +27,7 @@ class UsersController < ApplicationController
       sign_in @user
       @user.update_attribute(:email_token, User.encrypt(User.new_token))
       UserMailer.signup_confirmation(@user).deliver
-      flash[:success] = "Welcome to Rosenbridge Beta!  Please verify the email you provided by clicking the link we sent to you."
+      flash[:success] = 'Welcome to Rosenbridge Beta!  Please verify the email you provided by clicking the link we sent to you.'
       redirect_to @user
     else
       render 'new'
@@ -40,13 +40,13 @@ class UsersController < ApplicationController
   def verify_emails
     @user = User.find_by(email_token: params[:email_token])
     @user.activate!
-    flash[:success] = "Your email has been verified!"
+    flash[:success] = 'Your email has been verified!'
     redirect_to @user
   end
 
   def update
     if @user.update_attributes(user_params)
-      flash[:success] = "Profile updated"
+      flash[:success] = 'Profile updated'
       redirect_to @user
     else
       render 'edit'
@@ -57,19 +57,19 @@ class UsersController < ApplicationController
 
 
     User.find(params[:id]).destroy
-    flash[:success] = "User deleted."
+    flash[:success] = 'User deleted.'
     redirect_to users_url
   end
 
   def following
-    @title = "Following"
+    @title = 'Following'
     @user = User.find(params[:id])
     @users = @user.followed_users.paginate(page: params[:page])
     render 'show_follow'
   end
 
   def followers
-    @title = "Followers"
+    @title = 'Followers'
     @user = User.find(params[:id])
     @users = @user.followers.paginate(page: params[:page])
     render 'show_follow'
@@ -86,7 +86,7 @@ class UsersController < ApplicationController
 
     def redirect_to_root_if_signed_in
       if signed_in?
-        flash[:success] = "You are already signed in, goof!"
+        flash[:success] = 'You are already signed in, goof!'
         redirect_to root_path
       end
     end

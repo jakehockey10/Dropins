@@ -1,16 +1,16 @@
 require 'spec_helper'
 
-describe "Password Reset pages" do
+describe 'Password Reset pages' do
 
   subject { page }
 
-  describe "new" do
+  describe 'new' do
     before { visit new_password_reset_path }
 
-    it { should have_title("Reset Password") }
+    it { should have_title('Reset Password') }
   end
 
-  describe "edit" do
+  describe 'edit' do
 
   end
 

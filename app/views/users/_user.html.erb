@@ -7,9 +7,9 @@
       If you are not signed in, current_user is nil and thus we
       cannot call the admin? method on that object at that time.-->
   <% if !current_user.nil? && current_user.admin? && !current_user?(user) %>
-    | <%= link_to "delete",
+    | <%= link_to 'delete',
                   user,
                   method: :delete,
-                  data: { confirm: "You sure?" } %>
+                  data: { confirm: 'You sure?'} %>
   <% end %>
 </li>

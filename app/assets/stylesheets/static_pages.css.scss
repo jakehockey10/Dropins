@@ -1,3 +1,29 @@
 // Place all the styles related to the StaticPages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.carousel-inner {
+  .active.left {
+    left: -25% !important;
+  }
+  .next {
+    left: 25% !important;
+  }
+  .active.right {
+    right: 25% !important;
+  }
+  .prev {
+    right: -25% !important;
+  }
+}
+
+.carousel-control {
+  width: 4% !important;
+  &.left, &.right {
+    margin-left: 15px !important;
+    background-image: none !important;
+  }
+}
+//.carousel-inner .active.left { left: -25% !important; }
+//.carousel-inner .next        { left:  25% !important; }
+//.carousel-control 			 { width:  4% !important; }
+//.carousel-control.left,.carousel-control.right {margin-left:15px !important;background-image:none !important;}

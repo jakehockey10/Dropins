@@ -2,11 +2,11 @@ class User < ActiveRecord::Base
   has_many :microposts,
            dependent: :destroy
   has_many :relationships,
-           foreign_key: "follower_id",
+           foreign_key: 'follower_id',
            dependent: :destroy
   has_many :reverse_relationships,
-           foreign_key: "followed_id",
-           class_name: "Relationship",
+           foreign_key: 'followed_id',
+           class_name: 'Relationship',
            dependent: :destroy
   has_many :followers,
            through: :reverse_relationships
@@ -35,13 +35,13 @@ class User < ActiveRecord::Base
             #if: :validate_password?
             if: :password_required?
 
-  States = {
+  STATES = {
       inactive: 0,
       active: 1
   }
 
   state_machine :state, initial: :inactive do
-    States.each do |name, value|
+    STATES.each do |name, value|
       state name, value: value
     end
 

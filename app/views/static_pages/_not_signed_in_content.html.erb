@@ -1,30 +1,60 @@
-<div class="center hero-unit" id="hero-unit">
+<div class="center jumbotron" id="jumbotron">
   <h1>
     Rosenbridge
-    <span class="label">beta</span>
+    <span class="label label-default">beta</span>
   </h1>
 
-  <%= image_tag("rosenbridge222x200.gif") %>
+  <%= image_tag('rosenbridge222x200.gif') %>
 
   <h2>
     Speak a language TODAY!
   </h2>
 
-  <div class="center" style="margin-bottom: 20px;">
-    <%= link_to "Sign up",
-                signup_path,
-                class: "btn btn-large" %>
-    <%= link_to "Sign in",
-                signin_path,
-                class: "btn btn-large" %>
+  <div class="center">
+    <%= link_to 'Sign up', signup_path, class: 'btn btn-default btn-home' %>
+    <%= link_to 'Sign in', signin_path, class: 'btn btn-default btn-home' %>
   </div>
-
 
   <h2 class="text-center">
     or
   </h2>
 
   <h4 class="text-center">
-    <%= link_to "Sign up", signup_path, class: "link" %> to be a teacher
+    <%= link_to 'Sign up', signup_path, class: 'link' %> to be a teacher
   </h4>
+</div>
+<div class="row">
+  <div class="col-md-12 text-center"><h3>Bootstrap 3 Multiple Slide Carousel</h3></div>
+  <div class="col-md-6 col-md-offset-3">
+    <div class="carousel slide" id="myCarousel">
+      <div class="carousel-inner">
+        <div class="item active">
+          <div class="col-xs-3"><a href="#"><img src="http://placehold.it/500/e499e4/fff&amp;text=1" class="img-responsive"></a></div>
+        </div>
+        <div class="item">
+          <div class="col-xs-3"><a href="#"><img src="http://placehold.it/500/e477e4/fff&amp;text=2" class="img-responsive"></a></div>
+        </div>
+        <div class="item">
+          <div class="col-xs-3"><a href="#"><img src="http://placehold.it/500/eeeeee&amp;text=3" class="img-responsive"></a></div>
+        </div>
+        <div class="item">
+          <div class="col-xs-3"><a href="#"><img src="http://placehold.it/500/f4f4f4&amp;text=4" class="img-responsive"></a></div>
+        </div>
+        <div class="item">
+          <div class="col-xs-3"><a href="#"><img src="http://placehold.it/500/f566f5/333&amp;text=5" class="img-responsive"></a></div>
+        </div>
+        <div class="item">
+          <div class="col-xs-3"><a href="#"><img src="http://placehold.it/500/f477f4/fff&amp;text=6" class="img-responsive"></a></div>
+        </div>
+        <div class="item">
+          <div class="col-xs-3"><a href="#"><img src="http://placehold.it/500/eeeeee&amp;text=7" class="img-responsive"></a></div>
+        </div>
+        <div class="item">
+          <div class="col-xs-3"><a href="#"><img src="http://placehold.it/500/fcfcfc/333&amp;text=8" class="img-responsive"></a></div>
+        </div>
+      </div>
+      <a class="left carousel-control" href="#myCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+      <a class="right carousel-control" href="#myCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
+    </div>
+  </div>
 </div>
