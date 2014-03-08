@@ -8,12 +8,14 @@
     Please give us your email and we'll send you information as it becomes available :)
   </p>
   <div class="row">
-    <div class="col-lg-offset-3 col-sm-6 col-md-6">
-      <%= form_for @interested_person, url: '/interested_person', method: :post, remote: true do |f| %>
-        <%= f.label :email %>
+    <div class="col-lg-offset-4 col-sm-4 col-md-4">
+      <%= bootstrap_form_for @interested_person, layout: :horizontal, url: '/interested_person', method: :post, remote: true do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
+
         <%= f.text_field :email %>
 
         <%= submit_tag "I'm interested", class: 'btn btn-primary' %>
+
       <% end %>
     </div>
   </div>

@@ -1,29 +1,98 @@
-// Place all the styles related to the StaticPages controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
-.carousel-inner {
-  .active.left {
-    left: -25% !important;
-  }
-  .next {
-    left: 25% !important;
-  }
-  .active.right {
-    right: 25% !important;
-  }
-  .prev {
-    right: -25% !important;
-  }
+/*
+This is the visible area of you carousel.
+Set a width here to define how much items are visible.
+The width can be either fixed in px or flexible in %.
+Position must be relative!
+*/
+.jcarousel {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
 }
 
-.carousel-control {
-  width: 4% !important;
-  &.left, &.right {
-    margin-left: 15px !important;
-    background-image: none !important;
-  }
+/*
+This is the container of the carousel items.
+You must ensure that the position is relative or absolute and
+that the width is big enough to contain all items.
+*/
+.jcarousel ul {
+  list-style: none outside none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  width: 20000em;
 }
-//.carousel-inner .active.left { left: -25% !important; }
-//.carousel-inner .next        { left:  25% !important; }
-//.carousel-control 			 { width:  4% !important; }
-//.carousel-control.left,.carousel-control.right {margin-left:15px !important;background-image:none !important;}
+
+/*
+These are the item elements. jCarousel works best, if the items
+have a fixed width and height (but it's not required).
+*/
+.jcarousel li {
+  -moz-box-sizing: border-box;
+  border: 1px solid #FFFFFF;
+  float: left;
+  width: 200px;
+}
+
+.jcarousel-wrapper {
+  border: 10px solid #FFFFFF;
+  border-radius: 5px;
+  box-shadow: 0 0 2px #999999;
+  margin: 20px auto;
+  position: relative;
+}
+
+.jcarousel-control-prev {
+  left: 15px;
+}
+
+.jcarousel-control-next {
+  right: 15px;
+}
+
+.jcarousel-control-prev, .jcarousel-control-next {
+  background: none repeat scroll 0 0 #4E443C;
+  border-radius: 30px;
+  box-shadow: 0 0 4px #F0EFE7;
+  color: #FFFFFF;
+  font: 24px/27px Arial,sans-serif;
+  height: 30px;
+  margin-top: -15px;
+  position: absolute;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: 0 0 1px #000000;
+  top: 50%;
+  width: 30px;
+}
+
+.jcarousel-pagination {
+  bottom: -40px;
+  left: 50%;
+  margin: 0;
+  position: absolute;
+  transform: translate(-50%, 0px);
+}
+
+.jcarousel-pagination a {
+  background: none repeat scroll 0 0 #FFFFFF;
+  border-radius: 10px;
+  box-shadow: 0 0 2px #4E443C;
+  color: #4E443C;
+  display: inline-block;
+  font-size: 11px;
+  height: 10px;
+  line-height: 10px;
+  margin-right: 7px;
+  text-decoration: none;
+  text-indent: -9999px;
+  width: 10px;
+}
+
+
+.jcarousel-pagination a.active {
+  background: none repeat scroll 0 0 #4E443C;
+  box-shadow: 0 0 2px #F0EFE7;
+  color: #FFFFFF;
+  opacity: 1;
+}
