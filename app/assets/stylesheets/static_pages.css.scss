@@ -43,11 +43,33 @@ have a fixed width and height (but it's not required).
 }
 
 .jcarousel-control-prev {
-  left: 15px;
+  left: 0px;
+//  left: 15px;
+  background: -webkit-linear-gradient(right, rgba(200, 200, 200, 0), rgba(200, 200, 200, 1));
+  background: -o-linear-gradient(left, rgba(200, 200, 200, 0), rgba(200, 200, 200, 1));
+  background: -moz-linear-gradient(left, rgba(200, 200, 200, 0), rgba(200, 200, 200, 1));
+  background: linear-gradient(to left, rgba(200, 200, 200, 0), rgba(200, 200, 200, 1));
+  &:hover {
+    background: -webkit-linear-gradient(right, rgba(150, 150, 150, 0), rgba(150, 150, 150, 1));
+    background: -o-linear-gradient(left, rgba(150, 150, 150, 0), rgba(150, 150, 150, 1));
+    background: -moz-linear-gradient(left, rgba(150, 150, 150, 0), rgba(150, 150, 150, 1));
+    background: linear-gradient(to left, rgba(150, 150, 150, 0), rgba(150, 150, 150, 1));
+  }
 }
 
 .jcarousel-control-next {
-  right: 15px;
+  right: 0px;
+//  right: 15px;
+  background: -webkit-linear-gradient(left, rgba(200, 200, 200, 0), rgba(200, 200, 200, 1)); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(right, rgba(200, 200, 200, 0), rgba(200, 200, 200, 1)); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(right, rgba(200, 200, 200, 0), rgba(200, 200, 200, 1)); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to right, rgba(200, 200, 200, 0), rgba(200, 200, 200, 1)); /* Standard syntax (must be last) */
+  &:hover {
+    background: -webkit-linear-gradient(left, rgba(150, 150, 150, 0), rgba(150, 150, 150, 1)); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(right, rgba(150, 150, 150, 0), rgba(150, 150, 150, 1)); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(right, rgba(150, 150, 150, 0), rgba(150, 150, 150, 1)); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to right, rgba(150, 150, 150, 0), rgba(150, 150, 150, 1)); /* Standard syntax (must be last) */
+  }
 }
 
 .jcarousel-control-prev, .jcarousel-control-next {
@@ -56,14 +78,22 @@ have a fixed width and height (but it's not required).
 //  box-shadow: 0 0 4px #F0EFE7;
   color: #FFFFFF;
   font: 24px/27px Arial,sans-serif;
-  height: 30px;
-  margin-top: -15px;
+//  height: 30px;
+  height: 100%;
+//  margin-top: -15px;
+  margin-top: 0px;
   position: absolute;
   text-align: center;
   text-decoration: none;
   text-shadow: 0 0 1px #000000;
-  top: 50%;
-  width: 30px;
+  top: 0%;
+//  top: 50%;
+  width: 100px;
+//  width: 30px;
+  vertical-align: middle;
+  i {
+    top: 50%;
+  }
 }
 
 .jcarousel-pagination {
