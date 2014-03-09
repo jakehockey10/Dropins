@@ -6,19 +6,20 @@
   <aside class="col-xs-12 col-sm-4 col-md-4">
     <section>
       <div class="center">
-        <div class="row">
+        <!--<div class="row">-->
           <%= gravatar_for @user, size: 200, center: true %>
-        </div>
-        <div class="row">
+        <!--</div>-->
+        <br>
+        <!--<div class="row">-->
           <a href="http://gravatar.com/emails" target="_blank">change</a>
-        </div>
+        <!--</div>-->
       </div>
     </section>
   </aside>
 
   <div class="col-xs-12 col-sm-8 col-md-6">
     <%= bootstrap_form_for(@user) do |f| %>
-      <%= render partial: 'users/fields', locals: { f: f } %>
+      <%= render partial: 'users/fields', locals: { f: f, hide_labels: false } %>
       <%= f.submit 'Save changes', class: 'btn btn-primary btn-users-edit' %>
     <% end %>
   </div>

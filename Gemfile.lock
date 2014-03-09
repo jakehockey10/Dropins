@@ -191,6 +191,9 @@ GEM
       polyglot (>= 0.3.1)
     turbolinks (1.1.1)
       coffee-rails
+    twitter_cldr (2.4.2)
+      json
+      tzinfo
     tzinfo (0.3.38)
     uglifier (2.1.1)
       execjs (>= 0.3.0)
@@ -226,5 +229,6 @@ DEPENDENCIES
   selenium-webdriver (= 2.35.1)
   state_machine (= 1.2.0)
   turbolinks (= 1.1.1)
+  twitter_cldr
   uglifier (= 2.1.1)
   will_paginate (~> 3.0.4)

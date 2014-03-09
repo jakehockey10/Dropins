@@ -1,6 +1,7 @@
 namespace :db do
   desc 'Fill database with sample data'
   task populate: :environment do
+    Rake::Task['db:reset'].invoke
     make_users
     make_microposts
     make_relationships
@@ -10,15 +11,24 @@ end
 def make_users
   admin = User.create!(name: 'Jake Smith',
                        email: 'jakehockey10@gmail.com',
+                       speaking_language: TwitterCldr::Shared::Languages.from_code(:'en-US'),
+                       learning_language: TwitterCldr::Shared::Languages.from_code(:fr),
                        password: ENV['GMAIL_PASSWORD'],
                        password_confirmation: ENV['GMAIL_PASSWORD'],
+                       state: 1,
                        admin: true)
   99.times do |n|
     name = Faker::Name.name
     email = "example-#{n+1}@railstutorial.org"
+    speaking_language = TwitterCldr::Shared::Languages.from_code(:'en-US')
+    learning_language = TwitterCldr::Shared::Languages.from_code(:fr)
     password = 'password'
+    state = 1
     User.create!(name: name,
                  email: email,
+                 speaking_language: speaking_language,
+                 learning_language: learning_language,
+                 state: state,
                  password: password,
                  password_confirmation: password)
   end

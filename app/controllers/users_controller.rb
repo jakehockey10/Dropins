@@ -78,6 +78,8 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:name,
                                    :email,
+                                   :speaking_language,
+                                   :learning_language,
                                    :password,
                                    :password_confirmation)
     end

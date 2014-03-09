@@ -14,6 +14,13 @@ class User < ActiveRecord::Base
            through: :relationships,
            source: :followed
 
+  LANGUAGES = TwitterCldr::Shared::Languages.all.values
+
+  STATES = {
+      inactive: 0,
+      active: 1
+  }
+
   before_save { email.downcase! }
   before_create :create_remember_token
   before_create :create_reset_token
@@ -34,11 +41,12 @@ class User < ActiveRecord::Base
             presence: true,
             #if: :validate_password?
             if: :password_required?
-
-  STATES = {
-      inactive: 0,
-      active: 1
-  }
+  validates :speaking_language,
+            presence: true,
+            inclusion: { in: LANGUAGES }
+  validates :learning_language,
+            presence: true,
+            inclusion: { in: LANGUAGES }
 
   state_machine :state, initial: :inactive do
     STATES.each do |name, value|

@@ -2,5 +2,7 @@
 
 <%= f.text_field :name, hide_label: true, placeholder: 'name' %>
 <%= f.text_field :email, hide_label: true, placeholder: 'email' %>
+<%= f.select :speaking_language, TwitterCldr::Shared::Languages.all.values %>
+<%= f.select :learning_language, TwitterCldr::Shared::Languages.all.values %>
 <%= f.password_field :password, hide_label: true, placeholder: 'password' %>
 <%= f.password_field :password_confirmation, hide_label: true, placeholder: 'confirm password' %>
