@@ -35,6 +35,10 @@ textarea {
   }
 }
 
+.vcenter {
+  vertical-align: middle;
+}
+
 .jumbotron {
   padding-top: 50px;
   padding-bottom: 10px;
@@ -42,6 +46,10 @@ textarea {
 
 .btn-home {
   width: 200px;
+}
+
+.btn-width100 {
+  width: 100%;
 }
 
 /* typography */
@@ -164,6 +172,13 @@ aside {
   margin-right: 10px;
 }
 
+.gravatar-large {
+  margin: 15px auto;
+  border: 10px solid #FFFFFF;
+  border-radius: 5px;
+  box-shadow: 0 0 2px #999999;
+}
+
 .stats {
   overflow: auto;
   a {
@@ -195,9 +210,13 @@ aside {
 
 /* forms */
 
+form {
+  margin-bottom: 15px;
+
+}
+
 input, textarea, select, .uneditable-input {
   border: 1px solid #bbb;
-  width: 100%;
   margin-bottom: 15px;
   @include box_sizing;
 }
@@ -215,8 +234,9 @@ input {
 }
 
 .field_with_errors {
-  @extend .control-group;
-  @extend .error;
+//  @extend .control-group;
+//  @extend .error;
+  @extend .has-error
 }
 
 /* Users index */
@@ -251,10 +271,7 @@ input {
 .timestamp {
   color: $gray-light;
 }
-.gravatar {
-  float: left;
-  margin-right: 10px;
-}
+
 aside {
   textarea {
     height: 100px;

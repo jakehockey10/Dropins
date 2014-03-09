@@ -31,7 +31,7 @@ have a fixed width and height (but it's not required).
   -moz-box-sizing: border-box;
   border: 1px solid #FFFFFF;
   float: left;
-  width: 200px;
+  width: 200px !important;
 }
 
 .jcarousel-wrapper {

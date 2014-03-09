@@ -12,7 +12,7 @@
       <%= bootstrap_form_for @interested_person, layout: :horizontal, url: '/interested_person', method: :post, remote: true do |f| %>
         <%= render 'shared/error_messages', object: f.object %>
 
-        <%= f.text_field :email %>
+        <%= f.text_field :email, hide_label: true, placeholder: 'email' %>
 
         <%= submit_tag "I'm interested", class: 'btn btn-primary' %>
 

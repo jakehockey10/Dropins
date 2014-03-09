@@ -2,18 +2,29 @@
 <h1>Update your profile</h1>
 
 <div class="row">
-  <div class="span6 offset3">
-    <%= form_for(@user) do |f| %>
+
+  <aside class="col-sm-4 col-md-4">
+    <div class="row">
+      <div class="center">
+        <div class="row">
+          <%= gravatar_for @user, size: 200, center: true %>
+        </div>
+        <div class="row">
+          <a href="http://gravatar.com/emails" target="_blank">change</a>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <div class="col-sm-8 col-md-6">
+    <%= bootstrap_form_for(@user) do |f| %>
       <%= render partial: 'users/fields', locals: { f: f } %>
-      <%= f.submit 'Save changes', class: 'btn btn-large btn-primary' %>
+      <%= f.submit 'Save changes', class: 'btn btn-primary btn-users-edit' %>
     <% end %>
-
-    <%= gravatar_for @user %>
-    <a href="http://gravatar.com/emails" target="_blank">change</a>
-
-    <%= debug("user password present: #{@user.password.present?}\n" +
-              "user password_confirmation present: #{@user.password_confirmation.present?}\n" +
-              "user is valid: #{@user.valid?}\n" +
-              "user is active: #{@user.active?}") if Rails.env.development? %>
   </div>
+
+  <%= debug("user password present: #{@user.password.present?}\n" +
+                    "user password_confirmation present: #{@user.password_confirmation.present?}\n" +
+                    "user is valid: #{@user.valid?}\n" +
+                    "user is active: #{@user.active?}") if Rails.env.development? %>
 </div>
