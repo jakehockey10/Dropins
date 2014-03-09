@@ -36,6 +36,7 @@ textarea {
 }
 
 .vcenter {
+  display: inline-block;
   vertical-align: middle;
 }
 
@@ -212,7 +213,7 @@ aside {
 
 form {
   margin-bottom: 15px;
-
+  margin-top: 15px;
 }
 
 input, textarea, select, .uneditable-input {
