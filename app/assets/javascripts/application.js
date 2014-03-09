@@ -38,7 +38,7 @@ $(document).ready(function () {
             trigger: "manual",
             content: help_block,
             placement: placement,
-            title: 'error' + '<button type="button" class="close" onclick="$(\'#' + control_id + '\').popover(\'hide\')">&times</button>',
+            title: 'uh oh :(' + '<button type="button" class="close" onclick="$(\'#' + control_id + '\').popover(\'hide\')">&times</button>',
             container: "body"
         });
         control.popover("show");
