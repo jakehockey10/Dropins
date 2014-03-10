@@ -19,9 +19,8 @@
         <button type="button" class="close">&times</button>
       <% end %>
     <% end %>
-    <div class="container">
-      <%= yield %>
-    </div>
+
+    <%= yield %>
 
     <%= debug(params) if Rails.env.development? %>
     <%= debug("current_user is nil: #{current_user.nil?}") if Rails.env.development? %>
