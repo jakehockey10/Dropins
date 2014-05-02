@@ -48,6 +48,11 @@ $(document).ready(function () {
         });
     });
 
+    $('.interested-button').click(function () {
+        var btn = $(this);
+        btn.button('loading');
+    });
+
 //    $("form").validate({
 //        rules: {
 //            "user[password]": {

@@ -14,7 +14,7 @@
         <%= f.text_field :email, required: true %>
         <%= f.select :language, TwitterCldr::Shared::Languages.all.values %>
         <%= f.hidden_field :nickname %>
-        <%= f.submit 'I\'m interested!', class: 'btn btn-primary btn-sm' %>
+        <%= f.submit 'I\'m interested!', class: 'btn btn-primary btn-sm interested-button' %>
       <% end %>
     </div>
   </div>
