@@ -10,6 +10,7 @@ RosenbridgeApp::Application.routes.draw do
   resources :microposts, only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]
   resources :password_resets
+  resources :contacts, only: [:new, :create]
 
   root 'static_pages#home'
 
@@ -18,6 +19,7 @@ RosenbridgeApp::Application.routes.draw do
   match '/signout', to: 'sessions#destroy', via: 'delete'
 
   # match '/landing', to: 'interested_person#new', via: 'get'
+  match '/landing', to: 'contacts#new', via: 'get'
 
   match '/help', to: 'static_pages#help', via: 'get'
   match '/about', to: 'static_pages#about', via: 'get'

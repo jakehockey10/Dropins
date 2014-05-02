@@ -1,13 +1,16 @@
-<footer class="footer">
-  <small>
-    <a href="#">Rosenbridge</a>
-    <span class="label label-default">Beta</span>
-  </small>
-  <nav>
-    <ul>
-      <li><%= link_to 'About', about_path %></li>
-      <li><%= link_to 'Contact', contact_path %></li>
-      <li><a href="http://news.railstutorial.org/">News</a></li>
-    </ul>
-  </nav>
+<footer class="footer navbar-fixed-bottom">
+  <div class="navbar-inner">
+    <div class="container">
+      <small>
+        <%= link_to raw('Datums <span class="label label-default">beta</span>'), root_path %>
+      </small>
+      <nav>
+        <ul>
+          <li><%= link_to 'About', about_path %></li>
+          <li><%= link_to 'Contact', contact_path %></li>
+          <li><%= link_to 'Help', help_path %></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
 </footer>

@@ -140,6 +140,7 @@ footer {
   padding-top: 5px;
   border-top: 1px solid $grayMediumLight;
   color: $gray-light;
+  background-color: white;
   a {
     color: $gray;
     &:hover {
@@ -199,11 +200,11 @@ aside {
   margin-right: 10px;
 }
 
-.gravatar-large {
+.gravatar-border {
   margin: 15px auto;
-  border: 10px solid #FFFFFF;
+  border: 7px solid #FFFFFF;
   border-radius: 5px;
-  box-shadow: 0 0 2px #999999;
+  box-shadow: 0 0 5px #999999;
 }
 
 .stats {
