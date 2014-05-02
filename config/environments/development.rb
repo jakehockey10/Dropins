@@ -24,8 +24,8 @@ RosenbridgeApp::Application.configure do
       domain: 'gmail.com',
       authentication: 'plain',
       enable_starttls_auto: true,
-      user_name: ENV['GMAIL_USERNAME'],
-      password: ENV['GMAIL_PASSWORD']
+      user_name: ENV['ROSENBRIDGE_GMAIL_USERNAME'],
+      password: ENV['ROSENBRIDGE_GMAIL_PASSWORD']
   }
 
   # specify what domain to use for mailer URLs
