@@ -6,7 +6,9 @@ describe User do
     @user = User.new(name: 'Example User',
                      email: 'user@example.com',
                      password: 'foobar',
-                     password_confirmation: 'foobar')
+                     password_confirmation: 'foobar',
+                     speaking_language: TwitterCldr::Shared::Languages.from_code(:en),
+                     learning_language: TwitterCldr::Shared::Languages.from_code(:fr))
   end
 
   subject { @user }
@@ -31,6 +33,8 @@ describe User do
   it { should respond_to(:active?) }
   it { should respond_to(:activate) }
   it { should respond_to(:deactivate) }
+  it { should respond_to(:speaking_language) }
+  it { should respond_to(:learning_language) }
 
   it { should be_valid }
   it { should_not be_admin }

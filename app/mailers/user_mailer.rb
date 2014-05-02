@@ -7,7 +7,6 @@ class UserMailer < ActionMailer::Base
   #   en.user_mailer.signup_confirmation.subject
   #
   def signup_confirmation(user)
-    #@greeting = "Hi"
     @user = user
     @url = verify_emails_user_url(@user,
                                   email_token: @user.email_token)

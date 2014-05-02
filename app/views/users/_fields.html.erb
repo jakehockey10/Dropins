@@ -1,8 +1,8 @@
 <%= render 'shared/error_messages', object: f.object %>
 
-<%= f.text_field :name, hide_label: true, placeholder: 'name' %>
-<%= f.text_field :email, hide_label: true, placeholder: 'email' %>
+<%= f.text_field :name, hide_label: true, placeholder: 'Name' %>
+<%= f.text_field :email, hide_label: true, placeholder: 'Email' %>
 <%= f.select :speaking_language, TwitterCldr::Shared::Languages.all.values %>
 <%= f.select :learning_language, TwitterCldr::Shared::Languages.all.values %>
-<%= f.password_field :password, hide_label: true, placeholder: 'password' %>
-<%= f.password_field :password_confirmation, hide_label: true, placeholder: 'confirm password' %>
+<%= f.password_field :password, hide_label: true, placeholder: 'Password' %>
+<%= f.password_field :password_confirmation, hide_label: true, placeholder: 'Confirm Password' %>
