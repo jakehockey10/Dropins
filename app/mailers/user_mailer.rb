@@ -18,9 +18,4 @@ class UserMailer < ActionMailer::Base
     @user = user
     mail to: user.email, subject: 'Password Reset'
   end
-
-  def interested_person_welcome(interested_person)
-    @interested_person = interested_person
-    mail to: interested_person.email, subject: 'Thanks from Rosenbridge'
-  end
 end

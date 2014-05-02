@@ -5,7 +5,7 @@ RosenbridgeApp::Application.routes.draw do
       get :verify_emails
     end
   end
-  resources :interested_person
+
   resources :sessions, only: [:new, :create, :destroy]
   resources :microposts, only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]
@@ -17,7 +17,7 @@ RosenbridgeApp::Application.routes.draw do
   match '/signin', to: 'sessions#new', via: 'get'
   match '/signout', to: 'sessions#destroy', via: 'delete'
 
-  match '/landing', to: 'interested_person#new', via: 'get'
+  # match '/landing', to: 'interested_person#new', via: 'get'
 
   match '/help', to: 'static_pages#help', via: 'get'
   match '/about', to: 'static_pages#about', via: 'get'
