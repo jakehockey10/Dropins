@@ -48,33 +48,8 @@ $(document).ready(function () {
         });
     });
 
-    $('.interested-button').click(function () {
+    $('.interested-button').on('click', function () {
         var btn = $(this);
         btn.button('loading');
     });
-
-//    $("form").validate({
-//        rules: {
-//            "user[password]": {
-//                minlength: 6,
-//                required: true
-//            }
-//        },
-//        showErrors: function(errorMap, errorList) {
-//            $.each(this.successList, function (index, value) {
-//                return $(value).popover("hide");
-//            });
-//            return $.each(errorList, function (index, value) {
-//                var popover;
-//                popover = $(value.element).popover({
-//                    trigger: "manual",
-//                    placement: "right",
-//                    content: value.message,
-//                    template: "<div class=\"popover\"><div class=\"arrow\"></div><div class=\"popover-inner\"><div class=\"popover-content\"><p></p></div></div></div>"
-//                });
-//                popover.data("bs.popover").options.content = value.message;
-//                return $(value.element).popover("show");
-//            })
-//        }
-//    })
 });

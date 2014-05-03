@@ -12,7 +12,7 @@
       </p>
       <%= bootstrap_form_for(@contact, layout: :horizontal, label_col: 'col-sm-2', control_col: 'col-sm-10', remote: true) do |f| %>
         <%= f.text_field :email, required: true %>
-        <%= f.select :language, TwitterCldr::Shared::Languages.all.values %>
+        <%= f.select :language, TwitterCldr::Shared::Languages.all.values, prompt: 'Choose a language you are interested in learning...' %>
         <%= f.hidden_field :nickname %>
         <%= f.submit 'I\'m interested!', class: 'btn btn-primary btn-sm interested-button' %>
       <% end %>
