@@ -10,7 +10,6 @@ DropinsApp::Application.routes.draw do
   resources :microposts, only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]
   resources :password_resets
-  resources :contacts, only: [:new, :create]
   resources :contact_with_messages, only: [:new, :create]
 
   root 'static_pages#home'
@@ -18,9 +17,6 @@ DropinsApp::Application.routes.draw do
   match '/signup', to: 'users#new', via: 'get'
   match '/signin', to: 'sessions#new', via: 'get'
   match '/signout', to: 'sessions#destroy', via: 'delete'
-
-  # match '/landing', to: 'interested_person#new', via: 'get'
-  match '/landing', to: 'contacts#new', via: 'get'
 
   match '/help', to: 'static_pages#help', via: 'get'
   match '/about', to: 'static_pages#about', via: 'get'

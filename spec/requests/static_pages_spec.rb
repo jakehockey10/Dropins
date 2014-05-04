@@ -12,7 +12,7 @@ describe 'Static pages' do
   end
 
   describe 'Home page' do
-    before { visit root_path(i_like_landing_pages: false) }
+    before { visit root_path }
     let(:heading) { 'Dropins beta' }
     let(:page_title) { '' }
 
@@ -38,7 +38,7 @@ describe 'Static pages' do
         let(:other_user) { FactoryGirl.create(:user) }
         before do
           other_user.follow!(user)
-          visit root_path(i_like_landing_pages: false)
+          visit root_path
         end
 
         it { should have_link('0 following', href: following_user_path(user)) }
@@ -72,7 +72,7 @@ describe 'Static pages' do
   end
 
   it 'should have the right links on the layout' do
-    visit root_path(i_like_landing_pages: false)
+    visit root_path
     click_link 'About'
     expect(page).to have_title(full_title('About Us'))
     click_link 'Help'
@@ -80,8 +80,8 @@ describe 'Static pages' do
     click_link 'Contact'
     expect(page).to have_title(full_title('Contact'))
     click_link 'Home'
-    # click_link 'Sign up'                     # Commented out because we are currently
-    # expect(page).to have_title('Sign up')    # using a landing page that is temporary
+    click_link 'Sign up'
+    expect(page).to have_title('Sign up')
     click_link 'Dropins Beta'
     expect(page).to have_title('Dropins Beta')
   end

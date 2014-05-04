@@ -4,8 +4,6 @@ FactoryGirl.define do
     sequence(:email) { |n| "Person_#{n}@example.com" }
     password 'foobar'
     password_confirmation 'foobar'
-    speaking_language TwitterCldr::Shared::Languages.from_code(:en)
-    learning_language TwitterCldr::Shared::Languages.from_code(:fr)
 
     factory :admin do
       admin true
