@@ -1,0 +1,4 @@
+$('.pagination').remove();
+$('.panel-title').remove();
+$('.panel-body').html('<%= j render 'users_table' %>')
+$('.panel-heading').prepend('<div class="panel-title"><h4 class="pull-right"><small><%= pluralize(@users.count, 'match') %> found</small></h4></div>');

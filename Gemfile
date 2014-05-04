@@ -35,6 +35,7 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder'
 gem 'mail_form'
+gem 'ransack'
 
 group :doc do
   gem 'sdoc', '0.3.20', require: false

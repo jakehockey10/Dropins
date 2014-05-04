@@ -1,18 +1,17 @@
 <% provide(:title, 'Edit user') %>
-<h1>Update your profile</h1>
+
+<div class="page-header">
+  <h1>Update your profile</h1>
+</div>
 
 <div class="row">
 
   <aside class="col-xs-12 col-sm-4 col-md-4">
     <section>
       <div class="center">
-        <!--<div class="row">-->
-          <%= gravatar_for @user, size: 200, center: true %>
-        <!--</div>-->
+        <%= gravatar_for @user, size: 200, border: true %>
         <br>
-        <!--<div class="row">-->
-          <a href="http://gravatar.com/emails" target="_blank">change</a>
-        <!--</div>-->
+        <a href="http://gravatar.com/emails" target="_blank">change</a>
       </div>
     </section>
   </aside>
@@ -23,9 +22,4 @@
       <%= f.submit 'Save changes', class: 'btn btn-primary btn-users-edit' %>
     <% end %>
   </div>
-
-  <%= debug("user password present: #{@user.password.present?}\n" +
-                    "user password_confirmation present: #{@user.password_confirmation.present?}\n" +
-                    "user is valid: #{@user.valid?}\n" +
-                    "user is active: #{@user.active?}") if Rails.env.development? %>
 </div>

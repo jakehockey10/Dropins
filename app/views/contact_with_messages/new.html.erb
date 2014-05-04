@@ -1,0 +1,17 @@
+<div class="page-header">
+  <h1>Send us a message!</h1>
+</div>
+
+<div class="row">
+  <div class="col-lg-offset-3 col-lg-5">
+    <%= bootstrap_form_for(@contact_with_message, layout: :horizontal, label_col: 'col-sm-2', control_col: 'col-sm-10') do |f| %>
+      <%= f.text_field :name, value: (current_user.name unless current_user.nil?), required: true, class: 'form-control-static' %>
+      <%= f.text_field :email, value: (current_user.email unless current_user.nil?), required: true, class: 'form-control-static' %>
+      <%= f.text_area :message, as: :text, required: true, rows: 5 %>
+      <%= f.hidden_field :nickname %>
+      <%= f.form_group do %>
+        <%= f.submit 'Send message', class: 'btn btn-sm btn-primary' %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

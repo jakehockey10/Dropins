@@ -87,7 +87,7 @@ GEM
       rspec (~> 2.11)
     hike (1.2.3)
     i18n (0.6.9)
-    jbuilder (2.0.6)
+    jbuilder (2.0.7)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
     jquery-rails (3.1.0)
@@ -97,7 +97,7 @@ GEM
       railties (>= 3.1.0)
       turbolinks
     json (1.8.1)
-    listen (2.7.3)
+    listen (2.7.4)
       celluloid (>= 0.15.2)
       celluloid-io (>= 0.15.0)
       rb-fsevent (>= 0.9.3)
@@ -118,6 +118,8 @@ GEM
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
     pg (0.17.1)
+    polyamorous (1.0.0)
+      activerecord (>= 3.0)
     polyglot (0.3.4)
     pry (0.9.12.6)
       coderay (~> 1.0)
@@ -145,6 +147,12 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.3.1)
+    ransack (1.2.3)
+      actionpack (>= 3.0)
+      activerecord (>= 3.0)
+      activesupport (>= 3.0)
+      i18n
+      polyamorous (~> 1.0.0)
     rb-fsevent (0.9.4)
     rb-inotify (0.9.4)
       ffi (>= 0.5.0)
@@ -236,6 +244,7 @@ DEPENDENCIES
   pg
   rails (= 4.0.2)
   rails_12factor (= 0.0.2)
+  ransack
   rspec-rails (= 2.13.1)
   sass-rails (~> 4.0.0)
   sdoc (= 0.3.20)

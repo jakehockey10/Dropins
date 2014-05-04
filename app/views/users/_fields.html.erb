@@ -6,3 +6,4 @@
 <%= f.select :learning_language, TwitterCldr::Shared::Languages.all.values %>
 <%= f.password_field :password, hide_label: true, placeholder: 'Password' %>
 <%= f.password_field :password_confirmation, hide_label: true, placeholder: 'Confirm Password' %>
+<p class="help-block">You must confirm your password to update your profile.</p>
