@@ -1,4 +1,4 @@
-RosenbridgeApp::Application.configure do
+DropinsApp::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
@@ -73,12 +73,12 @@ RosenbridgeApp::Application.configure do
       domain: 'gmail.com',
       authentication: 'plain',
       enable_starttls_auto: true,
-      user_name: ENV['ROSENBRIDGE_GMAIL_USERNAME'],
-      password: ENV['ROSENBRIDGE_GMAIL_PASSWORD']
+      user_name: ENV['GMAIL_USERNAME'],
+      password: ENV['GMAIL_PASSWORD']
   }
 
   # specify what domain to use for mailer URLs
-  config.action_mailer.default_url_options = { host: 'https://rosenbridge.herokuapp.com'}
+  config.action_mailer.default_url_options = { host: 'https://dropins.herokuapp.com'}
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation can not be found).

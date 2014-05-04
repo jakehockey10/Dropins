@@ -1,4 +1,4 @@
-# Rosenbridge Beta
+# Dropins Beta
 
 This is the beta application for
-[*Rosenbridge*](https://rosenbridge.herokuapp.com/)
+[*Dropins*](https://dropins.herokuapp.com/)

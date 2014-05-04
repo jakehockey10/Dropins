@@ -28,7 +28,7 @@ class UsersController < ApplicationController
       sign_in @user
       @user.update_attribute(:email_token, User.encrypt(User.new_token))
       UserMailer.signup_confirmation(@user).deliver
-      flash[:success] = 'Welcome to Rosenbridge Beta!  Please verify the email you provided by clicking the link we sent to you.'
+      flash[:success] = 'Welcome to Dropins Beta!  Please verify the email you provided by clicking the link we sent to you.'
       redirect_to @user
     else
       render 'new'

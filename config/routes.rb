@@ -1,4 +1,4 @@
-RosenbridgeApp::Application.routes.draw do
+DropinsApp::Application.routes.draw do
   resources :users do
     member do
       get :following, :followers

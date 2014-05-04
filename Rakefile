@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-RosenbridgeApp::Application.load_tasks
+DropinsApp::Application.load_tasks

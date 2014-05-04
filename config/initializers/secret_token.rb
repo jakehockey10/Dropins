@@ -24,4 +24,4 @@ def secure_token
   end
 end
 
-RosenbridgeApp::Application.config.secret_key_base = secure_token
+DropinsApp::Application.config.secret_key_base = secure_token

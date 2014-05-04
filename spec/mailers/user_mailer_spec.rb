@@ -8,7 +8,7 @@ describe UserMailer do
     it 'renders the headers' do
       mail.subject.should eq('Signup Confirmation')
       mail.to.should eq([user.email])
-      mail.from.should eq([ENV['ROSENBRIDGE_GMAIL_USERNAME']])
+      mail.from.should eq([ENV['GMAIL_USERNAME']])
     end
 
     it 'renders the body' do
@@ -25,7 +25,7 @@ describe UserMailer do
     it 'renders the headers' do
       mail.subject.should eq('Password Reset')
       mail.to.should eq([user.email])
-      mail.from.should eq([ENV['ROSENBRIDGE_GMAIL_USERNAME']])
+      mail.from.should eq([ENV['GMAIL_USERNAME']])
     end
 
     it 'renders the body' do

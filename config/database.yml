@@ -1,7 +1,7 @@
 development:
   adapter: postgresql
   encoding: utf8
-  database: rosenbridge_development
+  database: dropins_development
   pool: 5
   username: jake
   password:
@@ -12,7 +12,7 @@ development:
 test:
   adapter: postgresql
   encoding: utf8
-  database: rosenbridge_test
+  database: dropins_test
   pool: 5
   username: jake
   password:

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Static pages' do
 
-  let(:base_title) { 'Rosenbridge Beta' }
+  let(:base_title) { 'Dropins Beta' }
 
   subject { page }
 
@@ -13,7 +13,7 @@ describe 'Static pages' do
 
   describe 'Home page' do
     before { visit root_path(i_like_landing_pages: false) }
-    let(:heading) { 'Rosenbridge beta' }
+    let(:heading) { 'Dropins beta' }
     let(:page_title) { '' }
 
     it_should_behave_like 'all static pages'
@@ -82,7 +82,7 @@ describe 'Static pages' do
     click_link 'Home'
     # click_link 'Sign up'                     # Commented out because we are currently
     # expect(page).to have_title('Sign up')    # using a landing page that is temporary
-    click_link 'Rosenbridge Beta'
-    expect(page).to have_title('Rosenbridge Beta')
+    click_link 'Dropins Beta'
+    expect(page).to have_title('Dropins Beta')
   end
 end
