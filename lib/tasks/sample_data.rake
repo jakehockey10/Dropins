@@ -6,11 +6,23 @@ namespace :db do
     make_microposts
     make_relationships
   end
+  task make_jake: :environment do
+    make_jake_admin
+  end
+end
+
+def make_jake_admin
+  User.create!(name: 'Jake Smith',
+               email: ENV['GMAIL_USERNAME'],
+               password: ENV['GMAIL_PASSWORD'],
+               password_confirmation: ENV['GMAIL_PASSWORD'],
+               state: 1,
+               admin: true)
 end
 
 def make_users
   admin = User.create!(name: 'Jake Smith',
-                       email: 'jakehockey10@gmail.com',
+                       email: ENV['GMAIL_USERNAME'],
                        password: ENV['GMAIL_PASSWORD'],
                        password_confirmation: ENV['GMAIL_PASSWORD'],
                        state: 1,
