@@ -13,7 +13,7 @@ end
 
 def make_jake_admin
   User.create!(name: 'Jake Smith',
-               email: ENV['GMAIL_USERNAME'],
+               email: ENV['GMAIL_USERNAME'].dup,
                password: ENV['GMAIL_PASSWORD'],
                password_confirmation: ENV['GMAIL_PASSWORD'],
                state: 1,

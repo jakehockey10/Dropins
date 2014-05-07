@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
       active: 1
   }
 
-  before_save { email.downcase! }
+  before_save { email.downcase! || email }
   before_create :create_remember_token
   before_create :create_reset_token
   validates :name,
