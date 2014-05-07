@@ -19,7 +19,9 @@ class DropinsController < ApplicationController
   end
 
   def create
-    @dropin = Dropin.new(dropin_params)
+    the_dropin_params = dropin_params
+    the_dropin_params[:date] = Time.strptime(the_dropin_params[:date], '%m/%d/%Y %I:%M %p')
+    @dropin = Dropin.new(the_dropin_params)
 
     if @dropin.save
       flash[:success] = 'Dropin was successfully created.'
@@ -48,6 +50,10 @@ class DropinsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_dropin
       @dropin = Dropin.find(params[:id])
+    end
+
+    def convert_time
+      DateTime.strptime(dropin_params[:date], '%m/%d/%Y %I:%M %p')
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
