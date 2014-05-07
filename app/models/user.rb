@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
   has_many :followed_users,
            through: :relationships,
            source: :followed
+  has_many :attendances
+  has_many :dropins, through: :attendances
 
   STATES = {
       inactive: 0,
@@ -76,6 +78,18 @@ class User < ActiveRecord::Base
 
   def unfollow!(other_user)
     relationships.find_by(followed_id: other_user.id).destroy
+  end
+
+  def attending_dropin?(dropin)
+    attendances.find_by(dropin_id: dropin.id)
+  end
+
+  def join_dropin!(dropin)
+    attendances.create!(dropin_id: dropin.id)
+  end
+
+  def leave_dropin!(dropin)
+    attendances.find_by(dropin_id: dropin.id).destroy
   end
 
   def send_password_reset

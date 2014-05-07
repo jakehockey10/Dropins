@@ -1,4 +1,8 @@
 DropinsApp::Application.routes.draw do
+  resources :attendances, only: [:create, :destroy]
+
+  resources :dropins
+
   resources :users do
     member do
       get :following, :followers

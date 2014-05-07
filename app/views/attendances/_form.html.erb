@@ -1,0 +1,7 @@
+<div id="attendance_form">
+  <% if current_user.attending_dropin?(@dropin) %>
+    <%= render 'attendances/leave_dropin' %>
+  <% else %>
+    <%= render 'attendances/join_dropin' %>
+  <% end %>
+</div>

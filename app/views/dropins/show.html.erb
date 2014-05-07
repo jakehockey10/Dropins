@@ -1,0 +1,32 @@
+<% provide(:title, 'Dropin') %>
+
+<div class="page-header">
+  <h1>Dropin <%= @dropin.id %></h1>
+</div>
+
+<div class="row">
+  <aside class="col-sm-4 col-md-4">
+    <section>
+      <h1>
+        <strong>Date:</strong>
+        <%= @dropin.date.to_formatted_s(:long_ordinal) %>
+      </h1>
+    </section>
+    <section>
+      <%= link_to 'Edit', edit_dropin_path(@dropin), class: 'btn btn-lg btn-default' %>
+      <%= link_to 'Back', dropins_path, class: 'btn btn-lg btn-default' %>
+    </section>
+  </aside>
+  <div class="col-sm-8 col-md-8 dropin-skaters">
+    <%= render 'attendances/form' if signed_in? %>
+
+    <table class="table">
+      <tr>
+        <th>User</th>
+        <th class="text-center">Followers</th>
+        <th class="text-center">Active</th>
+      </tr>
+      <%= render 'skaters' %>
+    </table>
+  </div>
+</div>

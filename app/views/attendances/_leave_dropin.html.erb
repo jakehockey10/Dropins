@@ -1,0 +1,5 @@
+<%= bootstrap_form_for(current_user.attendances.find_by(dropin_id: @dropin.id),
+    html: { method: :delete},
+    remote: true) do |f| %>
+  <%= f.submit 'Leave Dropin', class: 'btn btn-default btn-lg' %>
+<% end %>

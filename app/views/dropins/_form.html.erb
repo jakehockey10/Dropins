@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="col-lg-offset-3 col-lg-6">
+    <%= form_for(@dropin) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+
+      <div class="form-group">
+        <%= f.label :date %>
+        <div class='input-group date' id='datetimepicker1'>
+          <%= f.text_field :date, value: (f.object.date.to_formatted_s(:long_ordinal) if f.object.date), class: 'form-control' %>
+          <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+        </div>
+      </div>
+      <%= f.submit 'Submit', class: 'btn btn-default' %>
+    <% end %>
+  </div>
+</div>
+

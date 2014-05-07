@@ -36,6 +36,9 @@ gem 'turbolinks'
 gem 'jbuilder'
 gem 'mail_form'
 gem 'ransack'
+gem 'momentjs-rails'
+gem 'bootstrap3-datetimepicker-rails'
+gem 'date_validator'
 
 group :doc do
   gem 'sdoc', '0.3.20', require: false
