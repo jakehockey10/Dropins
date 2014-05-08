@@ -4,6 +4,6 @@ class Dropin < ActiveRecord::Base
 
   validates :date,
             presence: true,
-            date: { after: Proc.new { Time.zone.now.to_time.strftime('%c').to_datetime },
+            date: { after: Proc.new { Time.zone.now },
                     before: Proc.new { Time.now + 1.year } }
 end
