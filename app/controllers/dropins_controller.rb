@@ -20,7 +20,7 @@ class DropinsController < ApplicationController
 
   def create
     the_dropin_params = dropin_params
-    the_dropin_params[:date] = Time.strptime(the_dropin_params[:date], '%m/%d/%Y %I:%M %p').utc
+    the_dropin_params[:date] = Time.strptime(the_dropin_params[:date], '%m/%d/%Y %I:%M %p')
     @dropin = Dropin.new(the_dropin_params)
 
     if @dropin.save
