@@ -1,0 +1,11 @@
+<table class="table">
+  <tr>
+    <th>User</th>
+    <th class="text-center">Followers</th>
+    <th class="text-center">Active</th>
+    <% if current_user.admin? %>
+      <th class="text-center">Remove</th>
+    <% end %>
+  </tr>
+  <%= render 'dropins/skaters' %>
+</table>

@@ -4,7 +4,7 @@
   <h1>Editing Dropin <%= @dropin.id %></h1>
 </div>
 
-<%= render 'form' %>
+<%= render 'form', dropin: @dropin %>
 
 <%= link_to 'Show', @dropin, class: 'btn btn-lg btn-primary' %>
 <%= link_to 'Back', dropins_path, class: 'btn btn-lg btn-default' %>

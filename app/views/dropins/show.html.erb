@@ -13,23 +13,13 @@
       </h1>
     </section>
     <section>
-      <%= link_to 'Edit', edit_dropin_path(@dropin), class: 'btn btn-lg btn-default' %>
+      <%= link_to 'Edit', edit_dropin_path(@dropin), class: 'btn btn-lg btn-default' if current_user.admin? %>
       <%= link_to 'Back', dropins_path, class: 'btn btn-lg btn-default' %>
     </section>
   </aside>
   <div class="col-sm-8 col-md-8 dropin-skaters">
     <%= render 'attendances/form' if signed_in? %>
 
-    <table class="table">
-      <tr>
-        <th>User</th>
-        <th class="text-center">Followers</th>
-        <th class="text-center">Active</th>
-        <% if current_user.admin? %>
-          <th class="text-center">Remove</th>
-        <% end %>
-      </tr>
-      <%= render 'skaters' %>
-    </table>
+    <%= render 'skaters_table' %>
   </div>
 </div>

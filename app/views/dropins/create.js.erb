@@ -1,0 +1,2 @@
+$('.dropins-table').html('<%= j render 'dropins_table', dropins: Dropin.paginate(page: params[:page], per_page: 8, order: 'date asc') %>');
+//$('tr#<%= @dropin.id %>').hide().show().effect('highlight', { color: '#669966' }, 3000);

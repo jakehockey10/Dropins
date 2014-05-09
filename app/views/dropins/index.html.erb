@@ -1,31 +1,20 @@
 <% provide(:title, 'Dropins') %>
 
 <div class="page-header">
-  <h1>Dropins</h1>
+  <h1>Dropins <small class="pull-right"></small></h1>
 </div>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Date</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @dropins.each do |dropin| %>
-      <tr>
-        <td><%= dropin.date.to_datetime.to_formatted_s(:long_ordinal) %></td>
-        <td><%= link_to 'Show', dropin, class: 'btn btn-lg btn-primary' %></td>
-        <td><%= link_to 'Edit', edit_dropin_path(dropin), class: 'btn btn-lg btn-default' if current_user.admin? %></td>
-        <td><%= link_to 'Destroy', dropin, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-lg btn-danger' if current_user.admin? %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Dropin', new_dropin_path, class: 'btn btn-lg btn-default' if current_user.admin? %>
+<div class="row">
+  <aside class="col-sm-4 col-md-4">
+    <section>
+      <h1>Create a new dropin:</h1>
+      <%= render 'dropins/form', dropin: Dropin.new %>
+    </section>
+    <section>
+      <%= link_to 'New Dropin', new_dropin_path, class: 'btn btn-lg btn-default' if current_user.admin? %>
+    </section>
+  </aside>
+  <div class="col-sm-8 col-md-8 dropins-table">
+    <%= render 'dropins_table', dropins: @dropins %>
+  </div>
+</div>

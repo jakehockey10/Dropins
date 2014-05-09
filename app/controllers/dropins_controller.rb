@@ -4,7 +4,7 @@ class DropinsController < ApplicationController
   before_action :admin_user, only: [:edit, :update, :new, :create, :destroy]
 
   def index
-    @dropins = Dropin.all
+    @dropins = Dropin.paginate(page: params[:page], per_page: 8, order: 'date asc')
   end
 
   def show
@@ -24,8 +24,13 @@ class DropinsController < ApplicationController
     @dropin = Dropin.new(the_dropin_params)
 
     if @dropin.save
-      flash[:success] = 'Dropin was successfully created.'
-      redirect_to @dropin
+      respond_to do |format|
+        format.html do
+          flash[:success] = 'Dropin was successfully created.'
+          redirect_to @dropin
+        end
+        format.js
+      end
     else
       render 'new'
     end
