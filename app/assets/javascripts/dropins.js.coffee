@@ -6,3 +6,12 @@ $(document).on 'ready page:load', ->
     useSeconds: false,
     sideBySide: true,
   });
+  $('.view-dropin').tooltip({
+    container: 'body'
+  });
+  $('.edit-dropin').tooltip({
+    container: 'body'
+  });
+  $('.delete-dropin').tooltip({
+    container: 'body'
+  })
