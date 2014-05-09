@@ -4,7 +4,7 @@
 $(document).on 'ready page:load', ->
   $('#datetimepicker1').datetimepicker({
     useSeconds: false,
-    sideBySide: true,
+    sideBySide: true
   });
   $('.view-dropin').tooltip({
     container: 'body'

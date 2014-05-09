@@ -1,2 +1,7 @@
 $('.dropins-table').html('<%= j render 'dropins_table', dropins: Dropin.paginate(page: params[:page], per_page: 8, order: 'date asc') %>');
+$('aside').html('<section><h1>Create a new dropin:</h1><%= j render 'dropins/form', dropin: Dropin.new %></section><section></section>');
+$('#datetimepicker1').datetimepicker({
+  useSeconds: false,
+  sideBySide: true
+});
 //$('tr#<%= @dropin.id %>').hide().show().effect('highlight', { color: '#669966' }, 3000);
