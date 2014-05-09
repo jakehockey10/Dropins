@@ -65,6 +65,6 @@ class DropinsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def dropin_params
-      params.require(:dropin).permit(:date)
+      params.require(:dropin).permit(:date, :price)
     end
 end

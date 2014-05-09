@@ -3,6 +3,7 @@
   <thead>
   <tr>
     <th class="center">Date</th>
+    <th class="center">Price</th>
     <th class="center">Actions</th>
   </tr>
   </thead>
@@ -11,6 +12,7 @@
   <% dropins.each do |dropin| %>
     <tr id="<%= dropin.id %>">
       <td><%= dropin.date.strftime('%A') %><br/><%= dropin.date.strftime('%b %e, %Y at %I:%M %p') %></td>
+      <td class="center"><%= number_to_currency(dropin.price, unit: '$') %></td>
       <td class="center">
         <div class="btn-group">
           <%= link_to raw('<span class="glyphicon glyphicon-eye-open"></span>'),
