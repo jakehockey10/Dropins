@@ -10,31 +10,29 @@
 
 <div class="row">
   <% if current_user.admin? %>
-  <aside class="col-sm-4 col-md-4">
-    <section>
-      <h1>Add a rink:</h1>
-      <%= render 'rinks/form', rink: Rink.new %>
-    </section>
-  </aside>
-  <% end %>
-  <div class="col-sm-8 col-md-8">
-    <% if current_user.admin? %>
+    <aside class="col-sm-4 col-md-4">
+      <section>
+        <h1>Add a rink:</h1>
+        <%= render 'rinks/form', rink: Rink.new %>
+      </section>
+    </aside>
+    <div class="col-sm-8 col-md-8">
       <div style="width: 800px;">
         <input id="pac-input" class="controls" type="text" placeholder="Search Box"/>
         <div id="map" style="width: 800px; height: 400px;"></div>
       </div>
-    <% else %>
+    </div>
+  <% else %>
+    <div class="col-sm-12 col-md-12">
       <div style="width: 1140px;">
+        <input id="pac-input" class="controls" type="text" placeholder="Search Box"/>
         <div id="map" style="width: 1140px; height: 400px;"></div>
       </div>
-    <% end %>
-    <%= render 'rinks_table' %>
-  </div>
+    </div>
+  <% end %>
+
+  <%= render 'rinks_table' %>
 </div>
-
-<br>
-
-<%= link_to 'New Rink', new_rink_path %>
 
 <script type="text/javascript">
   var makeMap = function () {

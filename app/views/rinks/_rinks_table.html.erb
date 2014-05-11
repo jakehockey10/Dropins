@@ -1,26 +1,47 @@
 <table class="table">
   <thead>
   <tr>
+    <th>Name</th>
+    <th>Address</th>
     <th>Latitude</th>
     <th>Longitude</th>
-    <th>Address</th>
-    <th>Name</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th>Actions</th>
   </tr>
   </thead>
 
   <tbody>
   <% @rinks.each do |rink| %>
     <tr>
+      <td><%= rink.name %></td>
+      <td><%= rink.address %></td>
       <td><%= rink.latitude %></td>
       <td><%= rink.longitude %></td>
-      <td><%= rink.address %></td>
-      <td><%= rink.name %></td>
-      <td><%= link_to 'Show', rink %></td>
-      <td><%= link_to 'Edit', edit_rink_path(rink) %></td>
-      <td><%= link_to 'Destroy', rink, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td class="center">
+        <div class="btn-group">
+          <%= link_to raw('<span class="glyphicon glyphicon-eye-open"></span>'),
+                      rink,
+                      class: 'btn btn-sm btn-default view-rink',
+                      data: { toggle: 'tooltip',
+                              placement: current_user.admin? ? 'left' : 'right',
+                              title: 'View rink' } %>
+          <%= link_to raw('<span class="glyphicon glyphicon-edit"></span>'),
+                      edit_rink_path(rink),
+                      class: 'btn btn-sm btn-default edit-rink',
+                      data: { toggle: 'tooltip',
+                              placement: 'top',
+                              title: 'Edit rink' } if current_user.admin? %>
+          <%= link_to raw('<span class="glyphicon glyphicon-remove"></span>'),
+                      rink,
+                      method: :delete,
+                      class: 'btn btn-sm btn-danger delete-rink',
+                      data: { confirm: 'Are you sure?',
+                              toggle: 'tooltip',
+                              placement: 'right',
+                              title: 'Delete rink' } if current_user.admin? %>
+        </div>
+      </td>
+      <td></td>
+      <td></td>
     </tr>
   <% end %>
   </tbody>

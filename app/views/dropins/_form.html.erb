@@ -20,5 +20,10 @@
       <span class="input-group-addon"><span>.00</span></span>
     </div>
   </div>
+  <div class="form-group">
+    <%= f.label :rink %>
+    <br/>
+    <%= collection_select(:dropin, :rink_id, Rink.all, :id, :name, { prompt: true }, { class: 'selectpicker' }) %>
+  </div>
   <%= f.submit 'Submit', class: 'btn btn-default' %>
 <% end %>

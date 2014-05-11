@@ -14,4 +14,5 @@ $(document).on 'ready page:load', ->
   });
   $('.delete-dropin').tooltip({
     container: 'body'
-  })
+  });
+  $('.selectpicker').selectpicker();

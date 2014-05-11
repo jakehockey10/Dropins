@@ -21,7 +21,7 @@
                       dropin,
                       class: 'btn btn-sm btn-default view-dropin',
                       data: { toggle: 'tooltip',
-                              placement: 'left',
+                              placement: current_user.admin? ? 'left' : 'right',
                               title: 'View/Register for dropin' } %>
           <%= link_to raw('<span class="glyphicon glyphicon-edit"></span>'),
                       edit_dropin_path(dropin),

@@ -41,6 +41,7 @@ gem 'bootstrap3-datetimepicker-rails'
 gem 'date_validator'
 gem 'gmaps4rails'
 gem 'geocoder'
+gem 'bootstrap-select-rails'
 
 group :doc do
   gem 'sdoc', '0.3.20', require: false
