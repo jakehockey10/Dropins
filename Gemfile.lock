@@ -80,7 +80,9 @@ GEM
       bundler (~> 1.0)
       rails (>= 3, < 5)
     formatador (0.2.4)
-    guard (2.6.0)
+    geocoder (1.2.0)
+    gmaps4rails (2.1.2)
+    guard (2.6.1)
       formatador (>= 0.2.4)
       listen (~> 2.7)
       lumberjack (~> 1.0)
@@ -244,6 +246,8 @@ DEPENDENCIES
   factory_girl_rails (= 4.2.1)
   faker (= 1.1.2)
   figaro
+  geocoder
+  gmaps4rails
   guard-rspec (= 2.5.0)
   jbuilder
   jquery-rails

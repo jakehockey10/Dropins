@@ -39,6 +39,8 @@ gem 'ransack'
 gem 'momentjs-rails'
 gem 'bootstrap3-datetimepicker-rails'
 gem 'date_validator'
+gem 'gmaps4rails'
+gem 'geocoder'
 
 group :doc do
   gem 'sdoc', '0.3.20', require: false

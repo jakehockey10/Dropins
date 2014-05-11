@@ -1,0 +1,27 @@
+<table class="table">
+  <thead>
+  <tr>
+    <th>Latitude</th>
+    <th>Longitude</th>
+    <th>Address</th>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @rinks.each do |rink| %>
+    <tr>
+      <td><%= rink.latitude %></td>
+      <td><%= rink.longitude %></td>
+      <td><%= rink.address %></td>
+      <td><%= rink.name %></td>
+      <td><%= link_to 'Show', rink %></td>
+      <td><%= link_to 'Edit', edit_rink_path(rink) %></td>
+      <td><%= link_to 'Destroy', rink, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

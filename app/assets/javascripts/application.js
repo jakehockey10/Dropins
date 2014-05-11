@@ -16,6 +16,8 @@
 //= require bootstrap
 //= require moment
 //= require bootstrap-datetimepicker
+//= require underscore
+//= require gmaps/google
 //= require_tree .
 $(document).ready(function () {
     $(".alert button.close").click(function () {

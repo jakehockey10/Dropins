@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140511041217) do
+ActiveRecord::Schema.define(version: 20140511075014) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,7 +36,10 @@ ActiveRecord::Schema.define(version: 20140511041217) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.decimal  "price",      precision: 8, scale: 2
+    t.integer  "rink_id"
   end
+
+  add_index "dropins", ["rink_id"], name: "index_dropins_on_rink_id", using: :btree
 
   create_table "microposts", force: true do |t|
     t.string   "content"
@@ -59,8 +62,10 @@ ActiveRecord::Schema.define(version: 20140511041217) do
   add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id", using: :btree
 
   create_table "rinks", force: true do |t|
-    t.string   "name"
+    t.float    "latitude"
+    t.float    "longitude"
     t.string   "address"
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
