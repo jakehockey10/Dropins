@@ -20,16 +20,23 @@
           <%= link_to raw('<span class="glyphicon glyphicon-eye-open"></span>'),
                       dropin,
                       class: 'btn btn-sm btn-default view-dropin',
-                      data: { toggle: 'tooltip', placement: 'left', title: 'View/Register for dropin' } %>
+                      data: { toggle: 'tooltip',
+                              placement: 'left',
+                              title: 'View/Register for dropin' } %>
           <%= link_to raw('<span class="glyphicon glyphicon-edit"></span>'),
                       edit_dropin_path(dropin),
                       class: 'btn btn-sm btn-default edit-dropin',
-                      data: { toggle: 'tooltip', placement: 'top', title: 'Edit dropin' } if current_user.admin? %>
+                      data: { toggle: 'tooltip',
+                              placement: 'top',
+                              title: 'Edit dropin' } if current_user.admin? %>
           <%= link_to raw('<span class="glyphicon glyphicon-remove"></span>'),
                       dropin,
                       method: :delete,
                       class: 'btn btn-sm btn-danger delete-dropin',
-                      data: { confirm: 'Are you sure?', toggle: 'tooltip', placement: 'right', title: 'Delete dropin' } if current_user.admin? %>
+                      data: { confirm: 'Are you sure?',
+                              toggle: 'tooltip',
+                              placement: 'right',
+                              title: 'Delete dropin' } if current_user.admin? %>
         </div>
       </td>
     </tr>
