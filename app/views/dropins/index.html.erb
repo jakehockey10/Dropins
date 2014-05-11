@@ -1,10 +1,11 @@
 <% provide(:title, 'Dropins') %>
 
 <div class="page-header">
-  <h1>Dropins <small class="pull-right"></small></h1>
+  <h1>Dropins</h1>
 </div>
 
 <div class="row">
+  <% if current_user.admin? %>
   <aside class="col-sm-4 col-md-4">
     <section>
       <h1>Create a new dropin:</h1>
@@ -14,7 +15,8 @@
 
     </section>
   </aside>
-  <div class="col-sm-8 col-md-8 dropins-table">
+  <% end %>
+  <div class="<% unless current_user.admin? %>col-md-offset-2 <% end %>col-sm-8 col-md-8 dropins-table">
     <%= render 'dropins_table', dropins: @dropins %>
   </div>
 </div>

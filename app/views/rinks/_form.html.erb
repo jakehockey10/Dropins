@@ -1,0 +1,7 @@
+<%= bootstrap_form_for(rink, remote: true) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+
+  <%= f.text_field :name, hide_label: true, placeholder: 'name' %>
+  <%= f.text_field :address, hide_label: true, placeholder: 'address' %>
+  <%= f.submit 'Submit', class: 'btn btn-default' %>
+<% end %>

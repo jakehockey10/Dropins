@@ -1,0 +1,19 @@
+<% provide(:title, 'Rinks') %>
+
+<div class="page-header">
+  <h1>Rinks</h1>
+</div>
+
+<div class="row">
+  <% if current_user.admin? %>
+  <aside class="col-sm-4 col-md-4">
+    <section>
+      <h1>Add a rink:</h1>
+      <%= render 'rinks/form', rink: Rink.new %>
+    </section>
+  </aside>
+  <% end %>
+  <div class="col-sm-8 col-md-8">
+    <%= render 'rinks_table', rinks: @rinks %>
+  </div>
+</div>

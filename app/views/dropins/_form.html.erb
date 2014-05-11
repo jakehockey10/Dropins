@@ -1,7 +1,6 @@
-<%= form_for(dropin, class: 'form-horizontal', remote: true) do |f| %>
+<%= form_for(dropin, remote: true) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
 
-  <%= f.hidden_field :date_hidden, value: (f.object.date if f.object.date) %>
   <div class="form-group">
     <%= f.label :date %>
     <div class='input-group date' id='datetimepicker1'>

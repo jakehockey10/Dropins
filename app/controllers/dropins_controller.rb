@@ -59,10 +59,6 @@ class DropinsController < ApplicationController
       @dropin = Dropin.find(params[:id])
     end
 
-    def convert_time
-      DateTime.strptime(dropin_params[:date], '%m/%d/%Y %I:%M %p')
-    end
-
     # Never trust parameters from the scary internet, only allow the white list through.
     def dropin_params
       params.require(:dropin).permit(:date, :price)

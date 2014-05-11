@@ -1,8 +1,4 @@
 DropinsApp::Application.routes.draw do
-  resources :attendances, only: [:create, :destroy]
-
-  resources :dropins
-
   resources :users do
     member do
       get :following, :followers
@@ -15,6 +11,9 @@ DropinsApp::Application.routes.draw do
   resources :relationships, only: [:create, :destroy]
   resources :password_resets
   resources :contact_with_messages, only: [:new, :create]
+  resources :attendances, only: [:create, :destroy]
+  resources :dropins
+  resources :rinks
 
   root 'static_pages#home'
 
