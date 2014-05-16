@@ -1,12 +1,22 @@
-<% provide(:title, 'About Us') %>
+<% provide(:title, 'About Dropins') %>
 
 <div class="page-header">
   <h1>About Us</h1>
 </div>
 
-<p>
-  <strong>Greg,</strong>
-</p>
-<p>
-  <strong>What do we want to put here for our about page?  Anything yet?</strong>
-</p>
+<div class="row">
+  <div class="col-lg-offset-2 col-lg-8">
+    <p>
+      Hello,
+    </p>
+    <p>
+      This is Dropins <span class="label label-default">Beta</span>!  Take a look at the <%= link_to 'Dropins page', dropins_path %>
+      where you'll find all the dropins that have been created for you to sign up for.
+    </p>
+    <p>
+      Not sure where that rink is exactly?  Don't worry about opening up another tab in your browser to look it up in <%= link_to 'Google Maps', 'maps.google.com' %>,
+      just head on over to the <%= link_to 'Rinks page', rinks_path %> and use Google's slick Maps and Places to identify the
+      location of the dropins you have or will sign up for!
+    </p>
+  </div>
+</div>

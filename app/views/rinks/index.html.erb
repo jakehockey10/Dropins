@@ -9,14 +9,19 @@
 </div>
 
 <div class="row">
+  <p class="center">
+    Does something not look right?  Reload the page by pressing <kbd>ctrl</kbd> + <kbd>r</kbd>.  If it still doesn't
+    look right, please let me know about it <%= link_to 'here', contact_path %>.
+  </p>
+  <h2>Find the rink you are looking for</h2>
   <% if current_user.admin? %>
-    <aside class="col-sm-4 col-md-4">
+    <aside class="col-sm-3 col-md-3">
       <section>
         <h1>Add a rink:</h1>
         <%= render 'rinks/form', rink: Rink.new %>
       </section>
     </aside>
-    <div class="col-sm-8 col-md-8">
+    <div class="col-sm-9 col-md-9 thumbnail" style="width: 810px;">
       <div style="width: 800px;">
         <input id="pac-input" class="controls" type="text" placeholder="Search Box"/>
         <div id="map" style="width: 800px; height: 400px;"></div>
@@ -30,8 +35,13 @@
       </div>
     </div>
   <% end %>
+</div>
 
-  <%= render 'rinks_table' %>
+<div class="row">
+  <h2>List of rinks in the system</h2>
+  <div class="col-lg-offset-1 col-lg-10">
+    <%= render 'rinks_table' %>
+  </div>
 </div>
 
 <script type="text/javascript">

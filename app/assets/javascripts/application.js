@@ -21,7 +21,7 @@
 //= require gmaps/google
 //= require_tree .
 $(document).ready(function () {
-    $(".alert button.close").click(function () {
+    $('.alert button.close').click(function () {
         $(this).parent().fadeOut('fast');
 //        $(this).parent().animate({ height: 0, opacity: 0 }, 'fast');
     });

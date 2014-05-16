@@ -11,7 +11,28 @@
     </section>
   </aside>
   <div class="col-sm-8 col-md-8">
-    <h3>Micropost Feed</h3>
-    <%= render 'shared/feed' %>
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#dropins" data-toggle="tab">Dropins</a></li>
+      <li><a href="#rinks" data-toggle="tab">Rinks</a></li>
+      <li><a href="#microposts" data-toggle="tab">Microposts</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div class="tab-pane fade in active" id="dropins">
+        <h3>Upcoming dropins</h3>
+        <%= render 'dropins/dropins_table', dropins: @dropins %>
+      </div>
+      <div class="tab-pane fade" id="rinks">
+        <h3>Rinks nearby</h3>
+        <%= render 'rinks/rinks_table', rinks: @rinks %>
+      </div>
+      <div class="tab-pane fade" id="microposts">
+        <%= render 'shared/feed' %>
+      </div>
+    </div>
+
   </div>
 </div>
