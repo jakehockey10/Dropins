@@ -1,7 +1,10 @@
 <tr>
   <td>
     <%= gravatar_for user, size: 52 %>
-    <%= link_to user.name, user %>
+    <%= link_to user.first_name, user %>
+  </td>
+  <td>
+    <%= user.second_name %>
   </td>
   <td class="text-center">
     <%= user.followers.count %>
