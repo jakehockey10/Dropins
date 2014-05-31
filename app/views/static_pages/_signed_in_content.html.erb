@@ -14,9 +14,26 @@
 
     <!-- Nav tabs -->
     <ul class="nav nav-tabs">
-      <li class="active"><a href="#dropins" data-toggle="tab">Dropins</a></li>
-      <li><a href="#rinks" data-toggle="tab">Rinks</a></li>
-      <li><a href="#microposts" data-toggle="tab">Microposts</a></li>
+      <li class="active">
+        <a href="#dropins" data-toggle="tab">
+          <span class="glyphicon glyphicon-tag"></span>&nbsp;&nbsp;&nbsp;Dropins
+        </a>
+      </li>
+      <li>
+        <a href="#calendar" data-toggle="tab">
+          <span class="glyphicon glyphicon-calendar"></span>&nbsp;&nbsp;&nbsp;Calendar
+        </a>
+      </li>
+      <li>
+        <a href="#rinks" data-toggle="tab">
+          <span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;Rinks
+        </a>
+      </li>
+      <li>
+        <a href="#microposts" data-toggle="tab">
+          <span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;&nbsp;Microposts
+        </a>
+      </li>
     </ul>
 
     <!-- Tab panes -->
@@ -24,6 +41,9 @@
       <div class="tab-pane fade in active" id="dropins">
         <h3>Upcoming dropins</h3>
         <%= render 'dropins/dropins_table', dropins: @dropins %>
+      </div>
+      <div class="tab-pane fade" id="calendar">
+        <%= render 'shared/calendar' %>
       </div>
       <div class="tab-pane fade" id="rinks">
         <h3>Rinks nearby</h3>

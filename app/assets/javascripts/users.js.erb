@@ -1,0 +1,30 @@
+//# Place all the behaviors and hooks related to the matching controller here.
+//# All this logic will automatically be available in application.js.
+//# You can use CoffeeScript in this file: http://coffeescript.org/
+$(document).ready(function() {
+//    $('#calendar').fullCalendar({
+//        events: '/dropins.json'
+//    });
+
+    $('#calendar').fullCalendar({
+        header: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'month,agendaWeek,agendaDay'
+        },
+        events: '/dropins.json',
+        eventRender: function(event, element) {
+            var list = '';
+            for (var i = 0; i < event.skaters.length; i++) {
+                list += '<li>' + event.skaters[i].first_name + ' ' + event.skaters[i].second_name + '</li>'
+            }
+            element.popover({
+                placement: 'auto',
+                html: true,
+                title: event.rink.name,
+                content: '<h5><strong>Attending:</strong></h5><ul class="list-inline">' + list + '</ul>',
+                container: 'body'
+            });
+        }
+    });
+});
