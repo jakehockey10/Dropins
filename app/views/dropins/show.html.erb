@@ -13,6 +13,11 @@
       </h1>
     </section>
     <section>
+      <strong>Price:</strong>
+      <%= number_to_currency(@dropin.price, unit: '$') %>
+      <%= link_to image_tag('https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif'), express_checkout_path(dropin_id: @dropin.id), class: 'pull-right' %>
+    </section>
+    <section>
       <%= link_to 'Edit', edit_dropin_path(@dropin), class: 'btn btn-lg btn-default' if current_user.admin? %>
       <%= link_to 'Back', dropins_path, class: 'btn btn-lg btn-default' %>
     </section>

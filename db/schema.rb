@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140511075014) do
+ActiveRecord::Schema.define(version: 20140618044228) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,15 @@ ActiveRecord::Schema.define(version: 20140511075014) do
   add_index "relationships", ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true, using: :btree
   add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id", using: :btree
 
+  create_table "reservations", force: true do |t|
+    t.integer  "dropin_id"
+    t.string   "ip"
+    t.string   "express_token"
+    t.integer  "express_payer_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "rinks", force: true do |t|
     t.float    "latitude"
     t.float    "longitude"
@@ -71,7 +80,6 @@ ActiveRecord::Schema.define(version: 20140511075014) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "name"
     t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -82,6 +90,8 @@ ActiveRecord::Schema.define(version: 20140511075014) do
     t.string   "email_token"
     t.string   "password_reset_token"
     t.datetime "password_reset_sent_at"
+    t.string   "first_name"
+    t.string   "second_name"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

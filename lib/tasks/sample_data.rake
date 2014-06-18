@@ -12,7 +12,8 @@ namespace :db do
 end
 
 def make_jake_admin
-  User.create!(name: 'Jake Smith',
+  User.create!(first_name: 'Jake',
+               second_name: 'Smith',
                email: ENV['GMAIL_USERNAME'].dup,
                password: ENV['GMAIL_PASSWORD'],
                password_confirmation: ENV['GMAIL_PASSWORD'],
@@ -21,7 +22,8 @@ def make_jake_admin
 end
 
 def make_users
-  admin = User.create!(name: 'Jake Smith',
+  admin = User.create!(first_name: 'Jake',
+                       second_name: 'Smith',
                        email: ENV['GMAIL_USERNAME'],
                        password: ENV['GMAIL_PASSWORD'],
                        password_confirmation: ENV['GMAIL_PASSWORD'],

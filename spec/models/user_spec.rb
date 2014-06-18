@@ -3,7 +3,8 @@ require 'spec_helper'
 describe User do
 
   before do
-    @user = User.new(name: 'Example User',
+    @user = User.new(first_name: 'Example',
+                     second_name: 'User',
                      email: 'user@example.com',
                      password: 'foobar',
                      password_confirmation: 'foobar')
@@ -11,7 +12,8 @@ describe User do
 
   subject { @user }
 
-  it { should respond_to(:name) }
+  it { should respond_to(:first_name) }
+  it { should respond_to(:second_name) }
   it { should respond_to(:email) }
   it { should respond_to(:password_digest) }
   it { should respond_to(:password) }
@@ -44,8 +46,13 @@ describe User do
     it { should be_admin }
   end
 
-  describe 'when name is not present' do
-    before { @user.name = ' ' }
+  describe 'when first name is not present' do
+    before { @user.first_name = ' ' }
+    it { should_not be_valid }
+  end
+
+  describe 'when second name is not present' do
+    before { @user.second_name = ' ' }
     it { should_not be_valid }
   end
 
@@ -102,7 +109,8 @@ describe User do
 
   describe 'when password is not present' do
     before do
-      @user = User.new(name: 'Example User',
+      @user = User.new(first_name: 'Example',
+                       second_name: 'User',
                        email: 'user@example.com',
                        password: ' ',
                        password_confirmation: ' ')

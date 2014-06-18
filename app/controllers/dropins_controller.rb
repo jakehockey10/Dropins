@@ -9,6 +9,7 @@ class DropinsController < ApplicationController
 
   def show
     @skaters = @dropin.skaters.paginate(page: params[:page])
+    @reservation = Reservation.new
   end
 
   def new

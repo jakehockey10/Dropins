@@ -41,4 +41,14 @@ DropinsApp::Application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
+
+  config.after_initialize do
+    ActiveMerchant::Billing::Base.mode = :test
+    paypal_options = {
+        login: ENV['PAYPAL_API_USERNAME'],
+        password: ENV['PAYPAL_API_PASSWORD'],
+        signature: ENV['PAYPAL_API_SIGNATURE']
+    }
+    ::EXPRESS_GATEWAY = ActiveMerchant::Billing::PaypalExpressGateway.new(paypal_options)
+  end
 end

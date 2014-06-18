@@ -42,6 +42,8 @@ gem 'date_validator'
 gem 'gmaps4rails'
 gem 'geocoder'
 gem 'bootstrap-select-rails'
+gem 'paypal-express'
+gem 'activemerchant'
 
 group :doc do
   gem 'sdoc', '0.3.20', require: false
