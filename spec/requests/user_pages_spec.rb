@@ -24,7 +24,7 @@ describe 'User pages' do
 
       it 'should list each user' do
         User.paginate(page: 1).each do |user|
-          expect(page).to have_selector('li', text: user.name)
+          expect(page).to have_selector('td', text: user.name)
         end
       end
     end
@@ -148,7 +148,8 @@ describe 'User pages' do
 
     describe 'with valid information' do
       before do
-        fill_in 'Name', with: 'Example User'
+        fill_in 'First Name', with: 'Example'
+        fill_in 'Second Name', with: 'User'
         fill_in 'Email', with: 'user@example.com'
         fill_in 'Password', with: 'foobar'
         fill_in 'Confirm Password', with: 'foobar'
@@ -189,21 +190,24 @@ describe 'User pages' do
     end
 
     describe 'with valid information' do
-      let(:new_name) { 'New Name' }
+      let(:new_first_name) { 'New First Name' }
+      let(:new_second_name) { 'New Second Name' }
       let(:new_email) { 'new@example.com' }
 
       before do
-        fill_in 'Name', with: new_name
+        fill_in 'First Name', with: new_first_name
+        fill_in 'Second Name', with: new_second_name
         fill_in 'Email', with: new_email
         fill_in 'Password', with: user.password
         fill_in 'Confirm Password', with: user.password
         click_button 'Save changes'
       end
 
-      it { should have_title(new_name) }
+      it { should have_title(new_first_name + ' ' + new_second_name) }
       it { should have_selector('div.alert.alert-success') }
       it { should have_link('Sign out', href: signout_path) }
-      specify { expect(user.reload.name).to eq new_name }
+      specify { expect(user.reload.first_name).to eq new_first_name }
+      specify { expect(user.reload.second_name).to eq new_second_name }
       specify { expect(user.reload.email).to eq new_email }
     end
 

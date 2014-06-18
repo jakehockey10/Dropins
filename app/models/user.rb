@@ -24,9 +24,12 @@ class User < ActiveRecord::Base
   before_save { email.downcase! || email }
   before_create :create_remember_token
   before_create :create_reset_token
-  validates :name,
+  validates :first_name,
             presence: true,
-            length: { maximum: 50 }
+            length: { maximum: 20 }
+  validates :second_name,
+            presence: true,
+            length: { maximum: 30 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
   validates :email,
             presence: true,
@@ -97,6 +100,10 @@ class User < ActiveRecord::Base
     self.password_reset_sent_at = Time.zone.now
     save!
     UserMailer.password_reset(self).deliver
+  end
+
+  def name
+    "#{first_name} #{second_name}"
   end
 
   private

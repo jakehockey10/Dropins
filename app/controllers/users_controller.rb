@@ -74,10 +74,15 @@ class UsersController < ApplicationController
     render 'show_follow'
   end
 
+  def name
+    "#{first_name} #{second_name}"
+  end
+
   private
 
     def user_params
-      params.require(:user).permit(:name,
+      params.require(:user).permit(:first_name,
+                                   :second_name,
                                    :email,
                                    :password,
                                    :password_confirmation)
@@ -96,6 +101,4 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
       redirect_to(root_url) unless current_user?(@user)
     end
-
-
 end

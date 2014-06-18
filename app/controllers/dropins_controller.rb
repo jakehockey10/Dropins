@@ -4,7 +4,7 @@ class DropinsController < ApplicationController
   before_action :admin_user, only: [:edit, :update, :new, :create, :destroy]
 
   def index
-    @dropins = Dropin.paginate(page: params[:page], per_page: 8, order: 'date asc')
+    @dropins = Dropin.order('date asc').paginate(page: params[:page], per_page: 8)
   end
 
   def show

@@ -2,7 +2,8 @@
 
 <table id="users" class="table">
   <tr>
-    <th><%= sort_link @q, :name, 'user name' %></th>
+    <th><%= sort_link @q, :first_name, 'user\'s first name' %></th>
+    <th><%= sort_link @q, :second_name, 'user\'s second name' %></th>
     <th class="text-center"><%= sort_link @q, :followers, 'followers' %></th>
     <th class="text-center"><%= sort_link @q, :state, 'active?' %></th>
     <th class="text-center">remove</th>

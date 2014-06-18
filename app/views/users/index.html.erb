@@ -9,8 +9,8 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <%= search_form_for @q, class: 'navbar-form', remote: 'true' do |f| %>
-          <%= f.label :name_cont, 'name contains' %>
-          <%= f.text_field :name_cont, class: 'form-control' %>
+          <%= f.label :first_name_or_second_name_cont, 'name contains' %>
+          <%= f.text_field :first_name_or_second_name_cont, class: 'form-control' %>
           <%= button_tag class: 'btn btn-info' do %>
             <span class="glyphicon glyphicon-search"></span>
           <% end %>

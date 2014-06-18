@@ -19,6 +19,8 @@
 //= require bootstrap-select
 //= require underscore
 //= require gmaps/google
+//= require fullcalendar
+//= require gcal
 //= require_tree .
 $(document).ready(function () {
     $('.alert button.close').click(function () {
