@@ -1,24 +1,21 @@
-<p id="notice"><%= notice %></p>
+<% provide(:title, @rink.name) %>
 
-<p>
-  <strong>Latitude:</strong>
-  <%= @rink.latitude %>
-</p>
+<div class="page-header">
+  <h1><%= @rink.name %></h1>
+</div>
 
-<p>
-  <strong>Longitude:</strong>
-  <%= @rink.longitude %>
-</p>
-
-<p>
-  <strong>Address:</strong>
-  <%= @rink.address %>
-</p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @rink.name %>
-</p>
-
-<%= link_to 'Edit', edit_rink_path(@rink) %> |
-<%= link_to 'Back', rinks_path %>
+<aside class="col-sm-3 col-md-3">
+  <!-- TODO: Image -->
+  <section>
+    <strong>Address:</strong>
+    <%= @rink.address %>
+  </section>
+  <section>
+    <strong>Latitude:</strong>
+    <%= @rink.latitude %>
+  </section>
+  <section>
+    <strong>Longitude:</strong>
+    <%= @rink.longitude %>
+  </section>
+</aside>
