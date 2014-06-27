@@ -43,6 +43,7 @@ gem 'gmaps4rails'
 gem 'geocoder'
 gem 'bootstrap-select-rails'
 gem 'fullcalendar-rails'
+gem 'wepay'
 
 group :doc do
   gem 'sdoc', '0.3.20', require: false

@@ -74,8 +74,26 @@ class UsersController < ApplicationController
     render 'show_follow'
   end
 
-  def name
-    "#{first_name} #{second_name}"
+  # GET /users/oauth/1
+  def oauth
+    if !params[:code]
+      return redirect_to root_path
+    end
+
+    redirect_uri = url_for(controller: 'users', action: 'oauth', user_id: params[:user_id], host: request.host_with_port)
+    @user = User.find(params[:user_id])
+    begin
+      @user.request_wepay_access_token(params[:code], redirect_uri)
+    rescue Exception => e
+      error = e.message
+    end
+
+    if error
+      flash[:danger] = error
+    else
+      flash[:success] = 'We successfully connected you to WePay!'
+    end
+    redirect_to @user
   end
 
   private
@@ -85,7 +103,9 @@ class UsersController < ApplicationController
                                    :second_name,
                                    :email,
                                    :password,
-                                   :password_confirmation)
+                                   :password_confirmation,
+                                   :wepay_access_token,
+                                   :wepay_account_id)
     end
 
     def redirect_to_root_if_signed_in

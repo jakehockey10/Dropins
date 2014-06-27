@@ -5,6 +5,9 @@ DropinsApp::Application.routes.draw do
       get :verify_emails
     end
   end
+  # For WePay:
+  get '/users/:action(/:user_id)', controller: 'users'
+
 
   resources :sessions, only: [:new, :create, :destroy]
   resources :microposts, only: [:create, :destroy]
@@ -12,7 +15,11 @@ DropinsApp::Application.routes.draw do
   resources :password_resets
   resources :contact_with_messages, only: [:new, :create]
   resources :attendances, only: [:create, :destroy]
-  resources :dropins
+  resources :dropins do
+    member do
+      get :pay, :payment_success
+    end
+  end
   resources :rinks
 
   root 'static_pages#home'

@@ -1,8 +1,6 @@
 <% provide(:title, 'Edit user') %>
 
-<div class="page-header">
-  <h1>Update your profile</h1>
-</div>
+<h1 class="page-header">Update your profile</h1>
 
 <div class="row">
 
@@ -14,6 +12,17 @@
         <a href="http://gravatar.com/emails" target="_blank">change</a>
       </div>
     </section>
+    <% if !@user.has_valid_wepay_access_token? || !@user.has_wepay_access_token? %>
+      <section>
+        <p>
+          <strong>Please create a WePay account to manage your money:</strong>
+        </p>
+        <p>
+          <% redirect_uri = url_for(controller: 'users', action: 'oauth', user_id: @user.id, host: request.host_with_port) %>
+          <%= link_to 'Click here to create your account', @user.wepay_authorization_url(redirect_uri), class: 'btn btn-primary' %>
+        </p>
+      </section>
+    <% end %>
   </aside>
 
   <div class="col-xs-12 col-sm-8 col-md-6">

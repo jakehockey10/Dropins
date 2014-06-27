@@ -1,8 +1,6 @@
 <% provide(:title, 'Dropin') %>
 
-<div class="page-header">
-  <h1>Dropin <%= @dropin.id %></h1>
-</div>
+<h1 class="page-header">Dropin <%= @dropin.id %></h1>
 
 <div class="row">
   <aside class="col-sm-4 col-md-4">
@@ -26,6 +24,11 @@
         unless cancellation is received within 4 hours of the start time.
       </p>
     </section>
+    <% if current_user.has_wepay_account? && @dropin.user.has_wepay_account? %>
+    <section>
+      <%= link_to 'Pay for dropin', pay_dropin_path(@dropin), class: 'btn btn-danger btn-large', id: 'pay-now-button' %>
+    </section>
+    <% end %>
     <section>
       <%= link_to 'Edit', edit_dropin_path(@dropin), class: 'btn btn-lg btn-default' if current_user.admin? %>
       <%= link_to 'Back', dropins_path, class: 'btn btn-lg btn-default' %>

@@ -41,4 +41,10 @@ DropinsApp::Application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
+
+  # Wepay
+  WEPAY_CLIENT_ID = ENV['WEPAY_CLIENT_ID']
+  WEPAY_CLIENT_SECRET = ENV['WEPAY_CLIENT_SECRET']
+  USE_STAGE = true
+  WEPAY = WePay.new(WEPAY_CLIENT_ID, WEPAY_CLIENT_SECRET, USE_STAGE)
 end

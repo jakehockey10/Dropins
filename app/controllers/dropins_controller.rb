@@ -22,6 +22,7 @@ class DropinsController < ApplicationController
     the_dropin_params = dropin_params
     the_dropin_params[:date] = Time.strptime(the_dropin_params[:date], '%m/%d/%Y %I:%M %p')
     @dropin = Dropin.new(the_dropin_params)
+    @dropin.user = current_user
 
     if @dropin.save
       respond_to do |format|
@@ -53,6 +54,34 @@ class DropinsController < ApplicationController
     redirect_to dropins_url
   end
 
+  # GET /dropins/pay/1
+  def pay
+    redirect_uri = url_for(controller: 'dropins', action: 'payment_success', user_id: params[:user_id], host: request.host_with_port)
+    @dropin = Dropin.find(params[:id])
+    @user = User.find(@dropin.user.id)
+    begin
+      @checkout = @user.create_checkout(redirect_uri, @dropin.price)
+    rescue Exception => e
+      flash[:danger] = e.message
+      redirect_to @dropin
+    end
+  end
+
+  #GET /dropins/payment_success/1
+  def payment_success
+    @dropin = Dropin.find(params[:id])
+    if !params[:checkout_id]
+      flash[:danger] = 'Error - Checkout ID is expected'
+      return redirect_to @dropin
+    end
+    if (params['error'] && params['error_description'])
+      flash[:danger] = "Error - #{params['error_description']}"
+      return redirect_to @dropin
+    end
+    flash[:success] = 'Thanks for the payment!  You should receive a confirmation email shortly.'
+    redirect_to @dropin
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_dropin
@@ -61,6 +90,6 @@ class DropinsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def dropin_params
-      params.require(:dropin).permit(:date, :price, :rink_id)
+      params.require(:dropin).permit(:date, :price, :rink_id, :user_id)
     end
 end

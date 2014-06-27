@@ -2,6 +2,7 @@ class Dropin < ActiveRecord::Base
   has_many :attendances
   has_many :skaters, through: :attendances, source: :user
   belongs_to :rink
+  belongs_to :user
 
   validates :date,
             presence: true,
