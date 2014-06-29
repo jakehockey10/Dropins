@@ -96,9 +96,9 @@ class User < ActiveRecord::Base
   #   commitments.find_by(dropin_id: dropin.id).destroy
   # end
 
-  # def show_pay_for_dropin_button(dropin)
-  #   self.has_wepay_account? && dropin.user.has_wepay_account? && self.has_not_paid(dropin)
-  # end
+  def show_pay_for_dropin_button(dropin)
+    self.has_wepay_account? && dropin.user.has_wepay_account? && self.has_not_paid(dropin)
+  end
 
   def has_not_paid(dropin)
     Commitment.where(user_id: self.id, dropin_id: dropin.id).blank?

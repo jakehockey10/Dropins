@@ -18,7 +18,7 @@
     </p>
     <p>TODO: Need to specify what to do here.</p>
   </section>
-  <% if current_user.has_not_paid(@dropin) %>
+  <% if current_user.show_pay_for_dropin_button(@dropin) %>
     <section>
       <%# link_to 'Pay for dropin',
                   pay_dropin_path(@dropin),
