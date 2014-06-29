@@ -35,7 +35,7 @@
     </section>
   <% end %>
   <section>
-    <%= link_to 'Edit', edit_dropin_path(@dropin), class: 'btn btn-lg btn-default' if current_user.admin? && current_user.id == @dropin.user.id %>
+    <%# link_to 'Edit', edit_dropin_path(@dropin), class: 'btn btn-lg btn-default' if current_user.admin? && current_user.id == @dropin.user.id %>
     <%= link_to 'Back', dropins_path, class: 'btn btn-lg btn-default' %>
   </section>
 </aside>
