@@ -92,4 +92,10 @@ DropinsApp::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+
+  # Wepay
+  WEPAY_CLIENT_ID = ENV['WEPAY_CLIENT_ID']
+  WEPAY_CLIENT_SECRET = ENV['WEPAY_CLIENT_SECRET']
+  USE_STAGE = true
+  WEPAY = WePay.new(WEPAY_CLIENT_ID, WEPAY_CLIENT_SECRET, USE_STAGE)
 end

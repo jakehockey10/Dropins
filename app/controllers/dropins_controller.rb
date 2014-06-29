@@ -59,13 +59,14 @@ class DropinsController < ApplicationController
     redirect_uri = url_for(controller: 'dropins', action: 'payment_success', user_id: params[:user_id], host: request.host_with_port)
     @dropin = Dropin.find(params[:id])
     @user = User.find(@dropin.user.id)
-    begin
-      @checkout = @user.create_checkout(redirect_uri, @dropin.price)
-    rescue Exception => e
-      flash[:danger] = e.message
-      redirect_to @dropin
-    end
+
     respond_to do |format|
+      begin
+        @checkout = @user.create_checkout(redirect_uri, @dropin.price)
+      rescue Exception => e
+        flash[:danger] = e.message
+        redirect_to @dropin
+      end
       format.js
     end
   end
