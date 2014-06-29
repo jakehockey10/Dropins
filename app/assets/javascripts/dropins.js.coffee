@@ -16,3 +16,7 @@ $(document).on 'ready page:load', ->
     container: 'body'
   });
   $('.selectpicker').selectpicker();
+  $('#pay-now-button').click ->
+    btn = $(this)
+    btn.button "loading"
+    return

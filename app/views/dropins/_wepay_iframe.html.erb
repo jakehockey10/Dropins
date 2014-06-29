@@ -1,6 +1,4 @@
-<h1 class="page-header">Pay for dropin @ <%= @dropin.rink.name %></h1>
 <div id="wepay-iframe-div">
-  <%= javascript_include_tag 'https://www.wepay.com/js/iframe.wepay.js' %>
   <script type="text/javascript">
     WePay.iframe_checkout("wepay-iframe-div", "<%= @checkout['checkout_uri'] %>");
   </script>

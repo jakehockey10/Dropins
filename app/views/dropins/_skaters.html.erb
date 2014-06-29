@@ -1,6 +1,8 @@
 <% if @dropin.skaters.any? %>
   <h3>Skaters (<%= @dropin.skaters.count %>)</h3>
   <ol class="skaters">
-    <%= render @dropin.skaters %>
+    <% @dropin.skaters.each do |skater| %>
+      <%= render 'users/skater', skater: skater %>
+    <% end %>
   </ol>
 <% end %>

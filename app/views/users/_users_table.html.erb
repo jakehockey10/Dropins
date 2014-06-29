@@ -1,7 +1,8 @@
 <%= will_paginate %>
 
-<table id="users" class="table">
+<table id="users" class="table table-hover">
   <tr>
+    <th></th>
     <th><%= sort_link @q, :first_name, 'user\'s first name' %></th>
     <th><%= sort_link @q, :second_name, 'user\'s second name' %></th>
     <th class="text-center"><%= sort_link @q, :followers, 'followers' %></th>

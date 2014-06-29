@@ -1,4 +1,6 @@
 DropinsApp::Application.routes.draw do
+  get "commitments/create"
+  get "commitments/destroy"
   resources :users do
     member do
       get :following, :followers

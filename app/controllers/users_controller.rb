@@ -15,7 +15,6 @@ class UsersController < ApplicationController
 
   def new
     redirect_to_root_if_signed_in
-
     @user = User.new
   end
 

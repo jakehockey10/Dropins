@@ -1,41 +1,14 @@
 <% provide(:title, 'Dropin') %>
 
+<%= render 'pay_modal' %>
+
 <h1 class="page-header">Dropin <%= @dropin.id %></h1>
 
 <div class="row">
-  <aside class="col-sm-4 col-md-4">
-    <section>
-      <h1>
-        <strong>Date:</strong>
-        <%= @dropin.date.to_datetime.in_time_zone.strftime('%A %b %d, %G %l:%M %p') %>
-      </h1>
-    </section>
-    <section>
-      <h1>
-        <strong>Price/player:</strong>
-        <%= number_to_currency(@dropin.price) %>
-      </h1>
-    </section>
-    <section>
-      <h1><strong>Terms & Conditions:</strong></h1>
-      <p>
-        I acknowledge that by clicking Join Dropin, I am obligated to
-        attend said dropin and pay the amount listed for this dropin
-        unless cancellation is received within 4 hours of the start time.
-      </p>
-    </section>
-    <% if current_user.has_wepay_account? && @dropin.user.has_wepay_account? %>
-    <section>
-      <%= link_to 'Pay for dropin', pay_dropin_path(@dropin), class: 'btn btn-danger btn-large', id: 'pay-now-button' %>
-    </section>
-    <% end %>
-    <section>
-      <%= link_to 'Edit', edit_dropin_path(@dropin), class: 'btn btn-lg btn-default' if current_user.admin? %>
-      <%= link_to 'Back', dropins_path, class: 'btn btn-lg btn-default' %>
-    </section>
-  </aside>
+  <%= render 'dropin_aside' %>
+
   <div class="col-sm-8 col-md-8 dropin-skaters">
-    <%= render 'attendances/form' if signed_in? %>
+    <%# render 'attendances/form' if signed_in? %>
 
     <%= render 'skaters_table' %>
   </div>

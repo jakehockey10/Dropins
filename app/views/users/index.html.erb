@@ -1,8 +1,6 @@
 <% provide(:title, 'All users') %>
 
-<div class="page-header">
-  <h1>All users</h1>
-</div>
+<h1 class="page-header">All users</h1>
 
 <div class="row">
   <div class="col-lg-offset-1 col-lg-10">
@@ -10,10 +8,14 @@
       <div class="panel-heading">
         <%= search_form_for @q, class: 'navbar-form', remote: 'true' do |f| %>
           <%= f.label :first_name_or_second_name_cont, 'name contains' %>
-          <%= f.text_field :first_name_or_second_name_cont, class: 'form-control' %>
-          <%= button_tag class: 'btn btn-info' do %>
-            <span class="glyphicon glyphicon-search"></span>
-          <% end %>
+          <div class="input-group">
+            <%= f.text_field :first_name_or_second_name_cont, class: 'form-control' %>
+            <span class="input-group-btn">
+              <%= button_tag class: 'btn btn-info' do %>
+                <span class="glyphicon glyphicon-search"></span>
+              <% end %>
+            </span>
+          </div>
         <% end %>
       </div>
       <div class="panel-body">

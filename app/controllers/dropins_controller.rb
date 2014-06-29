@@ -65,20 +65,24 @@ class DropinsController < ApplicationController
       flash[:danger] = e.message
       redirect_to @dropin
     end
+    respond_to do |format|
+      format.js
+    end
   end
 
   #GET /dropins/payment_success/1
   def payment_success
     @dropin = Dropin.find(params[:id])
-    if !params[:checkout_id]
+    unless params[:checkout_id]
       flash[:danger] = 'Error - Checkout ID is expected'
       return redirect_to @dropin
     end
-    if (params['error'] && params['error_description'])
+    if params['error'] && params['error_description']
       flash[:danger] = "Error - #{params['error_description']}"
       return redirect_to @dropin
     end
     flash[:success] = 'Thanks for the payment!  You should receive a confirmation email shortly.'
+    current_user.commit_to!(@dropin)
     redirect_to @dropin
   end
 

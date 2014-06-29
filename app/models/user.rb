@@ -8,6 +8,10 @@ class User < ActiveRecord::Base
            foreign_key: 'followed_id',
            class_name: 'Relationship',
            dependent: :destroy
+  has_many :commitments,
+           # foreign_key: 'dropin_id',
+           class_name: 'Commitment',
+           dependent: :destroy
   has_many :followers,
            through: :reverse_relationships
   has_many :followed_users,
@@ -81,6 +85,23 @@ class User < ActiveRecord::Base
 
   def unfollow!(other_user)
     relationships.find_by(followed_id: other_user.id).destroy
+  end
+
+  def commit_to!(dropin)
+    commitments.create!(user_id: self.id, dropin_id: dropin.id)
+  end
+
+  # are we going to accept refunds?
+  # def uncommit_to!(dropin)
+  #   commitments.find_by(dropin_id: dropin.id).destroy
+  # end
+
+  def show_pay_for_dropin_button(dropin)
+    self.has_wepay_account? && dropin.user.has_wepay_account? && self.has_not_paid(dropin)
+  end
+
+  def has_not_paid(dropin)
+    Commitment.where(user_id: self.id, dropin_id: dropin.id).blank?
   end
 
   def attending_dropin?(dropin)

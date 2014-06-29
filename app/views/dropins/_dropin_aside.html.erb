@@ -1,0 +1,41 @@
+<aside class="col-sm-4 col-md-4">
+  <section>
+    <h1>
+      <strong>Date:</strong>
+      <%= @dropin.date.to_datetime.in_time_zone.strftime('%A %b %d, %G %l:%M %p') %>
+    </h1>
+  </section>
+  <section>
+    <h1>
+      <strong>Price/player:</strong>
+      <%= number_to_currency(@dropin.price) %>
+    </h1>
+  </section>
+  <section>
+    <h1><strong>Terms & Conditions:</strong></h1>
+    <p>
+      Right now, there are no refunds...
+    </p>
+    <p>TODO: Need to specify what to do here.</p>
+  </section>
+  <% if current_user.show_pay_for_dropin_button(@dropin) %>
+    <section>
+      <%# link_to 'Pay for dropin',
+                  pay_dropin_path(@dropin),
+                  class: 'btn btn-danger btn-large',
+                  id: 'pay-now-button',
+                  data: { no_turbolink: true } %>
+      <%= link_to 'Pay for dropin',
+                  pay_dropin_path(@dropin),
+                  class: 'btn btn-danger btn-large',
+                  id: 'pay-now-button',
+                  data: { 'loading-text' => 'Loading...' },
+                  remote: true %>
+      <%# button_tag 'Pay for dropin', class: 'btn btn-danger btn-large', id: 'pay-now-button', data: { toggle: 'modal', target: '#pay_modal' } %>
+    </section>
+  <% end %>
+  <section>
+    <%= link_to 'Edit', edit_dropin_path(@dropin), class: 'btn btn-lg btn-default' if current_user.admin? %>
+    <%= link_to 'Back', dropins_path, class: 'btn btn-lg btn-default' %>
+  </section>
+</aside>

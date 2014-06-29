@@ -1,16 +1,13 @@
 <tr>
-  <td><%= gravatar_for user, size: 52 %></td>
   <td>
-    <%= link_to user.first_name, user %>
-  </td>
-  <td>
-    <%= user.second_name %>
+    <%= gravatar_for skater, size: 52 %>
+    <%= link_to skater.name, skater %>
   </td>
   <td class="text-center">
-    <%= user.followers.count %>
+    <%= skater.followers.count %>
   </td>
   <td class="text-center">
-    <% if user.active? %>
+    <% if skater.active? %>
       <span class="glyphicon glyphicon-ok"></span>
     <% end %>
   </td>
@@ -20,7 +17,7 @@
       particular user while not signed in does not cause an error.
       If you are not signed in, current_user is nil and thus we
       cannot call the admin? method on that object at that time.-->
-    <% if !current_user.nil? && current_user.admin? && !current_user?(user) %>
+    <% if !current_user.nil? && current_user.admin? && !current_user?(skater) %>
       <%= link_to 'delete', user, method: :delete, data: { confirm: 'You sure?' } %>
     <% end %>
   </td>
