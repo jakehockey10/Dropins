@@ -1,14 +1,25 @@
-<div class="page-header">
-  <h1><small>Sean Le's</small> Dropins <span class="label label-default">beta</span></h1>
-</div>
+<%= stylesheet_link_tag 'landing' %>
+<h1 class="page-header">
+  <small>Sean Le's</small> Dropins <small><span class="label label-default">beta</span></small>
+</h1>
 
 <br/>
 <div class="center">
-  <%= image_tag('SeanRe.jpg', class: 'img-circle img-thumbnail') %>
+  <%= image_tag('SeanRe.jpg', size: '150', class: 'img-circle img-thumbnail popover-dismiss') %>
 </div>
 
 <br/>
-<br/>
+<div class="row">
+  <div class="col-lg-offset-3 col-lg-6">
+    <!--<div class="well">-->
+      <p class="lead center">
+        Dropins is a place where hockey players can sign up and secure a
+        spot by paying in advance for private or public dropins.
+      </p>
+    <!--</div>-->
+  </div>
+</div>
+
 <div class="center">
   <%= link_to 'Sign up', signup_path, class: 'btn btn-info btn-home' %>
   <%= link_to 'Sign in', signin_path, class: 'btn btn-info btn-home' %>

@@ -1,8 +1,28 @@
 <% provide(:title, 'Sign up') %>
+
 <h1>Sign up</h1>
 
 <div class="row">
-  <div class="col-lg-offset-4 col-sm-6 col-md-4">
+  <div class="col-md-6">
+    <!--<div class="media">-->
+      <%= link_to image_tag('WePay_logo_from_2011.png',
+                            class: 'thumbnail',
+                            style: 'margin: auto'),
+                  'https://www.wepay.com',
+                  target: '_blank',
+                  style: 'margin: auto' %>
+      <!--<div class="media-body">-->
+        <h2>WEPAY</h2>
+        <p>
+          This site uses WePay to allow its users to pay for dropins ahead of time.
+          This makes it fast and easy for the skaters as well as the people who put
+          the dropin together.  If you would like more information about WePay, please
+          click the image above to be directed to WePay's website.
+        </p>
+      <!--</div>-->
+    <!--</div>-->
+  </div>
+  <div class="col-md-6">
     <%= bootstrap_form_for(@user) do |f| %>
       <%= render partial: 'users/fields', locals: { f: f } %>
       <div class="row center">
