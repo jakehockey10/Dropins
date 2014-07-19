@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140627053017) do
+ActiveRecord::Schema.define(version: 20140718010337) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,14 +33,6 @@ ActiveRecord::Schema.define(version: 20140627053017) do
   add_index "commitments", ["dropin_id"], name: "index_commitments_on_dropin_id", using: :btree
   add_index "commitments", ["user_id", "dropin_id"], name: "index_commitments_on_user_id_and_dropin_id", unique: true, using: :btree
   add_index "commitments", ["user_id"], name: "index_commitments_on_user_id", using: :btree
-
-  create_table "contacts", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "email"
-    t.string   "email_token"
-    t.string   "language"
-  end
 
   create_table "dropins", force: true do |t|
     t.datetime "date"
@@ -73,15 +65,6 @@ ActiveRecord::Schema.define(version: 20140627053017) do
   add_index "relationships", ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true, using: :btree
   add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id", using: :btree
 
-  create_table "reservations", force: true do |t|
-    t.integer  "dropin_id"
-    t.string   "ip"
-    t.string   "express_token"
-    t.integer  "express_payer_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "rinks", force: true do |t|
     t.float    "latitude"
     t.float    "longitude"
@@ -102,10 +85,10 @@ ActiveRecord::Schema.define(version: 20140627053017) do
     t.string   "email_token"
     t.string   "password_reset_token"
     t.datetime "password_reset_sent_at"
-    t.string   "first_name"
-    t.string   "second_name"
     t.string   "wepay_access_token"
     t.integer  "wepay_account_id"
+    t.string   "first_name"
+    t.string   "second_name"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

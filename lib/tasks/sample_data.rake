@@ -12,7 +12,8 @@ namespace :db do
 end
 
 def make_jake_admin
-  User.create!(name: 'Jake Smith',
+  User.create!(first_name: 'Jake',
+               second_name: 'Smith',
                email: ENV['GMAIL_USERNAME'].dup,
                password: ENV['GMAIL_PASSWORD'],
                password_confirmation: ENV['GMAIL_PASSWORD'],
@@ -21,18 +22,14 @@ def make_jake_admin
 end
 
 def make_users
-  admin = User.create!(name: 'Jake Smith',
-                       email: ENV['GMAIL_USERNAME'],
-                       password: ENV['GMAIL_PASSWORD'],
-                       password_confirmation: ENV['GMAIL_PASSWORD'],
-                       state: 1,
-                       admin: true)
   99.times do |n|
-    name = Faker::Name.name
+    first_name = Faker::Name.first_name
+    second_name = Faker::Name.last_name
     email = "example-#{n+1}@railstutorial.org"
     password = 'password'
     state = 1
-    User.create!(name: name,
+    User.create!(first_name: first_name,
+                 second_name: second_name,
                  email: email,
                  state: state,
                  password: password,
