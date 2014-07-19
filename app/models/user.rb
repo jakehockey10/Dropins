@@ -91,11 +91,6 @@ class User < ActiveRecord::Base
     commitments.create!(user_id: self.id, dropin_id: dropin.id)
   end
 
-  # are we going to accept refunds?
-  # def uncommit_to!(dropin)
-  #   commitments.find_by(dropin_id: dropin.id).destroy
-  # end
-
   def show_pay_for_dropin_button(dropin)
     self.has_wepay_account? && dropin.user.has_wepay_account? && self.has_not_paid(dropin)
   end
