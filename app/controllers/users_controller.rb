@@ -75,7 +75,7 @@ class UsersController < ApplicationController
 
   # GET /users/oauth/1
   def oauth
-    if !params[:code]
+    unless params[:code]
       return redirect_to root_path
     end
 
