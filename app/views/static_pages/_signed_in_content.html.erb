@@ -6,17 +6,17 @@
     <section>
       <%= render 'shared/stats' %>
     </section>
-    <% if !current_user.has_valid_wepay_access_token? || !current_user.has_wepay_access_token? %>
-      <section>
-        <p>
-          <strong>Please create a WePay account to manage your money:</strong>
-        </p>
-        <p>
-          <% redirect_uri = url_for(controller: 'users', action: 'oauth', user_id: current_user.id, host: request.host_with_port) %>
-          <%= link_to 'Click here to create your account', current_user.wepay_authorization_url(redirect_uri), class: 'btn btn-primary' %>
-        </p>
-      </section>
-    <% end %>
+    <%# if !current_user.has_valid_wepay_access_token? || !current_user.has_wepay_access_token? %>
+      <!--<section>-->
+        <!--<p>-->
+          <!--<strong>Please create a WePay account to manage your money:</strong>-->
+        <!--</p>-->
+        <!--<p>-->
+          <!--<%# redirect_uri = url_for(controller: 'users', action: 'oauth', user_id: current_user.id, host: request.host_with_port) %>-->
+          <!--<%# link_to 'Click here to create your account', current_user.wepay_authorization_url(redirect_uri), class: 'btn btn-primary' %>-->
+        <!--</p>-->
+      <!--</section>-->
+    <%# end %>
     <section>
       <%= render 'shared/micropost_form' %>
     </section>

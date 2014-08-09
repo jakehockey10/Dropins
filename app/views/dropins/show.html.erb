@@ -8,7 +8,17 @@
   <%= render 'dropin_aside' %>
 
   <div class="col-sm-8 col-md-8 dropin-skaters">
-    <%# render 'attendances/form' if signed_in? %>
+    <% if show_join_button(@dropin, current_user.id) %>
+        <%= render 'attendances/form' if signed_in? %>
+    <% else %>
+        <p class="bg-danger">
+          The dropin is currently full.  Use the contact
+          page <%= link_to 'here', contact_with_messages_path %>
+          to be put on the wait-list in case of a spot opening up.
+          You will be contacted if you are next in the wait-list and
+          there is an available slot in the roster.
+        </p>
+    <% end %>
 
     <%= render 'skaters_table' %>
   </div>

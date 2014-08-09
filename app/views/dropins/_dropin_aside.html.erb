@@ -11,25 +11,27 @@
       <%= number_to_currency(@dropin.price) %>
     </h1>
   </section>
-  <section>
+  <section class="bg-danger">
     <h1><strong>Terms & Conditions:</strong></h1>
     <p>
-      Right now, there are no refunds...
+      By signing up, you are committing to attending this dropin.
+      Under certain circumstances, one may request that they be
+      removed from the dropin due "something coming up."  To do
+      so, please use the contact page found <%= link_to 'here', contact_with_messages_path %>.
     </p>
-    <p>TODO: Need to specify what to do here.</p>
   </section>
-  <% if current_user.show_pay_for_dropin_button(@dropin) && current_user.has_valid_wepay_access_token? %>
-    <section>
-      <%= link_to 'Pay for dropin',
-                  pay_dropin_path(@dropin),
-                  class: 'btn btn-danger btn-large',
-                  id: 'pay-now-button',
-                  data: { 'loading-text' => 'Loading...' },
+  <%# if current_user.show_pay_for_dropin_button(@dropin) && current_user.has_valid_wepay_access_token? %>
+    <!--<section>-->
+      <%# link_to 'Pay for dropin',
+#                   pay_dropin_path(@dropin),
+#                   class: 'btn btn-danger btn-large',
+#                   id: 'pay-now-button',
+#                   data: { 'loading-text' => 'Loading...' },
                   remote: true %>
-    </section>
-  <% end %>
+    <!--</section>-->
+  <%# end %>
   <section>
-    <%# link_to 'Edit', edit_dropin_path(@dropin), class: 'btn btn-lg btn-default' if current_user.admin? && current_user.id == @dropin.user.id %>
+    <%= link_to 'Edit', edit_dropin_path(@dropin), class: 'btn btn-lg btn-default' if current_user.admin? && current_user.id == @dropin.user.id %>
     <%= link_to 'Back', dropins_path, class: 'btn btn-lg btn-default' %>
   </section>
 </aside>

@@ -187,6 +187,10 @@ aside {
       border: 0;
       padding-top: 0;
     }
+    &.bg-danger, &.bg-primary {
+      padding: 15px 15px 15px 15px;
+      margin-top: 15px;
+    }
     span {
       display: block;
       margin-bottom: 3px;
@@ -200,6 +204,11 @@ aside {
       margin-top: 0px;
     }
   }
+}
+
+p.bg-danger, p.bg-primary {
+  padding: 15px 15px 15px 15px;
+  margin-top: 15px;
 }
 
 .gravatar {
@@ -363,3 +372,4 @@ aside {
   font-size: 13px;
   font-weight: 300;
 }
+

@@ -1,6 +1,6 @@
 DropinsApp::Application.routes.draw do
-  get "commitments/create"
-  get "commitments/destroy"
+  get 'commitments/create'
+  get 'commitments/destroy'
   resources :users do
     member do
       get :following, :followers
@@ -9,7 +9,6 @@ DropinsApp::Application.routes.draw do
   end
   # For WePay:
   get '/users/:action(/:user_id)', controller: 'users'
-
 
   resources :sessions, only: [:new, :create, :destroy]
   resources :microposts, only: [:create, :destroy]

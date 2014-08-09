@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140718010337) do
+ActiveRecord::Schema.define(version: 20140809081050) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 20140718010337) do
     t.decimal  "price",      precision: 8, scale: 2
     t.integer  "rink_id"
     t.integer  "user_id"
+    t.integer  "limit"
   end
 
   add_index "dropins", ["rink_id"], name: "index_dropins_on_rink_id", using: :btree

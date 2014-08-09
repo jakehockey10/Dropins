@@ -21,6 +21,14 @@
     </div>
   </div>
   <div class="form-group">
+    <%= f.label :limit %>
+    <div class="input-group">
+      <%= f.number_field :limit, class: 'form-control',
+                         hide_label: true,
+                         placeholder: 'Player limit' %>
+    </div>
+  </div>
+  <div class="form-group">
     <%= f.label :rink %>
     <br/>
     <%= collection_select(:dropin, :rink_id, Rink.all, :id, :name, { prompt: true }, { class: 'selectpicker' }) %>

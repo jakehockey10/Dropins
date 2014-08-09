@@ -16,6 +16,7 @@ class DropinsController < ApplicationController
   end
 
   def edit
+    # TODO: Do a flash message if error occurs.
   end
 
   def create
