@@ -23,7 +23,8 @@ $(document).on('ready page:load', function() {
                 html: true,
                 title: event.rink.name,
                 content: '<h5><strong>Attending:</strong></h5><ul class="list-inline">' + list + '</ul>',
-                container: 'body'
+                container: 'body',
+                trigger: 'click'
             });
         }
     });

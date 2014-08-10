@@ -55,8 +55,8 @@ $(document).ready(function () {
         });
     });
 
-    $('.interested-button').on('click', function () {
-        var btn = $(this);
-        btn.button('loading');
-    });
+//    $('.interested-button').on('click', function () {
+//        var btn = $(this);
+//        btn.button('loading');
+//    });
 });

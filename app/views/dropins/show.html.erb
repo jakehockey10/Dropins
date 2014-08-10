@@ -8,7 +8,14 @@
   <%= render 'dropin_aside' %>
 
   <div class="col-sm-8 col-md-8 dropin-skaters">
-    <% if show_join_button(@dropin, current_user.id) %>
+    <% if @dropin.date <= Time.now %>
+        <p class="bg-danger">
+          It is too late to sign up for this dropin.  If you believe
+          you are seeing this message in error, please use the contact
+          form <%= link_to 'here', contact_with_messages_path %> to let
+          me know
+        </p>
+    <% elsif show_join_button(@dropin, current_user.id) %>
         <%= render 'attendances/form' if signed_in? %>
     <% else %>
         <p class="bg-danger">
