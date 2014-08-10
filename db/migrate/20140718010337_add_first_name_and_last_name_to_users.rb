@@ -11,7 +11,9 @@ class AddFirstNameAndLastNameToUsers < ActiveRecord::Migration
       user.update_attributes!(first_name: name[0])
       user.update_attributes!(second_name: name[1])
     end
-    remove_column :users, :name
+    if column_exists? :users, :name
+      remove_column :users, :name
+    end
   end
 
   def down
