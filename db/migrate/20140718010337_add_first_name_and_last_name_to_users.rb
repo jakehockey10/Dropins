@@ -1,7 +1,11 @@
 class AddFirstNameAndLastNameToUsers < ActiveRecord::Migration
   def up
-    add_column :users, :first_name, :string
-    add_column :users, :second_name, :string
+    unless column_exists? :users, :first_name
+      add_column :users, :first_name, :string
+    end
+    unless column_exists? :users, :second_name
+      add_column :users, :second_name, :string
+    end
     User.all.each do |user|
       name = user.name.split(' ')
       user.update_attributes!(first_name: name[0])
