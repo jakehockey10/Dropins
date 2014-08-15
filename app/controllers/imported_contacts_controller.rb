@@ -17,7 +17,7 @@ class ImportedContactsController < ApplicationController
     # scope - Indicates that the application is requesting a token to access contacts feeds.
     # secure - Indicates whether the client is requesting a secure token.
     # session - Indicates whether the token returned can be exchanged for a multi-use (session) token.
-    
+
   end
 
   def authorise
