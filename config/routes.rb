@@ -37,6 +37,7 @@ DropinsApp::Application.routes.draw do
   match '/help', to: 'static_pages#help', via: 'get'
   match '/about', to: 'static_pages#about', via: 'get'
   match '/contact', to: 'contact_with_messages#new', via: 'get'
+  match '/oauth2callback', to: 'invite#oauth2callback', via: 'get'
   match '/contacts/:importer/callback', to: 'invite#oauth2callback', via: 'get'
   match '/contacts/failure', to: 'invite#failure', via: 'get'
 
