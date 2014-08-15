@@ -122,6 +122,9 @@ GEM
     multi_json (1.10.1)
     nokogiri (1.6.2.1)
       mini_portile (= 0.6.0)
+    omnicontacts (0.3.4)
+      json
+      rack
     pg (0.17.1)
     polyamorous (1.0.0)
       activerecord (>= 3.0)
@@ -254,6 +257,7 @@ DEPENDENCIES
   jquery-turbolinks
   mail_form
   momentjs-rails
+  omnicontacts
   pg
   rails (= 4.0.2)
   rails_12factor (= 0.0.2)

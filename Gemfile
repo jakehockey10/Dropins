@@ -44,6 +44,10 @@ gem 'geocoder'
 gem 'bootstrap-select-rails'
 gem 'fullcalendar-rails'
 gem 'wepay'
+gem 'omnicontacts'
+# gem 'gdata_19'
+# gem 'contacts'
+# gem 'hpricot'
 
 group :doc do
   gem 'sdoc', '0.3.20', require: false

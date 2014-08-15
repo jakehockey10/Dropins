@@ -2,6 +2,8 @@ DropinsApp::Application.routes.draw do
   get "imported_contacts/authenticate"
   get "imported_contacts/authorise"
   get "imported_contacts/import"
+  # get 'invite/import'
+  get 'invite/invite'
   get 'commitments/create'
   get 'commitments/destroy'
   resources :users do
@@ -34,8 +36,9 @@ DropinsApp::Application.routes.draw do
 
   match '/help', to: 'static_pages#help', via: 'get'
   match '/about', to: 'static_pages#about', via: 'get'
-  # match '/contact', to: 'static_pages#contact', via: 'get'
   match '/contact', to: 'contact_with_messages#new', via: 'get'
+  match '/contacts/:importer/callback', to: 'invite#oauth2callback', via: 'get'
+  match '/contacts/failure', to: 'invite#failure', via: 'get'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

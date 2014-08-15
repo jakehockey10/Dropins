@@ -6,7 +6,21 @@
         <h4 class="modal-title" id="invite_modal_label">Invite Skaters</h4>
       </div>
       <div class="modal-body">
+        <%# bootstrap_form_tag(url: {controller: :invite, action: :import}, method: 'get', remote: true) do |f| %>
+            <%# f.select :from, %w(Gmail Yahoo Hotmail) %>
+            <%# f.email_field :login, value: 'name@example.com' %>
+            <%# f.password_field :password %>
+            <%# f.submit 'Submit', class: 'btn btn-md btn-default' %>
+        <%# end %>
 
+        <%= link_to 'Import Gmail Contacts', '/contacts/gmail', id: 'import-gmail-link' %>
+
+        <%= bootstrap_form_tag(url: {controller: :invite, action: :invite}, method: 'get') do |f| %>
+            <%= f.hidden_field :dropin_id, value: @dropin.id %>
+            <%= f.text_field :users %>
+            <%= f.text_area :message %>
+            <%= f.submit 'Send', class: 'btn btn-md btn-primary' %>
+        <% end %>
       </div>
       <div class="modal-footer">
         <%= button_tag 'Close', class: 'btn btn-default', data: { dismiss: 'modal' } %>

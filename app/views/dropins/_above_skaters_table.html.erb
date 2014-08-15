@@ -1,0 +1,25 @@
+<%= button_tag 'Invite Skaters', class: 'invite-skaters btn btn-sm btn-default pull-right' if @dropin.is_not_full %>
+<div class="row">
+  <% if @dropin.date <= Time.now %>
+      <p class="well">
+        It is too late to sign up for this dropin.  If you believe
+        you are seeing this message in error, please use the contact
+        form <%= link_to 'here', contact_path %> to let
+        me know
+      </p>
+  <% elsif @dropin.is_full %>
+      <p class="well">
+        The dropin is currently full.  Use the contact
+        page <%= link_to 'here', contact_path %>
+        to be put on the wait-list in case of a spot opening up.
+        You will be contacted if you are next in the wait-list and
+        there is an available slot in the roster.
+      </p>
+  <% elsif @dropin.user_is_attending(current_user.id) %>
+      <p class="well">
+        You are signed up for this dropin!
+      </p>
+  <% else %>
+      <%= render 'attendances/form' if signed_in? %>
+  <% end %>
+</div>

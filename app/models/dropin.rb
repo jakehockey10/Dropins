@@ -19,7 +19,15 @@ class Dropin < ActiveRecord::Base
     self.limit > self.skaters.count
   end
 
+  def is_full
+    self.limit <= self.skaters.count
+  end
+
   def user_is_not_attending(user_id)
     attendances.count === 0 || attendances.find_by(user_id: user_id).nil?
+  end
+
+  def user_is_attending(user_id)
+    attendances.count > 0 && attendances.find_by(user_id: user_id)
   end
 end

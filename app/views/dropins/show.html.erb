@@ -9,32 +9,12 @@
   <%= render 'dropin_aside' %>
 
   <div class="col-sm-8 col-md-8 dropin-skaters">
-    <% if @dropin.date <= Time.now %>
-        <p class="well">
-          It is too late to sign up for this dropin.  If you believe
-          you are seeing this message in error, please use the contact
-          form <%= link_to 'here', contact_path %> to let
-          me know
-        </p>
-    <% elsif show_join_button(@dropin, current_user.id) %>
-        <div class="row">
-          <div class="col-sm-6 col-md-6">
-            <%= render 'attendances/form' if signed_in? %>
-          </div>
-          <div class="col-sm-6 col-md-6">
-            <button class="invite-skaters btn btn-lg btn-default pull-right">Invite Skaters</button>
-          </div>
-        </div>
-    <% else %>
-        <p class="well">
-          The dropin is currently full.  Use the contact
-          page <%= link_to 'here', contact_path %>
-          to be put on the wait-list in case of a spot opening up.
-          You will be contacted if you are next in the wait-list and
-          there is an available slot in the roster.
-        </p>
-    <% end %>
+    <div class="above_skaters_table">
+      <%= render 'above_skaters_table' %>
+    </div>
 
-    <%= render 'skaters_table' %>
+    <div class="skaters_table">
+      <%= render 'skaters_table' %>
+    </div>
   </div>
 </div>

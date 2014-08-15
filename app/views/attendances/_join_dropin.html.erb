@@ -1,4 +1,4 @@
 <%= bootstrap_form_for(current_user.attendances.build(dropin_id: @dropin.id), remote: true) do |f| %>
     <%= f.hidden_field :dropin_id %>
-    <%= f.submit 'Join Dropin', class: 'btn btn-default btn-lg' %>
+    <%= f.submit 'Join Dropin', class: 'btn btn-default btn-sm' %>
 <% end %>
