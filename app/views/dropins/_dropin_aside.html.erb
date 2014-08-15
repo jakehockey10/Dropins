@@ -2,18 +2,24 @@
   <section>
     <h1>
       <strong>Date:</strong>
-      <%= @dropin.date.to_datetime.in_time_zone.strftime('%A %b %d, %G %l:%M %p') %>
+      <span id="dropin-date-time"><%= @dropin.date.to_datetime.in_time_zone.strftime('%A %b %d, %G %l:%M %p') %></span>
     </h1>
   </section>
   <section>
     <h1>
       <strong>Price/player:</strong>
-      <%= number_to_currency(@dropin.price) %>
+      <span id="dropin-price-per-player"><%= number_to_currency(@dropin.price) %></span>
+    </h1>
+  </section>
+  <section>
+    <h1>
+      <strong>Rink:</strong>
+      <span id="dropin-rink"><%= @dropin.rink.name %></span>
     </h1>
   </section>
   <section class="well">
     <h1><strong>Terms & Conditions:</strong></h1>
-    <p>
+    <p id="dropin-terms-and-conditions">
       By signing up, you are committing to attending this dropin.
       Under certain circumstances, one may request that they be
       removed from the dropin due "something coming up."  To do

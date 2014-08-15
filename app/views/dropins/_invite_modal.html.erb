@@ -1,3 +1,4 @@
+<%= bootstrap_form_tag(url: {controller: :invite, action: :invite}, method: 'get') do |f| %>
 <div class="modal fade" id="invite_modal" tabindex="-1" role="dialog" aria-labelledby="Invite Modal" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -15,16 +16,20 @@
 
         <%= link_to 'Import Gmail Contacts', '/contacts/gmail', id: 'import-gmail-link' %>
 
-        <%= bootstrap_form_tag(url: {controller: :invite, action: :invite}, method: 'get') do |f| %>
-            <%= f.hidden_field :dropin_id, value: @dropin.id %>
-            <%= f.text_field :users %>
-            <%= f.text_area :message %>
-            <%= f.submit 'Send', class: 'btn btn-md btn-primary' %>
-        <% end %>
+        <%= f.hidden_field :dropin_id, value: @dropin.id %>
+        <%= f.text_field :users, placeholder: 'All emails, separated by commas...' %>
+        <%= f.text_area :message, as: :text, rows: 5, placeholder: 'Add to default message...' %>
+
       </div>
       <div class="modal-footer">
+        <%= button_tag 'Insert Date/Time', class: 'btn btn-sm btn-success pull-left', id: 'insert-date-time', type: 'button' %>
+        <%= button_tag 'Insert Price-per-player', class: 'btn btn-sm btn-success pull-left', id: 'insert-price-per-player', type: 'button' %>
+        <%= button_tag 'Insert Rink', class: 'btn btn-sm btn-success pull-left', id: 'insert-rink', type: 'button' %>
+        <%= button_tag 'Insert Terms & Conditions', class: 'btn btn-sm btn-success pull-left', id: 'insert-terms-and-conditions', type: 'button' %>
+        <%= f.submit 'Send', class: 'btn btn-primary' %>
         <%= button_tag 'Close', class: 'btn btn-default', data: { dismiss: 'modal' } %>
       </div>
     </div>
   </div>
 </div>
+<% end %>
