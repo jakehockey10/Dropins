@@ -11,7 +11,7 @@
       <%= number_to_currency(@dropin.price) %>
     </h1>
   </section>
-  <section class="bg-danger">
+  <section class="standout bg-danger">
     <h1><strong>Terms & Conditions:</strong></h1>
     <p>
       By signing up, you are committing to attending this dropin.
@@ -30,6 +30,7 @@
                   remote: true %>
     <!--</section>-->
   <%# end %>
+  <section></section>
   <section>
     <%= link_to 'Edit', edit_dropin_path(@dropin), class: 'btn btn-lg btn-default' if current_user.admin? && current_user.id == @dropin.user.id %>
     <%= link_to 'Back', dropins_path, class: 'btn btn-lg btn-default' %>

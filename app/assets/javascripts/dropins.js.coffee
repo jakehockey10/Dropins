@@ -20,3 +20,5 @@ $(document).on 'ready page:load', ->
     btn = $(this)
     btn.button "loading"
     return
+  $('.invite-skaters').click ->
+    $('#invite_modal').modal('show');

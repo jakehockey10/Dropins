@@ -1,4 +1,7 @@
 DropinsApp::Application.routes.draw do
+  get "imported_contacts/authenticate"
+  get "imported_contacts/authorise"
+  get "imported_contacts/import"
   get 'commitments/create'
   get 'commitments/destroy'
   resources :users do

@@ -1,6 +1,7 @@
 <% provide(:title, 'Dropin') %>
 
 <%= render 'pay_modal' %>
+<%= render 'invite_modal' %>
 
 <h1 class="page-header">Dropin <%= @dropin.id %></h1>
 
@@ -16,7 +17,14 @@
           me know
         </p>
     <% elsif show_join_button(@dropin, current_user.id) %>
-        <%= render 'attendances/form' if signed_in? %>
+        <div class="row">
+          <div class="col-sm-6 col-md-6">
+            <%= render 'attendances/form' if signed_in? %>
+          </div>
+          <div class="col-sm-6 col-md-6">
+            <button class="invite-skaters btn btn-lg btn-default pull-right">Invite Skaters</button>
+          </div>
+        </div>
     <% else %>
         <p class="bg-danger">
           The dropin is currently full.  Use the contact
