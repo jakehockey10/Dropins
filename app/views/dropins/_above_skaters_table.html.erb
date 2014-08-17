@@ -1,4 +1,4 @@
-<%= button_tag 'Invite Skaters', class: 'invite-skaters btn btn-sm btn-default pull-right' if @dropin.is_not_full %>
+<%= button_tag 'Invite Skaters', class: 'invite-skaters btn btn-sm btn-default pull-right' if @dropin.is_not_full && current_user.id == @dropin.user_id %>
 <div class="row">
   <% if @dropin.date <= Time.now %>
       <p class="well">
