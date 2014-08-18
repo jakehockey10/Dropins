@@ -17,19 +17,6 @@ gem 'pg'
 gem 'figaro'
 gem 'jquery-turbolinks'
 
-group :development, :test do
-  gem 'better_errors'
-  gem 'binding_of_caller'
-  gem 'rspec-rails', '2.13.1'
-  gem 'guard-rspec', '2.5.0'
-end
-
-group :test do
-  gem 'selenium-webdriver', '2.35.1'
-  gem 'capybara', '2.1.0'
-  gem 'factory_girl_rails', '4.2.1'
-end
-
 gem 'uglifier'
 gem 'coffee-rails'
 gem 'jquery-rails'
@@ -48,6 +35,20 @@ gem 'fullcalendar-rails'
 gem 'wepay'
 gem 'omnicontacts', '~> 0.3.5', git: 'git://github.com/Diego81/omnicontacts.git'
 gem 'rails4-autocomplete'
+
+
+group :development, :test do
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'rspec-rails', '2.13.1'
+  gem 'guard-rspec', '2.5.0'
+end
+
+group :test do
+  gem 'selenium-webdriver', '2.35.1'
+  gem 'capybara', '2.1.0'
+  gem 'factory_girl_rails', '4.2.1'
+end
 
 group :doc do
   gem 'sdoc', '0.3.20', require: false
