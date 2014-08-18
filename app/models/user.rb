@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
            source: :followed
   has_many :attendances
   has_many :dropins, through: :attendances
+  has_many :gmail_contacts
 
   STATES = {
       inactive: 0,

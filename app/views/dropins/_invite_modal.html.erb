@@ -6,28 +6,31 @@
         <%= button_tag raw('<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>'), class: 'close', data: { dismiss: 'modal' } %>
         <h4 class="modal-title" id="invite_modal_label">Invite Skaters</h4>
       </div>
+
       <div class="modal-body">
-        <%# bootstrap_form_tag(url: {controller: :invite, action: :import}, method: 'get', remote: true) do |f| %>
-            <%# f.select :from, %w(Gmail Yahoo Hotmail) %>
-            <%# f.email_field :login, value: 'name@example.com' %>
-            <%# f.password_field :password %>
-            <%# f.submit 'Submit', class: 'btn btn-md btn-default' %>
-        <%# end %>
-
-        <%= link_to 'Import Gmail Contacts', '/contacts/gmail', id: 'import-gmail-link' %>
-
         <%= f.hidden_field :dropin_id, value: @dropin.id %>
-        <%= f.text_field :users, placeholder: 'All emails, separated by commas...' %>
-        <%= f.text_area :message, as: :text, rows: 5, placeholder: 'Add to default message...' %>
 
+        <div class="row">
+          <div class="col-sm-offset-2 col-sm-8">
+            <div class="control-group">
+              <%= f.autocomplete_field :users, autocomplete_gmail_contact_name_users_path, 'data-delimiter' => ',', multiple: true, placeholder: 'All emails, separated by commas...', class: 'form-control', id: 'users' %>
+            </div>
+            <%= f.text_area :message, as: :text, rows: 7, hide_label: true, placeholder: 'Add to default message...' %>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-body">
+        <%= link_to image_tag('icon_gmail.png', size: '25x25') + '  Import Gmail Contacts', "/contacts/gmail?state=#{@dropin.id}", id: 'import-gmail-link', class: 'btn btn-xs btn-danger' %>
+        <br/><span class="timestamp">last imported <%= time_ago_in_words(@contacts.first.created_at) %> ago.</span>
       </div>
       <div class="modal-footer">
         <%= button_tag 'Insert Date/Time', class: 'btn btn-sm btn-success pull-left', id: 'insert-date-time', type: 'button' %>
         <%= button_tag 'Insert Price-per-player', class: 'btn btn-sm btn-success pull-left', id: 'insert-price-per-player', type: 'button' %>
         <%= button_tag 'Insert Rink', class: 'btn btn-sm btn-success pull-left', id: 'insert-rink', type: 'button' %>
         <%= button_tag 'Insert Terms & Conditions', class: 'btn btn-sm btn-success pull-left', id: 'insert-terms-and-conditions', type: 'button' %>
-        <%= f.submit 'Send', class: 'btn btn-primary' %>
-        <%= button_tag 'Close', class: 'btn btn-default', data: { dismiss: 'modal' } %>
+        <%= f.submit 'Send', class: 'btn btn-sm btn-primary' %>
+        <%= button_tag 'Close', class: 'btn btn-sm btn-default', data: { dismiss: 'modal' } %>
       </div>
     </div>
   </div>

@@ -1,4 +1,4 @@
-DropinsApp::Application.configure do
+Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
@@ -13,7 +13,6 @@ DropinsApp::Application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
 
-  # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = true
 
   # Change mail delivery to either :smtp, :sendmail, :file, :test
@@ -34,7 +33,7 @@ DropinsApp::Application.configure do
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
-  # Raise an error on page load if there are pending migrations
+  # Raise an error on page load if there are pending migrations.
   config.active_record.migration_error = :page_load
 
   # Debug mode disables concatenation and preprocessing of assets.
@@ -42,9 +41,18 @@ DropinsApp::Application.configure do
   # number of complex assets.
   config.assets.debug = true
 
+  # Adds additional error checking when serving assets at runtime.
+  # Checks for improperly declared sprockets dependencies.
+  # Raises helpful error messages.
+  config.assets.raise_runtime_errors = true
+
+  # Raises error for missing translations
+  # config.action_view.raise_on_missing_translations = true
+
   # Wepay
   WEPAY_CLIENT_ID = ENV['WEPAY_CLIENT_ID']
   WEPAY_CLIENT_SECRET = ENV['WEPAY_CLIENT_SECRET']
   USE_STAGE = true
   WEPAY = WePay.new(WEPAY_CLIENT_ID, WEPAY_CLIENT_SECRET, USE_STAGE)
+
 end

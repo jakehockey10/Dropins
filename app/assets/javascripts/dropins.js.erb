@@ -14,8 +14,7 @@ $(document).on("ready page:load", function() {
     });
     $(".selectpicker").selectpicker();
     $("#pay-now-button").click(function() {
-        var btn = $(this);
-        btn.button("loading");
+        $(this).button("loading");
     });
     $(".invite-skaters").on("click", function() {
         $("#invite_modal").modal("show");
@@ -30,6 +29,7 @@ $(document).on("ready page:load", function() {
         insertAtCaret(message.attr('id'), $('#dropin-price-per-player').text());
         message.focus();
     });
+
     $('#insert-rink').on('click', function () {
         var message = $('#message');
         insertAtCaret(message.attr('id'), $('#dropin-rink').text());
@@ -41,7 +41,31 @@ $(document).on("ready page:load", function() {
         insertAtCaret(message.attr('id'), $('#dropin-terms-and-conditions').text());
         message.focus();
     });
-    function insertAtCaret(areaId,text) {
+
+    $('#import-gmail-link').on('click', function () {
+        $(this).button("loading");
+        $()
+    });
+
+    var refreshIntervalId = null;
+    var checkIfVariableIsSet = function()
+    {
+        if(typeof $('#users').autocomplete('instance') !== 'undefined'){
+            $('#users').autocomplete('instance')._renderItem = function (ul, item) {
+
+                var elem = $('<li>')
+                        .data( "item.autocomplete", item )
+                        .append('<a><strong>' + item.name + '</strong><br><em>' + item.email + '</em></a>')
+                        .appendTo(ul);
+                console.log(item);
+                return elem;
+            };
+            clearInterval(refreshIntervalId);
+        }
+    };
+    refreshIntervalId = setInterval(checkIfVariableIsSet, 1000);
+
+    function insertAtCaret(areaId, text) {
         var textArea = document.getElementById(areaId);
         var scrollPos = textArea.scrollTop;
         var strPos = 0;
