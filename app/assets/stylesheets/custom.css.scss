@@ -373,3 +373,12 @@ aside {
   font-weight: 300;
 }
 
+// Autocomplete Gmail contacts
+ul.ui-autocomplete.ui-menu {
+  z-index: 999999;
+  background-color: #ffffff;
+}
+
+li.ui-menu-item {
+
+}

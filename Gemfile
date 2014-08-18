@@ -1,10 +1,12 @@
 source 'https://rubygems.org'
-ruby '2.0.0'
+ruby '2.1.2'
 
-gem 'rails', '4.0.2'
-gem 'bootstrap-sass'
+gem 'rails'
+gem 'bootstrap-sass', '~> 3.2.0'
+gem 'sass-rails', '>= 3.2'
+gem 'autoprefixer-rails'
 gem 'bootstrap_form'
-gem 'bcrypt-ruby', '3.1.2'
+gem 'bcrypt-ruby'
 gem 'faker', '1.1.2'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
@@ -28,10 +30,10 @@ group :test do
   gem 'factory_girl_rails', '4.2.1'
 end
 
-gem 'sass-rails', '~> 4.0.0'
 gem 'uglifier'
 gem 'coffee-rails'
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 gem 'turbolinks'
 gem 'jbuilder'
 gem 'mail_form'
@@ -44,10 +46,8 @@ gem 'geocoder'
 gem 'bootstrap-select-rails'
 gem 'fullcalendar-rails'
 gem 'wepay'
-gem 'omnicontacts'
-# gem 'gdata_19'
-# gem 'contacts'
-# gem 'hpricot'
+gem 'omnicontacts', '~> 0.3.5', git: 'git://github.com/Diego81/omnicontacts.git'
+gem 'rails4-autocomplete'
 
 group :doc do
   gem 'sdoc', '0.3.20', require: false

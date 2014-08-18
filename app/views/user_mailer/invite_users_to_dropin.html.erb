@@ -1,7 +1,9 @@
 <p><%= @user.name %> invited you to a dropin!</p>
 
-<p>message from <%= @user.name %>:</p>
-<p><%= @message %></p>
+<% unless @message.empty? %>
+    <p>message from <%= @user.name %>:</p>
+    <p><%= @message %></p>
+<% end %>
 
 <p>
   Do you have an account with the website Dropins?

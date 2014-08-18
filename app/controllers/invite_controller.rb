@@ -1,4 +1,5 @@
 class InviteController < ApplicationController
+
   # def import
   #   begin
   #     @sites = { 'Gmail' => Contacts::Gmail, 'Yahoo' => Contacts::Yahoo, 'Hotmail' => Contacts::Hotmail }
@@ -24,14 +25,25 @@ class InviteController < ApplicationController
 
   def oauth2callback
     @contacts = request.env['omnicontacts.contacts']
+    # For now, only grab the contacts that have emails returned.
+    @contacts = @contacts.select { |contact| !contact[:email].nil? }
     @user = request.env['omnicontacts.user']
-    puts "List of contacts of #{current_user.name} obtained from #{params[:importer]}:"
+    dropin_id = request.env['rack.request.query_hash']['state']
+    GmailContact.destroy_all(user_id: current_user.id)
     @contacts.each do |contact|
-      puts "Contact found: name => #{contact[:name]}, email => #{contact[:email]}"
+      GmailContact.create!(name: contact[:name],
+                           email: contact[:email],
+                           user_id: current_user.id,
+                           profile_picture: contact[:profile_picture],
+                           phone_number: contact[:phone_number])
     end
-    respond_to do |format|
-      format.js
-    end
+    flash[:success] = 'You have successfully imported your Gmail contacts!  You may use these in your invite forms from now on.'
+    redirect_to dropin_url(dropin_id)
+    # @user = request.env['omnicontacts.user']
+    # puts "List of contacts of #{current_user.name} obtained from #{params[:importer]}:"
+    # @contacts.each do |contact|
+    #   puts "Contact found: name => #{contact[:name]}, email => #{contact[:email]}"
+    # end
   end
 
   def failure
@@ -41,6 +53,6 @@ class InviteController < ApplicationController
   private
 
   def invite_params
-    params.permit(:from, :login, :password, :users, :dropin_id, :message)
+    params.permit(:from, :login, :password, :dropin_id, :message, users: [])
   end
 end

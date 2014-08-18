@@ -2,6 +2,7 @@ class DropinsController < ApplicationController
   before_action :signed_in_user
   before_action :set_dropin, only: [:show, :edit, :update, :destroy]
   before_action :admin_user, only: [:edit, :update, :new, :create, :destroy]
+  before_action :set_contacts, only: [:show]
 
   def index
     @dropins = Dropin.order('date asc').paginate(page: params[:page], per_page: 8)
@@ -90,6 +91,10 @@ class DropinsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_dropin
       @dropin = Dropin.find(params[:id])
+    end
+
+    def set_contacts
+      @contacts = GmailContact.where(user_id: current_user.id)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

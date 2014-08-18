@@ -1,12 +1,10 @@
-DropinsApp::Application.routes.draw do
-  get "imported_contacts/authenticate"
-  get "imported_contacts/authorise"
-  get "imported_contacts/import"
-  # get 'invite/import'
+Rails.application.routes.draw do
   get 'invite/invite'
   get 'commitments/create'
   get 'commitments/destroy'
   resources :users do
+    get :autocomplete_gmail_contact_email, on: :collection
+    get :autocomplete_gmail_contact_name, on: :collection
     member do
       get :following, :followers
       get :verify_emails

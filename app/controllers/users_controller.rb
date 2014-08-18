@@ -3,6 +3,8 @@ class UsersController < ApplicationController
   before_action :correct_user, only: [:edit, :update]
   before_action :admin_user, only: :destroy
 
+  autocomplete :gmail_contact, :name, full: true, extra_data: [:email, :name, :profile_picture], display_value: :get_email_from_name
+
   def index
     @q = User.ransack(params[:q])
     @users = @q.result.paginate(page: params[:page])
