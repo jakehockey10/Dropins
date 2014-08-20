@@ -14,6 +14,7 @@ $grayMediumLight: #eaeaea;
 
 html {
   overflow-y: scroll;
+  height: 100%; // fixes the landing page image.  Make sure this doesn't screw anything else up...
 }
 
 body {
