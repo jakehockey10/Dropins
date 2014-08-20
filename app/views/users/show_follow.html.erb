@@ -21,7 +21,7 @@
   <div class="col-sm-8 col-md-8">
     <h3><%= @title %></h3>
     <% if @users.any? %>
-      <ul class="users">
+      <ul class="users media-list">
         <%= render @users %>
       </ul>
       <%= will_paginate %>
