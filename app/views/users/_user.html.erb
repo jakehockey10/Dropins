@@ -1,37 +1,40 @@
-<!--<tr>-->
-  <!--<td><%# gravatar_for user, size: 52 %></td>-->
-  <!--<td>-->
-    <!--<%# link_to user.first_name, user %>-->
-  <!--</td>-->
-  <!--<td>-->
-    <!--<%# user.second_name %>-->
-  <!--</td>-->
-  <!--<td class="text-center">-->
-    <!--<%# user.followers.count %>-->
-  <!--</td>-->
-  <!--<td class="text-center">-->
-    <!--<% if user.active? %>-->
-      <!--<span class="glyphicon glyphicon-ok"></span>-->
-    <!--<% end %>-->
-  <!--</td>-->
-  <!--<td class="text-center">-->
+<tr>
+  <td><%= gravatar_for user, size: 52 %></td>
+  <td>
+    <%= link_to user.first_name, user %>
+  </td>
+  <td>
+    <%= user.second_name %>
+  </td>
+  <td class="text-center">
+    <%= user.followed_users.count %>
+  </td>
+  <td class="text-center">
+    <%= user.followers.count %>
+  </td>
+  <td class="text-center">
+    <% if user.active? %>
+      <span class="glyphicon glyphicon-ok"></span>
+    <% end %>
+  </td>
+  <td class="text-center">
     <!--add !current_user.nil? && to the predicate below so that
       attempting to reach the followers/following pages of a
       particular user while not signed in does not cause an error.
       If you are not signed in, current_user is nil and thus we
       cannot call the admin? method on that object at that time.-->
-    <!--<% if !current_user.nil? && current_user.admin? && !current_user?(user) %>-->
-      <!--<%# link_to 'delete', user, method: :delete, data: { confirm: 'You sure?' } %>-->
-    <!--<% end %>-->
-  <!--</td>-->
-<!--</tr>-->
-<li class="media">
-  <a class="pull-left" href="#">
-    <%= gravatar_for user, size: 52 %>
-  </a>
-  <div class="media-body">
-    <h4 class="media-heading">
-      <%= link_to user.name, user %>
-    </h4>
-  </div>
-</li>
+    <% if !current_user.nil? && current_user.admin? && !current_user?(user) %>
+      <%= link_to 'delete', user, method: :delete, data: { confirm: 'You sure?' } %>
+    <% end %>
+  </td>
+</tr>
+<!--<li class="media">-->
+  <!--<a class="pull-left" href="#">-->
+    <!--<%= gravatar_for user, size: 52 %>-->
+  <!--</a>-->
+  <!--<div class="media-body">-->
+    <!--<h4 class="media-heading">-->
+      <!--<%= link_to user.name, user %>-->
+    <!--</h4>-->
+  <!--</div>-->
+<!--</li>-->

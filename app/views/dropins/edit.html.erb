@@ -6,10 +6,9 @@
 
 <div class="row">
   <div class="col-lg-offset-3 col-lg-6">
-    <%= render 'form', dropin: @dropin %>
+    <%= render 'form', dropin: @dropin, remote: false %>
   </div>
 </div>
-
 
 <%= link_to 'Show', @dropin, class: 'btn btn-lg btn-primary' %>
 <%= link_to 'Back', dropins_path, class: 'btn btn-lg btn-default' %>

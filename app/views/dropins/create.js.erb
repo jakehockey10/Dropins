@@ -1,9 +1,9 @@
 $('.dropins-table').html('<%= j render 'dropins_table', dropins: Dropin.order('date asc').paginate(page: params[:page], per_page: 8) %>');
-$('aside').html('<h1>Create a new dropin:</h1><%= j render 'dropins/form', dropin: Dropin.new %>');
+$('aside').html('<h1>Create a new dropin:</h1><%= j render 'dropins/form', dropin: Dropin.new, remote: true %>');
 $('#datetimepicker1').datetimepicker({
   useSeconds: false,
   sideBySide: true
 });
 $('.selectpicker').selectpicker();
 $('btn').button('reset');
-//$('tr#<%= @dropin.id %>').hide().show().effect('highlight', { color: '#669966' }, 3000);
+//$('tr#<%# @dropin.id %>').hide().show().effect('highlight', { color: '#669966' }, 3000);

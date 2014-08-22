@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140818054322) do
+ActiveRecord::Schema.define(version: 20140821061234) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 20140818054322) do
     t.datetime "updated_at"
     t.string   "profile_picture"
     t.string   "phone_number"
+    t.integer  "other_user_id"
   end
 
   add_index "gmail_contacts", ["user_id"], name: "index_gmail_contacts_on_user_id", using: :btree

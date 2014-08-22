@@ -9,7 +9,6 @@ class User < ActiveRecord::Base
            class_name: 'Relationship',
            dependent: :destroy
   has_many :commitments,
-           # foreign_key: 'dropin_id',
            class_name: 'Commitment',
            dependent: :destroy
   has_many :followers,
@@ -82,10 +81,32 @@ class User < ActiveRecord::Base
 
   def follow!(other_user)
     relationships.create!(followed_id: other_user.id)
+    if create_gmail_contact?(self, id, other_user.id)
+      create_gmail_contact(other_user.name,
+                           other_user.email,
+                           self.id,
+                           other_user.id,
+                           other_user.gravatar_url)
+    elsif create_gmail_contact?(other_user, other_user.id, id)
+      create_gmail_contact(name, email, other_user.id, id, gravatar_url)
+    end
+  end
+
+  def create_gmail_contact?(user, followed_id, follower_id)
+    user.admin? && ! Relationship.where(followed_id: followed_id, follower_id: follower_id).empty?
+  end
+
+  def create_gmail_contact(name, email, user_id, other_user_id, profile_picture)
+    GmailContact.create!(name: name,
+                         email: email,
+                         user_id: user_id,
+                         other_user_id: other_user_id,
+                         profile_picture: profile_picture)
   end
 
   def unfollow!(other_user)
     relationships.find_by(followed_id: other_user.id).destroy
+    GmailContact.destroy_all(user_id: self.id, other_user_id: other_user.id)
   end
 
   def commit_to!(dropin)
@@ -201,7 +222,13 @@ class User < ActiveRecord::Base
       raise "Error - #{response['error_description']}"
     end
 
-    return response
+    response
+  end
+
+  def gravatar_url(options = { size: 30, border: false })
+    gravatar_id = Digest::MD5::hexdigest(self.email.downcase)
+    size = options[:size]
+    "https://secure.gravatar.com/avatar/#{gravatar_id}?s=#{size}"
   end
 
   private
