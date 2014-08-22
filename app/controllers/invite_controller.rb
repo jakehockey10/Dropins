@@ -24,26 +24,22 @@ class InviteController < ApplicationController
   end
 
   def oauth2callback
-    @contacts = request.env['omnicontacts.contacts']
     # For now, only grab the contacts that have emails returned.
-    @contacts = @contacts.select { |contact| !contact[:email].nil? }
+    @contacts = request.env['omnicontacts.contacts'].select { |contact| !contact[:email].nil? }
     @user = request.env['omnicontacts.user']
     dropin_id = request.env['rack.request.query_hash']['state']
-    GmailContact.destroy_all(user_id: current_user.id)
     @contacts.each do |contact|
-      GmailContact.create!(name: contact[:name],
-                           email: contact[:email],
-                           user_id: current_user.id,
-                           profile_picture: contact[:profile_picture],
-                           phone_number: contact[:phone_number])
+      gc = GmailContact.find_or_create_by(name: contact[:name],
+                                         email: contact[:email],
+                                         user_id: current_user.id,
+                                         other_user_id: 0,
+                                         profile_picture: contact[:profile_picture],
+                                         phone_number: contact[:phone_number])
+      gc.save unless gc.invalid?
     end
+
     flash[:success] = 'You have successfully imported your Gmail contacts!  You may use these in your invite forms from now on.'
     redirect_to dropin_url(dropin_id)
-    # @user = request.env['omnicontacts.user']
-    # puts "List of contacts of #{current_user.name} obtained from #{params[:importer]}:"
-    # @contacts.each do |contact|
-    #   puts "Contact found: name => #{contact[:name]}, email => #{contact[:email]}"
-    # end
   end
 
   def failure

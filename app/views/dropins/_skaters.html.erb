@@ -1,5 +1,10 @@
+<h3>
+  <div class="row">
+    <div class="col-md-6">Skaters (<%= @dropin.skaters.count %>)</div>
+    <div class="col-md-6"><span class="pull-right"><%= button_tag 'Invite Skaters', class: 'invite-skaters btn btn-sm btn-default' if @dropin.is_not_full && current_user.id == @dropin.user_id %></span></div>
+  </div>
+</h3>
 <% if @dropin.skaters.any? %>
-  <h3>Skaters (<%= @dropin.skaters.count %>)</h3>
   <ol class="skaters">
     <% @dropin.skaters.each do |skater| %>
       <%= render 'users/skater', skater: skater %>

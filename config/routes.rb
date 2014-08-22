@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get 'commitments/create'
   get 'commitments/destroy'
   resources :users do
-    get :autocomplete_gmail_contact_email, on: :collection
+    # get :autocomplete_gmail_contact_email, on: :collection
     get :autocomplete_gmail_contact_name, on: :collection
     member do
       get :following, :followers
@@ -36,7 +36,7 @@ Rails.application.routes.draw do
   match '/about', to: 'static_pages#about', via: 'get'
   match '/contact', to: 'contact_with_messages#new', via: 'get'
   match '/oauth2callback', to: 'invite#oauth2callback', via: 'get'
-  match '/contacts/:importer/callback', to: 'invite#oauth2callback', via: 'get'
+  # match '/contacts/:importer/callback', to: 'invite#oauth2callback', via: 'get'
   match '/contacts/failure', to: 'invite#failure', via: 'get'
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -10,6 +10,7 @@ class DropinsController < ApplicationController
 
   def show
     @skaters = @dropin.skaters.paginate(page: params[:page])
+    @gmail_contacts, @user_contacts = @dropin.user.gmail_contacts.partition { |contact| contact.other_user_id == 0 }
   end
 
   def new
@@ -40,9 +41,7 @@ class DropinsController < ApplicationController
   end
 
   def update
-    the_dropin_params = dropin_params
-    the_dropin_params[:date] = Time.strptime(the_dropin_params[:date], '%m/%d/%Y %I:%M %p')
-    if @dropin.update(the_dropin_params)
+    if @dropin.update(dropin_params)
       flash[:success] = 'Dropin was successfully updated.'
       redirect_to @dropin
     else
