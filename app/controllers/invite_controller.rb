@@ -1,19 +1,5 @@
 class InviteController < ApplicationController
 
-  # def import
-  #   begin
-  #     @sites = { 'Gmail' => Contacts::Gmail, 'Yahoo' => Contacts::Yahoo, 'Hotmail' => Contacts::Hotmail }
-  #     @contacts = @sites[invite_params[:from]].new(invite_params[:login], invite_params[:password]).contacts
-  #     @users = []
-  #     @contacts.each do |contact|
-  #       @users << { name: contact[0], email: contact[1] }
-  #     end
-  #   end
-  #   respond_to do |format|
-  #     format.js
-  #   end
-  # end
-
   def invite
     UserMailer.invite_users_to_dropin(current_user.id,
                                       invite_params[:users],
@@ -29,12 +15,15 @@ class InviteController < ApplicationController
     @user = request.env['omnicontacts.user']
     dropin_id = request.env['rack.request.query_hash']['state']
     @contacts.each do |contact|
-      gc = GmailContact.find_or_create_by(name: contact[:name],
-                                         email: contact[:email],
-                                         user_id: current_user.id,
-                                         other_user_id: 0,
-                                         profile_picture: contact[:profile_picture],
-                                         phone_number: contact[:phone_number])
+      params = {
+          name: contact[:name],
+          email: contact[:email],
+          user_id: current_user.id,
+          other_user_id: 0,
+          profile_picture: contact[:profile_picture],
+          phone_number: contact[:phone_number]
+      }
+      gc = GmailContact.find_or_create_by(params)
       gc.save unless gc.invalid?
     end
 

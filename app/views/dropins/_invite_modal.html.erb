@@ -38,7 +38,7 @@
                           class: 'btn btn-xs btn-danger' %>
               <script type="text/javascript" charset="utf-8">
                   $('#import-gmail-link').tooltip({
-                      title: '<%= @contacts.count > 0 ? 'last imported ' + time_ago_in_words(@contacts.first.created_at) + 'ago.' : 'No Gmail contacts imported.' %>',
+                      title: '<%= @contacts.count > 0 ? 'last imported ' + time_ago_in_words(@contacts.first.created_at) + ' ago.' : 'No Gmail contacts imported.' %>',
                       placement: 'bottom',
                       delay: 500
                   });

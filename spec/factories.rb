@@ -15,4 +15,11 @@ FactoryGirl.define do
     content 'Lorem ipsum'
     user
   end
+
+  factory :dropin do
+    sequence(:date) { Time.now }
+    sequence(:price) { 15 }
+    sequence(:rink) { Rink.new }
+    sequence(:limit) { 20 }
+  end
 end
