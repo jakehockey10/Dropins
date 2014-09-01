@@ -15,7 +15,7 @@
 //= require jquery-ui
 //= require autocomplete-rails
 //= require turbolinks
-//= require bootstrap
+//= require bootstrap-sprockets
 //= require moment
 //= require bootstrap-datetimepicker
 //= require bootstrap-select
@@ -24,7 +24,20 @@
 //= require fullcalendar
 //= require gcal
 //= require_tree .
-$(document).ready(function () {
+$(document).on('ready page:before-change', function () {
+    $('#main').fadeOut();
+});
+
+$(document).on('ready page:change', function () {
+    $('#main').hide();
+});
+
+$(document).on('ready page:update', function () {
+    $('#main').fadeIn();
+});
+
+$(document).on('ready page:load', function () {
+
     $('.alert button.close').click(function () {
         $(this).parent().fadeOut('fast');
 //        $(this).parent().animate({ height: 0, opacity: 0 }, 'fast');

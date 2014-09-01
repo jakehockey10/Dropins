@@ -35,8 +35,6 @@ class DropinsController < ApplicationController
         end
         format.js
       end
-    else
-      render 'new'
     end
   end
 

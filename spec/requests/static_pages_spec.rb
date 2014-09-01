@@ -57,15 +57,15 @@ describe 'Static pages' do
 
   describe 'About page' do
     before { visit about_path }
-    let(:heading) { 'About' }
-    let(:page_title) { 'About Us' }
+    let(:heading) { 'About Dropins' }
+    let(:page_title) { 'About Dropins' }
 
     it_should_behave_like 'all static pages'
   end
 
   describe 'Contact page' do
     before { visit contact_path }
-    let(:heading) { 'Contact' }
+    let(:heading) { 'Send us a message!' }
     let(:page_title) { 'Contact' }
 
     it_should_behave_like 'all static pages'
@@ -74,12 +74,12 @@ describe 'Static pages' do
   it 'should have the right links on the layout' do
     visit root_path
     click_link 'About'
-    expect(page).to have_title(full_title('About Us'))
+    expect(page).to have_title(full_title('About Dropins'))
     click_link 'Help'
     expect(page).to have_title(full_title('Help'))
     click_link 'Contact'
-    expect(page).to have_title(full_title('Contact'))
-    click_link 'Home'
+    expect(page).to have_title(full_title('Contact Us'))
+    first(:link, 'Dropins').click
     click_link 'Sign up'
     expect(page).to have_title('Sign up')
     click_link 'Dropins Beta'

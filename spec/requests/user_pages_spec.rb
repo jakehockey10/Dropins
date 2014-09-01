@@ -24,7 +24,8 @@ describe 'User pages' do
 
       it 'should list each user' do
         User.paginate(page: 1).each do |user|
-          expect(page).to have_selector('td', text: user.name)
+          expect(page).to have_selector('td', text: user.first_name)
+          expect(page).to have_selector('td', text: user.second_name)
         end
       end
     end
@@ -149,7 +150,7 @@ describe 'User pages' do
     describe 'with valid information' do
       before do
         fill_in 'First Name', with: 'Example'
-        fill_in 'Second Name', with: 'User'
+        fill_in 'Last Name', with: 'User'
         fill_in 'Email', with: 'user@example.com'
         fill_in 'Password', with: 'foobar'
         fill_in 'Confirm Password', with: 'foobar'
@@ -164,7 +165,7 @@ describe 'User pages' do
         let(:user) { User.find_by(email: 'user@example.com') }
 
         it { should have_link('Sign out') }
-        it { should have_title(user.name) }
+        it { should have_title('Dropins Beta') }
         it { should have_selector('div.alert.alert-success', text: 'Welcome') }
       end
     end
@@ -196,7 +197,7 @@ describe 'User pages' do
 
       before do
         fill_in 'First Name', with: new_first_name
-        fill_in 'Second Name', with: new_second_name
+        fill_in 'Last Name', with: new_second_name
         fill_in 'Email', with: new_email
         fill_in 'Password', with: user.password
         fill_in 'Confirm Password', with: user.password

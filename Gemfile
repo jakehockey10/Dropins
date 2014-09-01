@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby '2.1.2'
 
 gem 'rails'
-gem 'bootstrap-sass', '3.2.0.1'
+gem 'bootstrap-sass'
 gem 'sass-rails', '~> 4.0.0'
 gem 'autoprefixer-rails'
 gem 'bootstrap_form'
@@ -36,11 +36,10 @@ gem 'wepay'
 gem 'omnicontacts', '~> 0.3.5', git: 'git://github.com/Diego81/omnicontacts.git'
 gem 'rails4-autocomplete'
 
-
 group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'rspec-rails', '2.13.1'
+  gem 'rspec-rails', '2.14.0'
   gem 'guard-rspec', '2.5.0'
 end
 
