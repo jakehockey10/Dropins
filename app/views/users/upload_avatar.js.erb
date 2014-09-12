@@ -1,0 +1,5 @@
+var section = $('#avatar_section');
+section.fadeOut(function() {
+    section.html('<%= j render 'upload_avatar', user: current_user %>');
+    section.fadeIn();
+});

@@ -1,6 +1,6 @@
 <tr>
   <td>
-    <%= gravatar_for skater, size: 52 %>
+    <%= avatar_for skater, size: :small %>
     <%= link_to skater.name, skater %>
   </td>
   <td class="text-center">
@@ -18,7 +18,11 @@
       If you are not signed in, current_user is nil and thus we
       cannot call the admin? method on that object at that time.-->
     <% if !current_user.nil? && current_user.admin? && !current_user?(skater) %>
-      <%= link_to 'delete', skater, method: :delete, data: { confirm: 'You sure?  This will delete this user\'s account...' } %>
+      <%# link_to 'delete', skater, method: :delete, data: { confirm: 'You sure?  This will delete this user\'s account...' } %>
+      <%= bootstrap_form_for skater.attendances.find_by(dropin_id: @dropin.id), html: { method: :delete } do |f| %>
+        <%= f.hidden_field :user_id, value: skater.id %>
+        <%= f.submit 'Remove', class: 'btn btn-danger btn-sm', alert: 'Are you sure?' %>
+      <% end %>
     <% end %>
   </td>
 </tr>

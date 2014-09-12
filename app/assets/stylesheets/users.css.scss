@@ -6,3 +6,24 @@
   margin: 3em 0;
   font-size: 13px;
 }
+
+.delete-avatar {
+  color: #ff0000;
+  position: absolute !important;
+  display: none !important;
+  right: 100%;
+}
+
+#avatar {
+  position: relative;
+  overflow: hidden;
+}
+
+#avatar:hover .delete-avatar {
+  display: flex !important;
+  border-radius: 8px;
+  padding: 8px;
+  background: #fff;
+  text-align: center;
+  right: 7%;
+}

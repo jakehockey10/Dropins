@@ -19,6 +19,13 @@ class User < ActiveRecord::Base
   has_many :attendances
   has_many :dropins, through: :attendances
   has_many :gmail_contacts
+  has_attached_file :avatar, 
+                    path: ':attachment/:id/:style.:extension',
+                    storage: :s3,
+                    url: ':s3_domain_url',
+                    bucket: Proc.new { |a| a.instance.s3_bucket },
+                    s3_credentials: { access_key_id: ENV['AWS_ACCESS_KEY_ID'], secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'] },
+                    styles: { large: '500x500', medium: '250x250', thumb: '100x100', small: '60' }
 
   STATES = {
       inactive: 0,
@@ -48,6 +55,9 @@ class User < ActiveRecord::Base
             presence: true,
             #if: :validate_password?
             if: :password_required?
+  validates_attachment :avatar, content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] }
+  validates_attachment_content_type :avatar, content_type: /\Aimage/
+  validates_attachment_file_name :avatar, matches: [/png\Z/, /jpe?g\Z/]
 
   state_machine :state, initial: :inactive do
     STATES.each do |name, value|
@@ -229,6 +239,14 @@ class User < ActiveRecord::Base
     gravatar_id = Digest::MD5::hexdigest(self.email.downcase)
     size = options[:size]
     "https://secure.gravatar.com/avatar/#{gravatar_id}?s=#{size}"
+  end
+ 
+  def s3_bucket
+    if Rails.env.development?
+      ENV['S3_BUCKET_NAME_DEVELOPMENT']
+    else
+      ENV['S3_BUCKET_NAME_PRODUCTION']
+    end
   end
 
   private

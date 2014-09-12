@@ -1,8 +1,9 @@
 class InviteController < ApplicationController
 
   def invite
+    emails = Mail::AddressList.new(invite_params[:users].join(',')).addresses.map(&:address)
     UserMailer.invite_users_to_dropin(current_user.id,
-                                      invite_params[:users],
+                                      emails,
                                       invite_params[:dropin_id],
                                       invite_params[:message]).deliver
     flash[:success] = 'Invitations sent!'

@@ -34,10 +34,20 @@ $(document).on('ready page:change', function () {
 
 $(document).on('ready page:update', function () {
     $('#main').fadeIn();
+    initAlertsAndHelpBoxes();
 });
 
 $(document).on('ready page:load', function () {
+    initAlertsAndHelpBoxes();
 
+//    $('.interested-button').on('click', function () {
+//        var btn = $(this);
+//        btn.button('loading');
+//    });
+
+});
+
+function initAlertsAndHelpBoxes() {
     $('.alert button.close').click(function () {
         $(this).parent().fadeOut('fast');
 //        $(this).parent().animate({ height: 0, opacity: 0 }, 'fast');
@@ -69,10 +79,4 @@ $(document).on('ready page:load', function () {
             control.popover('show');
         });
     });
-
-//    $('.interested-button').on('click', function () {
-//        var btn = $(this);
-//        btn.button('loading');
-//    });
-
-});
+}

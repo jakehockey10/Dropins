@@ -1,13 +1,27 @@
 module UsersHelper
 
+  def avatar_for(user, options = { size: :small, border: false })
+    if user.avatar.file?
+      image_tag user.avatar.url(options[:size]), alt: user.name, class: image_class(options[:border])
+    else
+      unless options[:size]
+        options[:size] = 250
+      end
+      gravatar_for(user, options)
+    end
+  end
+
   # Returns the Gravatar (http://gravatar.com/) for the given user.
   def gravatar_for(user, options = { size: 50, border: false })
     gravatar_url = user.gravatar_url(options)
-    if options[:border]
-      gravatar_class = 'img-circle img-thumbnail'
+    image_tag(gravatar_url, alt: user.name, class: image_class(options[:border]))
+  end
+
+  def image_class(border)
+    if border
+      'img-circle img-thumbnail'
     else
-      gravatar_class = 'img-circle'
+      'img-circle'
     end
-    image_tag(gravatar_url, alt: user.name, class: gravatar_class)
   end
 end

@@ -8,6 +8,9 @@ Rails.application.routes.draw do
     member do
       get :following, :followers
       get :verify_emails
+      get :show_avatar
+      get :upload_avatar
+      match :delete_avatar, via: :delete
     end
   end
   # For WePay:

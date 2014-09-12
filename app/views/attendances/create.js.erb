@@ -1,8 +1,5 @@
 $('.above_skaters_table').hide();
 $('.skaters_table').hide();
 
-$('.skaters_table').html('<%= j render 'dropins/skaters_table' %>').fadeIn(2000, function () {
-    //$('.dropin-skaters').prepend('<%= j render 'attendances/form' %>').fadeIn();
-});
-
+$('.skaters_table').html('<%= j render 'dropins/skaters_table' %>').fadeIn(2000);
 $('.above_skaters_table').html('<%= j render 'dropins/above_skaters_table' %>').fadeIn(2000);

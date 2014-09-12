@@ -47,6 +47,27 @@ class UsersController < ApplicationController
   def edit
   end
 
+  def show_avatar
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def upload_avatar
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def delete_avatar
+    user = User.find(params[:id])
+    user.avatar.destroy
+    user.save
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def verify_emails
     @user = User.find_by(email_token: params[:email_token])
     @user.activate!
@@ -114,7 +135,8 @@ class UsersController < ApplicationController
                                    :password,
                                    :password_confirmation,
                                    :wepay_access_token,
-                                   :wepay_account_id)
+                                   :wepay_account_id,
+                                   :avatar)
     end
 
     def redirect_to_root_if_signed_in
