@@ -20,3 +20,4 @@ doc/
 .rvmrc
 .ruby-*
 .secret
+public/assets/
