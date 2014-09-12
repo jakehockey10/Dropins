@@ -24,6 +24,7 @@
 //= require fullcalendar
 //= require gcal
 //= require_tree .
+
 $(document).on('ready page:before-change', function () {
     $('#main').fadeOut();
 });
@@ -39,12 +40,6 @@ $(document).on('ready page:update', function () {
 
 $(document).on('ready page:load', function () {
     initAlertsAndHelpBoxes();
-
-//    $('.interested-button').on('click', function () {
-//        var btn = $(this);
-//        btn.button('loading');
-//    });
-
 });
 
 function initAlertsAndHelpBoxes() {
