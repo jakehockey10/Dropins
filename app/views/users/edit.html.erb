@@ -1,16 +1,15 @@
 <% provide(:title, 'Edit user') %>
 
 <h1 class="page-header">Update your profile</h1>
-
+<%# image_tag @user.avatar.url %>
+<%# image_tag @user.avatar.url(:large) %>
+<%# image_tag @user.avatar.url(:medium) %>
+<%# image_tag @user.avatar.url(:thumb) %>
 <div class="row">
 
   <aside class="col-xs-12 col-sm-4 col-md-4">
-    <section>
-      <div class="center">
-        <%= gravatar_for @user, size: 200, border: true %>
-        <br>
-        <a href="http://gravatar.com/emails" target="_blank">change</a>
-      </div>
+    <section id="avatar_section">
+      <%= render 'avatar', user: @user %>
     </section>
     <!--<%# if !@user.has_valid_wepay_access_token? || !@user.has_wepay_access_token? %>-->
       <!--<section>-->

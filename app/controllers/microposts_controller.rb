@@ -5,6 +5,9 @@ class MicropostsController < ApplicationController
 
   def create
     @micropost = current_user.microposts.build(micropost_params)
+    @feed_items = current_user.feed.paginate(page: params[:page])
+    @dropins = Dropin.order('date asc').paginate(page: params[:page])
+    @rinks = Rink.all
     if @micropost.save
       flash[:success] = 'Micropost created!'
       redirect_to root_url

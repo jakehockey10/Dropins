@@ -35,12 +35,17 @@ gem 'fullcalendar-rails'
 gem 'wepay'
 gem 'omnicontacts', '~> 0.3.5', git: 'git://github.com/Diego81/omnicontacts.git'
 gem 'rails4-autocomplete'
+gem 'paperclip'
+gem 'aws-s3'
+gem 'aws-sdk'
+gem 'mail'
 
 group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'rspec-rails', '2.14.0'
   gem 'guard-rspec', '2.5.0'
+  gem 'meta_request'
 end
 
 group :test do

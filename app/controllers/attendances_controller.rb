@@ -12,9 +12,12 @@ class AttendancesController < ApplicationController
 
   def destroy
     @dropin = Attendance.find(params[:id]).dropin
-    current_user.leave_dropin!(@dropin)
+    User.find(params[:attendance][:user_id]).leave_dropin!(@dropin)
     respond_to do |format|
-      format.html { redirect_to @dropin }
+      format.html do
+        flash[:success] = 'Successfully removed player from dropin'
+        redirect_to @dropin
+      end
       format.js
     end
   end
