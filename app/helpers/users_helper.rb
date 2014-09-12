@@ -7,6 +7,9 @@ module UsersHelper
       unless options[:size]
         options[:size] = 250
       end
+      if options[:size] == :small
+        options[:size] = 60
+      end
       gravatar_for(user, options)
     end
   end
