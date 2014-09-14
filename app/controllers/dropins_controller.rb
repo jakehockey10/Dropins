@@ -18,7 +18,6 @@ class DropinsController < ApplicationController
   end
 
   def edit
-    # TODO: Do a flash message if error occurs.
   end
 
   def create
@@ -39,7 +38,9 @@ class DropinsController < ApplicationController
   end
 
   def update
-    if @dropin.update(dropin_params)
+    the_dropin_params = dropin_params
+    the_dropin_params[:date] = Time.strptime(the_dropin_params[:date], '%m/%d/%Y %I:%M %p')
+    if @dropin.update(the_dropin_params)
       flash[:success] = 'Dropin was successfully updated.'
       redirect_to @dropin
     else
