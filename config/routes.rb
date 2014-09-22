@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :page_requests, only: [:index]
+
   get 'invite/invite'
   get 'commitments/create'
   get 'commitments/destroy'

@@ -6,7 +6,8 @@
     <div class='input-group date' id='datetimepicker1'>
       <%= f.text_field :date,
                        class: 'form-control',
-                       placeholder: 'Date' %>
+                       placeholder: 'Date',
+                       data: { date_format: 'MM/DD/YYYY hh:mm A/PM'}%>
       <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
     </div>
   </div>
@@ -31,7 +32,7 @@
   <div class="form-group">
     <%= f.label :rink %>
     <br/>
-    <%= collection_select(:dropin, :rink_id, Rink.all, :id, :name, { prompt: true }, { class: 'selectpicker' }) %>
+    <%= collection_select(:dropin, :rink_id, Rink.where(true), :id, :name, { prompt: true }, { class: 'selectpicker' }) %>
   </div>
   <%= f.submit 'Submit', class: 'btn btn-default' %>
 <% end %>

@@ -45,7 +45,6 @@ $(document).on('ready page:load', function () {
 function initAlertsAndHelpBoxes() {
     $('.alert button.close').click(function () {
         $(this).parent().fadeOut('fast');
-//        $(this).parent().animate({ height: 0, opacity: 0 }, 'fast');
     });
 
     var count = 0;
