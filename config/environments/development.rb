@@ -55,4 +55,10 @@ Rails.application.configure do
   USE_STAGE = true
   WEPAY = WePay.new(WEPAY_CLIENT_ID, WEPAY_CLIENT_SECRET, USE_STAGE)
 
+  #Pusher
+  90236
+  Pusher.app_id = '90236'
+  Pusher.key = '2d9f1057638004c17417'
+  Pusher.secret = 'fc2aa5d0fe4962297cb8'
+
 end

@@ -27,6 +27,8 @@ class User < ActiveRecord::Base
                     s3_credentials: { access_key_id: ENV['AWS_ACCESS_KEY_ID'], secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'] },
                     styles: { large: '500x500', medium: '250x250', thumb: '100x100', small: '60' }
 
+  has_many :received_messages, class_name: 'Message', foreign_key: 'recipient_id'
+
   STATES = {
       inactive: 0,
       active: 1

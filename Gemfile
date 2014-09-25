@@ -40,6 +40,8 @@ gem 'aws-s3'
 gem 'aws-sdk'
 gem 'mail'
 
+gem 'pusher'
+
 group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'

@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :messages
+  post 'pusher/auth'
+
   get 'invite/invite'
   get 'commitments/create'
   get 'commitments/destroy'
