@@ -9,6 +9,9 @@ namespace :db do
   task make_jake: :environment do
     make_jake_admin
   end
+  task follow_jake: :environment do
+    follow_jake
+  end
 end
 
 def make_jake_admin
@@ -52,4 +55,14 @@ def make_relationships
   followers = users[3..40]
   followed_users.each { |followed| user.follow!(followed) }
   followers.each { |follower| follower.follow!(user) }
+end
+
+def follow_jake
+  users = User.all
+  jake = User.find_by(email: 'jakehockey10@gmail.com')
+  users.each do |user|
+    unless user.followed_users.include? jake
+      user.follow!(jake)
+    end
+  end
 end
