@@ -21,3 +21,5 @@ doc/
 .ruby-*
 .secret
 public/assets/
+application.yml
+secrets.yml
