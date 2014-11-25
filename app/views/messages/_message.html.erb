@@ -1,4 +1,4 @@
-<%= content_tag_for(:div, receipt, class: 'card') do |receipt| %>
+<%= content_tag_for(:div, receipt, class: 'card replies') do |receipt| %>
   <% message = receipt.message %>
   <div class="panel-body">
     <%= link_to message.sender.name == current_user.name ? 'Me' : message.sender.name, user_path(message.sender) %>

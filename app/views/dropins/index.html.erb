@@ -6,7 +6,7 @@
 
 <div class="row">
   <% if current_user.admin? %>
-    <aside class="col-sm-4 col-md-4">
+    <aside class="col-sm-4 col-md-4 card">
       <h1>Create a new dropin:</h1>
       <%= render 'dropins/form', dropin: Dropin.new, remote: true %>
     </aside>
