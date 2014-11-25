@@ -33,5 +33,5 @@
     <br/>
     <%= collection_select(:dropin, :rink_id, Rink.all, :id, :name, { prompt: true }, { class: 'selectpicker' }) %>
   </div>
-  <%= f.submit 'Submit', class: 'btn btn-default' %>
+  <%= f.submit 'Submit', class: 'btn btn-default', data: { disable_with: 'Loading...' } %>
 <% end %>

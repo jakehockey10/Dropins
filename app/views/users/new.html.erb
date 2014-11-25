@@ -27,7 +27,7 @@
     <%= bootstrap_form_for(@user) do |f| %>
       <%= render partial: 'users/fields', locals: { f: f } %>
       <div class="row center">
-        <%= f.submit 'Create my account', class: 'btn btn-primary' %>
+        <%= f.submit 'Create my account', class: 'btn btn-primary', data: { disable_with: 'Creating...' } %>
       </div>
     <% end %>
   </div>

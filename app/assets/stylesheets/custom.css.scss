@@ -19,6 +19,7 @@ html {
 
 body {
   padding-top: 60px;
+  background-color: rgb(236, 236, 236);
 }
 
 section {
@@ -52,6 +53,15 @@ textarea {
 
 .btn-width100 {
   width: 100%;
+}
+
+.new-notification {
+  color: #ff0000;
+  text-shadow: 0 0 18px white;
+}
+
+.nav-tabs > li.active > a {
+  background-color: rgb(236, 236, 236) !important;
 }
 
 /* typography */
@@ -90,7 +100,30 @@ p {
   line-height: 1.7em;
 }
 
+.icon-stack {
+  position: relative;
+}
+
+.icon-stack .glyphicon {
+  position: absolute;
+  &.glyphicon-ban-circle {
+    color: #ff0000 !important;
+  }
+}
+
+p.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+}
+
 /* header */
+
+.navbar {
+  -webkit-box-shadow: 0 0 4px rgba(0,0,0,.14), 0 4px 8px rgba(0,0,0,.28);
+  -moz-box-shadow:    0 0 4px rgba(0,0,0,.14), 0 4px 8px rgba(0,0,0,.28);
+  box-shadow:         0 0 4px rgba(0,0,0,.14), 0 4px 8px rgba(0,0,0,.28);
+}
 
 #logo {
   float: left;
@@ -386,3 +419,4 @@ ul.ui-autocomplete.ui-menu {
 
 li.ui-menu-item {
 }
+

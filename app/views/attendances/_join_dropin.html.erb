@@ -2,7 +2,7 @@
     <%= f.hidden_field :dropin_id %>
     <div class="row">
       <div class="col-md-offset-3 col-md-6">
-        <%= f.submit 'Join Dropin', class: 'btn btn-primary btn-lg btn-block', id: 'join_dropin' %>
+        <%= f.submit 'Join Dropin', class: 'btn btn-primary btn-lg btn-block', id: 'join_dropin', data: { disable_with: 'Loading...' } %>
       </div>
     </div>
 <% end %>

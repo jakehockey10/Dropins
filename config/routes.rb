@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  resources :conversations, only: [:index, :show, :new, :create] do
+    member do
+      post :reply
+      post :trash
+      post :untrash
+    end
+  end
+
   get 'invite/invite'
   get 'commitments/create'
   get 'commitments/destroy'

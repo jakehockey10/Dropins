@@ -14,7 +14,7 @@
       <%= f.text_area :message, as: :text, required: true, rows: 5 %>
       <%= f.hidden_field :nickname %>
       <%= f.form_group do %>
-        <%= f.submit 'Send message', class: 'btn btn-sm btn-primary' %>
+        <%= f.submit 'Send message', class: 'btn btn-sm btn-primary', data: { disable_with: 'Sending...' } %>
       <% end %>
     <% end %>
   </div>

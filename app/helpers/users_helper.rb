@@ -1,16 +1,20 @@
 module UsersHelper
 
   def avatar_for(user, options = { size: :small, border: false })
-    if user.avatar.file?
-      image_tag user.avatar.url(options[:size]), alt: user.name, class: image_class(options[:border])
+    if user.respond_to? :avatar
+      if user.avatar.file?
+        image_tag user.avatar.url(options[:size]), alt: user.name, class: image_class(options[:border])
+      else
+        unless options[:size]
+          options[:size] = 250
+        end
+        if options[:size] == :small
+          options[:size] = 60
+        end
+        gravatar_for(user, options)
+      end
     else
-      unless options[:size]
-        options[:size] = 250
-      end
-      if options[:size] == :small
-        options[:size] = 60
-      end
-      gravatar_for(user, options)
+      image_tag 'Skates-small.jpg', alt: user.name, class: image_class(options[:border])
     end
   end
 

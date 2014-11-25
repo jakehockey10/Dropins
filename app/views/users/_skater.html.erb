@@ -21,7 +21,7 @@
       <%# link_to 'delete', skater, method: :delete, data: { confirm: 'You sure?  This will delete this user\'s account...' } %>
       <%= bootstrap_form_for skater.attendances.find_by(dropin_id: @dropin.id), html: { method: :delete } do |f| %>
         <%= f.hidden_field :user_id, value: skater.id %>
-        <%= f.submit 'Remove', class: 'btn btn-danger btn-sm', alert: 'Are you sure?' %>
+        <%= f.submit 'Remove', class: 'btn btn-danger btn-sm', alert: 'Are you sure?', data: { disable_with: 'Removing...' } %>
       <% end %>
     <% end %>
   </td>

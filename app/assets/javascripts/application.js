@@ -19,6 +19,7 @@
 //= require moment
 //= require bootstrap-datetimepicker
 //= require bootstrap-select
+//= require bootstrap-tokenfield
 //= require underscore
 //= require gmaps/google
 //= require fullcalendar
