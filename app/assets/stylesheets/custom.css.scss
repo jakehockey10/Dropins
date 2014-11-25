@@ -171,7 +171,7 @@ p.truncate {
 footer {
   margin-top: 45px;
   padding-top: 5px;
-  border-top: 1px solid $grayMediumLight;
+  border-top: 1px solid gray;
   color: $gray-light;
   background-color: white;
   a {
@@ -215,7 +215,7 @@ aside {
   }
   section {
     padding: 10px 0;
-    border-top: 1px solid $gray-lighter;
+    border-top: 1px solid #DDDDDD;
     &:first-child {
       border: 0;
       padding-top: 0;
@@ -261,7 +261,7 @@ p.bg-danger, p.bg-primary {
   a {
     float: left;
     padding: 0 10px;
-    border-left: 1px solid $gray-lighter;
+    border-left: 1px solid gray;
     color: gray;
     &:first-child {
       padding-left: 0;
@@ -324,9 +324,9 @@ input {
   li {
     overflow: auto;
     padding: 10px 0;
-    border-top: 1px solid $gray-lighter;
+    border-top: 1px solid gray;
     &:last-child {
-      border-bottom: 1px solid $gray-lighter;
+      border-bottom: 1px solid gray;
     }
   }
 }
@@ -339,7 +339,7 @@ input {
 
   li {
     padding: 10px 0;
-    border-top: 1px solid #e8e8e8;
+    border-top: 1px solid gray;
   }
 }
 .content {
