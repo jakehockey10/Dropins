@@ -12,6 +12,28 @@
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
         <% if signed_in? %>
+          <li class="dropdown">
+            <% if unread_count.to_i > 0 %>
+              <%= link_to '#', class: 'dropdown-toggle', data: { toggle: 'dropdown' } do %>
+                <span class="glyphicon glyphicon-bell new-notification"></span><span class="badge"><%= unread_count %></span>
+              <% end %>
+              <ul class="dropdown-menu notification-menu">
+                <% mailbox.inbox.unread(current_user).each do |m| %>
+                  <li>
+                    <%= link_to render('conversations/menu_conversation', conversation: m), conversation_path(m) %>
+                  </li>
+                <% end %>
+              </ul>
+            <% else %>
+              <%= link_to '#', class: 'dropdown-toggle', data: { toggle: 'dropdown' } do %>
+                <span class="glyphicon glyphicon-bell"></span>
+              <% end %>
+              <ul class="dropdown-menu notification-menu">
+                <li><%= link_to 'There are no new conversations...', '#' %></li>
+              </ul>
+            <% end %>
+
+          </li>
           <li><%= link_to raw('<span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;&nbsp;Users'), users_path %></li>
           <li><%= link_to raw('<span class="glyphicon glyphicon-calendar"></span>&nbsp;&nbsp;&nbsp;Dropins'), dropins_path %></li>
           <li><%= link_to raw('<span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;Rinks'), rinks_path, data: {no_turbolink: true} %></li>
@@ -20,11 +42,12 @@
               <span class="glyphicon glyphicon-cog"></span> <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
-              <li class="disabled"><%= link_to 'Profile', nil %></li>
+              <li><%= link_to raw('<span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;View Profile'), user_path(current_user) %></li>
               <!-- replace nil with current_user when profile page is ready -->
               <li><%= link_to raw('<span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;&nbsp;Edit Profile'), edit_user_path(current_user) %></li>
-              <li><%= link_to raw('<span class="glyphicon glyphicon-off"></span>&nbsp;&nbsp;&nbsp;Sign out'), signout_path, method: :delete %></li>
+              <li><%= link_to raw('<span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;&nbsp;Conversations'), conversations_path %></li>
               <li class="divider"></li>
+              <li><%= link_to raw('<span class="glyphicon glyphicon-off"></span>&nbsp;&nbsp;&nbsp;Sign out'), signout_path, method: :delete %></li>
               <li><%= link_to raw('<span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;&nbsp;About'), about_path %></li>
               <li><%= link_to raw('<span class="glyphicon glyphicon-envelope"></span>&nbsp;&nbsp;&nbsp;Contact'), contact_path %></li>
               <li><%= link_to raw('<span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;&nbsp;Help'), help_path %></li>

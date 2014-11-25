@@ -1,0 +1,5 @@
+<%= bootstrap_form_for :message, url: [:reply, :conversation], remote: true do |f| %>
+  <%= f.text_area :body, hide_label: true, placeholder: 'Reply', style: 'margin-bottom: 0px !important;', class: 'form-control' %>
+  <%= f.primary 'Send Message', data: { disable_with: 'Sending...' } %>
+  <%= submit_tag 'Clear Reply Box', type: :reset, class: 'btn btn-danger' %>
+<% end %>

@@ -1,4 +1,6 @@
 class Dropin < ActiveRecord::Base
+  acts_as_messageable
+
   has_many :attendances
   has_many :skaters, through: :attendances, source: :user
   # has_many :commitments,
@@ -29,5 +31,13 @@ class Dropin < ActiveRecord::Base
 
   def user_is_attending(user_id)
     attendances.count > 0 && attendances.find_by(user_id: user_id)
+  end
+
+  def name
+    "Dropin #{id}"
+  end
+
+  def mailboxer_email(object)
+    nil
   end
 end

@@ -1,0 +1,4 @@
+var conversation = $('#conversation');
+$('<%= j render 'messages/message', receipt: @receipt %>').appendTo(conversation).slideDown('fast');
+conversation.scrollTop(conversation[0].scrollHeight);
+$('#message_body').val("");

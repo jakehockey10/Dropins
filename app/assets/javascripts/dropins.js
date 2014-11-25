@@ -30,10 +30,6 @@ $(document).on("ready page:load", function() {
         message.focus();
     });
 
-    $('#join_dropin').on('click', function() {
-        $(this).button('loading');
-    });
-
     $('#insert-rink').on('click', function () {
         var message = $('#message');
         insertAtCaret(message.attr('id'), $('#dropin-rink').text());

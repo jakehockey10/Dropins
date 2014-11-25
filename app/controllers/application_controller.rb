@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  helper_method :mailbox, :unread_count
+
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
@@ -8,7 +10,15 @@ class ApplicationController < ActionController::Base
 
   private
 
-    def flash_to_headers
+    def mailbox
+      @mailbox ||= current_user.mailbox
+    end
+
+    def unread_count
+      @unread_count = mailbox.inbox(read: false).count(:id, distinct: true).to_s
+    end
+
+  def flash_to_headers
       return unless request.xhr?
       response.headers['X-message'] = flash_message
       response.headers['X-message-type'] = flash_type.to_s

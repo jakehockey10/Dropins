@@ -40,6 +40,10 @@ gem 'aws-s3'
 gem 'aws-sdk'
 gem 'mail'
 
+gem 'mailboxer'
+
+gem 'bootstrap_tokenfield_rails'
+
 group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'

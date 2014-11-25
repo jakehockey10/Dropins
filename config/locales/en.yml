@@ -28,3 +28,18 @@ en:
         after_or_equal_to: "must be after or equal to %{date}"
         before: "must be before %{date}"
         before_or_equal_to: "must be before or equal to %{date}"
+  mailboxer:
+    sent: "Message was sent!"
+    delete: "Delete"
+    delete_confirm: "Are you sure?"
+    reply: "Reply"
+    form:
+      recipients: "Recipients"
+      subject: "Subject"
+      body: "Body"
+    send: "Send"
+  time:
+    ago: "Last updated"
+  message:
+    participants: "Participants"
+    other: "Message Other"

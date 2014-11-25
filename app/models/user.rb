@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  acts_as_messageable
+
   has_many :microposts,
            dependent: :destroy
   has_many :relationships,
@@ -247,6 +249,10 @@ class User < ActiveRecord::Base
     else
       ENV['S3_BUCKET_NAME_PRODUCTION']
     end
+  end
+
+  def mailboxer_email(object)
+    nil
   end
 
   private
