@@ -1,8 +1,9 @@
 <%= bootstrap_form_for(@micropost) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
   <div class="field">
-    <%= f.text_area :content, placeholder: 'Compose new micropost...', hide_label: true %>
+    <%= f.text_area :content, placeholder: 'Compose new micropost...', hide_label: true, rows: 4 %>
   </div>
-  <%= f.submit 'Post', class: 'btn btn-primary btn-lg', data: { disable_with: 'Posting...' } %>
-  <span class="countdown pull-right"></span>
+
+  <span class="countdown pull-right" style="margin-bottom: 10px;"></span>
+  <%= f.submit 'Post', class: 'btn btn-primary btn-block', data: { disable_with: 'Posting...' } %>
 <% end %>

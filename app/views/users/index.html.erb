@@ -3,9 +3,9 @@
 <h1 class="page-header">All users</h1>
 
 <div class="row">
-  <div class="col-lg-offset-1 col-lg-10">
-    <div class="panel panel-default">
-      <div class="panel-heading">
+  <div class="col-md-offset-1 col-md-10 card">
+    <!--<div class="panel panel-default">-->
+      <!--<div class="panel-heading">-->
         <%= search_form_for @q, class: 'navbar-form', remote: 'true' do |f| %>
           <%= f.label :first_name_or_second_name_cont, 'name contains' %>
           <div class="input-group">
@@ -17,10 +17,10 @@
             </span>
           </div>
         <% end %>
-      </div>
+      <!--</div>-->
       <div class="panel-body">
         <%= render 'users_table' %>
       </div>
-    </div>
+    <!--</div>-->
   </div>
 </div>

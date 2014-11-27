@@ -1,54 +1,62 @@
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-  <div class="container">
+<nav class="navbar" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <%= button_tag type: 'button', class: 'navbar-toggle', data: { toggle: 'collapse', target: '#navbar-collapse'} do %>
+      <%= button_tag type: 'button', class: 'navbar-toggle toggle-menu menu-left push-body', data: { toggle: 'collapse', target: '#navbar-collapse' } do %>
         <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
+        <span class="icon-bar" style="background-color: #4DB6AC;"></span>
+        <span class="icon-bar" style="background-color: #4DB6AC;"></span>
+        <span class="icon-bar" style="background-color: #4DB6AC;"></span>
       <% end %>
-
-      <%= link_to raw('Dropins <span class="label label-default">Beta</span>'), root_path, id: 'logo' %>
+      <%= link_to raw('Dropins <span class="label label-default">Beta</span>'), root_path, id: 'logo', class: 'navbar-brand' %>
     </div>
-    <div class="navbar-collapse collapse" id="navbar-collapse">
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left navbar-inverse" id="navbar-collapse">
       <ul class="nav navbar-nav navbar-right">
         <% if signed_in? %>
-          <li class="dropdown">
-            <% if unread_count.to_i > 0 %>
-              <%= link_to '#', class: 'dropdown-toggle', data: { toggle: 'dropdown' } do %>
-                <span class="glyphicon glyphicon-bell new-notification"></span><span class="badge"><%= unread_count %></span>
-              <% end %>
-              <ul class="dropdown-menu notification-menu">
-                <% mailbox.inbox.unread(current_user).each do |m| %>
-                  <li>
-                    <%= link_to render('conversations/menu_conversation', conversation: m), conversation_path(m) %>
-                  </li>
-                <% end %>
-              </ul>
-            <% else %>
-              <%= link_to '#', class: 'dropdown-toggle', data: { toggle: 'dropdown' } do %>
-                <span class="glyphicon glyphicon-bell"></span>
-              <% end %>
-              <ul class="dropdown-menu notification-menu">
-                <li><%= link_to 'There are no new conversations...', '#' %></li>
-              </ul>
-            <% end %>
+          <li class="if-mobile">
+            <%= link_to avatar_for(current_user,
+                                   { size: :thumb,
+                                     border: true,
+                                     style: 'display: block; margin-left: auto; margin-right: auto;' }),
+                        current_user %>
+            <p class="text-center" style="display: block; color: #d3d3d3; margin-bottom: 0px;">
+              Logged in as
+            </p>
+            <p class="text-center" style="display: block; color: #d3d3d3; font-size: large">
 
+              <!--<span style="display: inline-block;">-->
+                <%= current_user.name %>
+                <!--<%= button_to signout_path, method: :delete, class: 'btn-link' do %>-->
+                  <!--<span class="glyphicon glyphicon-log-out"></span>-->
+                <!--<% end %>-->
+              <!--</span>-->
+            </p>
+            <hr/>
           </li>
+
+          <!-- Bell was here -->
+          <%= render 'layouts/notification_bell' %>
+
           <li><%= link_to raw('<span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;&nbsp;Users'), users_path %></li>
           <li><%= link_to raw('<span class="glyphicon glyphicon-calendar"></span>&nbsp;&nbsp;&nbsp;Dropins'), dropins_path %></li>
           <li><%= link_to raw('<span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;Rinks'), rinks_path, data: {no_turbolink: true} %></li>
           <li id="fat-menu" class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <span class="glyphicon glyphicon-cog"></span> <b class="caret"></b>
+              <span class="glyphicon glyphicon-cog"></span>  Settings <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
               <li><%= link_to raw('<span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;View Profile'), user_path(current_user) %></li>
-              <!-- replace nil with current_user when profile page is ready -->
               <li><%= link_to raw('<span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;&nbsp;Edit Profile'), edit_user_path(current_user) %></li>
               <li><%= link_to raw('<span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;&nbsp;Conversations'), conversations_path %></li>
               <li class="divider"></li>
-              <li><%= link_to raw('<span class="glyphicon glyphicon-off"></span>&nbsp;&nbsp;&nbsp;Sign out'), signout_path, method: :delete %></li>
+              <li>
+                <%= button_to signout_path, method: :delete, class: 'btn-link btn-block' do %>
+                  <span class="glyphicon glyphicon-log-out"></span>&nbsp;&nbsp;&nbsp;Sign out
+                <% end %>
+              </li>
+              <!--<li><%= link_to raw('<span class="glyphicon glyphicon-log-out"></span>&nbsp;&nbsp;&nbsp;Sign out'), signout_path, method: :delete %></li>-->
               <li><%= link_to raw('<span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;&nbsp;About'), about_path %></li>
               <li><%= link_to raw('<span class="glyphicon glyphicon-envelope"></span>&nbsp;&nbsp;&nbsp;Contact'), contact_path %></li>
               <li><%= link_to raw('<span class="glyphicon glyphicon-question-sign"></span>&nbsp;&nbsp;&nbsp;Help'), help_path %></li>
@@ -58,6 +66,6 @@
           <li><%= link_to 'Sign in', signin_path %></li>
         <% end %>
       </ul>
-    </div>
-  </div>
+  </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
 </nav>
