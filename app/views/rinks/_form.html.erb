@@ -1,7 +1,10 @@
 <%= bootstrap_form_for rink do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
 
-  <%= f.text_field :address %>
-  <%= f.text_field :name %>
+  <%= f.text_field :address, hide_label: true, placeholder: 'Address' %>
+  <%= f.text_field :name, hide_label: true, placeholder: 'Rink name' %>
+  <p class="small">
+    You can search for rinks with the search field in the map.  When you click on a rink, it will automatically populate the above fields for you.
+  </p>
   <%= f.submit 'Submit', data: { disable_with: 'Loading...' } %>
 <% end %>

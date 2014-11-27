@@ -1,9 +1,9 @@
 module UsersHelper
 
-  def avatar_for(user, options = { size: :small, border: false })
+  def avatar_for(user, options = { size: :small, border: false, style: '' })
     if user.respond_to? :avatar
       if user.avatar.file?
-        image_tag user.avatar.url(options[:size]), alt: user.name, class: image_class(options[:border])
+        image_tag user.avatar.url(options[:size]), alt: user.name, class: image_class(options[:border]), style: options[:style]
       else
         unless options[:size]
           options[:size] = 250

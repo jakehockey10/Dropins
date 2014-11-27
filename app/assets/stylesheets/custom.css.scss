@@ -18,7 +18,7 @@ html {
 }
 
 body {
-  padding-top: 60px;
+//  padding-top: 60px;
   background-color: rgb(236, 236, 236);
 }
 
@@ -64,7 +64,7 @@ textarea {
   background-color: rgb(236, 236, 236) !important;
 }
 
-.card {
+.card, .fc-view-container {
   -webkit-background-clip: padding-box;
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -150,10 +150,276 @@ p.truncate {
 
 /* header */
 
+// this and the module below this are required to make the button_to
+// helper look like the link_to helper inside the nav header dropdowns.
+.dropdown-menu > li > form {
+  margin: 0;
+}
+
+.dropdown-menu > li > form > div > button {
+  display: block;
+  padding: 3px 20px;
+  clear: both;
+  font-weight: normal;
+  line-height: 1.428571429 !important;
+  color: #333333 !important;
+  white-space: nowrap;
+  margin: 0;
+  text-align: left;
+  &:hover, &:focus {
+    text-decoration: none;
+    color: #262626;
+    background-color: whitesmoke;
+    outline-color: whitesmoke;
+  }
+}
+
+nav {
+  position: fixed;
+  &.navbar {
+    background-color: #00838F !important;
+    border-color: #00838F;
+  }
+}
+
 .navbar {
   -webkit-box-shadow: 0 0 4px rgba(0,0,0,.14), 0 4px 8px rgba(0,0,0,.28);
   -moz-box-shadow:    0 0 4px rgba(0,0,0,.14), 0 4px 8px rgba(0,0,0,.28);
   box-shadow:         0 0 4px rgba(0,0,0,.14), 0 4px 8px rgba(0,0,0,.28);
+}
+
+.if-mobile {
+  display: none !important;
+}
+
+@media screen and (min-width: 768px) {
+  .navbar-inverse {
+    background-color: #00838F !important;
+    border-color: #00838F;
+  }
+  .navbar-nav > li > a {
+    color: navajowhite !important;
+    &:hover, &:focus {
+      color: white !important;
+    }
+  }
+  .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+    background-color: rgba(96, 188, 200, 0.31);
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .if-mobile {
+    display: block !important;
+  }
+
+  // this and the module below this are required to make the button_to
+  // helper look like the link_to helper inside the nav header dropdowns.
+  .dropdown-menu > li > form > div > button {
+    padding: 5px 15px 5px 25px;
+    color: #9d9d9d !important;
+    &:hover, &:focus {
+      color: white !important;
+      background-color: transparent;
+    }
+  }
+
+  hr, li.divider {
+    border: none;
+    /* top    */ border-top: 1px solid black;
+    /* middle */ background-color: black; color: black;
+    /* bottom */ border-bottom: 1px solid rgb(104, 104, 104);
+    height: 1px;
+    *height: 3px; /* IE6+7 need the total height */
+  }
+
+  .navbar-nav {
+    margin: 0;
+  }
+  .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus{
+    background-color: rgba(18, 22, 24, 0.36);
+  }
+  /* General styles for all menus */
+  .cbp-spmenu {
+//    background: #f8f8f8;
+    position: fixed;
+    padding: 0;
+    margin: 0 !important;
+    overflow-x: hidden;
+    overflow-y: visible;
+    display: block;
+    background-color: #263238 !important;
+    border-color: #263238
+  }
+  .cbp-spmenu h3 {
+//    color: #afdefa;
+//    font-size: 1.9em;
+    padding: 20px;
+    margin: 0;
+    font-weight: 300;
+//    background: #0d77b6;
+  }
+  .cbp-spmenu a {
+    display: block;
+  }
+  /* Orientation-dependent styles for the content of the menu */
+  .cbp-spmenu-vertical {
+    width: 260px;
+    height: 100%;
+    top: 0;
+    z-index: 1000;
+  }
+  .cbp-spmenu-horizontal {
+    width: 100%;
+    height: 150px;
+    left: 0;
+    z-index: 1000;
+    overflow: hidden;
+  }
+  .cbp-spmenu-horizontal h3 {
+    height: 100%;
+    width: 20%;
+    float: left;
+  }
+  .cbp-spmenu-horizontal a {
+    float: left;
+    width: 20%;
+    padding: 0.8em;
+//    border-left: 1px solid #258ecd;
+  }
+  /* Vertical menu that slides from the left or right */
+  .cbp-spmenu-left {
+    left: -260px;
+  }
+  .cbp-spmenu-right {
+    right: -260px;
+  }
+  .cbp-spmenu-left.cbp-spmenu-open {
+    left: 0px;
+  }
+  .cbp-spmenu-right.cb-spmenu-open {
+    right: 0px;
+  }
+  /* Horizontal menu that slides from the top or bottom */
+  .cbp-spmenu-top {
+    top: -150px;
+  }
+  .cbp-spmenu-bottom {
+    bottom: -150px;
+  }
+  .cbp-spmenu-top.cbp-spmenu-open {
+    top: 0px;
+  }
+  .cbp-spmenu-bottom.cbp-spmenu-open {
+    bottom: 0px;
+  }
+  /* Push classes applied to the body */
+  .cbp-spmenu-push {
+    overflow-x: hidden;
+    position: relative;
+    left: 0;
+  }
+  .cbp-spmenu-push-toright {
+    left: 260px;
+  }
+  .cbp-spmenu-push-toleft {
+    left: -260px;
+  }
+  /* Transitions */
+  .cbp-spmenu, .cbp-spmenu-push {
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+  }
+
+  .collapse {
+    visibility: hidden;  /* Bootstrap v3.3.0 */
+  }
+  .cbp-spmenu {
+    visibility: visible; /* The Fix */
+  }
+  .navbar-toggle {
+    background-color: #222;
+    background-image: -webkit-linear-gradient(hsla(0,0%,100%,.15), hsla(0,0%,0%,0));
+    background-image:    -moz-linear-gradient(hsla(0,0%,100%,.15), hsla(0,0%,0%,0));
+    background-image:     -ms-linear-gradient(hsla(0,0%,100%,.15), hsla(0,0%,0%,0));
+    background-image:      -o-linear-gradient(hsla(0,0%,100%,.15), hsla(0,0%,0%,0));
+    background-image:         linear-gradient(hsla(0,0%,100%,.15), hsla(0,0%,0%,0));
+    border: 1px solid #111;
+    color: #c6c6c6;
+    cursor: pointer;
+    display: inline-block;
+    font: bold 14px/10px sans-serif;
+    margin: 10px;
+    padding: 10px 15px;
+    position: relative;
+    text-decoration: none;
+    text-shadow: 0 -1px 1px hsla(0,0%,0%,.8);
+    vertical-align: top;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: 0 1px 4px hsla(0,0%,0%,.4), inset 0 1px 0 hsla(0,0%,100%,.2);
+    -moz-box-shadow: 0 1px 4px hsla(0,0%,0%,.4), inset 0 1px 0 hsla(0,0%,100%,.2);
+    box-shadow: 0 1px 4px hsla(0,0%,0%,.4), inset 0 1px 0 hsla(0,0%,100%,.2);
+    &:hover, &:focus {
+      background-color: #242424;
+      color: #f6f6f6;
+      -webkit-box-shadow: 0 1px 4px hsla(0,0%,0%,.4), inset 0 1px 0 hsla(0,0%,100%,.2);
+      -moz-box-shadow: 0 1px 4px hsla(0,0%,0%,.4), inset 0 1px 0 hsla(0,0%,100%,.2);
+      box-shadow: 0 1px 4px hsla(0,0%,0%,.4), inset 0 1px 0 hsla(0,0%,100%,.2);
+      &:after {
+        display: block;
+      }
+    }
+    &:after {
+      background-image: -webkit-linear-gradient(left, hsla(0,0%,0%,0), hsla(0,0%,100%,.8), hsla(0,0%,0%,0));
+      background-image:    -moz-linear-gradient(left, hsla(0,0%,0%,0), hsla(0,0%,100%,.8), hsla(0,0%,0%,0));
+      background-image:     -ms-linear-gradient(left, hsla(0,0%,0%,0), hsla(0,0%,100%,.8), hsla(0,0%,0%,0));
+      background-image:      -o-linear-gradient(left, hsla(0,0%,0%,0), hsla(0,0%,100%,.8), hsla(0,0%,0%,0));
+      background-image:         linear-gradient(left, hsla(0,0%,0%,0), hsla(0,0%,100%,.8), hsla(0,0%,0%,0));
+      background-position: 50% 0%;
+      background-size: 200% 200%;
+      content: '';
+      display: none;
+      height: 1px;
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    &:before {
+      background: #363636;
+      bottom: -8px;
+      content: '';
+      left: -8px;
+      position: absolute;
+      right: -8px;
+      top: -8px;
+      z-index: -1;
+      -webkit-border-radius: 6px;
+      -moz-border-radius: 6px;
+      border-radius: 6px;
+      -webkit-box-shadow: 0 1px 1px hsla(0,0%,100%,.3), inset 0 1px 1px hsla(0,0%,0%,.4), inset 0 0 5px hsla(0,0%,0%,.2);
+      -moz-box-shadow: 0 1px 1px hsla(0,0%,100%,.3), inset 0 1px 1px hsla(0,0%,0%,.4), inset 0 0 5px hsla(0,0%,0%,.2);
+      box-shadow: 0 1px 1px hsla(0,0%,100%,.3), inset 0 1px 1px hsla(0,0%,0%,.4), inset 0 0 5px hsla(0,0%,0%,.2);
+    }
+    &:active {
+      background-color: #202020;
+      color: #b6b6b6;
+      padding: 11px 15px 9px;
+      -webkit-box-shadow: 0 1px 0 hsla(0,0%,100%,.1), inset 0 1px 4px hsla(0,0%,0%,.8);
+      -moz-box-shadow: 0 1px 0 hsla(0,0%,100%,.1), inset 0 1px 4px hsla(0,0%,0%,.8);
+      box-shadow: 0 1px 0 hsla(0,0%,100%,.1), inset 0 1px 4px hsla(0,0%,0%,.8);
+      &:after {
+        display: block;
+        left: 1px;
+        opacity: .5;
+        right: 1px;
+        top: 31px;
+      }
+    }
+  }
 }
 
 #logo {
@@ -163,7 +429,7 @@ p.truncate {
   color: white;
   text-transform: uppercase;
   letter-spacing: -1px;
-  padding-top: 9px;
+  padding-top: auto;
   font-weight: bold;
   line-height: 1;
   &:hover {
@@ -205,6 +471,9 @@ footer {
   border-top: 1px solid #DDDDDD;
   color: $gray-light;
   background-color: white;
+  nav {
+    position: inherit !important;
+  }
   a {
     color: $gray;
     &:hover {
@@ -366,12 +635,12 @@ input {
 
 .microposts {
   list-style: none;
-  margin: 10px 0 0 0;
+//  margin: 10px 0 0 0;
 
-  li {
-    padding: 10px 0;
-    border-top: 1px solid gray;
-  }
+//  li {
+//    padding: 10px 0;
+//    border-top: 1px solid gray;
+//  }
 }
 .content {
   display: block;

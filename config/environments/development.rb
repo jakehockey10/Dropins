@@ -13,6 +13,10 @@ Rails.application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
 
+  # Precompile additional assets.
+  # application.js, application.css.scss, and all non-JS/CSS in app/assets folder are already added.
+  config.assets.precompile += %w( jPushMenu.js )
+
   config.action_mailer.raise_delivery_errors = true
 
   # Change mail delivery to either :smtp, :sendmail, :file, :test
