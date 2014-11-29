@@ -40,4 +40,24 @@ class Dropin < ActiveRecord::Base
   def mailboxer_email(object)
     nil
   end
+
+  def show_register_link?(user)
+    unless skaters.include?(user)
+      is_in_the_future?
+    end
+  end
+
+  def is_in_the_future?
+    self.date > Time.zone.now
+  end
+
+  def followers_attending(user)
+    followers_going = self.skaters.where(id: user.followed_users).map { |u| u.name }
+    if followers_going.count == 1
+      "#{followers_going.to_sentence} is going."
+    else
+      "#{followers_going.to_sentence} are going."
+    end
+  end
+
 end

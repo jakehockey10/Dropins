@@ -33,12 +33,13 @@
                 <!--<% end %>-->
               <!--</span>-->
             </p>
-            <hr/>
+            <hr class="header"/>
           </li>
 
           <!-- Bell was here -->
           <%= render 'layouts/notification_bell' %>
 
+          <li><%= link_to raw('<span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;&nbsp;Conversations'), conversations_path %></li>
           <li><%= link_to raw('<span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;&nbsp;Users'), users_path %></li>
           <li><%= link_to raw('<span class="glyphicon glyphicon-calendar"></span>&nbsp;&nbsp;&nbsp;Dropins'), dropins_path %></li>
           <li><%= link_to raw('<span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;Rinks'), rinks_path, data: {no_turbolink: true} %></li>
@@ -49,7 +50,6 @@
             <ul class="dropdown-menu">
               <li><%= link_to raw('<span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;View Profile'), user_path(current_user) %></li>
               <li><%= link_to raw('<span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;&nbsp;Edit Profile'), edit_user_path(current_user) %></li>
-              <li><%= link_to raw('<span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;&nbsp;Conversations'), conversations_path %></li>
               <li class="divider"></li>
               <li>
                 <%= button_to signout_path, method: :delete, class: 'btn-link btn-block' do %>

@@ -12,6 +12,9 @@ namespace :db do
   task follow_jake: :environment do
     follow_jake
   end
+  task remove_invalid_relationships: :environment do
+    remove_invalid_relationships
+  end
 end
 
 def make_jake_admin
@@ -58,11 +61,18 @@ def make_relationships
 end
 
 def follow_jake
-  users = User.all
+  users = User.where.not(email: 'jakehockey10@gmail.com')
   jake = User.find_by(email: 'jakehockey10@gmail.com')
   users.each do |user|
     unless user.followed_users.include? jake
       user.follow!(jake)
     end
+  end
+end
+
+def remove_invalid_relationships
+  bad_relationships = Relationship.where('follower_id = followed_id')
+  bad_relationships.each do |r|
+    r.destroy!
   end
 end

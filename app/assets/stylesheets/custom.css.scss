@@ -77,8 +77,8 @@ textarea {
   box-sizing: border-box;
   color: rgba(0, 0, 0, 0.870588);
   background-color: rgb(255, 255, 255);
-  display: block;
-  padding: 10px;
+  list-style: none;
+  padding: 20px;
   -webkit-transition: box-shadow 0.5s;
   transition: box-shadow 0.5s;
 //  margin-top: 10px;
@@ -92,6 +92,32 @@ textarea {
   &.replies {
     margin-top: 15px;
     margin-bottom: 15px;
+  }
+  div.media-body {
+    width: 100%
+  }
+}
+
+.card-link {
+  text-transform: uppercase;
+  text-decoration: none !important;
+  padding: 0 10px;
+  &:hover, &:focus {
+    color: blue;
+  }
+}
+
+hr.card-break {
+
+}
+
+h2.card-header {
+  margin-top: 0;
+  a {
+    text-decoration: none !important;
+    &:hover, &:focus {
+      color: blue;
+    }
   }
 }
 
@@ -114,7 +140,7 @@ h2 {
   margin-bottom: 20px;
 //  text-align: center;
   font-weight: normal;
-  color: $gray-light;
+//  color: $gray-light;
 }
 
 h4 {
@@ -224,7 +250,7 @@ nav {
     }
   }
 
-  hr, li.divider {
+  hr.header, li.divider {
     border: none;
     /* top    */ border-top: 1px solid black;
     /* middle */ background-color: black; color: black;

@@ -1,5 +1,7 @@
 <%= content_tag_for(:li, conversation, class: 'media card') do |conversation| %>
-  <%= link_to avatar_for(conversation.originator), user_path(conversation.originator.id), class: 'pull-left' %>
+  <div class="media-left">
+    <%= link_to avatar_for(conversation.originator), user_path(conversation.originator.id) %>
+  </div>
   <div class="media-body">
     <h4 class="media-heading">
       <%= link_to conversation.subject, conversation_path(conversation) %>
@@ -19,9 +21,6 @@
     <p>
       <% filtered_participants = conversation.participants.reject do |u| u.id == current_user.id end %>
       to: <%= filtered_participants.map { |fp| fp.name }.to_sentence %>
-      <%# filtered_participants.each do |fp| %>
-        <%# fp.name %>
-      <%# end %>
     </p>
     <p>
       from: <%= conversation.originator.name %>
