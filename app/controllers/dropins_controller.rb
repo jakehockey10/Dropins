@@ -5,7 +5,7 @@ class DropinsController < ApplicationController
   before_action :set_contacts, only: [:show]
 
   def index
-    @dropins = Dropin.order('date asc').paginate(page: params[:page], per_page: 8)
+    @dropins = Dropin.order('date desc').paginate(page: params[:page], per_page: 8)
   end
 
   def show

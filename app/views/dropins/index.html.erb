@@ -12,6 +12,6 @@
     </aside>
   <% end %>
   <div class="<% unless current_user.admin? %>col-md-offset-2 <% end %>col-md-8 dropins-table" style="margin-top: 20px;">
-    <%= render 'dropins_table', dropins: @dropins %>
+    <%= render @dropins %>
   </div>
 </div>

@@ -4,7 +4,7 @@ class StaticPagesController < ApplicationController
     if signed_in?
       @micropost = current_user.microposts.build if signed_in?
       @feed_items = current_user.feed.paginate(page: params[:page])
-      @dropins = Dropin.order('date asc').paginate(page: params[:page])
+      @dropins = Dropin.where('date >= ?', Time.zone.now).order('date desc').paginate(page: params[:page])
       @rinks = Rink.all
     end
   end

@@ -51,7 +51,9 @@
     <div class="tab-content">
       <div class="tab-pane fade in active" id="dropins">
         <h3>Upcoming dropins</h3>
-        <%= render 'dropins/dropins_table', dropins: @dropins %>
+        <ul class="media-list">
+          <%= render @dropins %>
+        </ul>
       </div>
       <div class="tab-pane fade" id="calendar">
         <%= render 'shared/calendar' %>

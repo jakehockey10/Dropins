@@ -19,20 +19,49 @@
     <%= link_to 'Start Conversation', :new_conversation, class: 'btn btn-primary btn-lg btn-block' %>
   </div>
 </div>
-
+<br/>
 <div class="row">
   <div class="col-md-offset-2 col-md-8">
-    <h2>Inbox</h2>
-    <ul class="media-list">
-      <%= render collection: mailbox.inbox, partial: 'conversation' %>
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-pills nav-justified">
+      <li class="active">
+        <%= link_to '#inbox', data: { toggle: 'tab' } do %>
+          <span class="glyphicon glyphicon-inbox"></span>&nbsp;&nbsp;&nbsp;Inbox
+        <% end %>
+      </li>
+      <li>
+        <%= link_to '#sentbox', data: { toggle: 'tab' } do %>
+          <span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;&nbsp;Sentbox
+        <% end %>
+      </li>
+      <li>
+        <%= link_to '#trash', data: { toggle: 'tab' } do %>
+          <span class="glyphicon glyphicon-trash"></span>&nbsp;&nbsp;&nbsp;Trash
+        <% end %>
+      </li>
     </ul>
-    <h2>Sentbox</h2>
-    <ul class="media-list">
-      <%= render collection: mailbox.sentbox, partial: 'conversation' %>
-    </ul>
-    <h2>Trash</h2>
-    <ul class="media-list">
-      <%= render collection: mailbox.trash, partial: 'conversation' %>
-    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div class="tab-pane fade in active" id="inbox">
+        <h2>Inbox</h2>
+        <ul class="media-list">
+          <%= render collection: mailbox.inbox, partial: 'conversation' %>
+        </ul>
+      </div>
+      <div class="tab-pane fade" id="sentbox">
+        <h2>Sentbox</h2>
+        <ul class="media-list">
+          <%= render collection: mailbox.sentbox, partial: 'conversation' %>
+        </ul>
+      </div>
+      <div class="tab-pane fade" id="trash">
+        <h2>Trash</h2>
+        <ul class="media-list">
+          <%= render collection: mailbox.trash, partial: 'conversation' %>
+        </ul>
+      </div>
+    </div>
   </div>
 </div>
