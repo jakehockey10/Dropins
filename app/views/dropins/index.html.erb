@@ -11,7 +11,7 @@
       <%= render 'dropins/form', dropin: Dropin.new, remote: true %>
     </aside>
   <% end %>
-  <div class="<% unless current_user.admin? %>col-md-offset-2 <% end %>col-md-8 dropins-table" style="margin-top: 20px;">
+  <div id="dropins" class="<% unless current_user.admin? %>col-md-offset-2 <% end %>col-md-8 dropins-table" style="margin-top: 20px;">
     <%= render @dropins %>
   </div>
 </div>
