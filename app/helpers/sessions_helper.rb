@@ -50,4 +50,8 @@ module SessionsHelper
   def store_location
     session[:return_to] = request.url if request.get?
   end
+
+  def admin_link_to(text, path, html_options = {})
+    link_to text, path, html_options if current_user.admin?
+  end
 end

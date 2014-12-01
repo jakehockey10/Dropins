@@ -29,10 +29,6 @@ class RinksController < ApplicationController
     @rink = Rink.new
   end
 
-  # GET /rinks/1/edit
-  def edit
-  end
-
   # POST /rinks
   # POST /rinks.json
   def create
