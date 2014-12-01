@@ -1,0 +1,23 @@
+<li class="media card">
+  <h2 class="card-header">
+    <%= link_to rink.name, rink %>
+    <small>
+      <p>
+        <address>
+          <%= rink.address %>
+        </address>
+      </p>
+    </small>
+  </h2>
+  <hr class="card-break"/>
+  <div class="btn-toolbar">
+    <%= admin_link_to raw('View'),
+                      rink,
+                      class: 'card-link' %>
+    <%= admin_link_to raw('Remove'),
+                      rink,
+                      method: :delete,
+                      class: 'card-link pull-right',
+                      data: { confirm: 'Are you sure?' } %>
+  </div>
+</li>

@@ -1,33 +1,40 @@
-<li class="media card">
+<li class="media card<% unless dropin.is_in_the_future? %> card-older<% end %>">
+  <h2 class="card-header">
+    <%= link_to dropin.name, dropin %>
+    <small>
+      <p>
+        <%= dropin.date.strftime('%A') %>, <%= dropin.date.strftime('%b %e at %I:%M %p') %>
+      </p>
+    </small>
+  </h2>
+  <hr class="card-break"/>
+  <% if dropin.is_in_the_future? %>
+    <p>
+      <%= dropin.limit - dropin.skaters.count %> spots are left.
+    </p>
+    <p>
+      Followers attending dropin: <%= followers_attending(dropin, current_user) %>
+    </p>
+  <% else %>
+    <p>
+      <%= pluralize(dropin.skaters.count, 'player') %> went.
+    </p>
+    <p>
+      Followers who went: <%= followers_attending(dropin, current_user) %>
+    </p>
+  <% end %>
+  <hr class="card-break"/>
   <div class="btn-toolbar" role="toolbar">
-    <h2 class="card-header">
-      <%= link_to dropin.name, dropin %>
-      <br/>
-      <small><%= dropin.date.strftime('%A') %>, <%= dropin.date.strftime('%b %e at %I:%M %p') %></small>
-    </h2>
-    <hr class="card-break"/>
-    <% if dropin.is_in_the_future? %>
-      <p>
-        <%= dropin.limit - dropin.skaters.count %> spots are left.
-      </p>
-      <p>
-        Followers attending dropin: <%= followers_attending(dropin, current_user) %>
-      </p>
-    <% else %>
-      <p>
-        <%= pluralize(dropin.skaters.count, 'player') %> went.
-      </p>
-      <p>
-        Followers who went: <%= followers_attending(dropin, current_user) %>
-      </p>
-    <% end %>
-    <hr class="card-break"/>
-    <%= link_to raw('Register for dropin'), dropin, class: 'card-link' if dropin.show_register_link?(current_user) %>
+    <%= link_to raw('Register for dropin'),
+                dropin,
+                class: 'card-link' if dropin.show_register_link?(current_user) %>
     <%= link_to raw('Delete'),
                 dropin,
                 class: 'card-link pull-right',
                 method: :delete,
-                data: { confirm: 'Are you sure?'} if current_user.admin? %>
-    <%= link_to raw('Edit'), edit_dropin_path(dropin), class: 'card-link pull-right' if current_user.admin? %>
+                data: { confirm: 'Are you sure?' } if current_user.admin? %>
+    <%= link_to raw('Edit'),
+                edit_dropin_path(dropin),
+                class: 'card-link pull-right' if current_user.admin? %>
   </div>
 </li>

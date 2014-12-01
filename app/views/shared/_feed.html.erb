@@ -1,6 +1,6 @@
 <h3>Micropost Feed</h3>
 <% if @feed_items.any? %>
-  <ol class="microposts">
+  <ol class="microposts media-list">
     <%= render partial: 'shared/feed_item', collection: @feed_items %>
   </ol>
   <%= will_paginate @feed_items %>
