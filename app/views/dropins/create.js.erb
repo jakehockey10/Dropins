@@ -1,4 +1,6 @@
-$('.dropins-table').html('<%= j render 'dropins_table', dropins: Dropin.order('date asc').paginate(page: params[:page], per_page: 8) %>');
+// TODO: This should not render all the dropins like this.  This is stupid.
+// TODO: This was an easy way to keep them sorted...
+$('#dropins').html('<%= j render Dropin.order('date desc').paginate(page: params[:page], per_page: 8) %>');
 $('aside').html('<h1>Create a new dropin:</h1><%= j render 'dropins/form', dropin: Dropin.new, remote: true %>');
 $('#datetimepicker1').datetimepicker({
   useSeconds: false,
