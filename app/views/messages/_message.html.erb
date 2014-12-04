@@ -1,14 +1,12 @@
 <%= content_tag_for(:div, receipt, class: 'card replies') do |receipt| %>
   <% message = receipt.message %>
-  <div class="panel-body">
-    <%= link_to message.sender.name == current_user.name ? 'Me' : message.sender.name, user_path(message.sender) %>
-    <span class="pull-right">
-      <% if message.created_at.today? %>
-        <small><%= message.created_at.in_time_zone(Time.zone).strftime('%I:%M %p') %></small>
-      <% else %>
-        <small><%= message.created_at.in_time_zone(Time.zone).strftime('%d %b %I:%M %p') %></small>
-      <% end %>
-    </span>
-    <p style="margin-bottom: 0px !important;"><%= raw message.body %></p>
-  </div>
+  <%= link_to message.sender.name == current_user.name ? 'Me' : message.sender.name, user_path(message.sender) %>
+  <span class="pull-right">
+    <% if message.created_at.today? %>
+      <small><%= message.created_at.in_time_zone(Time.zone).strftime('%I:%M %p') %></small>
+    <% else %>
+      <small><%= message.created_at.in_time_zone(Time.zone).strftime('%d %b %I:%M %p') %></small>
+    <% end %>
+  </span>
+  <p style="margin-bottom: 0px !important;"><%= raw message.body %></p>
 <% end %>

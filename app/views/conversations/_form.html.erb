@@ -8,9 +8,18 @@
 
 <script type="text/javascript" charset="utf-8">
   $('input.tokenize-recipients').tokenfield({
-     autocomplete: {
-      source: <%= raw(current_user.relationships.map { |r| User.find(r.followed_id) }.map{ |u| u.email }) %>,
-      delay: 100
+    autocomplete: {
+      source: <%= tokenfield_source %>,
+      delay: 100,
+      create: function () {
+        $(this).data('ui-autocomplete')._renderItem = function (ul, item) {
+          return $('<li>')
+                  .addClass('media')
+                  .append('<a class="media-left" href="#">' + item.profile_picture + '</a><div class="media-body"><h4 class="media-heading">' + item.label + '</h4>' + item.value + '</div>')
+//                  .append('<a class="pull-left" href="#">' + item.profile_picture + '</a><div class="media-body"><h4 class="media-heading">' + item.label + '</h4>' + item.value + '</div>')
+                  .appendTo(ul);
+        };
+      }
     },
     showAutoCompleteOnFocus: true
   });
