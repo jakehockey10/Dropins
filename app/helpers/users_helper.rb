@@ -1,9 +1,9 @@
 module UsersHelper
 
-  def avatar_for(user, options = { size: :small, border: false, style: '' })
+  def avatar_for(user, options = { size: :small, border: false, style: '', class: '' })
     if user.respond_to? :avatar
       if user.avatar.file?
-        image_tag user.avatar.url(options[:size]), alt: user.name, class: image_class(options[:border]), style: options[:style]
+        image_tag user.avatar.url(options[:size]), alt: user.name, class: image_class(options), style: options[:style]
       else
         unless options[:size]
           options[:size] = 250
@@ -21,14 +21,13 @@ module UsersHelper
   # Returns the Gravatar (http://gravatar.com/) for the given user.
   def gravatar_for(user, options = { size: 50, border: false })
     gravatar_url = user.gravatar_url(options)
-    image_tag(gravatar_url, alt: user.name, class: image_class(options[:border]))
+    image_tag(gravatar_url, alt: user.name, class: image_class(options))
   end
 
-  def image_class(border)
-    if border
-      'img-circle img-thumbnail'
-    else
-      'img-circle'
-    end
+  def image_class(options)
+    img_cls = 'img-circle'
+    img_cls += ' img-thumbnail' if options[:border]
+    img_cls += ' ' + options[:class] if options[:class]
+    img_cls
   end
 end

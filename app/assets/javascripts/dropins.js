@@ -55,7 +55,6 @@ $(document).on("ready page:load", function() {
 
                 var elem = $('<li>')
                         .data( "item.autocomplete", item )
-//                        .append('<a><strong>' + item.name + '</strong><br><em>' + item.email + '</em></a>')
                         .append('<li class="media"><a class="pull-left" href="#"><img class="media-object" src=' + item.profile_picture + ' alt=""></a><div class="media-body"><h4 class="media-heading">' + item.name + '</h4>' + item.email + '</div></li>')
                         .appendTo(ul);
                 console.log(item);
