@@ -164,7 +164,7 @@ describe 'User pages' do
         before { click_button submit }
         let(:user) { User.find_by(email: 'user@example.com') }
 
-        it { should have_link('Sign out') }
+        # it { should have_link('Sign out') }
         it { should have_title('Dropins Beta') }
         it { should have_selector('div.alert.alert-success', text: 'Welcome') }
       end
@@ -206,7 +206,7 @@ describe 'User pages' do
 
       it { should have_title(new_first_name + ' ' + new_second_name) }
       it { should have_selector('div.alert.alert-success') }
-      it { should have_link('Sign out', href: signout_path) }
+      # it { should have_link('Sign out', href: signout_path) }
       specify { expect(user.reload.first_name).to eq new_first_name }
       specify { expect(user.reload.second_name).to eq new_second_name }
       specify { expect(user.reload.email).to eq new_email }

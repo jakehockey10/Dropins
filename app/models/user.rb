@@ -57,7 +57,7 @@ class User < ActiveRecord::Base
             presence: true,
             #if: :validate_password?
             if: :password_required?
-  validates_attachment :avatar, content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] }
+  validates_attachment :avatar, content_type: { content_type: %w(image/jpeg image/gif image/png) }
   validates_attachment_content_type :avatar, content_type: /\Aimage/
   validates_attachment_file_name :avatar, matches: [/png\Z/, /jpe?g\Z/]
 
@@ -125,13 +125,13 @@ class User < ActiveRecord::Base
     commitments.create!(user_id: self.id, dropin_id: dropin.id)
   end
 
-  def show_pay_for_dropin_button(dropin)
-    self.has_wepay_account? && dropin.user.has_wepay_account? && self.has_not_paid(dropin)
-  end
-
-  def has_not_paid(dropin)
-    Commitment.where(user_id: self.id, dropin_id: dropin.id).blank?
-  end
+  # def show_pay_for_dropin_button(dropin)
+  #   self.has_wepay_account? && dropin.user.has_wepay_account? && self.has_not_paid(dropin)
+  # end
+  #
+  # def has_not_paid(dropin)
+  #   Commitment.where(user_id: self.id, dropin_id: dropin.id).blank?
+  # end
 
   def attending_dropin?(dropin)
     attendances.find_by(dropin_id: dropin.id)
@@ -156,7 +156,7 @@ class User < ActiveRecord::Base
     "#{first_name} #{second_name}"
   end
 
-  # get the authorization url for this user.  THis url will let the user
+  # get the authorization url for this user.  This url will let the user
   # register or login to WePay to approve our app.
 
   # returns a url
@@ -185,11 +185,9 @@ class User < ActiveRecord::Base
 
   # makes an api call to WePay to check if current access token for user is still valid
   def has_valid_wepay_access_token?
-    if self.wepay_access_token.nil?
-      return false
-    end
+    return false if self.wepay_access_token.nil?
     response = WEPAY.call('/user', self.wepay_access_token)
-    response && response['user_id'] ? true : false
+    (response && response['user_id']) ? true : false
   end
 
   def has_wepay_account?
@@ -212,29 +210,86 @@ class User < ActiveRecord::Base
     raise 'Error - cannot create WePay account'
   end
 
+  def wepay_call(api_call, params)
+    response = WEPAY.call(api_call, self.wepay_access_token, params)
+    unless response.is_a?(Array)
+      if !response
+        raise 'Error - no response from WePay'
+      elsif response['error']
+        raise "Error - #{response['error_description']}"
+      end
+    end
+    response
+  end
+
   # creates a checkout object using WePay API for this user
   def create_checkout(redirect_uri, dropin_amount)
     app_fee = 0
-
     params = {
       account_id: self.wepay_account_id,
       short_description: 'Dropin paid for',
       type: :EVENT,
       amount: dropin_amount,
       app_fee: app_fee,
-      fee_payer: :payer,
+      fee_payer: :payee,
       mode: :iframe,
       redirect_uri: redirect_uri
     }
-    response = WEPAY.call('/checkout/create', self.wepay_access_token, params)
+    wepay_call('/checkout/create', params)
+  end
 
-    if !response
-      raise 'Error - no response from WePay'
-    elsif response['error']
-      raise "Error - #{response['error_description']}"
-    end
+  def make_withdrawal(redirect_uri, description = nil)
+    params = {
+      account_id: self.wepay_account_id,
+      redirect_uri: redirect_uri,
+      fallback_uri: redirect_uri,
+      note:         description ||= "User: #{self.email}",
+      mode:         'iframe'
+    }
+    wepay_call('/withdrawal/create', params)
+  end
 
-    response
+  def get_withdrawal(withdrawal_id)
+    params = {
+      withdrawal_id: withdrawal_id
+    }
+    wepay_call('/withdrawal', params)
+  end
+
+  def get_withdrawals(state)
+    params = {
+      account_id: self.wepay_account_id,
+      state: state
+    }
+    wepay_call('/withdrawal/find', params)
+  end
+
+  def get_withdrawal_counts
+    account_id = self.wepay_account_id
+    counts = {
+      new:      wepay_call('/withdrawal/find', { account_id: account_id, state: 'new' }).count,
+      started:  wepay_call('/withdrawal/find', { account_id: account_id, state: 'started' }).count,
+      captured: wepay_call('/withdrawal/find', { account_id: account_id, state: 'captured' }).count,
+      expired:  wepay_call('/withdrawal/find', { account_id: account_id, state: 'expired' }).count,
+      failed:   wepay_call('/withdrawal/find', { account_id: account_id, state: 'failed' }).count
+    }
+    counts
+  end
+
+  def get_wepay_account
+    params = {
+      account_id: self.wepay_account_id
+    }
+    wepay_call('/account', params)
+  end
+
+  def get_update_uri(redirect_uri)
+    params = {
+      account_id: self.wepay_account_id,
+      mode: :iframe,
+      redirect_uri: redirect_uri
+    }
+    wepay_call('/account/get_update_uri', params)
   end
 
   def gravatar_url(options = { size: 30, border: false })

@@ -10,3 +10,8 @@
 .standout {
   box-shadow: 5px 5px 60px #777777;
 }
+
+@media only screen and (max-width: 480px) {
+  #wepay-iframe-div { width: 100%;}
+  #wepay-iframe-div #wepay_checkout_iframe { width: 100%; max-width: 330px; height: 520px;}
+}

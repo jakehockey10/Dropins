@@ -22,4 +22,10 @@ FactoryGirl.define do
     sequence(:rink) { Rink.new }
     sequence(:limit) { 20 }
   end
+
+  factory :attendance do
+    dropin
+    user
+    paid false
+  end
 end

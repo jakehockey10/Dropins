@@ -3,7 +3,7 @@
   <%= link_to raw('<span class="delete-avatar glyphicon glyphicon-remove-circle pull-right"></span>'), delete_avatar_user_path(user.id), method: :delete, data: { confirm: 'Are you sure?' }, remote: true %>
   <br>
   <% unless user.avatar.file? %>
-      <a href="http://gravatar.com/emails" target="_blank">change Gravatar</a> |
+      <a href="http://gravatar.com/emails" target="_blank">Change Gravatar</a> |
   <% end %>
   <%= link_to 'Upload profile picture', upload_avatar_user_path(user), remote: true, id: 'upload_avatar_link' %>
 </div>

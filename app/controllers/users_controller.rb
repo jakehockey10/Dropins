@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :signed_in_user, only: [:index, :edit, :update, :destroy, :following, :followers]
-  before_action :correct_user, only: [:edit, :update]
-  before_action :admin_user, only: :destroy
+  before_action :correct_user,   only: [:edit, :update]
+  before_action :admin_user,     only: [:destroy, :make_withdrawal]
 
   autocomplete :gmail_contact,
                :name,
@@ -45,6 +45,10 @@ class UsersController < ApplicationController
   end
 
   def edit
+    if current_user.has_wepay_account?
+      @withdrawal_counts = current_user.get_withdrawal_counts
+      @account           = current_user.get_wepay_account
+    end
   end
 
   def show_avatar
@@ -123,7 +127,26 @@ class UsersController < ApplicationController
     else
       flash[:success] = 'We successfully connected you to WePay!'
     end
-    redirect_to @user
+    redirect_to edit_user_path @user
+  end
+
+  def make_withdrawal
+
+    redirect_uri = url_for(controller: 'users', action: 'edit', id: params[:user_id], host: request.host_with_port)
+    @user = User.find(params[:user_id])
+    begin
+      @withdrawal = @user.make_withdrawal(redirect_uri)
+    rescue Exception => e
+      error = e.message
+    end
+
+    if error
+      @error = error
+    end
+
+    respond_to do |format|
+      format.js
+    end
   end
 
   private

@@ -1,0 +1,14 @@
+<div class="row">
+  <aside class="col-md-offset-1 col-xs-12 col-sm-4 col-md-4">
+    <section id="avatar_section">
+      <%= render 'avatar', user: @user %>
+    </section>
+  </aside>
+
+  <div class="col-xs-12 col-sm-8 col-md-6">
+    <%= bootstrap_form_for(@user) do |f| %>
+      <%= render partial: 'users/fields', locals: { f: f, hide_labels: false } %>
+      <%= f.submit 'Save changes', class: 'btn btn-primary btn-block', data: { disable_with: 'Saving...' } %>
+    <% end %>
+  </div>
+</div>

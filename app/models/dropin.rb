@@ -11,10 +11,10 @@ class Dropin < ActiveRecord::Base
 
   validates :date,
             presence: true,
-            date: { after: Proc.new { Time.now - 1.minute },
+            date: { after:  Proc.new { Time.now - 1.minute },
                     before: Proc.new { Time.now + 1.year } }
   validates :price, presence: true, numericality: { greater_than: 0 }
-  validates :rink, presence: true
+  validates :rink,  presence: true
   validates :limit, presence: true, numericality: { only_integer: true, greater_than: 0 }
 
   def is_not_full

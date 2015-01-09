@@ -1,8 +1,11 @@
 <%= content_tag_for(:div, conversation, class: 'media') do |conversation| %>
+  <div class="media-left">
+    <%= avatar_for conversation.last_message.sender %>
+  </div>
   <div class="media-body">
     <h4 class="media-heading">
-      <%= conversation.subject %>
-      <small class="pull-right">Sent: <%= time_ago_in_words(conversation.updated_at) %> ago</small>
+      <%= conversation.subject %> |
+      <small>Sent: <%= time_ago_in_words(conversation.updated_at) %> ago</small>
     </h4>
     <p class="truncate"><small><%= truncate(conversation.last_message.body) %></small></p>
   </div>

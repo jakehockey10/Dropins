@@ -63,8 +63,12 @@ class DropinsController < ApplicationController
     begin
       @checkout = @user.create_checkout(redirect_uri, @dropin.price)
     rescue Exception => e
-      @checkout = e.message
+      error = e.message
     end
+    if error
+      @error = error
+    end
+
     respond_to do |format|
       format.js
     end
@@ -82,7 +86,9 @@ class DropinsController < ApplicationController
       return redirect_to @dropin
     end
     flash[:success] = 'Thanks for the payment!  You should receive a confirmation email shortly.'
-    current_user.commit_to!(@dropin)
+    current_user.join_dropin!(@dropin)
+    attendance = Attendance.where(user_id: current_user, dropin_id: @dropin.id).first
+    attendance.update(paid: true) if attendance
     redirect_to @dropin
   end
 

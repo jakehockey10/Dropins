@@ -1,0 +1,70 @@
+<div class="row">
+  <div class="col-md-offset-2 col-md-8">
+
+    <% unless @user.has_valid_wepay_access_token? %>
+      <h2>Please create a WePay account to manage your money:</h2>
+      <p>
+        <% redirect_uri = url_for(controller: 'users', action: 'oauth', user_id: @user.id, host: request.host_with_port) %>
+        <%= link_to 'Click here to create your account', @user.wepay_authorization_url(redirect_uri), class: 'btn btn-primary' %>
+      </p>
+    <% else %>
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg 12">
+          <h2>WePay Account information:</h2>
+          <p><strong>Account state:</strong> <%= @account['state'] %></p>
+          <% if @account['action_reasons'].any? %>
+            <p><strong>Actions required:</strong> <%= @account['action_reasons'].to_sentence %></p>
+          <% end %>
+          <p><strong>Account balance:</strong> <%= @account['balances'][0]['balance'] %></p>
+          <p><strong>Pending income:</strong> <%= @account['balances'][0]['incoming_pending_amount'] %></p>
+          <p>
+            <strong>Withdrawal frequency:</strong>
+            <%= @account['balances'][0]['withdrawal_period'] %>
+            (<%= link_to 'change', "/users/make_withdrawal/#{@user.id}", remote: true %>)
+          </p>
+        </div>
+      </div>
+
+      <hr/>
+      <h2>Status Summary of withdrawals:</h2>
+      <div class="row">
+        <div class="col-xs-2 col-sm-2 col-md-4 col-lg-2">
+          <a href="#" class="inset grad-blue"><%= @withdrawal_counts[:new] %> new</a>
+        </div>
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+          <span class="grad-arrow text-center">&#8594;</span>
+        </div>
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+          <a href="#" class="inset grad-blue"><%= @withdrawal_counts[:started] %> started</a>
+        </div>
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+          <span class="grad-arrow text-center">&#8594;</span>
+        </div>
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+          <a href="#" class="inset grad-green"><%= @withdrawal_counts[:captured] %> captured</a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+          <span class="grad-arrow text-center">&#8595;</span>
+        </div>
+        <div class="col-xs-offset-3 col-sm-offset-3 col-md-offset-3 col-lg-offset-3 col-xs-1 col-sm-1 col-md-1 col-lg-1">
+          <span class="grad-arrow text-center rotate-45">&#8596;</span>
+        </div>
+        <div class="col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1 col-xs-2 col-sm-2 col-md-2 col-lg-2">
+          <span class="grad-arrow text-center rotate-45">&#8597;</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+          <a href="#" class="inset grad-orange"><%= @withdrawal_counts[:expired] %> expired</a>
+        </div>
+        <div class="col-xs-offset-4 col-sm-offset-4 col-md-offset-4 col-lg-offset-4 col-xs-2 col-sm-2 col-md-2 col-lg-2">
+          <a href="#" class="inset grad-red"><%= @withdrawal_counts[:failed] %> failed</a>
+        </div>
+      </div>
+
+    <% end %>
+
+  </div>
+</div>

@@ -1,0 +1,6 @@
+<% if @error %>
+  $('.modal-body').html('<%= j render 'users/make_withdrawal_error' %>')
+<% else %>
+  $('.modal-body').html('<%= j render 'users/make_withdrawal_iframe' %>');
+<% end %>
+$('#make_withdrawal_modal').modal('show');

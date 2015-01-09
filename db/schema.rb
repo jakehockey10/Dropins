@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140925023160) do
+ActiveRecord::Schema.define(version: 20150102201643) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20140925023160) do
     t.integer  "dropin_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "paid",       default: false
   end
 
   create_table "commitments", force: true do |t|
@@ -112,15 +113,6 @@ ActiveRecord::Schema.define(version: 20140925023160) do
   add_index "mailboxer_receipts", ["notification_id"], name: "index_mailboxer_receipts_on_notification_id", using: :btree
   add_index "mailboxer_receipts", ["receiver_id", "receiver_type"], name: "index_mailboxer_receipts_on_receiver_id_and_receiver_type", using: :btree
 
-  create_table "messages", force: true do |t|
-    t.string   "subject"
-    t.text     "body"
-    t.integer  "sender_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "recipient_id"
-  end
-
   create_table "microposts", force: true do |t|
     t.string   "content"
     t.integer  "user_id"
@@ -129,16 +121,6 @@ ActiveRecord::Schema.define(version: 20140925023160) do
   end
 
   add_index "microposts", ["user_id", "created_at"], name: "index_microposts_on_user_id_and_created_at", using: :btree
-
-  create_table "page_requests", force: true do |t|
-    t.string   "path"
-    t.float    "page_duration"
-    t.float    "view_duration"
-    t.float    "db_duration"
-    t.string   "index"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "relationships", force: true do |t|
     t.integer  "follower_id"

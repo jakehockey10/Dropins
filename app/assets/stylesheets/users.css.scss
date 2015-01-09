@@ -27,3 +27,72 @@
   text-align: center;
   right: 7%;
 }
+
+.inset {
+  display: block;
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  font-size: 20px;
+  color: #fff;
+  line-height: 100px;
+  text-shadow: 0 1px 0 #666;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 1px 1px 2px #000;
+  background: #cccbbb;
+  opacity: 0.95
+}
+
+.inset:hover {
+  color: #eee;
+  text-shadow: 0 0 1px #666;
+  text-decoration: none;
+  box-shadow: 0 0 4px #222 inset;
+  opacity: 1
+}
+
+.grad-blue {
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  background: linear-gradient(to bottom, #40b3ff, #09f) !important;
+  margin: 0 auto;
+}
+.grad-green {
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  background: linear-gradient(to bottom, #37ffa8, #05ff6c) !important;
+  margin: 0 auto;
+}
+.grad-orange {
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  background: linear-gradient(to bottom, #ff9f3b, #ff8a04) !important;
+  margin: 0 auto;
+}
+.grad-red {
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  background: linear-gradient(to bottom, #ff3a3f, #ff0502) !important;
+  margin: 0 auto;
+}
+
+.grad-arrow {
+  display: block;
+  font-size: 60px;
+  width: 100px;
+  height: 100px;
+//  background: linear-gradient(to bottom, #ff3a3f, #ff0502) !important;
+  margin: 0 auto;
+}
+
+.rotate-45 {
+  -ms-transform: rotate(45deg); /* IE 9 */
+  -moz-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
+  transform: rotate(45deg);
+}

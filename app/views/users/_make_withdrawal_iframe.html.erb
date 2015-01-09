@@ -1,0 +1,7 @@
+<div id="withdrawal_div" style="text-align: center;"></div>
+<script type="text/javascript" src="https://www.wepay.com/min/js/iframe.wepay.js">
+</script>
+
+<script type="text/javascript">
+  WePay.iframe_checkout("withdrawal_div", "<%= @withdrawal['withdrawal_uri'] %>");
+</script>
