@@ -216,10 +216,18 @@ class User < ActiveRecord::Base
       if !response
         raise 'Error - no response from WePay'
       elsif response['error']
-        raise "Error - #{response['error_description']}"
+        respond_to_wepay_response(response)
       end
     end
     response
+  end
+
+  def respond_to_wepay_response(response)
+    if response['error_code'] === 1006
+
+    else
+      raise "Error - #{response['error_description']}"
+    end
   end
 
   # creates a checkout object using WePay API for this user
@@ -266,6 +274,7 @@ class User < ActiveRecord::Base
 
   def get_withdrawal_counts
     account_id = self.wepay_account_id
+    # TODO: use wepay batch call for this
     counts = {
       new:      wepay_call('/withdrawal/find', { account_id: account_id, state: 'new' }).count,
       started:  wepay_call('/withdrawal/find', { account_id: account_id, state: 'started' }).count,
