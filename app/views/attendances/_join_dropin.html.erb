@@ -1,8 +1,19 @@
-<%= bootstrap_form_for(current_user.attendances.build(dropin_id: @dropin.id), remote: true) do |f| %>
-    <%= f.hidden_field :dropin_id %>
-    <div class="row">
-      <div class="col-md-offset-3 col-md-6">
-        <%= f.submit 'Join Dropin', class: 'btn btn-primary btn-lg btn-block', id: 'join_dropin', data: { disable_with: 'Loading...' } %>
-      </div>
+<div class="row">
+  <%= bootstrap_form_for(current_user.attendances.build(dropin_id: @dropin.id), remote: true) do |f| %>
+    <div class="col-md-6">
+      <%= f.hidden_field :dropin_id %>
+      <%= f.submit 'Join Dropin and pay at rink (cash)',
+                   class: 'btn btn-primary btn-lg btn-block',
+                   id: 'join_dropin',
+                   data: { disable_with: 'Loading...' } %>
     </div>
-<% end %>
+    <div class="col-md-6">
+      <%= link_to 'Join Dropin and pay online',
+                  pay_dropin_path(@dropin),
+                  class: 'btn btn-danger btn-lg btn-block',
+                  id: 'pay-now-button',
+                  data: { 'loading-text' => 'Loading...' },
+                  remote: true %>
+    </div>
+  <% end %>
+</div>
