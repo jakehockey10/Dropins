@@ -8,8 +8,6 @@ Rails.application.routes.draw do
   end
 
   get 'invite/invite'
-  get 'commitments/create'
-  get 'commitments/destroy'
   resources :users do
     # get :autocomplete_gmail_contact_email, on: :collection
     get :autocomplete_gmail_contact_name, on: :collection
