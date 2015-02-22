@@ -26,7 +26,9 @@
   <!--<div class="col-lg-offset-3 col-md-offset-3 col-lg-6 col-md-6">-->
     <%= bootstrap_form_for(@user) do |f| %>
       <%= render partial: 'users/fields', locals: { f: f } %>
-        <%= f.submit 'Create my account', class: 'btn btn-primary btn-block', data: { disable_with: 'Creating...' } %>
+      <%= f.button 'Create my account',
+                   class: 'btn btn-primary btn-block',
+                   data: { disable_with: "#{fa_icon 'spinner pulse'} Creating..." } %>
     <% end %>
   </div>
   <!--</div>-->

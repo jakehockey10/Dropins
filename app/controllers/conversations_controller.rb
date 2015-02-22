@@ -4,10 +4,16 @@ class ConversationsController < ApplicationController
 
   def create
     recipient_emails = conversation_params(:recipients).split(/\s*,\s*/)
-    recipients = User.where(email: recipient_emails)
 
-    conversation = current_user.send_message(recipients, *conversation_params(:body, :subject)).conversation
-    redirect_to conversation_path(conversation)
+    if recipient_emails.empty? || conversation_params(:subject).empty? || conversation_params(:body).empty?
+      flash[:danger] = 'Please fill out the form before submitting'
+      redirect_to new_conversation_path
+    else
+      recipients = User.where(email: recipient_emails)
+
+      conversation = current_user.send_message(recipients, *conversation_params(:body, :subject)).conversation
+      redirect_to conversation_path(conversation)
+    end
   end
 
   def index

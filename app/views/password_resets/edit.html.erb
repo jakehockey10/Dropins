@@ -8,7 +8,9 @@
       <%= f.password_field :password, hide_label: true, placeholder: 'password' %>
       <%= f.password_field :password_confirmation, hide_label: true, placeholder: 'password confirmation' %>
 
-      <%= f.submit 'Update Password', class: 'btn btn-primary', data: { disable_with: 'Updating...' } %>
+      <%= f.button 'Update Password',
+                   class: 'btn btn-primary',
+                   data: { disable_with: "#{fa_icon 'spinner pulse'} Updating..." } %>
     <% end %>
   </div>
 </div>

@@ -18,19 +18,19 @@
       <td><%= rink.longitude %></td>
       <td class="center">
         <div class="btn-group">
-          <%= link_to raw('<span class="glyphicon glyphicon-eye-open"></span>'),
+          <%= link_to fa_icon('eye'),
                       rink,
                       class: 'btn btn-sm btn-default view-rink',
                       data: { toggle: 'tooltip',
                               placement: current_user.admin? ? 'left' : 'right',
                               title: 'View rink' } %>
-          <%= link_to raw('<span class="glyphicon glyphicon-edit"></span>'),
+          <%= link_to fa_icon('pencil-square-o'),
                       edit_rink_path(rink),
                       class: 'btn btn-sm btn-default edit-rink',
                       data: { toggle: 'tooltip',
                               placement: 'top',
                               title: 'Edit rink' } if current_user.admin? %>
-          <%= link_to raw('<span class="glyphicon glyphicon-remove"></span>'),
+          <%= link_to fa_icon('times'),
                       rink,
                       method: :delete,
                       class: 'btn btn-sm btn-danger delete-rink',

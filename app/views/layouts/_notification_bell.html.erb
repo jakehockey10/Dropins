@@ -1,7 +1,7 @@
 <li class="dropdown">
   <% if unread_count.to_i > 0 %>
     <%= link_to '#', class: 'dropdown-toggle', data: { toggle: 'dropdown' } do %>
-      <span class="glyphicon glyphicon-bell new-notification"></span><span class="badge"><%= unread_count %></span>
+      <%= fa_icon 'bell', class: 'new-notification', text: raw("<span class='badge'>#{unread_count}</span>") %>
     <% end %>
     <ul class="dropdown-menu notification-menu">
       <% mailbox.inbox.unread(current_user).each do |m| %>
@@ -12,7 +12,7 @@
     </ul>
   <% else %>
     <%= link_to '#', class: 'dropdown-toggle', data: { toggle: 'dropdown' } do %>
-      <span class="glyphicon glyphicon-bell"></span>
+      <%= fa_icon 'bell-o' %>
     <% end %>
     <ul class="dropdown-menu notification-menu">
       <li><%= link_to 'There are no new notifications...', '#' %></li>

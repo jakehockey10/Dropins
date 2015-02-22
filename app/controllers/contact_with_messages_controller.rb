@@ -4,6 +4,7 @@ class ContactWithMessagesController < ApplicationController
   end
 
   def create
+    contact_with_message_params[:email] = current_user.email
     @contact_with_message = ContactWithMessage.new(contact_with_message_params)
     @contact_with_message.request = request
     if @contact_with_message.deliver

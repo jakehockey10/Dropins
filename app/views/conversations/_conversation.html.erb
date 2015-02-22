@@ -8,13 +8,10 @@
       <span class="pull-right">
         <% if conversation.is_completely_trashed?(current_user) %>
           <%= link_to untrash_conversation_path(conversation), method: :post do %>
-            <span class="icon-stack">
-              <i class="glyphicon glyphicon-trash"></i>
-              <i class="glyphicon glyphicon-ban-circle"></i>
-            </span>
+            <%= fa_stacked_icon 'trash-o', base: 'ban', base_options: { class: 'text-danger' } %>
           <% end %>
         <% else %>
-          <%= link_to raw('<span class="glyphicon glyphicon-trash"></span>'), trash_conversation_path(conversation), method: :post %>
+          <%= link_to fa_icon('trash-o'), trash_conversation_path(conversation), method: :post %>
         <% end %>
       </span>
     </h4>

@@ -1,5 +1,7 @@
 <%= bootstrap_form_for(current_user.attendances.find_by(dropin_id: @dropin.id),
     html: { method: :delete },
     remote: true) do |f| %>
-  <%= f.submit 'Leave Dropin', class: 'btn btn-default btn-lg', alert: 'Are you sure?', data: { disable_with: 'Loading...' } %>
+  <%= f.button 'Leave Dropin',
+               class: 'btn btn-default btn-lg',
+               data: { disable_with: "#{fa_icon 'spinner pulse'} Loading..." } %>
 <% end %>

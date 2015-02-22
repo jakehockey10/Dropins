@@ -1,9 +1,13 @@
 <%= bootstrap_form_for :conversation, url: :conversations do |f| %>
+
   <%= f.text_field :recipients, class: 'tokenize-recipients' %>
   <%= f.text_field :subject %>
   <%= f.text_area :body %>
-  <%= f.submit 'Send', class: 'btn btn-primary', data: { disable_with: 'Sending...' } %>
+  <%= f.button 'Send',
+               class: 'btn btn-primary',
+               data: { disable_with: "#{fa_icon 'spinner pulse'} Sending..." } %>
   <%= f.submit 'Reset', type: :reset, class: 'btn btn-danger' %>
+
 <% end %>
 
 <script type="text/javascript" charset="utf-8">

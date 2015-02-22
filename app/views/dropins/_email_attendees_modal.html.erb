@@ -21,7 +21,9 @@
         </div>
         <div class="modal-footer">
 
-          <%= f.submit 'Send', class: 'btn btn-sm btn-primary', data: { disable_with: 'Loading...' } %>
+          <%= f.button 'Send',
+                       class: 'btn btn-sm btn-primary',
+                       data: { disable_with: "#{fa_icon 'spinner pulse'} Sending..." } %>
           <%= button_tag 'Close',
                          class: 'btn btn-sm btn-default',
                          data: { dismiss: 'modal' } %>

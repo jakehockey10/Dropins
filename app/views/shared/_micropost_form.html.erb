@@ -5,5 +5,7 @@
   </div>
 
   <span class="countdown pull-right" style="margin-bottom: 10px;"></span>
-  <%= f.submit 'Post', class: 'btn btn-primary btn-block', data: { disable_with: 'Posting...' } %>
+  <%= f.button 'Post',
+               class: 'btn btn-primary btn-block',
+               data: { disable_with: "#{fa_icon 'spinner pulse'} Posting..." } %>
 <% end %>
