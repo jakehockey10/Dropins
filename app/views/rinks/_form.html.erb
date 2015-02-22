@@ -1,4 +1,4 @@
-<%= bootstrap_form_for rink do |f| %>
+<%= bootstrap_form_for @rink do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
 
   <%= f.text_field :address, hide_label: true, placeholder: 'Address' %>

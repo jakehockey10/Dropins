@@ -139,7 +139,7 @@ class User < ActiveRecord::Base
   end
 
   def name
-    "#{first_name} #{second_name}"
+    "#{first_name.titleize} #{second_name.titleize}"
   end
 
   # get the authorization url for this user.  This url will let the user

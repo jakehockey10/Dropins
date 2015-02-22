@@ -12,6 +12,7 @@ class RinksController < ApplicationController
   # GET /rinks.json
   def index
     @rinks = Rink.all
+    @rink = Rink.new
     @hash = Gmaps4rails.build_markers(@rinks) do |rink, marker|
       marker.lat rink.latitude
       marker.lng rink.longitude
@@ -33,13 +34,14 @@ class RinksController < ApplicationController
   # POST /rinks.json
   def create
     @rink = Rink.new(rink_params)
+    @rinks = Rink.all
 
     respond_to do |format|
       if @rink.save
         format.html { flash[:success] = 'Rink was successfully created.'; redirect_to rinks_url }
         format.json { render :show, status: :created, location: @rink }
       else
-        format.html { render :new }
+        format.html { render 'rinks/index' }
         format.json { render json: @rink.errors, status: :unprocessable_entity }
       end
     end

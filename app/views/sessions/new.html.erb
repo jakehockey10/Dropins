@@ -3,7 +3,7 @@
 <h1 class="page-header">Sign in</h1>
 
 <div class="row">
-  <div class="col-lg-offset-4 col-sm-6 col-md-4">
+  <div class="col-xs-offset-2 col-sm-offset-3 col-md-offset-4 col-xs-8 col-sm-6 col-md-4">
     <%= bootstrap_form_for(:session, url: sessions_path) do |f| %>
 
       <%= f.text_field :email, hide_label: true, placeholder: 'email' %>
