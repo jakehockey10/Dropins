@@ -16,14 +16,14 @@
   <% if current_user.admin? %>
     <aside class="col-sm-3 col-md-3" style="margin: 20px;">
       <section>
-        <h1>Rinks in the system:</h1>
-        <ul class="media-list" style="margin-top: 20px;">
-          <%= render @rinks %>
-        </ul>
-      </section>
-      <section>
         <h1>Add a rink:</h1>
         <%= render 'rinks/form', rink: Rink.new %>
+      </section>
+      <section style="overflow: visible">
+        <h1>Rinks in the system:</h1>
+        <ul class="media-list" style="margin-top: 20px">
+          <%= render @rinks %>
+        </ul>
       </section>
     </aside>
     <div class="col-sm-9 col-md-9 thumbnail" style="margin-top: 50px; width: 810px;">
