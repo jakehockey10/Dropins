@@ -1,6 +1,6 @@
 class DropinsController < ApplicationController
   before_action :signed_in_user
-  before_action :set_dropin, only: [:show, :edit, :update, :destroy]
+  before_action :set_dropin, only: [:show, :edit, :update, :destroy, :email_attendees]
   before_action :admin_user, only: [:edit, :update, :new, :create, :destroy]
   before_action :set_contacts, only: [:show]
 
@@ -89,6 +89,18 @@ class DropinsController < ApplicationController
     current_user.join_dropin!(@dropin)
     attendance = Attendance.where(user_id: current_user, dropin_id: @dropin.id).first
     attendance.update(paid: true) if attendance
+    redirect_to @dropin
+  end
+
+  def email_attendees
+    users = @dropin.skaters.pluck(:email)
+    @user = current_user
+    DropinAttendeeMailer.email_attendees(@user.id,
+                                         users,
+                                         @dropin.id,
+                                         params[:subject],
+                                         params[:message]).deliver
+    flash[:success] = 'Emails sent!'
     redirect_to @dropin
   end
 
