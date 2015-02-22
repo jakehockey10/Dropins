@@ -1,0 +1,16 @@
+<h1><%= @owner.name %>, owner of Dropin <%= @dropin.id %>, has a message to all attendees:</h1>
+
+<p>
+  <%= @message %>
+</p>
+
+<p>
+  Do you have an account with the website Dropins?
+  If not, you should totally sign up and let <%= @owner.name %>
+  know whether you are coming to the dropin or not.  Here is
+  the <%= link_to 'link to sign up', @signup_url %>
+</p>
+
+<p>
+  Already have an account?  Here's the <%= link_to 'link to the dropin', @url %>!
+</p>

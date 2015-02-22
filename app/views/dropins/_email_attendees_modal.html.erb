@@ -1,0 +1,32 @@
+<%= bootstrap_form_tag(url: email_attendees_dropin_url(@dropin.id), method: 'get') do |f| %>
+  <div class="modal fade" id="email_attendees_modal" tabindex="-1" role="dialog" aria-labelledby="Invite Modal" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <%= button_tag raw('<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>'),
+                         class: 'close',
+                         data: { dismiss: 'modal' } %>
+          <h4 class="modal-title" id="email_attendees_modal_label">Email Attendees</h4>
+        </div>
+
+        <div class="modal-body">
+
+          <div class="row">
+            <div class="col-md-offset-2 col-md-8">
+              <%= f.text_field :subject, placeholder: 'Subject', hide_label: true %>
+              <%= f.text_area :message, placeholder: 'Message', hide_label: true, rows: 5 %>
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+
+          <%= f.submit 'Send', class: 'btn btn-sm btn-primary', data: { disable_with: 'Loading...' } %>
+          <%= button_tag 'Close',
+                         class: 'btn btn-sm btn-default',
+                         data: { dismiss: 'modal' } %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
