@@ -14,7 +14,7 @@
   <%= render 'layouts/header' %>
   <div class="container" id="main">
     <% flash.each do |key, value| %>
-      <%= content_tag(:div, value, class: "alert alert-#{key} alert-dismissable") do %>
+      <%= content_tag(:div, value, class: "alert alert-#{key} alert-dismissable card-alert") do %>
         <%= value %>
         <button type="button" class="close">&times</button>
       <% end %>

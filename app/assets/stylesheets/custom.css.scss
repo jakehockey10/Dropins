@@ -64,6 +64,20 @@ textarea {
   background-color: rgb(236, 236, 236) !important;
 }
 
+.card-alert {
+  -webkit-box-shadow: rgba(0, 0, 0, 0.156863) 0px 3px 10px 0px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.156863) 0px 3px 10px 0px;
+  box-shadow: rgba(0, 0, 0, 0.156863) 0px 3px 10px 0px;
+  -webkit-transition: box-shadow 0.5s;
+  transition: box-shadow 0.5s;
+  &:hover {
+    //    -webkit-box-shadow: rgba(0, 0, 0, 0.156863) 0px 3px 10px 0px;
+    //    box-shadow: rgba(0, 0, 0, 0.156863) 0px 3px 10px 0px;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.188235) 0px 10px 30px 0px;
+    box-shadow: rgba(0, 0, 0, 0.188235) 0px 10px 30px 0px;
+  }
+}
+
 .card, .fc-view-container {
   -webkit-background-clip: padding-box;
   -webkit-font-smoothing: antialiased;
