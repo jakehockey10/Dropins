@@ -4,9 +4,13 @@
   <aside class="col-sm-4 col-md-4">
     <section>
       <h1>
-        <%= avatar_for @user %>
-        <%= @user.name %>
+        <%= avatar_for(@user,
+                       { size: :medium,
+                         border: true,
+                         style: 'display: block; margin-left: auto; margin-right: auto;' }) %>
       </h1>
+      <br/>
+      <h1 class="center"><%= @user.name %></h1>
     </section>
     <section>
       <%= render 'shared/stats' %>

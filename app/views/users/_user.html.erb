@@ -6,18 +6,18 @@
   <td>
     <%= user.second_name %>
   </td>
-  <td class="text-center">
+  <td class="text-center" style="vertical-align: middle">
     <%= user.followed_users.count %>
   </td>
-  <td class="text-center">
+  <td class="text-center" style="vertical-align: middle">
     <%= user.followers.count %>
   </td>
-  <td class="text-center">
+  <td class="text-center" style="vertical-align: middle">
     <% if user.active? %>
-      <span class="glyphicon glyphicon-ok"></span>
+      <%= fa_icon 'check 2x' %>
     <% end %>
   </td>
-  <td class="text-center">
+  <td class="text-center" style="vertical-align: middle">
     <!--add !current_user.nil? && to the predicate below so that
       attempting to reach the followers/following pages of a
       particular user while not signed in does not cause an error.

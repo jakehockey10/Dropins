@@ -3,17 +3,17 @@
     <%= avatar_for skater, size: :small %>
     <%= link_to skater.name, skater %>
   </td>
-  <td class="text-center">
+  <td class="text-center" style="vertical-align: middle">
     <%= skater.followers.count %>
   </td>
-  <td class="text-center">
+  <td class="text-center" style="vertical-align: middle">
     <% if skater.active? %>
-      <span class="glyphicon glyphicon-ok"></span>
+      <%= fa_icon 'check 2x' %>
     <% end %>
   </td>
-  <td class="text-center">
+  <td class="text-center" style="vertical-align: middle">
     <% if Attendance.where(user_id: skater.id, dropin_id: @dropin.id).first.paid %>
-      <span class="glyphicon glyphicon-ok"></span>
+      <%= fa_icon 'check 2x' %>
     <% end %>
   </td>
   <!--add !current_user.nil? && to the predicate below so that
@@ -25,7 +25,10 @@
     <td class="text-center">
       <%= bootstrap_form_for skater.attendances.find_by(dropin_id: @dropin.id), html: { method: :delete } do |f| %>
         <%= f.hidden_field :user_id, value: skater.id %>
-        <%= f.submit 'Remove', class: 'btn btn-danger btn-sm', alert: 'Are you sure?', data: { disable_with: 'Removing...' } %>
+        <%= f.button 'Remove',
+                     class: 'btn btn-danger btn-sm',
+                     alert: 'Are you sure?',
+                     data: { disable_with: "#{fa_icon 'spinner pulse'} Removing..." } %>
       <% end %>
     </td>
   <% end %>

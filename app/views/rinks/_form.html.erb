@@ -6,5 +6,7 @@
   <p class="small">
     You can search for rinks with the search field in the map.  When you click on a rink, it will automatically populate the above fields for you.
   </p>
-  <%= f.submit 'Submit', data: { disable_with: 'Loading...' } %>
+  <%= f.button 'Submit',
+               class: 'btn btn-default',
+               data: { disable_with: "#{fa_icon 'spinner pulse'} Loading..." } %>
 <% end %>

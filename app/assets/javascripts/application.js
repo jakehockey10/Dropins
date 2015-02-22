@@ -67,4 +67,10 @@ function initAlertsAndHelpBoxes() {
   //      control.popover('show');
   //  });
   //});
+
+  // Temp Fix: Remove after Bootstrap does the right thing and removes touchstart (see issue https://github.com/twitter/bootstrap/issues/6488)
+  $('a.dropdown-toggle, .dropdown-menu, .dropdown-menu a, .dropdown-menu .dropdown-submenu a').on('touchstart.dropdown.data-api', function (e) {
+    e.stopPropagation();
+  });
+  $(".selectpicker").selectpicker();
 }

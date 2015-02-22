@@ -1,23 +1,12 @@
 <div class="row">
-  <aside class="col-sm-4 col-md-4">
+  <aside class="col-sm-4 col-md-4" style="overflow: visible;">
     <section>
       <%= render 'shared/user_info' %>
     </section>
     <section>
       <%= render 'shared/stats' %>
     </section>
-    <%# if !current_user.has_valid_wepay_access_token? || !current_user.has_wepay_access_token? %>
-      <!--<section>-->
-        <!--<p>-->
-          <!--<strong>Please create a WePay account to manage your money:</strong>-->
-        <!--</p>-->
-        <!--<p>-->
-          <!--<%# redirect_uri = url_for(controller: 'users', action: 'oauth', user_id: current_user.id, host: request.host_with_port) %>-->
-          <!--<%# link_to 'Click here to create your account', current_user.wepay_authorization_url(redirect_uri), class: 'btn btn-primary' %>-->
-        <!--</p>-->
-      <!--</section>-->
-    <%# end %>
-    <section>
+    <section style="overflow: visible;">
       <%= render 'shared/micropost_form' %>
     </section>
   </aside>
@@ -27,22 +16,22 @@
     <ul class="nav nav-pills nav-justified">
       <li class="active">
         <a href="#dropins" data-toggle="tab">
-          <span class="glyphicon glyphicon-tag"></span>&nbsp;&nbsp;&nbsp;Dropins
+          <%= fa_icon 'tag 2x', text: 'Dropins', class: 'vcenter' %>
         </a>
       </li>
       <li>
         <a href="#calendar" data-toggle="tab">
-          <span class="glyphicon glyphicon-calendar"></span>&nbsp;&nbsp;&nbsp;Calendar
+          <%= fa_icon 'calendar 2x', text: 'Calendar', class: 'vcenter' %>
         </a>
       </li>
       <li>
         <a href="#rinks" data-toggle="tab">
-          <span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;Rinks
+          <%= fa_stacked_icon 'map-marker', base: 'square-o', icon_options: { class: 'text-danger' }, text: 'Rinks', class: 'fa-lg vcenter' %>
         </a>
       </li>
       <li>
         <a href="#microposts" data-toggle="tab">
-          <span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;&nbsp;Microposts
+          <%= fa_icon 'comment 2x', text: 'Microposts', class: 'vcenter' %>
         </a>
       </li>
     </ul>

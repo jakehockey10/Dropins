@@ -27,17 +27,17 @@
     <ul class="nav nav-pills nav-justified">
       <li class="active">
         <%= link_to '#inbox', data: { toggle: 'tab' } do %>
-          <span class="glyphicon glyphicon-inbox"></span>&nbsp;&nbsp;&nbsp;Inbox
+          <%= fa_icon 'inbox 2x', text: 'Inbox' %>
         <% end %>
       </li>
       <li>
         <%= link_to '#sentbox', data: { toggle: 'tab' } do %>
-          <span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;&nbsp;Sentbox
+          <%= fa_icon 'paper-plane 2x', text: 'Sentbox' %>
         <% end %>
       </li>
       <li>
         <%= link_to '#trash', data: { toggle: 'tab' } do %>
-          <span class="glyphicon glyphicon-trash"></span>&nbsp;&nbsp;&nbsp;Trash
+          <%= fa_icon 'trash 2x', text: 'Trash' %>
         <% end %>
       </li>
     </ul>

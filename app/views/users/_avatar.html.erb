@@ -1,6 +1,10 @@
 <div id="avatar" class="center">
   <%= avatar_for user, border: true %>
-  <%= link_to raw('<span class="delete-avatar glyphicon glyphicon-remove-circle pull-right"></span>'), delete_avatar_user_path(user.id), method: :delete, data: { confirm: 'Are you sure?' }, remote: true %>
+  <%= link_to fa_icon('times-circle-o'),
+              delete_avatar_user_path(user.id),
+              method: :delete,
+              data: { confirm: 'Are you sure?' },
+              remote: true, class: 'delete-avatar pull-right' %>
   <br>
   <% unless user.avatar.file? %>
       <a href="http://gravatar.com/emails" target="_blank">Change Gravatar</a> |

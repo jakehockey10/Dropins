@@ -3,7 +3,10 @@
       <%= render 'shared/error_messages', object: f.object %>
 
       <%= f.file_field :avatar, hide_label: true, id: 'avatar_file' %>
-      <%= f.submit 'Upload avatar', data: { disable_with: 'Loading...' }, disabled: true, id: 'avatar_submit_button' %>
+    <%= f.button 'Upload avatar',
+                 data: { disable_with: "#{fa_icon 'spinner pulse'} Loading..." },
+                 disabled: true,
+                 id: 'avatar_submit_button' %>
   <% end %>
   <% unless user.avatar.nil? %>
     <%= link_to 'Nevermind...', show_avatar_user_path(user), remote: true, id: 'avatar_link' %>

@@ -39,10 +39,9 @@ gem 'paperclip'
 gem 'aws-s3'
 gem 'aws-sdk'
 gem 'mail'
-
 gem 'mailboxer'
-
 gem 'bootstrap_tokenfield_rails'
+gem 'font-awesome-rails'
 
 group :development, :test do
   gem 'better_errors'

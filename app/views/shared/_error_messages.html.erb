@@ -1,7 +1,7 @@
 <% if object.errors.any? %>
-  <div id="error_explanation">
-    <div class="alert alert-danger">
-      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  <div id="error_explanation" style="overflow: visible;">
+    <div class="alert alert-danger card-alert">
+      <%= fa_icon 'exclamation-triangle 2x', class: 'text-danger' %>
       <span class="sr-only">Error:</span>
       The form contains <%= pluralize(object.errors.count, 'error') %>
     </div>

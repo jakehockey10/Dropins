@@ -3,9 +3,9 @@
     <div class="col-md-6">Skaters (<%= @dropin.skaters.count %>)</div>
     <div class="col-md-6">
       <span class="pull-right">
-        <%= button_tag 'Invite Skaters',
+        <%= button_tag fa_icon('send', text: 'Invite Skaters'),
                        class: 'invite-skaters btn btn-sm btn-default' if @dropin.is_not_full && current_user.id == @dropin.user_id %>
-        <%= button_tag 'Email Attendees',
+        <%= button_tag fa_icon('envelope-o', text: 'Email Attendees'),
                        class: 'email-attendees btn btn-sm btn-default' if @dropin.is_not_full && current_user.id == @dropin.user_id %>
       </span>
     </div>

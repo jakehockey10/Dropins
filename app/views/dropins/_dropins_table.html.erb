@@ -18,19 +18,19 @@
     <tr id="<%= dropin.id %>">
       <td class="center">
         <div class="btn-group">
-          <%= link_to raw('<span class="glyphicon glyphicon-eye-open"></span>'),
+          <%= link_to fa_icon('eye'),
                       dropin,
                       class: 'btn btn-sm btn-default view-dropin',
                       data: { toggle: 'tooltip',
                               placement: current_user.admin? ? 'left' : 'right',
                               title: 'View/Register for dropin' } %>
-          <%= link_to raw('<span class="glyphicon glyphicon-edit"></span>'),
+          <%= link_to fa_icon('pencil-square-o'),
                       edit_dropin_path(dropin),
                       class: 'btn btn-sm btn-default edit-dropin',
                       data: { toggle: 'tooltip',
                               placement: 'top',
                               title: 'Edit dropin'} if current_user.admin? %>
-          <%= link_to raw('<span class="glyphicon glyphicon-remove"></span>'),
+          <%= link_to fa_icon('times'),
                       dropin,
                       method: :delete,
                       class: 'btn btn-sm btn-danger delete-dropin',

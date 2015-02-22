@@ -27,7 +27,7 @@
     </p>
   </section>
   <section>
-    <%= link_to 'Edit', edit_dropin_path(@dropin), class: 'btn btn-lg btn-default' if current_user.admin? && current_user.id == @dropin.user.id %>
-    <%= link_to 'Back', dropins_path, class: 'btn btn-lg btn-default' %>
+    <%= link_to fa_icon('pencil-square-o', text: 'Edit'), edit_dropin_path(@dropin), class: 'btn btn-lg btn-default' if current_user.admin? && current_user.id == @dropin.user.id %>
+    <%= link_to fa_icon('arrow-left', text: 'Back'), dropins_path, class: 'btn btn-lg btn-default' %>
   </section>
 </aside>
