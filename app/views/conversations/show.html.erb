@@ -6,13 +6,13 @@
 
 <div class="row">
   <div class="col-md-8">
-    <div id="conversation" class="conversation-container">
-      <%= render partial: 'messages/message', collection: @receipts, as: :receipt %>
+    <div class="conversation-shadow-top"></div>
+      <div id="conversation" class="conversation-container">
+        <%= render partial: 'messages/message', collection: @receipts, as: :receipt %>
+      </div>
+    <div class="conversation-shadow-bottom"></div>
 
-    </div>
-    <div style="padding: 15px;">
       <%= render 'messages/form', conversation: conversation %>
-    </div>
   </div>
   <aside class="col-md-4">
     <section>
