@@ -23,6 +23,7 @@ class User < ActiveRecord::Base
                     storage: :s3,
                     url: ':s3_domain_url',
                     bucket: Proc.new { |a| a.instance.s3_bucket },
+                    s3_protocal: 'https',
                     s3_credentials: { access_key_id: ENV['AWS_ACCESS_KEY_ID'], secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'] },
                     styles: { large: '500x500', medium: '250x250', thumb: '100x100', small: '60' }
 
