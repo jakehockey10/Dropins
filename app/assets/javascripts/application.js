@@ -4,6 +4,7 @@
 //= require autocomplete-rails
 //= require turbolinks
 //= require bootstrap-sprockets
+//= require bootstrap
 //= require moment
 //= require bootstrap-datetimepicker
 //= require bootstrap-select
@@ -24,21 +25,22 @@ $(document).on('ready page:change', function () {
 
 $(document).on('ready page:update', function () {
   $('#main').fadeIn();
-  initAlertsAndHelpBoxes();
+  init();
 });
 
 $(document).on('ready page:load', function () {
-  initAlertsAndHelpBoxes();
+  init();
 
   $('.toggle-menu').jPushMenu({closeOnClickLink: false});
   $('.dropdown-toggle').dropdown();
   $('[data-toggle="tooltip"]').tooltip();
 });
 
-function initAlertsAndHelpBoxes() {
+function init() {
   $('.alert button.close').click(function () {
     $(this).parent().fadeOut('fast');
 //    $(this).parent().animate({ height: 0, opacity: 0 }, 'fast');
+    $(".selectpicker").selectpicker();
   });
 
   //var count = 0;
@@ -72,5 +74,5 @@ function initAlertsAndHelpBoxes() {
   $('a.dropdown-toggle, .dropdown-menu, .dropdown-menu a, .dropdown-menu .dropdown-submenu a').on('touchstart.dropdown.data-api', function (e) {
     e.stopPropagation();
   });
-  $(".selectpicker").selectpicker();
+
 }

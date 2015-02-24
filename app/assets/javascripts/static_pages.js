@@ -1,7 +1,7 @@
 $(document).ready(function () {
-    $(".jcarousel").jcarousel({
-        animation: 'slow'
-    });
+    //$(".jcarousel").jcarousel({
+    //    animation: 'slow'
+    //});
 //    $('#myCarousel').carousel({
 //        interval: 4000
 //    });

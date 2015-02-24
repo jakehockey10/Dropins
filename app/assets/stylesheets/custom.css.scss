@@ -322,36 +322,46 @@ nav {
   .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus{
     background-color: rgba(18, 22, 24, 0.36);
   }
+
   /* General styles for all menus */
   .cbp-spmenu {
-//    background: #f8f8f8;
     position: fixed;
-    padding: 0;
     margin: 0 !important;
     overflow-x: hidden;
     overflow-y: visible;
     display: block;
-    background-color: #263238 !important;
+    background: #263238 !important;
     border-color: #263238
   }
+
   .cbp-spmenu h3 {
-//    color: #afdefa;
-//    font-size: 1.9em;
     padding: 20px;
     margin: 0;
     font-weight: 300;
-//    background: #0d77b6;
   }
+
   .cbp-spmenu a {
     display: block;
   }
+
+  .cbp-spmenu a:hover {
+    background: #258ecd;
+  }
+
+  .cbp-spmenu a:active {
+    background: #afdefa;
+    color: #47a3da;
+  }
+
   /* Orientation-dependent styles for the content of the menu */
   .cbp-spmenu-vertical {
-    width: 260px;
+    width: 240px;
     height: 100%;
     top: 0;
     z-index: 1000;
+    overflow-y: scroll;
   }
+
   .cbp-spmenu-horizontal {
     width: 100%;
     height: 150px;
@@ -359,60 +369,111 @@ nav {
     z-index: 1000;
     overflow: hidden;
   }
+
   .cbp-spmenu-horizontal h3 {
     height: 100%;
     width: 20%;
     float: left;
   }
+
   .cbp-spmenu-horizontal a {
     float: left;
     width: 20%;
     padding: 0.8em;
-//    border-left: 1px solid #258ecd;
   }
+
   /* Vertical menu that slides from the left or right */
   .cbp-spmenu-left {
-    left: -260px;
+    left: -240px;
   }
+
   .cbp-spmenu-right {
-    right: -260px;
+    right: -240px;
   }
-  .cbp-spmenu-left.cbp-spmenu-open {
+
+  .cbp-spmenu-left.menu-open {
     left: 0px;
   }
-  .cbp-spmenu-right.cb-spmenu-open {
+
+  .cbp-spmenu-right.menu-open {
     right: 0px;
   }
+
   /* Horizontal menu that slides from the top or bottom */
+
   .cbp-spmenu-top {
     top: -150px;
   }
+
   .cbp-spmenu-bottom {
     bottom: -150px;
   }
-  .cbp-spmenu-top.cbp-spmenu-open {
-    top: 0px;
+
+  .cbp-spmenu-top.menu-open {
+    top: 0;
   }
-  .cbp-spmenu-bottom.cbp-spmenu-open {
-    bottom: 0px;
+
+  .cbp-spmenu-bottom.menu-open {
+    bottom: 0;
   }
+
   /* Push classes applied to the body */
-  .cbp-spmenu-push {
+  .push-body {
     overflow-x: hidden;
     position: relative;
     left: 0;
   }
-  .cbp-spmenu-push-toright {
-    left: 260px;
+
+  .push-body-toright {
+    left: 240px;
   }
-  .cbp-spmenu-push-toleft {
-    left: -260px;
+
+  .push-body-toleft {
+    left: -240px;
   }
+
   /* Transitions */
-  .cbp-spmenu, .cbp-spmenu-push {
+  .cbp-spmenu,
+  .push-body {
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
     transition: all 0.3s ease;
+  }
+
+  /* Example media queries */
+  @media screen and (max-width: 55.1875em) {
+    .cbp-spmenu-horizontal {
+      font-size: 75%;
+      height: 110px;
+    }
+
+    .cbp-spmenu-top {
+      top: -110px;
+    }
+
+    .cbp-spmenu-bottom {
+      bottom: -110px;
+    }
+  }
+
+  @media screen and (max-height: 26.375em) {
+    .cbp-spmenu-vertical {
+      font-size: 90%;
+      width: 190px;
+    }
+
+    .cbp-spmenu-left,
+    .push-body-toleft {
+      left: -190px;
+    }
+
+    .cbp-spmenu-right {
+      right: -190px;
+    }
+
+    .push-body-toright {
+      left: 190px;
+    }
   }
 
   .collapse {
@@ -798,8 +859,26 @@ aside {
 ul.ui-autocomplete.ui-menu {
   z-index: 999999;
   background-color: #ffffff;
+  max-width: 100px;
 }
 
 li.ui-menu-item {
 }
 
+.animate-caret {
+  .caret-down-animate {
+    opacity: 0.0;
+    filter: alpha(opacity=0);
+  }
+}
+
+.animate-caret:hover {
+  .caret-down-animate {
+    opacity: 1.0;
+    filter:alpha(opacity=100);
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+  }
+}
