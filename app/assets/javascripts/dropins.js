@@ -1,6 +1,5 @@
 $(document).on("ready page:load", function() {
   $("#datetimepicker1").datetimepicker({
-    useSeconds: false,
     sideBySide: true
   });
   $(".view-dropin").tooltip({
