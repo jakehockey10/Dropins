@@ -16,23 +16,27 @@
   </div>
   <aside class="col-md-4">
     <section>
-      <div class="panel panel-default">
-        <div class="panel-heading">Participants</div>
-        <div class="list-group">
-          <% conversation.participants.each do |participant| %>
-            <%= link_to participant, class: 'list-group-item' do %>
-              <h4 class="list-group-item-heading"><%= avatar_for(participant) + "  #{participant.name}" %></h4>
-              <p class="list-group-item-text">
-                <% last = conversation.receipts_for(participant).order('created_at').select{ |p| p.message.sender == participant }.last %>
-                <% unless last.nil? %>
-                  <% last_message = last.nil? ? last : last.message.created_at %>
-                  last message sent <%= time_ago_in_words last_message %> ago
-                <% end %>
-              </p>
-            <% end %>
-          <% end %>
-        </div>
-      </div>
+      <!--<div class="panel panel-default">-->
+        <!--<div class="panel-heading">Participants</div>-->
+        <!--<div class="list-group">-->
+          <!--<% conversation.participants.each do |participant| %>-->
+            <!--<%= link_to participant, class: 'list-group-item' do %>-->
+              <!--<h4 class="list-group-item-heading"><%= avatar_for(participant) + "  #{participant.name}" %></h4>-->
+              <!--<p class="list-group-item-text">-->
+                <!--<% last = conversation.receipts_for(participant).order('created_at').select{ |p| p.message.sender == participant }.last %>-->
+                <!--<% unless last.nil? %>-->
+                  <!--<% last_message = last.nil? ? last : last.message.created_at %>-->
+                  <!--last message sent <%= time_ago_in_words last_message %> ago-->
+                <!--<% end %>-->
+              <!--</p>-->
+            <!--<% end %>-->
+          <!--<% end %>-->
+        <!--</div>-->
+      <!--</div>-->
+      <h1>Participants</h1>
+      <% conversation.participants.each do |participant| %>
+        <%= render 'users/user_card', user: participant %>
+      <% end %>
     </section>
   </aside>
 
