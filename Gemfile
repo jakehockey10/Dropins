@@ -40,7 +40,7 @@ gem 'paperclip'
 gem 'aws-s3'
 gem 'aws-sdk', '< 2.0'
 gem 'mail'
-gem 'mailboxer'
+gem 'mailboxer', github: 'lacco/mailboxer' #Use this branch until Foreigner is no longer used in Mailboxer.  Incompatible with Rails 4.2.  See https://bithub.com/mailboxer/mailboxer/issues/316
 gem 'bootstrap_tokenfield_rails'
 gem 'font-awesome-rails'
 

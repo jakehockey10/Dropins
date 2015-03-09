@@ -6,6 +6,14 @@ GIT
       json
       rack
 
+GIT
+  remote: git://github.com/lacco/mailboxer.git
+  revision: d436329f771d1607a6835f0aeb8b1120a3562a47
+  specs:
+    mailboxer (0.12.5)
+      carrierwave (>= 0.5.8)
+      rails (>= 3.2.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -125,8 +133,6 @@ GEM
       thor (~> 0.14)
     font-awesome-rails (4.3.0.0)
       railties (>= 3.2, < 5.0)
-    foreigner (1.7.2)
-      activerecord (>= 3.0.0)
     formatador (0.2.5)
     fullcalendar-rails (2.2.5.1)
       jquery-rails (>= 3.1.1, < 5.0.0)
@@ -175,10 +181,6 @@ GEM
     mail_form (1.5.0)
       actionmailer (>= 3.2, < 5)
       activemodel (>= 3.2, < 5)
-    mailboxer (0.12.5)
-      carrierwave (>= 0.5.8)
-      foreigner (>= 0.9.1)
-      rails (>= 3.2.0)
     meta_request (0.3.4)
       callsite (~> 0.0, >= 0.0.11)
       rack-contrib (~> 1.1)
@@ -357,7 +359,7 @@ DEPENDENCIES
   jquery-ui-rails
   mail
   mail_form
-  mailboxer
+  mailboxer!
   meta_request
   momentjs-rails
   omnicontacts (~> 0.3.5)!
