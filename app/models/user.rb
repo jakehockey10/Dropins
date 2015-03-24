@@ -59,8 +59,18 @@ class User < ActiveRecord::Base
   validates_attachment_content_type :avatar, content_type: /\Aimage/
   validates_attachment_file_name :avatar, matches: [/png\Z/, /jpe?g\Z/]
 
-  def active?
-    STATES.key(self.state) === :active
+  state_machine :state, initial: :inactive do
+    STATES.each do |name, value|
+      state name, value: value
+    end
+
+    event :activate do
+      transition all => :active
+    end
+
+    event :deactivate do
+      transition all => :inactive
+    end
   end
 
   def User.new_token
