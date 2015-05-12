@@ -122,13 +122,6 @@ ActiveRecord::Schema.define(version: 20150309032829) do
   add_index "relationships", ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true, using: :btree
   add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id", using: :btree
 
-  create_table "rink_photos", force: :cascade do |t|
-    t.string   "url"
-    t.integer  "rink_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "rinks", force: :cascade do |t|
     t.float    "latitude"
     t.float    "longitude"
