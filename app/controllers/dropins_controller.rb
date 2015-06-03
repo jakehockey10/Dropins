@@ -1,5 +1,5 @@
 class DropinsController < ApplicationController
-  before_action :signed_in_user
+  before_action :logged_in_user
   before_action :set_dropin, only: [:show, :edit, :update, :destroy, :email_attendees]
   before_action :admin_user, only: [:edit, :update, :new, :create, :destroy]
   before_action :set_contacts, only: [:show]

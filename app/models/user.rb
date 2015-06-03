@@ -1,24 +1,16 @@
 class User < ActiveRecord::Base
   acts_as_messageable
 
-  has_many :microposts,
-           dependent: :destroy
-  has_many :relationships,
-           foreign_key: 'follower_id',
-           dependent: :destroy
-  has_many :reverse_relationships,
-           foreign_key: 'followed_id',
-           class_name: 'Relationship',
-           dependent: :destroy
-  has_many :followers,
-           through: :reverse_relationships
-  has_many :followed_users,
-           through: :relationships,
-           source: :followed
+  has_many :microposts, dependent: :destroy
+  has_many :active_relationships, class_name: 'Relationship', foreign_key: 'follower_id', dependent: :destroy
+  has_many :passive_relationships, class_name: 'Relationship', foreign_key: 'followed_id', dependent: :destroy
+  has_many :following, through: :active_relationships, source: :followed
+  has_many :followers, through: :passive_relationships, source: :follower
+
   has_many :attendances
   has_many :dropins, through: :attendances
   has_many :gmail_contacts
-  has_attached_file :avatar, 
+  has_attached_file :avatar,
                     path: ':attachment/:id/:style.:extension',
                     storage: :s3,
                     url: ':s3_domain_url',
@@ -27,79 +19,103 @@ class User < ActiveRecord::Base
                     s3_credentials: { access_key_id: ENV['AWS_ACCESS_KEY_ID'], secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'] },
                     styles: { large: '500x500', medium: '250x250', thumb: '100x100', small: '60' }
 
-  STATES = {
-      inactive: 0,
-      active: 1
-  }
+  # From http://stackoverflow.com/questions/20533925/why-is-attr-accessor-necessary-in-rails-4:
+  # About attr_accessor:
+  # "If you declare an `attr_accessor` then you can use it as a `virtual attribute`,
+  # which is basically an attribute on the model that isn't persisted to the database."
+  attr_accessor :remember_token, :activation_token, :reset_token
+  before_save   :downcase_email
+  before_create :create_activation_digest
 
-  before_save { email.downcase! || email }
-  before_create :create_remember_token
-  before_create :create_reset_token
-  validates :first_name,
-            presence: true,
-            length: { maximum: 20 }
-  validates :second_name,
-            presence: true,
-            length: { maximum: 30 }
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
-  validates :email,
-            presence: true,
-            format: { with: VALID_EMAIL_REGEX },
-            uniqueness: { case_sensitive: false }
+  validates :first_name, presence: true, length: { maximum: 20 }
+  validates :second_name, presence: true, length: { maximum: 30 }
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
+  validates :email, presence: true, length: { maximum: 255 }, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
+
+  # has_secure_password enforces presence validations upon object creation.
+  validates :password, length: { minimum: 6 }, allow_blank: true
   has_secure_password
-  validates :password,
-            length: { minimum: 6 },
-            #if: :validate_password?
-            if: :password_required?
-  validates :password_confirmation,
-            presence: true,
-            #if: :validate_password?
-            if: :password_required?
+
   validates_attachment :avatar, content_type: { content_type: %w(image/jpeg image/gif image/png) }
   validates_attachment_content_type :avatar, content_type: /\Aimage/
   validates_attachment_file_name :avatar, matches: [/png\Z/, /jpe?g\Z/]
 
-  state_machine :state, initial: :inactive do
-    STATES.each do |name, value|
-      state name, value: value
+  class << self
+    # Returns the hash digest of the given string.
+    def digest(string)
+      cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
+      BCrypt::Password.create(string, cost: cost)
     end
 
-    event :activate do
-      transition all => :active
-    end
-
-    event :deactivate do
-      transition all => :inactive
+    # Returns a random token.
+    def new_token
+      SecureRandom.urlsafe_base64
     end
   end
 
-  def User.new_token
-    SecureRandom.urlsafe_base64
+  # Remembers a user in the database for use in persistent sessions.
+  def remember
+    self.remember_token = User.new_token
+    update_attribute(:remember_digest, User.digest(remember_token))
   end
 
-  def User.encrypt(token)
-    Digest::SHA1.hexdigest(token.to_s)
+  # Returns true i the given token matches the digest
+  def authenticated?(attribute, token)
+    digest = send("#{attribute}_digest")
+    return false if digest.nil?
+    BCrypt::Password.new(digest).is_password?(token)
   end
 
+  # Forgets a user.
+  def forget
+    update_attribute(:remember_digest, nil)
+  end
+
+  # Activates an account.
+  def activate
+    update_columns(activated: true, activated_at: Time.zone.now)
+  end
+
+  # Sends activation email.
+  def send_activation_email
+    UserMailer.account_activation(self).deliver_now
+  end
+
+  # Sets the password reset attributes.
+  def create_reset_digest
+    self.reset_token = User.new_token
+    update_columns(reset_digest: User.digest(reset_token), reset_sent_at: Time.zone.now)
+  end
+
+  # Sends password reset email.
+  def send_password_reset_email
+    UserMailer.password_reset(self).deliver_now
+  end
+
+  # Returns true if a password reset has expired.
+  def password_reset_expired?
+    reset_sent_at < 2.hours.ago
+  end
+
+  # Defines a proto-feed.
   def feed
-    Micropost.from_users_followed_by(self)
+    following_ids = 'SELECT followed_id FROM relationships WHERE follower_id = :user_id'
+    Micropost.where("user_id IN (#{following_ids}) OR user_id = :user_id", user_id: id)
   end
 
+  # Follows a user.
+  def follow(other_user)
+    active_relationships.create(followed_id: other_user.id)
+  end
+
+  # Unfollows a user.
+  def unfollow(other_user)
+    active_relationships.find_by(followed_id: other_user.id).destroy
+  end
+
+  # Returns true if the current user is following the other user.
   def following?(other_user)
-    relationships.find_by(followed_id: other_user.id)
-  end
-
-  def follow!(other_user)
-    relationships.create!(followed_id: other_user.id)
-    if create_gmail_contact?(self, id, other_user.id)
-      create_gmail_contact(other_user.name,
-                           other_user.email,
-                           self.id,
-                           other_user.id,
-                           other_user.gravatar_url)
-    elsif create_gmail_contact?(other_user, other_user.id, id)
-      create_gmail_contact(name, email, other_user.id, id, gravatar_url)
-    end
+    following.include?(other_user)
   end
 
   def create_gmail_contact?(user, followed_id, follower_id)
@@ -112,11 +128,6 @@ class User < ActiveRecord::Base
                          user_id: user_id,
                          other_user_id: other_user_id,
                          profile_picture: profile_picture)
-  end
-
-  def unfollow!(other_user)
-    relationships.find_by(followed_id: other_user.id).destroy
-    GmailContact.destroy_all(user_id: self.id, other_user_id: other_user.id)
   end
 
   def attending_dropin?(dropin)
@@ -147,7 +158,7 @@ class User < ActiveRecord::Base
 
   # returns a url
   def wepay_authorization_url(redirect_uri)
-    WEPAY.oauth2_authorize_url(redirect_uri, self.email, self.name)
+    DropinsApp::Application::WEPAY.oauth2_authorize_url(redirect_uri, self.email, self.name)
   end
 
   # takes a code returned by wepay oauth2 authorization and makes an api call to generate oauth2 token for this user.
@@ -287,12 +298,6 @@ class User < ActiveRecord::Base
     wepay_call('/account/get_update_uri', params)
   end
 
-  def gravatar_url(options = { size: 30, border: false })
-    gravatar_id = Digest::MD5::hexdigest(self.email.downcase)
-    size = options[:size]
-    "https://secure.gravatar.com/avatar/#{gravatar_id}?s=#{size}"
-  end
- 
   def s3_bucket
     if Rails.env.development?
       ENV['S3_BUCKET_NAME_DEVELOPMENT']
@@ -307,27 +312,14 @@ class User < ActiveRecord::Base
 
   private
 
-    def create_remember_token
-      self.remember_token = User.create_token
+    # Converts email to all lower-case
+    def downcase_email
+      self.email = email.downcase
     end
 
-    def create_reset_token
-      self.password_reset_token = User.create_token
-    end
-
-    def create_email_token
-      self.email_token = User.create_token
-    end
-
-    def User.create_token
-      User.encrypt(User.new_token)
-    end
-
-    def validate_password?
-      password.present? || password_confirmation.present?
-    end
-
-    def password_required?
-      !persisted? || !password.nil? || !password_confirmation.nil?
+    # Creates and assigns the activation token and digest.
+    def create_activation_digest
+      self.activation_token = User.new_token
+      self.activation_digest = User.digest(activation_token)
     end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150309032829) do
+ActiveRecord::Schema.define(version: 20150531213716) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -104,12 +104,13 @@ ActiveRecord::Schema.define(version: 20150309032829) do
 
   create_table "microposts", force: :cascade do |t|
     t.string   "content",    limit: 255
-    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "picture"
+    t.integer  "user_id"
   end
 
-  add_index "microposts", ["user_id", "created_at"], name: "index_microposts_on_user_id_and_created_at", using: :btree
+  add_index "microposts", ["user_id"], name: "index_microposts_on_user_id", using: :btree
 
   create_table "relationships", force: :cascade do |t|
     t.integer  "follower_id"
@@ -121,6 +122,13 @@ ActiveRecord::Schema.define(version: 20150309032829) do
   add_index "relationships", ["followed_id"], name: "index_relationships_on_followed_id", using: :btree
   add_index "relationships", ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true, using: :btree
   add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id", using: :btree
+
+  create_table "rink_photos", force: :cascade do |t|
+    t.string   "url"
+    t.integer  "rink_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "rinks", force: :cascade do |t|
     t.float    "latitude"
@@ -138,7 +146,6 @@ ActiveRecord::Schema.define(version: 20150309032829) do
     t.string   "password_digest",        limit: 255
     t.string   "remember_token",         limit: 255
     t.boolean  "admin",                              default: false
-    t.integer  "state",                              default: 0
     t.string   "email_token",            limit: 255
     t.string   "password_reset_token",   limit: 255
     t.datetime "password_reset_sent_at"
@@ -150,6 +157,12 @@ ActiveRecord::Schema.define(version: 20150309032829) do
     t.string   "avatar_content_type",    limit: 255
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.boolean  "activated",                          default: false
+    t.string   "activation_digest"
+    t.datetime "activated_at"
+    t.string   "remember_digest"
+    t.string   "reset_digest"
+    t.datetime "reset_sent_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -158,4 +171,5 @@ ActiveRecord::Schema.define(version: 20150309032829) do
   add_foreign_key "mailboxer_conversation_opt_outs", "mailboxer_conversations", column: "conversation_id", name: "mb_opt_outs_on_conversations_id"
   add_foreign_key "mailboxer_notifications", "mailboxer_conversations", column: "conversation_id", name: "notifications_on_conversation_id"
   add_foreign_key "mailboxer_receipts", "mailboxer_notifications", column: "notification_id", name: "receipts_on_notification_id"
+  add_foreign_key "microposts", "users"
 end

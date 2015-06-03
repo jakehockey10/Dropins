@@ -1,28 +1,27 @@
 source 'https://rubygems.org'
-ruby '2.1.2'
 
-gem 'rails'
-gem 'bootstrap-sass', '~> 3.3.3'
-gem 'sass-rails', '>= 3.2'
-gem 'autoprefixer-rails'
-gem 'bootstrap_form'
-gem 'bcrypt-ruby'
-gem 'faker', '1.1.2'
+gem 'rails', '4.2.1'
+gem 'bcrypt'
+gem 'faker'
+gem 'carrierwave'
+gem 'mini_magick'
+gem 'fog'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
-gem 'state_machines-activerecord'
-gem 'twitter_cldr'
+gem 'bootstrap-sass'
 gem 'pg'
-
-gem 'figaro'
-gem 'jquery-turbolinks'
-
+gem 'sass-rails', '~> 5.0'
 gem 'uglifier'
 gem 'coffee-rails'
+gem 'autoprefixer-rails'
 gem 'jquery-rails'
-gem 'jquery-ui-rails'
 gem 'turbolinks'
 gem 'jbuilder'
+
+gem 'figaro'
+gem 'twitter_cldr'
+gem 'jquery-turbolinks'
+gem 'jquery-ui-rails'
 gem 'mail_form'
 gem 'ransack'
 gem 'momentjs-rails'
@@ -43,25 +42,22 @@ gem 'mail'
 gem 'mailboxer', github: 'lacco/mailboxer' #Use this branch until Foreigner is no longer used in Mailboxer.  Incompatible with Rails 4.2.  See https://bithub.com/mailboxer/mailboxer/issues/316
 gem 'bootstrap_tokenfield_rails'
 gem 'font-awesome-rails'
+gem 'sdoc', '~> 0.4.0', group: :doc
 
 group :development, :test do
-  gem 'better_errors'
-  gem 'binding_of_caller'
-  gem 'rspec-rails', '2.14.0'
-  gem 'guard-rspec', '2.5.0'
-  gem 'meta_request'
+  gem 'byebug'
+  gem 'web-console'
+  gem 'spring'
 end
 
 group :test do
-  gem 'selenium-webdriver', '2.35.1'
-  gem 'capybara', '2.1.0'
-  gem 'factory_girl_rails', '4.2.1'
-end
-
-group :doc do
-  gem 'sdoc', '0.3.20', require: false
+  gem 'minitest-reporters'
+  gem 'mini_backtrace'
+  gem 'guard-minitest'
+  gem 'guard'
 end
 
 group :production do
   gem 'rails_12factor'
+  gem 'puma'
 end

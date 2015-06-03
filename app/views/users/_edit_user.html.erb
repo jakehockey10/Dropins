@@ -6,7 +6,7 @@
   </aside>
 
   <div class="col-xs-12 col-sm-8 col-md-6">
-    <%= bootstrap_form_for(@user) do |f| %>
+    <%= form_for(@user) do |f| %>
       <%= render partial: 'users/fields', locals: { f: f, hide_labels: false } %>
       <%= f.button 'Save changes',
                    class: 'btn btn-primary btn-block',

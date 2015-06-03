@@ -13,7 +13,7 @@ Rails.application.configure do
   config.eager_load = false
 
   # Configure static asset server for tests with Cache-Control for performance.
-  config.serve_static_assets  = true
+  config.serve_static_files  = true
   config.static_cache_control = 'public, max-age=3600'
 
   # Show full error reports and disable caching.
@@ -34,10 +34,18 @@ Rails.application.configure do
   # specify what domain to use for mailer URLs
   config.action_mailer.default_url_options = { host: 'localhost:3000'}
 
+  # Randomize the order test cases are executed.
+  config.active_support.test_order = :random
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  # Wepay
+  WEPAY_CLIENT_ID = ENV['WEPAY_CLIENT_ID']
+  WEPAY_CLIENT_SECRET = ENV['WEPAY_CLIENT_SECRET']
+  USE_STAGE = true
+  WEPAY = WePay::Client.new(WEPAY_CLIENT_ID, WEPAY_CLIENT_SECRET, USE_STAGE)
 end

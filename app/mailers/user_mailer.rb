@@ -1,22 +1,18 @@
-class UserMailer < ActionMailer::Base
-  default from: ENV['GMAIL_USERNAME']
+class UserMailer < ApplicationMailer
 
-  # Subject can be set in your I18n file at config/locales/en.yml
-  # with the following lookup:
-  #
-  #   en.user_mailer.signup_confirmation.subject
-  #
-  def signup_confirmation(user)
+  def account_activation(user)
     @user = user
-    @url = verify_emails_user_url(@user,
-                                  email_token: @user.email_token)
-
-    mail to: user.email, subject: 'Signup Confirmation'
+    mail to: user.email, subject: 'Account activation'
   end
 
   def password_reset(user)
     @user = user
-    mail to: user.email, subject: 'Password Reset'
+    mail to: user.email, subject: 'Password reset'
+  end
+
+  def get_help(user)
+    @user = user
+    mail to: ENV['GMAIL_USERNAME'], from: user.email, subject: 'Dropins: User needs help'
   end
 
   def invite_users_to_dropin(user_id, users, dropin_id, message)

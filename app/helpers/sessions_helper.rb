@@ -1,57 +1,70 @@
 module SessionsHelper
 
-  def sign_in(user)
-    remember_token = User.new_token
-    cookies.permanent[:remember_token] = remember_token
-    user.update_attribute(:remember_token, User.encrypt(remember_token))
-    self.current_user = user
+  # Logs in the given user.
+  def log_in(user)
+    session[:user_id] = user.id
   end
 
-  def sign_out
-    current_user.update_attribute(:remember_token,
-                                  User.encrypt(User.new_token))
-    cookies.delete(:remember_token)
-    self.current_user = nil
+  # Remembers a user in a persistent session.
+  def remember(user)
+    user.remember
+    cookies.permanent.signed[:user_id] = user.id
+    cookies.permanent[:remember_token] = user.remember_token
   end
 
-  def signed_in?
-    !current_user.nil?
-  end
-
-  def current_user=(user)
-    @current_user = user
-  end
-
-  def current_user
-    remember_token = User.encrypt(cookies[:remember_token])
-    @current_user ||= User.find_by(remember_token: remember_token)
-  end
-
+  # Returns true if the given user is the current user
   def current_user?(user)
     user == current_user
   end
 
-  def signed_in_user
-    unless signed_in?
-      store_location
-      redirect_to signin_url, flash: { danger: 'Please sign in.' } unless signed_in?
+  # Returns the user corresponding to the remember token cookie.
+  def current_user
+    if (user_id = session[:user_id])
+      @current_user ||= User.find_by(id: user_id)
+    elsif (user_id = cookies.signed[:user_id])
+      user = User.find_by(id: user_id)
+      if user && user.authenticated?(:remember, cookies[:remember_token])
+        log_in user
+        @current_user = user
+      end
     end
   end
 
-  def admin_user
-    redirect_to(root_url) unless current_user.admin?
+  # Returns true if the user is logged in, false otherwise
+  def logged_in?
+    !current_user.nil?
   end
 
+  # Forgets a persistent session.
+  def forget(user)
+    user.forget
+    cookies.delete(:user_id)
+    cookies.delete(:remember_token)
+  end
+
+  # Logs out the current user.
+  def log_out
+    session.delete(:user_id)
+    @current_user = nil
+  end
+
+  # Redirects to stored location (or to the default).
   def redirect_back_or(default)
-    redirect_to(session[:return_to] || default)
-    session.delete(:return_to)
+    redirect_to(session[:forwarding_url] || default)
+    session.delete(:forwarding_url)
   end
 
+  # Stores the URL trying to be accessed.
   def store_location
-    session[:return_to] = request.url if request.get?
+    session[:forwarding_url] = request.url if request.get?
   end
 
   def admin_link_to(text, path, html_options = {})
     link_to text, path, html_options if current_user.admin?
+  end
+
+  # Returns true if current_user exists and they have admin privileges.
+  def admin?
+    current_user.admin? if current_user
   end
 end

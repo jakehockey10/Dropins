@@ -1,5 +1,5 @@
-<% if signed_in? %>
-  <%= render 'static_pages/signed_in_content' %>
+<% if logged_in? %>
+  <%= render 'static_pages/user_home_page' %>
 <% else %>
-  <%= render 'static_pages/not_signed_in_content' %>
+  <%= render 'static_pages/guest_home_page' %>
 <% end %>

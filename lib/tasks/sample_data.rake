@@ -57,18 +57,18 @@ end
 def make_relationships
   users = User.all
   user = users.first
-  followed_users = users[2..50]
+  following = users[2..50]
   followers = users[3..40]
-  followed_users.each { |followed| user.follow!(followed) }
-  followers.each { |follower| follower.follow!(user) }
+  following.each { |followed| user.follow(followed) }
+  followers.each { |follower| follower.follow(user) }
 end
 
 def follow_jake
   users = User.where.not(email: 'jakehockey10@gmail.com')
   jake = User.find_by(email: 'jakehockey10@gmail.com')
   users.each do |user|
-    unless user.followed_users.include? jake
-      user.follow!(jake)
+    unless user.following.include? jake
+      user.follow(jake)
     end
   end
 end
@@ -77,8 +77,8 @@ def jake_follow
   users = User.where.not(email: 'jakehockey10@gmail.com')
   jake = User.find_by(email: 'jakehockey10@gmail.com')
   users.each do |user|
-    unless jake.followed_users.include? user
-      jake.follow!(user)
+    unless jake.following.include? user
+      jake.follow(user)
     end
   end
 end

@@ -1,7 +1,9 @@
-<%= bootstrap_form_for(current_user.relationships.build(followed_id: @user.id),
-             remote: true) do |f| %>
-    <div><%= f.hidden_field :followed_id %></div>
-  <%= f.button 'Follow',
-               class: 'btn btn-default btn-lg',
-               data: { disable_with: "#{fa_icon 'spinner pulse'} Following..." } %>
+<%= form_for(current_user.active_relationships.build, remote: true) do |f| %>
+    <div>
+      <%= hidden_field_tag :followed_id, @user.id %>
+    </div>
+    <%= f.button 'Follow',
+                 class: 'btn btn-primary',
+                 data:  {disable_with: "#{fa_icon 'spinner pulse'} Following..."} %>
 <% end %>
+

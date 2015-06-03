@@ -7,34 +7,19 @@
     <%= user.second_name %>
   </td>
   <td class="text-center" style="vertical-align: middle">
-    <%= user.followed_users.count %>
+    <%= user.following.count %>
   </td>
   <td class="text-center" style="vertical-align: middle">
     <%= user.followers.count %>
   </td>
   <td class="text-center" style="vertical-align: middle">
-    <% if user.active? %>
+    <% if user.activated? %>
       <%= fa_icon 'check 2x' %>
     <% end %>
   </td>
   <td class="text-center" style="vertical-align: middle">
-    <!--add !current_user.nil? && to the predicate below so that
-      attempting to reach the followers/following pages of a
-      particular user while not signed in does not cause an error.
-      If you are not signed in, current_user is nil and thus we
-      cannot call the admin? method on that object at that time.-->
-    <% if !current_user.nil? && current_user.admin? && !current_user?(user) %>
+    <% if current_user.admin? && !current_user?(user) %>
       <%= link_to 'delete', user, method: :delete, data: { confirm: 'You sure?' } %>
     <% end %>
   </td>
 </tr>
-<!--<li class="media">-->
-  <!--<a class="pull-left" href="#">-->
-    <!--<%= avatar_for user, size: :small %>-->
-  <!--</a>-->
-  <!--<div class="media-body">-->
-    <!--<h4 class="media-heading">-->
-      <!--<%= link_to user.name, user %>-->
-    <!--</h4>-->
-  <!--</div>-->
-<!--</li>-->

@@ -1,5 +1,5 @@
 <div id="upload_avatar" class="center">
-  <%= bootstrap_form_for(user, html: { multipart: true, class: 'avatar_submit' }) do |f| %>
+  <%= form_for(user, html: { multipart: true, class: 'avatar_submit' }) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
 
       <%= f.file_field :avatar, hide_label: true, id: 'avatar_file' %>

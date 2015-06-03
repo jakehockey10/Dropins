@@ -5,7 +5,7 @@ module DropinsHelper
 
   def followers_attending(dropin, user)
     result = ''
-    followers_going = dropin.skaters.where(id: user.followed_users)
+    followers_going = dropin.skaters.where(id: user.following)
     followers_going.each do |u|
       result << (link_to avatar_for(u, size: :small), u, data: { toggle: 'tooltip', placement: 'top', title: u.name })
     end

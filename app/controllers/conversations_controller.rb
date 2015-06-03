@@ -1,5 +1,5 @@
 class ConversationsController < ApplicationController
-  before_filter :signed_in_user
+  before_filter :logged_in_user
   helper_method :conversation
 
   def create

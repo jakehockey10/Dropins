@@ -1,13 +1,14 @@
 Rails.application.routes.draw do
-  resources :conversations, only: [:index, :show, :new, :create] do
-    member do
-      post :reply
-      post :trash
-      post :untrash
-    end
-  end
-
-  get 'invite/invite'
+  root                'static_pages#home'
+  get    'help'    => 'static_pages#help'
+  get    'about'   => 'static_pages#about'
+  get    'contact' => 'contact_with_messages#new'
+  get    'signup'  => 'users#new'
+  get    'login'   => 'sessions#new'
+  post   'login'   => 'sessions#create'
+  delete 'logout'  => 'sessions#destroy'
+  match '/oauth2callback', to: 'invite#oauth2callback', via: 'get'
+  match '/contacts/failure', to: 'invite#failure', via: 'get'
   resources :users do
     # get :autocomplete_gmail_contact_email, on: :collection
     get :autocomplete_gmail_contact_name, on: :collection
@@ -21,12 +22,22 @@ Rails.application.routes.draw do
   end
   # For WePay:
   get '/users/:action(/:user_id)', controller: 'users'
-
-  resources :sessions, only: [:new, :create, :destroy]
-  resources :microposts, only: [:create, :destroy]
-  resources :relationships, only: [:create, :destroy]
-  resources :password_resets
+  resources :account_activations,   only: [:edit]
+  resources :password_resets,       only: [:new, :create, :edit, :update]
+  # resources :get_help,              only: [:new, :create, :edit, :update]
+  resources :microposts,            only: [:create, :destroy]
+  resources :relationships,         only: [:create, :destroy]
   resources :contact_with_messages, only: [:new, :create]
+  resources :conversations, only: [:index, :show, :new, :create] do
+    member do
+      post :reply
+      post :trash
+      post :untrash
+    end
+  end
+
+  get 'invite/invite'
+
   resources :attendances, only: [:create, :destroy]
   resources :dropins do
     member do
@@ -35,18 +46,7 @@ Rails.application.routes.draw do
   end
   resources :rinks
 
-  root 'static_pages#home'
 
-  match '/signup', to: 'users#new', via: 'get'
-  match '/signin', to: 'sessions#new', via: 'get'
-  match '/signout', to: 'sessions#destroy', via: 'delete'
-
-  match '/help', to: 'static_pages#help', via: 'get'
-  match '/about', to: 'static_pages#about', via: 'get'
-  match '/contact', to: 'contact_with_messages#new', via: 'get'
-  match '/oauth2callback', to: 'invite#oauth2callback', via: 'get'
-  # match '/contacts/:importer/callback', to: 'invite#oauth2callback', via: 'get'
-  match '/contacts/failure', to: 'invite#failure', via: 'get'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

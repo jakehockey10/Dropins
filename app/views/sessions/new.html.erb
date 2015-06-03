@@ -1,15 +1,23 @@
-<% provide(:title, 'Sign in') %>
+<% provide(:title, 'Log in') %>
 
-<h1 class="page-header">Sign in</h1>
+<h1 class="page-header">Log in</h1>
 
 <div class="row">
   <div class="col-xs-offset-2 col-sm-offset-3 col-md-offset-4 col-xs-8 col-sm-6 col-md-4">
-    <%= bootstrap_form_for(:session, url: sessions_path) do |f| %>
+    <%= form_for(:session, url: login_path) do |f| %>
 
-      <%= f.text_field :email, hide_label: true, placeholder: 'email' %>
-      <%= f.password_field :password, hide_label: true, placeholder: 'password' %>
+        <%= f.label :email, hidden: true %>
+        <%= f.email_field :email, placeholder: 'email', class: 'form-control' %>
 
-      <%= f.button 'Sign in',
+        <%= f.label :password, hidden: true %>
+        <%= f.password_field :password, placeholder: 'password', class: 'form-control' %>
+
+        <%= f.label :remember_me, class: 'checkbox inline' do %>
+          <%= f.check_box :remember_me %>
+          <span>Remember me on this device</span>
+        <% end %>
+
+      <%= f.button 'Log in',
                    class: 'btn btn-primary btn-block',
                    data: { disable_with: "#{fa_icon 'spinner pulse'} Signing in..." } %>
     <% end %>
