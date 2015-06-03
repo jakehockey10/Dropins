@@ -23,7 +23,7 @@
       cannot call the admin? method on that object at that time.-->
   <% if !current_user.nil? && current_user.admin? && !Attendance.where(user_id: skater.id, dropin_id: @dropin.id).first.paid %>
     <td class="text-center">
-      <%= bootstrap_form_for skater.attendances.find_by(dropin_id: @dropin.id), html: { method: :delete } do |f| %>
+      <%= form_for skater.attendances.find_by(dropin_id: @dropin.id), html: { method: :delete } do |f| %>
         <%= f.hidden_field :user_id, value: skater.id %>
         <%= f.button 'Remove',
                      class: 'btn btn-danger btn-sm',

@@ -1,5 +1,5 @@
 <div class="row">
-  <%= bootstrap_form_for(current_user.attendances.build(dropin_id: @dropin.id), remote: true) do |f| %>
+  <%= form_for(current_user.attendances.build(dropin_id: @dropin.id), remote: true) do |f| %>
     <div class="col-md-6">
       <%= link_to fa_icon('credit-card') + ' / ' + fa_icon('university', text: 'Online'),
                   pay_dropin_path(@dropin),
@@ -12,8 +12,8 @@
       <%= f.hidden_field :dropin_id %>
 
       <%= f.button fa_icon('money', text: 'Cash'),
-    class: 'btn btn-success btn-lg btn-block',
-    data: { disable_with: "#{fa_icon 'spinner pulse 2x'} Loading..." } %>
+                   class: 'btn btn-success btn-lg btn-block',
+                   data: { disable_with: "#{fa_icon 'spinner pulse 2x'} Loading..." } %>
     </div>
   <% end %>
 </div>

@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <% if signed_in? %>
+      <% if logged_in? %>
         <%= button_tag type: 'button', class: 'navbar-toggle toggle-menu menu-left push-body', data: { toggle: 'collapse', target: '#navbar-collapse' } do %>
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar" style="background-color: #4DB6AC;"></span>
@@ -16,7 +16,7 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left navbar-inverse" id="navbar-collapse">
       <ul class="nav navbar-nav navbar-right">
-        <% if signed_in? %>
+        <% if logged_in? %>
           <li class="if-mobile">
             <%= link_to avatar_for(current_user,
                                    { size: :thumb,
@@ -30,7 +30,7 @@
 
               <!--<span style="display: inline-block;">-->
                 <%= current_user.name %>
-                <!--<%= button_to signout_path, method: :delete, class: 'btn-link' do %>-->
+                <!--<%= button_to logout_path, method: :delete, class: 'btn-link' do %>-->
                   <!--<span class="glyphicon glyphicon-log-out"></span>-->
                 <!--<% end %>-->
               <!--</span>-->
@@ -56,14 +56,14 @@
               <li><%= link_to fa_icon('map-marker', text: 'Rinks'), rinks_path, data: { no_turbolink: true } %></li>
               <li><%= link_to fa_icon('comments-o', text: 'Conversations'), conversations_path %> </li>
               <li class="divider"></li>
-              <li><%= link_to fa_icon('sign-out', text: 'Sign Out'), signout_path, method: :delete %></li>
+              <li><%= link_to fa_icon('sign-out', text: 'Log out'), logout_path, method: :delete %></li>
               <li><%= link_to fa_icon('info-circle', text: 'About'), about_path %></li>
               <li><%= link_to fa_icon('envelope-o', text: 'Contact'), contact_path %></li>
               <li><%= link_to fa_icon('question-circle', text: 'Help'), help_path %></li>
             </ul>
           </li>
         <% else %>
-          <li><%= link_to fa_icon('sign-in', text: 'Sign in'), signin_path %></li>
+          <li><%= link_to fa_icon('sign-in', text: 'Log in'), login_path %></li>
         <% end %>
       </ul>
   </div><!-- /.navbar-collapse -->

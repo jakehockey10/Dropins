@@ -10,6 +10,20 @@ class ApplicationController < ActionController::Base
 
   private
 
+    # Confirms a logged-in user.
+    def logged_in_user
+      unless logged_in?
+        store_location
+        flash[:danger] = 'Please log in.'
+        redirect_to login_url
+      end
+    end
+
+    # Confirms an admin user.
+    def admin_user
+      redirect_to(root_url) unless current_user.admin?
+    end
+
     def mailbox
       @mailbox ||= current_user.mailbox
     end
@@ -18,7 +32,7 @@ class ApplicationController < ActionController::Base
       @unread_count = mailbox.inbox(read: false).count(:id, distinct: true).to_s
     end
 
-  def flash_to_headers
+    def flash_to_headers
       return unless request.xhr?
       response.headers['X-message'] = flash_message
       response.headers['X-message-type'] = flash_type.to_s

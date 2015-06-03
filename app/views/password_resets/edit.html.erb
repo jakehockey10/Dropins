@@ -2,15 +2,19 @@
 
 <div class="row">
   <div class="col-lg-offset-4 col-sm-4 col-md-4">
-    <%= bootstrap_form_for @user, url: password_reset_path(params[:id]) do |f| %>
-      <%= render 'shared/error_messages', object: f.object %>
+    <%= form_for @user, url: password_reset_path(params[:id]) do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
 
-      <%= f.password_field :password, hide_label: true, placeholder: 'password' %>
-      <%= f.password_field :password_confirmation, hide_label: true, placeholder: 'password confirmation' %>
+        <%= hidden_field_tag :email, @user.email %>
 
-      <%= f.button 'Update Password',
-                   class: 'btn btn-primary',
-                   data: { disable_with: "#{fa_icon 'spinner pulse'} Updating..." } %>
+        <%= f.label :password, hidden: true %>
+        <%= f.password_field :password, placeholder: 'password', class: 'form-control' %>
+        <%= f.label :password_confirmation, hidden: true %>
+        <%= f.password_field :password_confirmation, placeholder: 'password confirmation', class: 'form-control' %>
+
+        <%= f.button 'Update Password',
+                     class: 'btn btn-primary',
+                     data:  {disable_with: "#{fa_icon 'spinner pulse'} Updating..."} %>
     <% end %>
   </div>
 </div>

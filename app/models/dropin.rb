@@ -49,7 +49,7 @@ class Dropin < ActiveRecord::Base
   end
 
   def followers_attending(user)
-    followers_going = self.skaters.where(id: user.followed_users).map { |u| u.name }
+    followers_going = self.skaters.where(id: user.following).map { |u| u.name }
     if followers_going.count == 1
       "#{followers_going.to_sentence} is going."
     else

@@ -1,7 +1,16 @@
 <%= render 'shared/error_messages', object: f.object %>
 
-<%= f.text_field :first_name, hide_label: true, placeholder: 'First Name' %>
-<%= f.text_field :second_name, hide_label: true, placeholder: 'Last Name' %>
-<%= f.text_field :email, hide_label: true, placeholder: 'Email' %>
-<%= f.password_field :password, hide_label: true, placeholder: 'Password' %>
-<%= f.password_field :password_confirmation, hide_label: true, placeholder: 'Confirm Password' %>
+<%= f.label :first_name, hidden: true %>
+<%= f.text_field :first_name, placeholder: 'First Name', class: 'form-control' %>
+
+<%= f.label :second_name, hidden: true %>
+<%= f.text_field :second_name, placeholder: 'Last Name', class: 'form-control' %>
+
+<%= f.label :email, hidden: true %>
+<%= f.text_field :email, placeholder: 'Email', class: 'form-control' %>
+
+<%= f.label :password, hidden: true %>
+<%= f.password_field :password, placeholder: 'Password', class: 'form-control' %>
+
+<%= f.label :password_confirmation, 'Confirmation', hidden: true %>
+<%= f.password_field :password_confirmation, placeholder: 'Confirm Password', class: 'form-control' %>

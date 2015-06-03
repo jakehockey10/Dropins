@@ -1,0 +1,5 @@
+Hi <%= @user.name %>
+
+Would you mind verifying your email address with us?  There are certain portions of the site that will not be available to you until you verify this email by clicking the following link:
+
+<%= edit_account_activation_url(@user.activation_token, email: @user.email) %>

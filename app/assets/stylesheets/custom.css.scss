@@ -49,6 +49,7 @@ textarea {
 
 .btn-home {
   width: 200px;
+  margin-top: 10px;
 }
 
 .btn-width100 {
@@ -93,7 +94,7 @@ textarea {
   color: rgba(0, 0, 0, 0.870588);
   background-color: rgb(255, 255, 255);
   list-style: none;
-  padding: 20px;
+  padding: 15px;
   -webkit-transition: box-shadow 0.5s;
   transition: box-shadow 0.5s;
 //  margin-top: 10px;
@@ -650,6 +651,30 @@ footer {
 /* sidebar */
 
 aside {
+  //section.user_info {
+  //  margin-top: 20px;
+  //}
+  //section {
+  //  padding: 10px 0;
+  //  margin-top: 20px;
+  //  &:first-child {
+  //    border: 0;
+  //    padding-top: 0;
+  //  }
+  //  span {
+  //    display: block;
+  //    margin-bottom: 3px;
+  //    line-height: 1;
+  //  }
+  //  h1 {
+  //    font-size: 1.4em;
+  //    text-align: left;
+  //    letter-spacing: -1px;
+  //    margin-bottom: 3px;
+  //    margin-top: 0px;
+  //  }
+  //}
+  //
   h1 {
     font-size: 1.4em;
     text-align: left;
@@ -689,7 +714,7 @@ p.bg-danger, p.bg-primary {
 }
 
 .gravatar {
-  float: left;
+  //float: left;
   margin-right: 10px;
 }
 
@@ -731,13 +756,9 @@ p.bg-danger, p.bg-primary {
 
 /* forms */
 
-form {
-  margin-bottom: 15px;
-  margin-top: 15px;
-}
-
 input, textarea, select, .uneditable-input {
   border: 1px solid #bbb;
+  width: 100%;
   margin-bottom: 15px;
   @include box_sizing;
 }
@@ -747,17 +768,32 @@ input {
 }
 
 #error_explanation {
-  color: #f00;
+  color: red;
   ul {
-    list-style: none;
-    margin: 0 0 18px 0;
+    color: red;
+    margin: 0 0 30px 0;
   }
 }
 
 .field_with_errors {
-//  @extend .control-group;
-//  @extend .error;
-  @extend .has-error
+  @extend .has-error;
+  .form-control {
+    color: $state-danger-text;
+  }
+}
+
+.checkbox {
+  margin-top: -10px;
+  margin-bottom: 10px;
+  span {
+    margin-left: 20px;
+    font-weight: normal;
+  }
+}
+
+#session_remember_me {
+  width: auto;
+  margin-left: 0;
 }
 
 /* Users index */
@@ -779,12 +815,14 @@ input {
 
 .microposts {
   list-style: none;
-//  margin: 10px 0 0 0;
-
-//  li {
-//    padding: 10px 0;
-//    border-top: 1px solid gray;
-//  }
+  .content {
+    display: block;
+    margin-left: 60px;
+    img {
+      display: block;
+      padding: 5px 0;
+    }
+  }
 }
 .content {
   display: block;
@@ -802,6 +840,13 @@ aside {
   textarea {
     height: 100px;
     margin-bottom: 5px;
+  }
+}
+
+span.picture {
+  margin-top: 10px;
+  input {
+    border: 0;
   }
 }
 

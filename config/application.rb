@@ -21,8 +21,14 @@ module DropinsApp
     # config.i18n.default_locale = :de
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
 
-    config.serve_static_assets = true
+    config.serve_static_files = true
 
     I18n.enforce_available_locales = true
+
+    # Do not swallow errors in after_commit/after_rollback callbacks.
+    config.active_record.raise_in_transactional_callbacks = true
+
+    # Include the authenticity token in remote forms.
+    config.action_view.embed_authenticity_token_in_remote_forms = true
   end
 end

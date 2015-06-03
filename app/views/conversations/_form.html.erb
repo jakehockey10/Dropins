@@ -1,29 +1,32 @@
-<%= bootstrap_form_for :conversation, url: :conversations do |f| %>
+<%= form_for :conversation, url: :conversations do |f| %>
 
-  <%= f.text_field :recipients, class: 'tokenize-recipients' %>
-  <%= f.text_field :subject %>
-  <%= f.text_area :body %>
-  <%= f.button 'Send',
-               class: 'btn btn-primary',
-               data: { disable_with: "#{fa_icon 'spinner pulse'} Sending..." } %>
-  <%= f.submit 'Reset', type: :reset, class: 'btn btn-danger' %>
+    <%= f.label :recipients %>
+    <%= f.text_field :recipients, class: 'tokenize-recipients form-control' %>
+    <%= f.label :subject %>
+    <%= f.text_field :subject, class: 'form-control' %>
+    <%= f.label :body %>
+    <%= f.text_area :body, class: 'form-control' %>
+    <%= f.button 'Send',
+                 class: 'btn btn-primary',
+                 data:  {disable_with: "#{fa_icon 'spinner pulse'} Sending..."} %>
+    <%= f.submit 'Reset', type: :reset, class: 'btn btn-danger' %>
 
 <% end %>
 
 <script type="text/javascript" charset="utf-8">
-  $('input.tokenize-recipients').tokenfield({
-    autocomplete: {
-      source: <%= tokenfield_source %>,
-      delay: 100,
-      create: function () {
-        $(this).data('ui-autocomplete')._renderItem = function (ul, item) {
-          return $('<li>')
-                  .addClass('media')
-                  .append('<a class="media-left" href="#">' + item.profile_picture + '</a><div class="media-body"><h4 class="media-heading">' + item.label + '</h4>' + item.value + '</div>')
-                  .appendTo(ul);
-        };
-      }
-    },
-    showAutoCompleteOnFocus: true
-  });
+    $('input.tokenize-recipients').tokenfield({
+        autocomplete: {
+            source: <%= tokenfield_source %>,
+            delay: 100,
+            create: function () {
+                $(this).data('ui-autocomplete')._renderItem = function (ul, item) {
+                    return $('<li>')
+                            .addClass('media')
+                            .append('<a class="media-left" href="#">' + item.profile_picture + '</a><div class="media-body"><h4 class="media-heading">' + item.label + '</h4>' + item.value + '</div>')
+                            .appendTo(ul);
+                };
+            }
+        },
+        showAutoCompleteOnFocus: true
+    });
 </script>

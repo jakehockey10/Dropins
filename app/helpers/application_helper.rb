@@ -1,12 +1,12 @@
 module ApplicationHelper
 
-  #Returns the full title on a per-page basis
-  def full_title(page_title)
+  # Returns the full title on a per-page basis
+  def full_title(page_title = '')
     base_title = 'Dropins Beta'
     if page_title.empty?
       base_title
     else
-      "#{base_title} | #{page_title}"
+      page_title + ' | ' + base_title
     end
   end
 
