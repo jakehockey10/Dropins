@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   root                'static_pages#home'
-  get    'help'    => 'static_pages#help'
   get    'about'   => 'static_pages#about'
   get    'contact' => 'contact_with_messages#new'
   get    'signup'  => 'users#new'
@@ -24,7 +23,7 @@ Rails.application.routes.draw do
   get '/users/:action(/:user_id)', controller: 'users'
   resources :account_activations,   only: [:edit]
   resources :password_resets,       only: [:new, :create, :edit, :update]
-  # resources :get_help,              only: [:new, :create, :edit, :update]
+  resources :help_requests,         only: [:new, :create]
   resources :microposts,            only: [:create, :destroy]
   resources :relationships,         only: [:create, :destroy]
   resources :contact_with_messages, only: [:new, :create]

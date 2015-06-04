@@ -10,8 +10,9 @@ class UserMailer < ApplicationMailer
     mail to: user.email, subject: 'Password reset'
   end
 
-  def get_help(user)
+  def help_request(user, message)
     @user = user
+    @message = message
     mail to: ENV['GMAIL_USERNAME'], from: user.email, subject: 'Dropins: User needs help'
   end
 
