@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
   # About attr_accessor:
   # "If you declare an `attr_accessor` then you can use it as a `virtual attribute`,
   # which is basically an attribute on the model that isn't persisted to the database."
-  attr_accessor :remember_token, :activation_token, :reset_token
+  attr_accessor :remember_token, :activation_token, :reset_token, :help_token
   before_save   :downcase_email
   before_create :create_activation_digest
 
@@ -87,9 +87,20 @@ class User < ActiveRecord::Base
     update_columns(reset_digest: User.digest(reset_token), reset_sent_at: Time.zone.now)
   end
 
+  # Sets the help attributes.
+  def create_help_request_digest
+    self.help_token = User.new_token
+    update_columns(help_digest: User.digest(help_token), help_sent_at: Time.zone.now)
+  end
+
   # Sends password reset email.
   def send_password_reset_email
     UserMailer.password_reset(self).deliver_now
+  end
+
+  # Sends help email.
+  def send_help_request_email(message)
+    UserMailer.help_request(self, message).deliver_now
   end
 
   # Returns true if a password reset has expired.

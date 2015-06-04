@@ -1,0 +1,16 @@
+<% provide(:title, 'Request help') %>
+
+<h1>Request help</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(:help_request, url: help_requests_path) do |f| %>
+        <%= f.hidden_field :email, value: current_user.email %>
+
+        <%= f.label :message %>
+        <%= f.text_area :message, class: 'form-control', rows: 5 %>
+
+        <%= f.button 'Submit', class: 'btn btn-primary btn-block', data:  {disable_with: "#{fa_icon 'spinner pulse'} Sending..."} %>
+    <% end %>
+  </div>
+</div>

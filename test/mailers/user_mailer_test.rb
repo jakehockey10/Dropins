@@ -25,13 +25,18 @@ class UserMailerTest < ActionMailer::TestCase
     assert_match CGI::escape(user.email), mail.body.encoded
   end
 
-  # test 'get_help' do
-  #   user = users(:jake)
-  #   user.reset_token = User.new_token
-  #   mail = UserMailer.get_help(user)
-  #   assert_equal 'Dropins: User needs help', mail.subject
-  #   assert_equal [ENV['GMAIL_USERNAME']], mail.to
-  #   assert_equal [user.email], mail.from
-  #   assert_match CGI::escape(user.email), mail.body.encoded
-  # end
+  test 'help_request' do
+    user = users(:jake)
+    user.help_token = User.new_token
+    # mail = UserMailer.get_help(user)
+    mail = user.send_help_request_email('I need help!')
+    assert_equal 'Dropins: User needs help', mail.subject
+    assert_equal [ENV['GMAIL_USERNAME']], mail.to
+    assert_equal [user.email], mail.from
+    # TODO: Why doesn't this one need to be escaped like the others?
+    # assert_match CGI::escape(user.email), mail.body.encoded
+    assert_match user.email, mail.body.encoded
+    assert_match user.name, mail.body.encoded
+    assert_match 'I need help!', mail.body.encoded
+  end
 end
