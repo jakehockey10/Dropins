@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150604055122) do
+ActiveRecord::Schema.define(version: 20150605033451) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -140,24 +140,24 @@ ActiveRecord::Schema.define(version: 20150604055122) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  limit: 255
+    t.string   "email",                        limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "password_digest",        limit: 255
-    t.string   "remember_token",         limit: 255
-    t.boolean  "admin",                              default: false
-    t.string   "email_token",            limit: 255
-    t.string   "password_reset_token",   limit: 255
+    t.string   "password_digest",              limit: 255
+    t.string   "remember_token",               limit: 255
+    t.boolean  "admin",                                    default: false
+    t.string   "email_token",                  limit: 255
+    t.string   "password_reset_token",         limit: 255
     t.datetime "password_reset_sent_at"
-    t.string   "wepay_access_token",     limit: 255
+    t.string   "wepay_access_token",           limit: 255
     t.integer  "wepay_account_id"
-    t.string   "first_name",             limit: 255
-    t.string   "second_name",            limit: 255
-    t.string   "avatar_file_name",       limit: 255
-    t.string   "avatar_content_type",    limit: 255
+    t.string   "first_name",                   limit: 255
+    t.string   "second_name",                  limit: 255
+    t.string   "avatar_file_name",             limit: 255
+    t.string   "avatar_content_type",          limit: 255
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
-    t.boolean  "activated",                          default: false
+    t.boolean  "activated",                                default: false
     t.string   "activation_digest"
     t.datetime "activated_at"
     t.string   "remember_digest"
@@ -165,6 +165,8 @@ ActiveRecord::Schema.define(version: 20150604055122) do
     t.datetime "reset_sent_at"
     t.string   "help_digest"
     t.datetime "help_sent_at"
+    t.string   "email_dropin_creator_digest"
+    t.datetime "email_dropin_creator_sent_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

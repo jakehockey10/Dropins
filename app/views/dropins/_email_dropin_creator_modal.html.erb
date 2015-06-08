@@ -1,0 +1,30 @@
+<div class="modal fade" id="email_dropin_creators_modal" tabindex="-1" role="dialog" aria-labelledby="Email Dropin Creator Modal" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <%= form_for(:email_dropin_creator, url: email_dropin_creators_path) do |f| %>
+          <%= render 'shared/modal_header', object: f.object, title: 'Email Dropin Creator' %>
+
+          <%= f.hidden_field :dropin_id, value: @dropin.id %>
+          <%= f.hidden_field :user_id, value: current_user.id %>
+
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-offset-2 col-md-8">
+                <%= f.label :message, hidden: true %>
+                <%= f.text_area :message, placeholder: 'message', rows: 5 %>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <%= f.button 'Send',
+                         class: 'btn btn-sm btn-primary',
+                         data:  { disable_with: "#{fa_icon 'spinner pulse'} Sending..." } %>
+            <%= button_tag 'Close',
+                           class: 'btn btn-sm btn-default',
+                           data:  { dismiss: 'modal' } %>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>

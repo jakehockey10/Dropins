@@ -93,10 +93,8 @@ class DropinsController < ApplicationController
   end
 
   def email_attendees
-    users = @dropin.skaters.pluck(:email)
-    @user = current_user
-    DropinAttendeeMailer.email_attendees(@user.id,
-                                         users,
+    DropinAttendeeMailer.email_attendees(current_user.id,
+                                         @dropin.skaters.pluck(:email),
                                          @dropin.id,
                                          params[:subject],
                                          params[:message]).deliver

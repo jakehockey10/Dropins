@@ -1,0 +1,5 @@
+Hello <%= @dropin.user.name %>,
+
+You have a message from <%= @user.name %> (<%= @user.email %>), an attendee of your dropin scheduled for <%= @dropin.date.strftime('%A, %B %d') %>:
+
+<%= @message %>

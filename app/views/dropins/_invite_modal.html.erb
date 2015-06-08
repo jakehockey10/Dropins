@@ -1,4 +1,4 @@
-<%= bootstrap_form_tag(url: {controller: :invite, action: :invite}, method: 'get') do |f| %>
+<%= form_tag(@dropin, url: { controller: :invite, action: :invite }, method: 'get') do |f| %>
 <div class="modal fade" id="invite_modal" tabindex="-1" role="dialog" aria-labelledby="Invite Modal" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -10,7 +10,7 @@
       </div>
 
       <div class="modal-body">
-        <%= f.hidden_field :dropin_id, value: @dropin.id %>
+        <%= hidden_field_tag :dropin_id, value: @dropin.id %>
 
         <div class="row">
           <aside class="col-sm-3 col-md-3">
@@ -48,6 +48,7 @@
           </aside>
           <div class="col-sm-9">
             <div class="control-group">
+              <%= f.label :users, hidden: true %>
               <%= f.autocomplete_field :users,
                                        autocomplete_gmail_contact_name_users_path,
                                        'data-delimiter' => ',',
@@ -56,10 +57,10 @@
                                        class: 'form-control',
                                        id: 'users' %>
             </div>
+            <%= f.label :message, hidden: true %>
             <%= f.text_area :message,
                             as: :text,
                             rows: 7,
-                            hide_label: true,
                             placeholder: 'Add to default message...' %>
           </div>
         </div>

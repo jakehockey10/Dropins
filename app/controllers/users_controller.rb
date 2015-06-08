@@ -67,13 +67,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def verify_emails
-    @user = User.find_by(email_token: params[:email_token])
-    @user.activate!
-    flash[:success] = 'Your email has been verified!'
-    redirect_to @user
-  end
-
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
@@ -118,11 +111,7 @@ class UsersController < ApplicationController
       error = e.message
     end
 
-    if error
-      flash[:danger] = error
-    else
-      flash[:success] = 'We successfully connected you to WePay!'
-    end
+    error ? flash[:danger] = error : flash[:success] = 'We successfully connected you to WePay!'
     redirect_to edit_user_path @user
   end
 

@@ -1,8 +1,12 @@
+// jquery-turbolinks "requires" that jquery.turbolinks
+// be the second thing here and that turbolinks be the
+// very last thing
+
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
 //= require jquery-ui
 //= require autocomplete-rails
-//= require turbolinks
 //= require bootstrap-sprockets
 //= require bootstrap
 //= require moment
@@ -14,19 +18,20 @@
 //= require fullcalendar
 //= require fullcalendar/gcal
 //= require_tree .
+//= require turbolinks
 
-$(document).on('ready page:before-change', function () {
-  $('#main').fadeOut();
-});
-
-$(document).on('ready page:change', function () {
-  $('#main').hide();
-});
-
-$(document).on('ready page:update', function () {
-  $('#main').fadeIn();
-  init();
-});
+//$(document).on('ready page:before-change', function () {
+//  $('#main').fadeOut();
+//});
+//
+//$(document).on('ready page:change', function () {
+//  $('#main').hide();
+//});
+//
+//$(document).on('ready page:update', function () {
+//  $('#main').fadeIn();
+//  init();
+//});
 
 $(document).on('ready page:load', function () {
   init();

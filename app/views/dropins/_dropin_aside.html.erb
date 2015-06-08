@@ -1,5 +1,13 @@
 <aside class="col-sm-4 col-md-4">
   <section>
+    <%= button_tag fa_icon('user', text: 'Email Creator'),
+                   class: 'email-dropin-creator btn btn-sm btn-default' if @dropin.is_in_the_future? %>
+    <%= button_tag fa_icon('send', text: 'Invite Skaters'),
+                   class: 'invite-skaters btn btn-sm btn-default' if @dropin.is_not_full && current_user.id == @dropin.user_id %>
+    <%= button_tag fa_icon('users', text: 'Email Attendees'),
+                   class: 'email-attendees btn btn-sm btn-default' if current_user.id == @dropin.user_id %>
+  </section>
+  <section>
     <h1>
       <strong>Date:</strong>
       <span id="dropin-date-time"><%= @dropin.date.in_time_zone.strftime('%A %b %d, %G %l:%M %p') %></span>

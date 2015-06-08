@@ -7,12 +7,7 @@
     <%= skater.followers.count %>
   </td>
   <td class="text-center" style="vertical-align: middle">
-    <% if skater.active? %>
-      <%= fa_icon 'check 2x' %>
-    <% end %>
-  </td>
-  <td class="text-center" style="vertical-align: middle">
-    <% if Attendance.where(user_id: skater.id, dropin_id: @dropin.id).first.paid %>
+    <% if skater_has_paid(skater.id, @dropin.id) %>
       <%= fa_icon 'check 2x' %>
     <% end %>
   </td>
@@ -21,9 +16,9 @@
       particular user while not signed in does not cause an error.
       If you are not signed in, current_user is nil and thus we
       cannot call the admin? method on that object at that time.-->
-  <% if !current_user.nil? && current_user.admin? && !Attendance.where(user_id: skater.id, dropin_id: @dropin.id).first.paid %>
+  <% if show_remove_skater_from_dropin_button(skater.id, @dropin.id) %>
     <td class="text-center">
-      <%= form_for skater.attendances.find_by(dropin_id: @dropin.id), html: { method: :delete } do |f| %>
+      <%= form_for skater.attendances.find_by(dropin_id: @dropin.id), html: { method: :delete }, remote: true do |f| %>
         <%= f.hidden_field :user_id, value: skater.id %>
         <%= f.button 'Remove',
                      class: 'btn btn-danger btn-sm',

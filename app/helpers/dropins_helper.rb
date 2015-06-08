@@ -1,4 +1,16 @@
 module DropinsHelper
+
+  def skater_has_paid(skater_id, dropin_id)
+    attendance = Attendance.where(user_id: skater_id, dropin_id: dropin_id)
+    if attendance.first
+      attendance.first.paid
+    end
+  end
+
+  def show_remove_skater_from_dropin_button(skater_id, dropin_id)
+    current_user && current_user.admin? && !skater_has_paid(dropin_id, skater_id)
+  end
+
   def show_join_button(dropin, user_id)
     dropin.is_not_full && dropin.user_is_not_attending(user_id)
   end

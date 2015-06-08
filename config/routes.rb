@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'email_dropin_creators/create'
+
   root                'static_pages#home'
   get    'about'   => 'static_pages#about'
   get    'contact' => 'contact_with_messages#new'
@@ -13,7 +15,6 @@ Rails.application.routes.draw do
     get :autocomplete_gmail_contact_name, on: :collection
     member do
       get :following, :followers
-      get :verify_emails
       get :show_avatar
       get :upload_avatar
       match :delete_avatar, via: :delete
@@ -24,6 +25,7 @@ Rails.application.routes.draw do
   resources :account_activations,   only: [:edit]
   resources :password_resets,       only: [:new, :create, :edit, :update]
   resources :help_requests,         only: [:new, :create]
+  resources :email_dropin_creators, only: [:create]
   resources :microposts,            only: [:create, :destroy]
   resources :relationships,         only: [:create, :destroy]
   resources :contact_with_messages, only: [:new, :create]
