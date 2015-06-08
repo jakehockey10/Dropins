@@ -1,0 +1,10 @@
+<h1>Dropins Beta</h1>
+
+<p>Hello <%= @dropin.user.name %>,</p>
+
+<p>You have a message from <%= @user.name %> (<%= @user.email %>), an attendee of your dropin scheduled for <%= @dropin.date.strftime('%A, %B %d') %></p>
+
+<blockquote>
+  <%= @message %>
+</blockquote>
+

@@ -103,6 +103,11 @@ class User < ActiveRecord::Base
     UserMailer.help_request(self, message).deliver_now
   end
 
+  # Sends email to dropin creator.
+  def send_email_to_dropin_creator(dropin, message)
+    UserMailer.email_dropin_creator(dropin, self, message).deliver_now
+  end
+
   # Returns true if a password reset has expired.
   def password_reset_expired?
     reset_sent_at < 2.hours.ago

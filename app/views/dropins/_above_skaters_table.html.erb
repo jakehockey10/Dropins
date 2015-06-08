@@ -20,6 +20,6 @@
         You are signed up for this dropin!
       </p>
   <% else %>
-      <%= render 'attendances/form' if signed_in? %>
+      <%= render 'attendances/form' if logged_in? %>
   <% end %>
 </div>

@@ -1,0 +1,13 @@
+llua:
+  date: <%= Time.zone.now %>
+  price: 15.00
+  rink: promenade
+  user: jake
+  limit: 20
+
+silly_dropin:
+  date: <%= Time.zone.now %>
+  price: 0.00
+  rink: promenade
+  user: jake
+  limit: 1

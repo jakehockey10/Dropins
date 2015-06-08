@@ -6,13 +6,25 @@ class Dropin < ActiveRecord::Base
   belongs_to :rink
   belongs_to :user
 
-  validates :date,
-            presence: true,
+  validates :date, presence: true,
             date: { after:  Proc.new { Time.now - 1.minute },
                     before: Proc.new { Time.now + 1.year } }
   validates :price, presence: true, numericality: { greater_than: 0 }
   validates :rink,  presence: true
   validates :limit, presence: true, numericality: { only_integer: true, greater_than: 0 }
+
+  # class << self
+  #   # Returns the hash digest of the given string.
+  #   def digest(string)
+  #     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
+  #     BCrypt::Password.create(string, cost: cost)
+  #   end
+  #
+  #   # Returns a random token.
+  #   def new_token
+  #     SecureRandom.urlsafe_base64
+  #   end
+  # end
 
   def is_not_full
     self.limit > self.skaters.count

@@ -1,5 +1,5 @@
 class AttendancesController < ApplicationController
-  before_action :signed_in_user
+  before_action :logged_in_user
 
   def create
     @dropin = Dropin.find(params[:attendance][:dropin_id])
