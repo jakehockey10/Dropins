@@ -19,4 +19,7 @@ class StaticPagesController < ApplicationController
 
   def contact
   end
+
+  def calendar
+  end
 end

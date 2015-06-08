@@ -18,4 +18,10 @@ class StaticPagesControllerTest < ActionController::TestCase
     assert_select 'title', "About | #{@base_title}"
   end
 
+  test 'should get calendar' do
+    get :calendar
+    assert_response :success
+    assert_select 'title', "Calendar | #{@base_title}"
+  end
+
 end
