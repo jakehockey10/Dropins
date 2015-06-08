@@ -33,51 +33,50 @@
 //  init();
 //});
 
-$(document).on('ready page:load', function () {
-  init();
+$(function () {
+    init();
 
-  $('.toggle-menu').jPushMenu({closeOnClickLink: false});
-  $('.dropdown-toggle').dropdown();
-  $('[data-toggle="tooltip"]').tooltip();
+    $('.toggle-menu').jPushMenu({closeOnClickLink: false});
+    $('.dropdown-toggle').dropdown();
+    $('[data-toggle="tooltip"]').tooltip();
 });
 
 function init() {
-  $('.alert button.close').click(function () {
-    $(this).parent().fadeOut('fast');
+    $('.alert button.close').click(function () {
+        $(this).parent().fadeOut('fast');
 //    $(this).parent().animate({ height: 0, opacity: 0 }, 'fast');
-    $(".selectpicker").selectpicker();
-  });
+        $(".selectpicker").selectpicker();
+    });
 
-  //var count = 0;
-  //$('.help-block').each(function () {
-  //  count++;
-  //  var placement;
-  //  if (count % 2 == 0) {
-  //      placement = "left";
-  //  } else {
-  //      placement = "right";
-  //  }
-  //  var help_block = $(this).html();
-  //  var control = $(this).prev();
-  //  var control_id = control.attr('id');
-  //  control.popover({
-  //      html: true,
-  //      trigger: "manual",
-  //      content: help_block,
-  //      placement: placement,
-  //      title: 'uh oh :(' + '<button type="button" class="close" onclick="$(\'#' + control_id + '\').popover(\'hide\')">&times</button>',
-  //      container: "body"
-  //  });
-  //  control.popover("show");
-  //  $(this).remove();
-  //  control.on('focus', function () {
-  //      control.popover('show');
-  //  });
-  //});
+    //var count = 0;
+    //$('.help-block').each(function () {
+    //  count++;
+    //  var placement;
+    //  if (count % 2 == 0) {
+    //      placement = "left";
+    //  } else {
+    //      placement = "right";
+    //  }
+    //  var help_block = $(this).html();
+    //  var control = $(this).prev();
+    //  var control_id = control.attr('id');
+    //  control.popover({
+    //      html: true,
+    //      trigger: "manual",
+    //      content: help_block,
+    //      placement: placement,
+    //      title: 'uh oh :(' + '<button type="button" class="close" onclick="$(\'#' + control_id + '\').popover(\'hide\')">&times</button>',
+    //      container: "body"
+    //  });
+    //  control.popover("show");
+    //  $(this).remove();
+    //  control.on('focus', function () {
+    //      control.popover('show');
+    //  });
+    //});
 
-  // Temp Fix: Remove after Bootstrap does the right thing and removes touchstart (see issue https://github.com/twitter/bootstrap/issues/6488)
-  $('a.dropdown-toggle, .dropdown-menu, .dropdown-menu a, .dropdown-menu .dropdown-submenu a').on('touchstart.dropdown.data-api', function (e) {
-    e.stopPropagation();
-  });
-
+    // Temp Fix: Remove after Bootstrap does the right thing and removes touchstart (see issue https://github.com/twitter/bootstrap/issues/6488)
+    $('a.dropdown-toggle, .dropdown-menu, .dropdown-menu a, .dropdown-menu .dropdown-submenu a').on('touchstart.dropdown.data-api', function (e) {
+        e.stopPropagation();
+    });
 }

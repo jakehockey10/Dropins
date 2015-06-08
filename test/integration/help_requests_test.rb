@@ -18,11 +18,15 @@ class HelpRequestsTest < ActionDispatch::IntegrationTest
     get new_help_request_path
     assert_template 'help_requests/new'
     # Invalid email
-    post help_requests_path, help_request: { email: '' }
+    post help_requests_path, help_request: { email: '', message: 'HELP!' }
+    assert_not flash.empty?
+    assert_template 'help_requests/new'
+    # Empty message
+    post help_requests_path, help_request: { email: @user.email, message: '' }
     assert_not flash.empty?
     assert_template 'help_requests/new'
     # Valid email
-    post help_requests_path, help_request: { email: @user.email }
+    post help_requests_path, help_request: { email: @user.email, message: 'HELP!' }
     assert_not_equal @user.help_digest, @user.reload.help_digest
     assert_equal 1, ActionMailer::Base.deliveries.size
     assert_not flash.empty?

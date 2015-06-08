@@ -8,10 +8,19 @@ $(document).on('change', '.avatar_submit input:file', function () {
     }
 });
 
-$(document).on('ready page:load', function() {
+$(function() {
 //    $('#calendar').fullCalendar({
 //        events: '/dropins.json'
 //    });
+    initCalendar();
+});
+
+var popoverClicked = false;
+
+function initCalendar() {
+    var toSentence = function(arr) {
+        return arr.join(", ").replace(/,\s([^,]+)$/, ' and $1');
+    };
     $('#calendar').fullCalendar({
         header: {
             left: 'prev,next today',
@@ -19,19 +28,37 @@ $(document).on('ready page:load', function() {
             right: 'month,agendaWeek,agendaDay'
         },
         events: '/dropins.json',
-        eventRender: function(event, element) {
-            var list = '';
+        eventRender: function (event, element) {
+            var list = [event.skaters.length];
             for (var i = 0; i < event.skaters.length; i++) {
-                list += '<li>' + event.skaters[i].first_name + ' ' + event.skaters[i].second_name + '</li>'
+                //list += '<li>' + event.skaters[i].first_name + ' ' + event.skaters[i].second_name + '</li>'
+                list[i] = event.skaters[i].first_name + ' ' + event.skaters[i].second_name
             }
+
             element.popover({
                 placement: 'auto',
                 html: true,
                 title: event.rink.name,
-                content: '<h5><strong>Attending:</strong></h5><ul class="list-inline">' + list + '</ul>',
+                content: '<h5><strong>Attending:</strong></h5><ul class="list-inline">' + toSentence(list) + '</ul>',
                 container: 'body',
-                trigger: 'click'
+                trigger: 'focus'
             });
+        },
+        eventClick: function (event, jsEvent, view) {
+            $(this).popover('show');
+            popoverClicked = !popoverClicked;
+        },
+        eventMouseover: function (event, jsEvent, view) {
+            if (!popoverClicked) {
+                $(this).popover('show');
+                popoverClicked = false;
+            }
+        },
+        eventMouseout: function (event, jsEvent, view) {
+            if (!popoverClicked) {
+                $(this).popover('hide');
+                popoverClicked = false;
+            }
         }
     });
-});
+}

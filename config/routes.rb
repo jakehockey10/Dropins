@@ -1,13 +1,14 @@
 Rails.application.routes.draw do
   get 'email_dropin_creators/create'
 
-  root                'static_pages#home'
-  get    'about'   => 'static_pages#about'
-  get    'contact' => 'contact_with_messages#new'
-  get    'signup'  => 'users#new'
-  get    'login'   => 'sessions#new'
-  post   'login'   => 'sessions#create'
-  delete 'logout'  => 'sessions#destroy'
+  root                 'static_pages#home'
+  get    'calendar' => 'static_pages#calendar'
+  get    'about'    => 'static_pages#about'
+  get    'contact'  => 'contact_with_messages#new'
+  get    'signup'   => 'users#new'
+  get    'login'    => 'sessions#new'
+  post   'login'    => 'sessions#create'
+  delete 'logout'   => 'sessions#destroy'
   match '/oauth2callback', to: 'invite#oauth2callback', via: 'get'
   match '/contacts/failure', to: 'invite#failure', via: 'get'
   resources :users do

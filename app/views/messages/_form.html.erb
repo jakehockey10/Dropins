@@ -1,6 +1,15 @@
 <%= form_for :message, url: [:reply, :conversation], remote: true do |f| %>
-    <%= f.label :body, hidden: true %>
-    <%= f.text_area :body, placeholder: 'Reply', style: 'margin-bottom: 0px !important;', class: 'form-control' %>
-    <%= f.primary 'Send Message', data: {disable_with: 'Sending...'} %>
-    <%= submit_tag 'Clear Reply Box', type: :reset, class: 'btn btn-danger' %>
+    <div class="form-group">
+      <%= f.label :body, hidden: true %>
+      <%= f.text_area :body, placeholder: 'Reply', style: 'margin-bottom: 0px !important;', class: 'form-control' %>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-sm-6">
+        <%= f.submit 'Send Message', data: { disable_with: 'Sending...' }, class: 'btn btn-primary' %>
+      </div>
+      <div class="col-md-6 col-sm-6">
+        <%= submit_tag 'Clear Reply Box', type: :reset, class: 'btn btn-danger' %>
+      </div>
+    </div>
+
 <% end %>
