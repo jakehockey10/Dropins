@@ -1,0 +1,7 @@
+<%= form_for(:dropin_removal_request, url: dropin_removal_requests_path) do |f| %>
+    <%= f.hidden_field :dropin_id, value: @dropin.id %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+    <%= button_tag fa_icon('sign-out', text: 'Request removal'),
+                   class: 'dropin-removal-request btn btn-sm btn-default',
+                   data: { disable_with: "#{fa_icon 'spinner pulse'} Sending..." } %>
+<% end %>

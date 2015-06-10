@@ -10,6 +10,16 @@ class ApplicationController < ActionController::Base
 
   private
 
+    # Confirms user is skater of dropin
+    def is_skater
+      @user = current_user
+      @dropin = Dropin.find(email_params[:dropin_id])
+      unless @user && @dropin.skaters.include?(@user)
+        flash[:info] = 'You must be skating in this dropin to message the dropin coordinator directly.'
+        redirect_to dropin_path(@dropin)
+      end
+    end
+
     # Confirms a logged-in user.
     def logged_in_user
       unless logged_in?

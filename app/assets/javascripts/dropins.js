@@ -16,7 +16,7 @@ $(function () {
         $(this).button("loading");
     });
     $('.email-dropin-creator').on('click', function () {
-        $('#email_dropin_creators_modal').modal('show');
+        $('#dropin_creator_emails_modal').modal('show');
     });
     $(".invite-skaters").on("click", function () {
         $("#invite_modal").modal("show");

@@ -2,7 +2,7 @@
     <div class="modal fade" id="email_attendees_modal" tabindex="-1" role="dialog" aria-labelledby="Email Attendees Modal" aria-hidden="true">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
-          <%= render 'shared/modal_header', locals: { title: 'Email Dropin Attendees' } %>
+          <%= render partial: 'shared/modal_header', locals: { title: 'Email Dropin Attendees' } %>
 
           <%= hidden_field_tag :dropin_id, value: @dropin.id %>
 
