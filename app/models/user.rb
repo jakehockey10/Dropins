@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
   # About attr_accessor:
   # "If you declare an `attr_accessor` then you can use it as a `virtual attribute`,
   # which is basically an attribute on the model that isn't persisted to the database."
-  attr_accessor :remember_token, :activation_token, :reset_token, :help_token
+  attr_accessor :remember_token, :activation_token, :reset_token, :help_token, :dropin_removal_token
   before_save   :downcase_email
   before_create :create_activation_digest
 
@@ -93,6 +93,12 @@ class User < ActiveRecord::Base
     update_columns(help_digest: User.digest(help_token), help_sent_at: Time.zone.now)
   end
 
+  # Sets the dropin removal request attributes
+  def create_dropin_removal_digest
+    self.dropin_removal_token = User.new_token
+    update_columns(dropin_removal_digest: User.digest(dropin_removal_token), dropin_removal_sent_at: Time.zone.now)
+  end
+
   # Sends password reset email.
   def send_password_reset_email
     UserMailer.password_reset(self).deliver_now
@@ -105,7 +111,12 @@ class User < ActiveRecord::Base
 
   # Sends email to dropin creator.
   def send_email_to_dropin_creator(dropin, message)
-    UserMailer.email_dropin_creator(dropin, self, message).deliver_now
+    UserMailer.dropin_creator_email(dropin, self, message).deliver_now
+  end
+
+  # Sends dropin removal request.
+  def send_dropin_removal_request(dropin, message)
+    UserMailer.dropin_removal_request(dropin, self, message).deliver_now
   end
 
   # Returns true if a password reset has expired.
@@ -156,13 +167,6 @@ class User < ActiveRecord::Base
 
   def leave_dropin!(dropin)
     attendances.find_by(dropin_id: dropin.id).destroy
-  end
-
-  def send_password_reset
-    create_reset_token
-    self.password_reset_sent_at = Time.zone.now
-    save!
-    UserMailer.password_reset(self).deliver
   end
 
   def name

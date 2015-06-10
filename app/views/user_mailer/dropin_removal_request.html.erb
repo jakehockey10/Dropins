@@ -1,0 +1,19 @@
+<h1>Dropins Beta</h1>
+
+<p>Hi <%= @dropin.user.name %>,</p>
+
+<p>
+  <%= @user.name %> would like to be removed from the dropin
+  you are coordinating, scheduled for <%= @dropin.date.strftime('%A, %B %d') %>.
+</p>
+
+<p><strong>Message from user:</strong></p>
+
+<blockquote>
+  <%= @message %>
+</blockquote>
+
+<p>
+  If you would like to remove them from the dropin, click
+  <%= link_to 'here', edit_dropin_removal_request_url(@user.dropin_removal_token, dropin_id: @dropin.id, user_id: @user.id) %>.
+</p>

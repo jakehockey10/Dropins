@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
-  get 'email_dropin_creators/create'
-
   root                 'static_pages#home'
-  get    'calendar' => 'static_pages#calendar'
   get    'about'    => 'static_pages#about'
+  get    'calendar' => 'static_pages#calendar'
   get    'contact'  => 'contact_with_messages#new'
   get    'signup'   => 'users#new'
   get    'login'    => 'sessions#new'
@@ -23,13 +21,14 @@ Rails.application.routes.draw do
   end
   # For WePay:
   get '/users/:action(/:user_id)', controller: 'users'
-  resources :account_activations,   only: [:edit]
-  resources :password_resets,       only: [:new, :create, :edit, :update]
-  resources :help_requests,         only: [:new, :create]
-  resources :email_dropin_creators, only: [:create]
-  resources :microposts,            only: [:create, :destroy]
-  resources :relationships,         only: [:create, :destroy]
-  resources :contact_with_messages, only: [:new, :create]
+  resources :account_activations,     only: [:edit]
+  resources :password_resets,         only: [:new, :create, :edit, :update]
+  resources :help_requests,           only: [:new, :create]
+  resources :dropin_creator_emails,   only: [:create]
+  resources :dropin_removal_requests, only: [:create, :edit]
+  resources :microposts,              only: [:create, :destroy]
+  resources :relationships,           only: [:create, :destroy]
+  resources :contact_with_messages,   only: [:new, :create]
   resources :conversations, only: [:index, :show, :new, :create] do
     member do
       post :reply

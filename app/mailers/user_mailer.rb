@@ -16,11 +16,18 @@ class UserMailer < ApplicationMailer
     mail to: ENV['GMAIL_USERNAME'], from: user.email, subject: 'Dropins: User needs help'
   end
 
-  def email_dropin_creator(dropin, user, message)
+  def dropin_creator_email(dropin, user, message)
     @dropin = dropin
     @user = user
     @message = message
     mail to: dropin.user.email, from: user.email, subject: "Message from skater of your #{@dropin.date.strftime('%A, %B %d')} dropin"
+  end
+
+  def dropin_removal_request(dropin, user, message = 'No message was given.')
+    @dropin = dropin
+    @user = user
+    @message = message
+    mail to: dropin.user.email, from: user.email, subject: "Request to be removed from your #{@dropin.date.strftime('%A, %B %d')} dropin"
   end
 
   def invite_users_to_dropin(user_id, users, dropin_id, message)

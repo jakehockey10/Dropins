@@ -1,5 +1,5 @@
 llua:
-  date: <%= Time.zone.now %>
+  date: <%= Time.zone.now + 1.hour %>
   price: 15.00
   rink: promenade
   user: jake

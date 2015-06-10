@@ -40,12 +40,12 @@ class UserMailerTest < ActionMailer::TestCase
     assert_match 'I need help!', mail.body.encoded
   end
 
-  test 'email_dropin_creator' do
+  test 'dropin_creator_email' do
     dropin = dropins(:llua)
     creator = dropin.user
     user = users(:archer)
     message = 'Thank you so much for putting this together!'
-    mail = UserMailer.email_dropin_creator(dropin, user, message)
+    mail = UserMailer.dropin_creator_email(dropin, user, message)
     assert_equal "Message from skater of your #{dropin.date.strftime('%A, %B %d')} dropin", mail.subject
     assert_equal [creator.email], mail.to
     assert_equal [user.email], mail.from

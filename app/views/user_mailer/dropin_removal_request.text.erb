@@ -1,0 +1,10 @@
+Hi <%= @dropin.user.name %>,
+
+<%= @user.name %> would like to be removed from the dropin
+you are coordinating, scheduled for <%= @dropin.date.strftime('%A, %B %d') %>.
+
+Message from user:
+
+<%= @message %>
+If you would like to remove them from the dropin, click
+<%= edit_dropin_removal_request_url(@user.dropin_removal_token, dropin_id: @dropin.id, user_id: @user.id) %>.

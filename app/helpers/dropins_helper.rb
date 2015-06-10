@@ -1,5 +1,17 @@
 module DropinsHelper
 
+  def current_user_is_owner
+    current_user == @dropin.user
+  end
+
+  def current_user_can_invite_skaters
+    @dropin.is_in_the_future? && @dropin.is_not_full && current_user.id == @dropin.user_id
+  end
+
+  def current_user_is_attending
+    @dropin.is_in_the_future? && current_user.id != @dropin.user_id && @dropin.skaters.include?(current_user)
+  end
+
   def skater_has_paid(skater_id, dropin_id)
     attendance = Attendance.where(user_id: skater_id, dropin_id: dropin_id)
     if attendance.first
