@@ -79,6 +79,8 @@ GEM
     bootstrap3-datetimepicker-rails (4.7.14)
       momentjs-rails (>= 2.8.1)
     bootstrap_tokenfield_rails (0.0.9)
+    bower (0.0.5)
+      multi_json
     builder (3.2.2)
     byebug (5.0.0)
       columnize (= 0.9.0)
@@ -408,6 +410,7 @@ DEPENDENCIES
   bootstrap-will_paginate
   bootstrap3-datetimepicker-rails
   bootstrap_tokenfield_rails
+  bower
   byebug
   carrierwave
   coffee-rails

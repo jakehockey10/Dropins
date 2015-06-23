@@ -5,6 +5,8 @@
   <%= favicon_link_tag 'favicon.ico', rel: 'short icon' %>
 
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
   <%= render 'layouts/shim' %>
@@ -13,6 +15,8 @@
 <body class="<%= yield :landing_css %>">
 <%= render 'layouts/header' %>
 <div class="container" id="main">
+
+  <!-- Main Content -->
   <% flash.each do |message_type, message| %>
       <%= content_tag(:div, message, class: "alert alert-#{message_type} alert-dismissable card-alert") do %>
           <%= message %>
@@ -23,7 +27,9 @@
   <%= yield %>
 
   <%= debug(params) if Rails.env.development? %>
+
   <%= render 'layouts/footer' %>
+
 </div>
 </body>
 </html>

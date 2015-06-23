@@ -22,10 +22,11 @@
         <%= f.text_area :message, as: :text, required: true, rows: 5, class: 'form-control' %>
         <%= f.hidden_field :nickname %>
         <hr class="card-break"/>
-
-        <%= f.button 'Send message',
-                     class: 'btn btn-link card-link pull-right',
-                     data:  {disable_with: "#{fa_icon 'spinner pulse'} Sending..."} %>
+        <div class="btn-toolbar" role="toolbar">
+          <%= f.button 'Send message',
+                       class: 'btn btn-link card-link pull-right',
+                       data:  {disable_with: "#{fa_icon 'spinner pulse'} Sending..."} %>
+        </div>
     <% end %>
   </div>
 </div>

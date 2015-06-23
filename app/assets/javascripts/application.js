@@ -39,6 +39,15 @@ $(function () {
     $('.toggle-menu').jPushMenu({closeOnClickLink: false});
     $('.dropdown-toggle').dropdown();
     $('[data-toggle="tooltip"]').tooltip();
+
+    $('.cog-spin').mouseover(function (e) {
+        $('.fa-cog').addClass('fa-spin');
+        setTimeout(function () {
+            $('.fa-cog').removeClass('fa-spin');
+        }, 1000)
+    }).mouseout(function (e) {
+        $('.fa-cog').removeClass('fa-spin');
+    })
 });
 
 function init() {

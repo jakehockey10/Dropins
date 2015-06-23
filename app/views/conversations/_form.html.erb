@@ -6,10 +6,17 @@
     <%= f.text_field :subject, class: 'form-control' %>
     <%= f.label :body %>
     <%= f.text_area :body, class: 'form-control' %>
-    <%= f.button 'Send',
-                 class: 'btn btn-primary',
-                 data:  {disable_with: "#{fa_icon 'spinner pulse'} Sending..."} %>
-    <%= f.submit 'Reset', type: :reset, class: 'btn btn-danger' %>
+
+    <div class="row">
+      <div class="col-md-6">
+        <%= f.button 'Send',
+                     class: 'btn btn-primary btn-block',
+                     data:  {disable_with: "#{fa_icon 'spinner pulse'} Sending..."} %>
+      </div>
+      <div class="col-md-6">
+        <%= f.submit 'Reset', type: :reset, class: 'btn btn-danger' %>
+      </div>
+    </div>
 
 <% end %>
 

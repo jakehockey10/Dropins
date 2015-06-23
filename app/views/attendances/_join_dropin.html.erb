@@ -1,6 +1,7 @@
 <div class="row">
   <%= form_for(current_user.attendances.build(dropin_id: @dropin.id), remote: true) do |f| %>
-      <div class="col-md-6">
+      <h1><%= label_tag :method, 'Want to join this dropin?' %></h1>
+      <div class="col-md-6 col-sm-6 col-xs-6">
         <%= link_to fa_icon('credit-card') + ' / ' + fa_icon('university', text: 'Pay online'),
                     pay_dropin_path(@dropin),
                     class:  'btn btn-primary btn-lg btn-block',
@@ -8,7 +9,7 @@
                     data:   {'loading-text' => "#{fa_icon 'spinner pulse'} Loading..."},
                     remote: true %>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6 col-sm-6 col-xs-6">
         <%= f.hidden_field :dropin_id %>
 
         <%= f.button fa_icon('money', text: 'Pay w/ cash'),
