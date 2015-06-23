@@ -20,6 +20,12 @@ doc/
 .rvmrc
 .ruby-*
 .secret
+.bowerrc
 public/assets/
 application.yml
 secrets.yml
+bower.json
+npm-debug.log
+
+vendor/assets/components
+public/uploads

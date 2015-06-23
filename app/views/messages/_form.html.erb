@@ -4,10 +4,10 @@
       <%= f.text_area :body, placeholder: 'Reply', style: 'margin-bottom: 0px !important;', class: 'form-control' %>
     </div>
     <div class="row">
-      <div class="col-md-6 col-sm-6">
+      <div class="col-md-6 col-sm-6 col-xs-6">
         <%= f.submit 'Send Message', data: { disable_with: 'Sending...' }, class: 'btn btn-primary' %>
       </div>
-      <div class="col-md-6 col-sm-6">
+      <div class="col-md-6 col-sm-6 col-xs-6">
         <%= submit_tag 'Clear Reply Box', type: :reset, class: 'btn btn-danger' %>
       </div>
     </div>

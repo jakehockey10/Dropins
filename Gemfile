@@ -17,6 +17,7 @@ gem 'autoprefixer-rails'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder'
+gem 'bower'
 
 gem 'figaro'
 gem 'twitter_cldr'

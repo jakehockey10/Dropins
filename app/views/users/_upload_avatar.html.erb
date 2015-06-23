@@ -4,6 +4,7 @@
 
       <%= f.file_field :avatar, hide_label: true, id: 'avatar_file' %>
     <%= f.button 'Upload avatar',
+                 class: 'btn btn-default',
                  data: { disable_with: "#{fa_icon 'spinner pulse'} Loading..." },
                  disabled: true,
                  id: 'avatar_submit_button' %>

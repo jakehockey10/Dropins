@@ -1,5 +1,13 @@
-$('.above_skaters_table').hide();
-$('.skaters_table').hide();
+var fadeDuration = 2000;
+var aboveSkatersTable = $('.above_skaters_table');
+var skatersTable = $('.skaters_table');
+var dropinButtons = $('#dropin_buttons');
 
-$('.skaters_table').html('<%= j render 'dropins/skaters_table' %>').fadeIn(2000);
-$('.above_skaters_table').html('<%= j render 'dropins/above_skaters_table' %>').fadeIn(2000);
+aboveSkatersTable.hide();
+skatersTable.hide();
+
+skatersTable.html('<%= j render 'dropins/skaters_table' %>').fadeIn(fadeDuration);
+aboveSkatersTable.html('<%= j render 'dropins/above_skaters_table' %>').fadeIn(fadeDuration);
+
+dropinButtons.hide();
+dropinButtons.html('<%= j render 'dropins/dropin_buttons' %>').fadeIn(fadeDuration);

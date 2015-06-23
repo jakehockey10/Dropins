@@ -3,7 +3,7 @@
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
       <% if logged_in? %>
-          <%= button_tag type: 'button', class: 'navbar-toggle toggle-menu menu-left push-body', data: {toggle: 'collapse', target: '#navbar-collapse'} do %>
+          <%= button_tag type: 'button', class: 'navbar-toggle toggle-menu menu-left push-body', data: { toggle: 'collapse', target: '#navbar-collapse' } do %>
               <span class="sr-only">Toggle navigation</span>
               <span class="icon-bar" style="background-color: #4DB6AC;"></span>
               <span class="icon-bar" style="background-color: #4DB6AC;"></span>
@@ -11,6 +11,9 @@
           <% end %>
       <% end %>
       <%= link_to raw('Dropins <span class="label label-default">Beta</span>'), root_path, id: 'logo', class: 'navbar-brand' %>
+      <% if logged_in? %>
+
+      <% end %>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -23,48 +26,78 @@
                                       border: true,
                                       style:  'display: block; margin-left: auto; margin-right: auto;'}),
                           current_user %>
-              <p class="text-center" style="display: block; color: #d3d3d3; margin-bottom: 0px;">
-                Logged in as
+              <!--<p class="text-center" style="display: block; color: #d3d3d3; font-size: large;">-->
+              <!--<%= current_user.name %>-->
+              <!--</p>-->
+              <p class="text-center" style="display: block; color: #d3d3d3; margin-bottom: 0;">
+                <%= link_to 'view my profile', current_user %>
               </p>
 
-              <p class="text-center" style="display: block; color: #d3d3d3; font-size: large">
-
-                <!--<span style="display: inline-block;">-->
-                <%= current_user.name %>
-                <!--<%= button_to logout_path, method: :delete, class: 'btn-link' do %>-->
-                    <!--<span class="glyphicon glyphicon-log-out"></span>-->
-                    <!--
-                <% end %>-->
-                <!--</span>-->
+              <p class="text-center" style="display: block; color: #d3d3d3; font-size: large;">
+                <%= pluralize(current_user.microposts.count, 'micropost') %>
               </p>
+
+              <div class="stats">
+                <a href="<%= following_user_path(current_user) %>" class="center" style="width: 50%;">
+                  <strong id="following" class="stat">
+                    <%= current_user.following.count %>
+                  </strong>
+                  following
+                </a>
+                <a href="<%= followers_user_path(current_user) %>" class="center" style="width: 50%;">
+                  <strong id="followers" class="stat">
+                    <%= current_user.followers.count %>
+                  </strong>
+                  followers
+                </a>
+              </div>
               <hr class="header"/>
             </li>
 
             <!-- Bell was here -->
             <%= render 'layouts/notification_bell' %>
 
-            <li id="fat-menu" class="dropdown">
-              <a href="#" class="dropdown-toggle animate-caret" data-toggle="dropdown">
-                <%= fa_icon 'bars' %> <%= fa_icon 'caret-down', class: 'caret-down-animate' %>
+            <li class="dropdown">
+              <a href="#" style="padding-top: 10px; padding-bottom: 10px;" class="dropdown-toggle" data-toggle="dropdown">
+                <%= fa_icon 'calendar 2x' %>
               </a>
               <ul class="dropdown-menu">
-                <li><%= link_to fa_icon('user', text: 'View Profile'), user_path(current_user) %></li>
-                <li><%= link_to fa_icon('pencil-square-o', text: 'Edit Profile'), edit_user_path(current_user) %></li>
-                <li class="divider"></li>
-                <% if current_user.admin? %>
-                    <li><%= link_to fa_icon('users', text: 'Users'), users_path %></li>
-                <% end %>
                 <li><%= link_to fa_icon('calendar', text: 'Calendar'), calendar_path %></li>
                 <li><%= link_to fa_icon('check-square-o', text: 'Dropins'), dropins_path %></li>
                 <li><%= link_to fa_icon('map-marker', text: 'Rinks'), rinks_path, data: {no_turbolink: true} %></li>
+              </ul>
+            </li>
+
+            <li class="dropdown">
+              <a href="#" style="padding-top: 10px; padding-bottom: 10px;" class="dropdown-toggle" data-toggle="dropdown">
+                <%= avatar_for(current_user, { size: 30 }) %>
+              </a>
+              <!--<a href="#" class="dropdown-toggle animate-caret" data-toggle="dropdown">-->
+                <!--<%# fa_icon 'bars' %> <%# fa_icon 'caret-down', class: 'caret-down-animate' %>-->
+              <!--</a>-->
+              <ul class="dropdown-menu">
+                <li><%= link_to fa_icon('user', text: 'View Profile'), user_path(current_user) %></li>
+                <li><%= link_to fa_icon('pencil-square-o', text: 'Edit Profile'), edit_user_path(current_user) %></li>
+                <% if current_user.admin? %>
+                    <li><%= link_to fa_icon('users', text: 'Users'), users_path %></li>
+                <% end %>
                 <li><%= link_to fa_icon('comments-o', text: 'Conversations'), conversations_path %> </li>
                 <li class="divider"></li>
                 <li><%= link_to fa_icon('sign-out', text: 'Log out'), logout_path, method: :delete %></li>
+              </ul>
+            </li>
+
+            <li class="dropdown fa-spin-hover">
+              <a href="#" style="padding-top: 10px; padding-bottom: 10px;" class="dropdown-toggle cog-spin" data-toggle="dropdown">
+                <%= fa_icon 'cog 2x', class: 'faa-spin' %>
+              </a>
+              <ul class="dropdown-menu">
                 <li><%= link_to fa_icon('info-circle', text: 'About'), about_path %></li>
                 <li><%= link_to fa_icon('envelope-o', text: 'Contact'), contact_path %></li>
                 <li><%= link_to fa_icon('question-circle', text: 'Help'), new_help_request_path %></li>
               </ul>
             </li>
+
         <% else %>
             <li><%= link_to fa_icon('sign-in', text: 'Log in'), login_path %></li>
         <% end %>
