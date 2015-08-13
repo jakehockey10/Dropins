@@ -1,6 +1,6 @@
 module UsersHelper
 
-  def avatar_for(user, options = { size: :small, border: false, style: '', class: '' })
+  def avatar_for(user, options = { size: :small, border: false, circle: false, style: '', class: '' })
     if user.respond_to? :avatar
       if user.avatar.file?
         image_tag user.avatar.url(options[:size]), alt: user.name, class: image_class(options), style: options[:style]
@@ -35,7 +35,8 @@ module UsersHelper
   end
 
   def image_class(options)
-    img_cls = 'gravatar img-circle'
+    img_cls = 'gravatar'
+    img_cls += ' img-circle' if options[:circle]
     img_cls += ' img-thumbnail' if options[:border]
     img_cls += ' ' + options[:class] if options[:class]
     img_cls

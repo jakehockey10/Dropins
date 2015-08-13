@@ -18,6 +18,7 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder'
 gem 'bower'
+gem 'groupify'
 
 gem 'figaro'
 gem 'twitter_cldr'

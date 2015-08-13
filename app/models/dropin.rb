@@ -1,5 +1,6 @@
 class Dropin < ActiveRecord::Base
   acts_as_messageable
+  groupify :group_member
 
   has_many :attendances
   has_many :skaters, through: :attendances, source: :user

@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
   acts_as_messageable
+  groupify :group_member
+  groupify :named_group_member
 
   has_many :microposts, dependent: :destroy
   has_many :active_relationships, class_name: 'Relationship', foreign_key: 'follower_id', dependent: :destroy

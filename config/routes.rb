@@ -36,6 +36,7 @@ Rails.application.routes.draw do
       post :untrash
     end
   end
+  resources :groups
 
   get 'invite/invite'
 
