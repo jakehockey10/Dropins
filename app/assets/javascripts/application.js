@@ -17,6 +17,7 @@
 //= require gmaps/google
 //= require fullcalendar
 //= require fullcalendar/gcal
+//= require kinetic-v5.0.1.min
 //= require_tree .
 //= require turbolinks
 

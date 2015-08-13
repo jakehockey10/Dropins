@@ -5,7 +5,10 @@ class AttendancesController < ApplicationController
     @dropin = Dropin.find(params[:attendance][:dropin_id])
     current_user.join_dropin!(@dropin)
     respond_to do |format|
-      format.html { redirect_to @dropin }
+      format.html do
+        flash[:success] = 'Are you ready to rumble?  You are signed up!'
+        redirect_to @dropin
+      end
       format.js
     end
   end
