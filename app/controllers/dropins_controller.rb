@@ -23,7 +23,7 @@ class DropinsController < ApplicationController
 
   def create
     the_dropin_params = dropin_params
-    the_dropin_params[:date] = Time.strptime(the_dropin_params[:date], '%m/%d/%Y %I:%M %p')
+    the_dropin_params[:date] = Time.strptime(the_dropin_params[:date], '%m/%d/%Y %I:%M %p') || Time.now - 100.years
     @dropin = Dropin.new(the_dropin_params)
     @dropin.user = current_user
 
@@ -35,6 +35,9 @@ class DropinsController < ApplicationController
         end
         format.js
       end
+    else
+      flash[:danger] = 'Watch yourself.'
+      render 'index'
     end
   end
 

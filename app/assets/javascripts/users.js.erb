@@ -45,8 +45,7 @@ function initCalendar() {
             });
         },
         eventClick: function (event, jsEvent, view) {
-            $(this).popover('show');
-            popoverClicked = !popoverClicked;
+            window.location.href = "/dropins/" + event.id;
         },
         eventMouseover: function (event, jsEvent, view) {
             if (!popoverClicked) {

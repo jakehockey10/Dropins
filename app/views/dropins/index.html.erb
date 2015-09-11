@@ -6,12 +6,14 @@
 
 <div class="row">
   <% if current_user.admin? %>
-    <aside class="col-md-4">
-      <h1>Create a new dropin:</h1>
-      <%= render 'dropins/form', dropin: Dropin.new, remote: true %>
-    </aside>
+      <aside class="col-md-4">
+        <h1>Create a new dropin:</h1>
+        <hr>
+        <%= render 'dropins/form', dropin: Dropin.new, remote: true %>
+      </aside>
   <% end %>
   <div id="dropins" class="<% unless current_user.admin? %>col-md-offset-2 <% end %>col-md-8 dropins-table" style="margin-top: 20px;">
+    <%= will_paginate @dropins %>
     <%= render @dropins %>
   </div>
 </div>

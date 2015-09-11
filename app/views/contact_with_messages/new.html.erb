@@ -5,28 +5,32 @@
 </div>
 
 <div class="row">
-  <div class="col-lg-offset-3 col-lg-6 card">
-    <h2 class="card-header">Write your message below:</h2>
-    <hr class="card-break"/>
-    <%= form_for(@contact_with_message) do |f| %>
-        <% if current_user.nil? %>
-            <%= f.label :name %>
-            <%= f.text_field :name, required: true, class: 'form-control' %>
-            <%= f.label :email %>
-            <%= f.email_field :email, required: true, class: 'form-control' %>
-        <% else %>
-            <%= f.hidden_field :name, value: current_user.name %>
-            <%= f.hidden_field :email, value: current_user.email %>
-        <% end %>
-        <%= f.label :message, hidden: true %>
-        <%= f.text_area :message, as: :text, required: true, rows: 5, class: 'form-control' %>
-        <%= f.hidden_field :nickname %>
-        <hr class="card-break"/>
-        <div class="btn-toolbar" role="toolbar">
-          <%= f.button 'Send message',
-                       class: 'btn btn-link card-link pull-right',
-                       data:  {disable_with: "#{fa_icon 'spinner pulse'} Sending..."} %>
-        </div>
-    <% end %>
+  <div class="col-lg-offset-3 col-lg-6">
+    <div class="media card">
+      <h2 class="card-header">
+        <small><p>Write your message below:</p></small>
+      </h2>
+      <hr class="card-break"/>
+      <%= form_for(@contact_with_message) do |f| %>
+          <% if current_user.nil? %>
+              <%= f.label :name %>
+              <%= f.text_field :name, required: true, class: 'form-control' %>
+              <%= f.label :email %>
+              <%= f.email_field :email, required: true, class: 'form-control' %>
+          <% else %>
+              <%= f.hidden_field :name, value: current_user.name %>
+              <%= f.hidden_field :email, value: current_user.email %>
+          <% end %>
+          <%= f.label :message, hidden: true %>
+          <%= f.text_area :message, as: :text, required: true, rows: 5, class: 'form-control' %>
+          <%= f.hidden_field :nickname %>
+          <hr class="card-break"/>
+          <div class="btn-toolbar" role="toolbar">
+            <%= f.button 'Send message',
+                         class: 'btn btn-link card-link pull-right',
+                         data:  { disable_with: "#{fa_icon 'spinner pulse'} Sending..." } %>
+          </div>
+      <% end %>
+    </div>
   </div>
 </div>

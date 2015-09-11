@@ -1,39 +1,47 @@
-<%= form_for(dropin, remote: remote) do |f| %>
-  <%= render 'shared/error_messages', object: f.object %>
+<%= form_for(dropin, remote: remote, html: { class: 'form-horizontal' }) do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
 
-  <div class="form-group">
-    <%= f.label :date %>
-    <div class='input-group date' id='datetimepicker1'>
-      <%= f.text_field :date,
-                       class: 'form-control',
-                       placeholder: 'Date' %>
-      <span class="input-group-addon"><%= fa_icon 'calendar' %></span>
+    <div class="form-group">
+      <%= f.label :date, class: 'control-label col-sm-2' %>
+      <div class='input-group date' id='datetimepicker1'>
+        <%= f.text_field :date,
+                         class:       'form-control',
+                         placeholder: 'Date' %>
+        <span class="input-group-addon"><%= fa_icon 'calendar' %></span>
+      </div>
     </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :price %>
-    <div class="input-group price" id="price1">
-      <span class="input-group-addon"><%= fa_icon 'usd' %></span>
-      <%= f.number_field :price, class: 'form-control',
-                         hide_label: true,
-                         placeholder: 'Price-per-player' %>
-      <span class="input-group-addon"><span>.00</span></span>
+    <div class="form-group">
+      <%= f.label :price, class: 'control-label col-sm-2' %>
+      <div class="input-group price col-sm-10" id="price1">
+        <span class="input-group-addon"><%= fa_icon 'usd' %></span>
+        <%= f.number_field :price,
+                           class:       'form-control',
+                           placeholder: 'Price-per-player' %>
+        <span class="input-group-addon"><span>.00 / player</span></span>
+      </div>
     </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :limit %>
-    <div class="input-group">
-      <%= f.number_field :limit, class: 'form-control',
-                         hide_label: true,
-                         placeholder: 'Player limit' %>
+    <div class="form-group">
+      <%= f.label :limit, class: 'control-label col-sm-2' %>
+      <div class="input-group col-sm-10">
+        <%= f.number_field :limit,
+                           class:       'form-control',
+                           placeholder: 'Player limit' %>
+      </div>
     </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :rink %>
-    <br/>
-    <%= collection_select(:dropin, :rink_id, Rink.all, :id, :name, { prompt: true }, { class: 'selectpicker' }) %>
-  </div>
-  <%= f.button 'Submit',
-               class: 'btn btn-default',
-               data: { disable_with: "#{fa_icon 'spinner pulse'} Loading..." } %>
+    <div class="form-group">
+      <%= f.label :rink, class: 'control-label col-sm-2' %>
+      <div class="col-sm-10">
+        <%= collection_select(:dropin,
+                              :rink_id,
+                              Rink.all,
+                              :id,
+                              :name,
+                              { prompt: 'Please select the rink' },
+                              { class: 'selectpicker form-control' }) %>
+      </div>
+    </div>
+    <hr>
+    <%= f.button 'Submit',
+                 class: 'btn btn-default btn-block',
+                 data:  { disable_with: "#{fa_icon 'spinner pulse'} Loading..." } %>
 <% end %>
