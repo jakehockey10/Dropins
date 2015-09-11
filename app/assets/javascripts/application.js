@@ -17,7 +17,6 @@
 //= require gmaps/google
 //= require fullcalendar
 //= require fullcalendar/gcal
-//= require kinetic-v5.0.1.min
 //= require_tree .
 //= require turbolinks
 
@@ -48,15 +47,20 @@ $(function () {
         }, 1000)
     }).mouseout(function (e) {
         $('.fa-cog').removeClass('fa-spin');
-    })
+    });
+
+    // Add an event listener
+    document.addEventListener("need-a-selectpicker", function(e) {
+        console.log(e.detail); // Prints "Example of an event"
+    });
 });
 
 function init() {
+    $(".selectpicker").selectpicker();
     $('.alert button.close').click(function () {
         $(this).parent().fadeOut('fast');
-//    $(this).parent().animate({ height: 0, opacity: 0 }, 'fast');
-        $(".selectpicker").selectpicker();
     });
+//    $(this).parent().animate({ height: 0, opacity: 0 }, 'fast');
 
     //var count = 0;
     //$('.help-block').each(function () {

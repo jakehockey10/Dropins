@@ -37,13 +37,13 @@ ActiveRecord::Schema.define(version: 20150705020249) do
   add_index "dropins", ["rink_id"], name: "index_dropins_on_rink_id", using: :btree
 
   create_table "gmail_contacts", force: :cascade do |t|
-    t.string   "name",            limit: 255
-    t.string   "email",           limit: 255
+    t.string   "name"
+    t.string   "email"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "profile_picture", limit: 255
-    t.string   "phone_number",    limit: 255
+    t.string   "profile_picture"
+    t.string   "phone_number"
     t.integer  "other_user_id"
   end
 
@@ -69,7 +69,7 @@ ActiveRecord::Schema.define(version: 20150705020249) do
 
   create_table "mailboxer_conversation_opt_outs", force: :cascade do |t|
     t.integer "unsubscriber_id"
-    t.string  "unsubscriber_type", limit: 255
+    t.string  "unsubscriber_type"
     t.integer "conversation_id"
   end
 
@@ -77,26 +77,26 @@ ActiveRecord::Schema.define(version: 20150705020249) do
   add_index "mailboxer_conversation_opt_outs", ["unsubscriber_id", "unsubscriber_type"], name: "index_mailboxer_conversation_opt_outs_on_unsubscriber_id_type", using: :btree
 
   create_table "mailboxer_conversations", force: :cascade do |t|
-    t.string   "subject",    limit: 255, default: ""
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.string   "subject",    default: ""
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "mailboxer_notifications", force: :cascade do |t|
-    t.string   "type",                 limit: 255
+    t.string   "type"
     t.text     "body"
-    t.string   "subject",              limit: 255, default: ""
+    t.string   "subject",              default: ""
     t.integer  "sender_id"
-    t.string   "sender_type",          limit: 255
+    t.string   "sender_type"
     t.integer  "conversation_id"
-    t.boolean  "draft",                            default: false
-    t.string   "notification_code",    limit: 255
+    t.boolean  "draft",                default: false
+    t.string   "notification_code"
     t.integer  "notified_object_id"
-    t.string   "notified_object_type", limit: 255
-    t.string   "attachment",           limit: 255
-    t.datetime "updated_at",                                       null: false
-    t.datetime "created_at",                                       null: false
-    t.boolean  "global",                           default: false
+    t.string   "notified_object_type"
+    t.string   "attachment"
+    t.datetime "updated_at",                           null: false
+    t.datetime "created_at",                           null: false
+    t.boolean  "global",               default: false
     t.datetime "expires"
   end
 
@@ -107,21 +107,21 @@ ActiveRecord::Schema.define(version: 20150705020249) do
 
   create_table "mailboxer_receipts", force: :cascade do |t|
     t.integer  "receiver_id"
-    t.string   "receiver_type",   limit: 255
-    t.integer  "notification_id",                             null: false
-    t.boolean  "is_read",                     default: false
-    t.boolean  "trashed",                     default: false
-    t.boolean  "deleted",                     default: false
+    t.string   "receiver_type"
+    t.integer  "notification_id",                            null: false
+    t.boolean  "is_read",                    default: false
+    t.boolean  "trashed",                    default: false
+    t.boolean  "deleted",                    default: false
     t.string   "mailbox_type",    limit: 25
-    t.datetime "created_at",                                  null: false
-    t.datetime "updated_at",                                  null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
   end
 
   add_index "mailboxer_receipts", ["notification_id"], name: "index_mailboxer_receipts_on_notification_id", using: :btree
   add_index "mailboxer_receipts", ["receiver_id", "receiver_type"], name: "index_mailboxer_receipts_on_receiver_id_and_receiver_type", using: :btree
 
   create_table "microposts", force: :cascade do |t|
-    t.string   "content",    limit: 255
+    t.string   "content"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "picture"
@@ -141,41 +141,34 @@ ActiveRecord::Schema.define(version: 20150705020249) do
   add_index "relationships", ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true, using: :btree
   add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id", using: :btree
 
-  create_table "rink_photos", force: :cascade do |t|
-    t.string   "url"
-    t.integer  "rink_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "rinks", force: :cascade do |t|
     t.float    "latitude"
     t.float    "longitude"
-    t.string   "address",    limit: 255
-    t.string   "name",       limit: 255
+    t.string   "address"
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                        limit: 255
+    t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "password_digest",              limit: 255
-    t.string   "remember_token",               limit: 255
-    t.boolean  "admin",                                    default: false
-    t.string   "email_token",                  limit: 255
-    t.string   "password_reset_token",         limit: 255
+    t.string   "password_digest"
+    t.string   "remember_token"
+    t.boolean  "admin",                        default: false
+    t.string   "email_token"
+    t.string   "password_reset_token"
     t.datetime "password_reset_sent_at"
-    t.string   "wepay_access_token",           limit: 255
+    t.string   "wepay_access_token"
     t.integer  "wepay_account_id"
-    t.string   "first_name",                   limit: 255
-    t.string   "second_name",                  limit: 255
-    t.string   "avatar_file_name",             limit: 255
-    t.string   "avatar_content_type",          limit: 255
+    t.string   "first_name"
+    t.string   "second_name"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
-    t.boolean  "activated",                                default: false
+    t.boolean  "activated",                    default: false
     t.string   "activation_digest"
     t.datetime "activated_at"
     t.string   "remember_digest"
@@ -183,8 +176,8 @@ ActiveRecord::Schema.define(version: 20150705020249) do
     t.datetime "reset_sent_at"
     t.string   "help_digest"
     t.datetime "help_sent_at"
-    t.string   "email_dropin_creator_digest"
-    t.datetime "email_dropin_creator_sent_at"
+    t.string   "dropin_creator_email_digest"
+    t.datetime "dropin_creator_email_sent_at"
     t.string   "dropin_removal_digest"
     t.datetime "dropin_removal_sent_at"
   end

@@ -1,11 +1,19 @@
 // TODO: This should not render all the dropins like this.  This is stupid.
 // TODO: This was an easy way to keep them sorted...
-$('#dropins').html('<%= j render Dropin.order('date desc').paginate(page: params[:page], per_page: 8) %>');
+$('#dropins').html('<%= j render Dropin.order('date asc').paginate(page: params[:page], per_page: 8) %>');
 $('aside').html('<h1>Create a new dropin:</h1><%= j render 'dropins/form', dropin: Dropin.new, remote: true %>');
-$('#datetimepicker1').datetimepicker({
-  useSeconds: false,
-  sideBySide: true
-});
-$('.selectpicker').selectpicker();
+console.log('hello?');
+$('#datetimepicker1').datetimepicker();
+console.log('hello?');
+
 $('btn').button('reset');
 //$('tr#<%# @dropin.id %>').hide().show().effect('highlight', { color: '#669966' }, 3000);
+
+$('.selectpicker').selectpicker();
+//
+//// Create the event
+//var event = new CustomEvent("need-a-selectpicker", { "detail": "Example of an event" });
+//
+//// Dispatch/Trigger/Fire the event
+//document.dispatchEvent(event);
+
