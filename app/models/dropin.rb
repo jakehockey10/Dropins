@@ -7,12 +7,21 @@ class Dropin < ActiveRecord::Base
   belongs_to :rink
   belongs_to :user
 
-  validates :date, presence: true,
-            date: { after:  Proc.new { Time.now - 1.minute },
-                    before: Proc.new { Time.now + 1.year } }
-  validates :price, presence: true, numericality: { greater_than: 0 }
-  validates :rink,  presence: true
-  validates :limit, presence: true, numericality: { only_integer: true, greater_than: 0 }
+  validates :date,
+            presence: true,
+            date:     { after:  Proc.new { Time.now - 1.minute },
+                        before: Proc.new { Time.now + 1.year } }
+  validates :price,
+            presence:     true,
+            numericality: { greater_than: 0 }
+  validates :rink,
+            presence: true
+  validates :limit,
+            presence:     true,
+            numericality: { only_integer: true, greater_than: 0 }
+  validates :description,
+            presence: true,
+            length:   { maximum: 140, minimum: 10 }
 
   # class << self
   #   # Returns the hash digest of the given string.
@@ -44,7 +53,8 @@ class Dropin < ActiveRecord::Base
   end
 
   def name
-    "Dropin #{id}"
+    # "Dropin #{id}"
+    self.description
   end
 
   def mailboxer_email(object)

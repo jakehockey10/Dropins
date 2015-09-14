@@ -5,15 +5,45 @@
 </div>
 
 <div class="row">
-  <% if current_user.admin? %>
-      <aside class="col-md-4">
+  <aside class="col-md-4">
+    <% if current_user.admin? %>
         <h1>Create a new dropin:</h1>
         <hr>
         <%= render 'dropins/form', dropin: Dropin.new, remote: true %>
-      </aside>
-  <% end %>
-  <div id="dropins" class="<% unless current_user.admin? %>col-md-offset-2 <% end %>col-md-8 dropins-table" style="margin-top: 20px;">
-    <%= will_paginate @dropins %>
-    <%= render @dropins %>
+        <hr>
+    <% end %>
+    <!-- Nav tabs -->
+    <ul class="nav nav-pills nav-stacked" id="dropin_tabs">
+      <li role="presentation" class="active">
+        <a href="#my_dropins">My dropins</a>
+      </li>
+      <li role="presentation" class="">
+        <a href="#other_dropins">Other dropins</a>
+      </li>
+      <li role="presentation" class="">
+        <a href="#public_dropins">Public dropins</a>
+      </li>
+    </ul>
+  </aside>
+  <div id="dropins" class="col-md-8 dropins-table" style="margin-top: 20px;">
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane fade in active" id="my_dropins">
+        <%= will_paginate @current_user_dropins %>
+        <%= render @current_user_dropins %>
+        <%= will_paginate @current_user_dropins %>
+      </div>
+      <div role="tabpanel" class="tab-pane fade" id="other_dropins">
+        <%= will_paginate @group_dropins %>
+        <%= render @group_dropins %>
+        <%= will_paginate @group_dropins %>
+      </div>
+      <div role="tabpanel" class="tab-pane fade" id="public_dropins">
+        <%= will_paginate @public_dropins %>
+        <%= render @public_dropins %>
+        <%= will_paginate @public_dropins %>
+      </div>
+    </div>
+
   </div>
 </div>

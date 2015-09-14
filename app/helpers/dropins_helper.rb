@@ -8,8 +8,12 @@ module DropinsHelper
     @dropin.is_in_the_future? && @dropin.is_not_full && current_user.id == @dropin.user_id
   end
 
-  def current_user_is_attending
+  def current_user_attending
     @dropin.is_in_the_future? && current_user.id != @dropin.user_id && @dropin.skaters.include?(current_user)
+  end
+
+  def current_user_attending_dropin(dropin)
+    dropin.is_in_the_future? && current_user.id != dropin.user_id && dropin.skaters.include?(current_user)
   end
 
   def skater_has_paid(skater_id, dropin_id)
@@ -28,7 +32,7 @@ module DropinsHelper
   end
 
   def followers_attending(dropin, user)
-    result = ''
+    result          = ''
     followers_going = dropin.skaters.where(id: user.following)
     followers_going.each do |u|
       result << (link_to avatar_for(u, size: :small), u, data: { toggle: 'tooltip', placement: 'top', title: u.name })
@@ -39,4 +43,21 @@ module DropinsHelper
       result.html_safe
     end
   end
+
+  def commitment_icon
+    if current_user_attending
+      skater_paid_icon(@dropin)
+    end
+  end
+
+  def dropin_commitment_icon(dropin)
+    if current_user_attending_dropin(dropin)
+      skater_paid_icon(dropin)
+    end
+  end
+
+  def skater_paid_icon(dropin)
+    skater_has_paid(current_user.id, dropin.id) ? fa_icon('credit-card') : fa_icon('money')
+  end
+
 end

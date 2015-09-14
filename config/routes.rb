@@ -19,8 +19,7 @@ Rails.application.routes.draw do
       match :delete_avatar, via: :delete
     end
   end
-  # For WePay:
-  get '/users/:action(/:user_id)', controller: 'users'
+  get '/users/:action(/:user_id)', controller: 'users' # For WePay:
   resources :account_activations,     only: [:edit]
   resources :password_resets,         only: [:new, :create, :edit, :update]
   resources :help_requests,           only: [:new, :create]
@@ -36,6 +35,8 @@ Rails.application.routes.draw do
       post :untrash
     end
   end
+
+  # Uncomment when these are actually ready!
   resources :groups
 
   get 'invite/invite'

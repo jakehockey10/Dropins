@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150705020249) do
+ActiveRecord::Schema.define(version: 20150913230034) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,10 +28,11 @@ ActiveRecord::Schema.define(version: 20150705020249) do
     t.datetime "date"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.decimal  "price",      precision: 8, scale: 2
+    t.decimal  "price",       precision: 8, scale: 2
     t.integer  "rink_id"
     t.integer  "user_id"
     t.integer  "limit"
+    t.string   "description"
   end
 
   add_index "dropins", ["rink_id"], name: "index_dropins_on_rink_id", using: :btree
@@ -55,6 +56,7 @@ ActiveRecord::Schema.define(version: 20150705020249) do
     t.integer "group_id"
     t.string  "group_name"
     t.string  "membership_type"
+    t.string  "group_type"
   end
 
   add_index "group_memberships", ["group_id"], name: "index_group_memberships_on_group_id", using: :btree

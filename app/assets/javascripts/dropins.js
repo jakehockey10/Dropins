@@ -102,4 +102,15 @@ $(function () {
         }
         textArea.scrollTop = scrollPos;
     }
+
+    $('#dropin_tabs a').click(function (e) {
+        e.preventDefault();
+        $(this).tab('show');
+    });
+
+    updateCountdown('#dropin_description');
+    var description = $('#dropin_description');
+    description.on('change', function () {return updateCountdown('#dropin_description');});
+    description.on('keyup', function () {return updateCountdown('#dropin_description');});
+
 });

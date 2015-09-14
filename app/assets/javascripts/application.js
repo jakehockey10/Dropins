@@ -50,7 +50,7 @@ $(function () {
     });
 
     // Add an event listener
-    document.addEventListener("need-a-selectpicker", function(e) {
+    document.addEventListener("need-a-selectpicker", function (e) {
         console.log(e.detail); // Prints "Example of an event"
     });
 });
@@ -94,3 +94,15 @@ function init() {
         e.stopPropagation();
     });
 }
+
+var updateCountdown = function (idSelector) {
+    // 140 is the max character length and 10 is the minimum
+    var description = $(idSelector);
+    if (description.length == 0) {
+        return;
+    }
+    if (description.val() != null) {
+        var remaining = 140 - description.val().length;
+    }
+    $('.countdown').text(remaining + ' characters remaining');
+};

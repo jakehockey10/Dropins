@@ -1,15 +1,18 @@
 class DropinsController < ApplicationController
+  require 'will_paginate/array'
+
+  before_filter :set_dropins, only: [:index]
   before_action :logged_in_user
   before_action :set_dropin, only: [:show, :edit, :update, :destroy, :email_attendees]
   before_action :admin_user, only: [:edit, :update, :new, :create, :destroy]
   before_action :set_contacts, only: [:show]
 
   def index
-    @dropins = Dropin.order('date asc').paginate(page: params[:page], per_page: 8)
+
   end
 
   def show
-    @skaters = @dropin.skaters.paginate(page: params[:page])
+    @skaters                        = @dropin.skaters.paginate(page: params[:page])
     @gmail_contacts, @user_contacts = @dropin.user.gmail_contacts.partition { |contact| contact.other_user_id == 0 }
   end
 
@@ -22,10 +25,10 @@ class DropinsController < ApplicationController
   end
 
   def create
-    the_dropin_params = dropin_params
+    the_dropin_params        = dropin_params
     the_dropin_params[:date] = Time.strptime(the_dropin_params[:date], '%m/%d/%Y %I:%M %p') || Time.now - 100.years
-    @dropin = Dropin.new(the_dropin_params)
-    @dropin.user = current_user
+    @dropin                  = Dropin.new(the_dropin_params)
+    @dropin.user             = current_user
 
     if @dropin.save
       respond_to do |format|
@@ -42,8 +45,10 @@ class DropinsController < ApplicationController
   end
 
   def update
-    the_dropin_params = dropin_params
-    the_dropin_params[:date] = Time.strptime(the_dropin_params[:date], '%m/%d/%Y %I:%M %p')
+    the_dropin_params        = dropin_params
+    unless the_dropin_params[:date].empty?
+      the_dropin_params[:date] = Time.strptime(the_dropin_params[:date], '%m/%d/%Y %I:%M %p')
+    end
     if @dropin.update(the_dropin_params)
       flash[:success] = 'Dropin was successfully updated.'
       redirect_to @dropin
@@ -61,8 +66,8 @@ class DropinsController < ApplicationController
   # GET /dropins/pay/1
   def pay
     redirect_uri = url_for(controller: 'dropins', action: 'payment_success', user_id: params[:user_id], host: request.host_with_port)
-    @dropin = Dropin.find(params[:id])
-    @user = User.find(@dropin.user.id)
+    @dropin      = Dropin.find(params[:id])
+    @user        = User.find(@dropin.user.id)
     begin
       @checkout = @user.create_checkout(redirect_uri, @dropin.price)
     rescue Exception => e
@@ -106,17 +111,25 @@ class DropinsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_dropin
-      @dropin = Dropin.find(params[:id])
-    end
 
-    def set_contacts
-      @contacts = GmailContact.where(user_id: current_user.id)
-    end
+  # Scope dropins index page using current_user
+  def set_dropins
+    @current_user_dropins = (current_user.dropins + Dropin.where(user_id: current_user.id)).sort_by { |d| d[:date] }.paginate(page: params[:page], per_page: 8)
+    @public_dropins       = Dropin.select { |d| d.groups.count == 0 }.sort_by { |d| d[:date] }.paginate(page: params[:page], per_page: 8)
+    @group_dropins        = Dropin.shares_any_group(current_user).sort_by { |d| d[:date] }.paginate(page: params[:page], per_page: 8)
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def dropin_params
-      params.require(:dropin).permit(:date, :price, :rink_id, :user_id, :limit)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_dropin
+    @dropin = Dropin.find(params[:id])
+  end
+
+  def set_contacts
+    @contacts = GmailContact.where(user_id: current_user.id)
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def dropin_params
+    params.require(:dropin).permit(:date, :price, :rink_id, :user_id, :limit)
+  end
 end

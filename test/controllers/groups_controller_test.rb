@@ -28,7 +28,7 @@ class GroupsControllerTest < ActionController::TestCase
   test 'should redirect create when not admin' do
     log_in_as(users(:michael))
     assert_no_difference 'Group.count' do
-      post :create, group: {}
+      post :create, group: { name: 'Silly group' }
     end
     assert_redirected_to root_url
   end
@@ -42,7 +42,7 @@ class GroupsControllerTest < ActionController::TestCase
   test 'should redirect destroy if logged in as non-admin' do
     log_in_as(@other_user)
     assert_no_difference 'Group.count' do
-      delete :destroy, id: @group
+      delete :destroy, id: @group, method: :destroy
     end
     assert_redirected_to root_url
   end

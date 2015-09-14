@@ -18,6 +18,11 @@ namespace :db do
   task remove_invalid_relationships: :environment do
     remove_invalid_relationships
   end
+
+  task populate_existing_dropin_descriptions: :environment do
+    populate_existing_dropin_descriptions
+  end
+
 end
 
 def make_jake_admin
@@ -87,5 +92,11 @@ def remove_invalid_relationships
   bad_relationships = Relationship.where('follower_id = followed_id')
   bad_relationships.each do |r|
     r.destroy!
+  end
+end
+
+def populate_existing_dropin_descriptions
+  Dropin.all.each do |d|
+    d.update_attribute(:description, d.user.name + "'s dropin!")
   end
 end

@@ -1,11 +1,14 @@
-<% provide(:title, 'Dropin') %>
+<% provide(:title, @dropin.description) %>
 
 <%= render 'pay_modal' %>
 <!--<%# render 'invite_modal' %>-->
 <%= render 'dropin_creator_email_modal' %>
 <%= render 'email_attendees_modal' %>
 
-<h1 class="page-header">Dropin <%= @dropin.id %></h1>
+<h1 class="page-header">
+  <%= @dropin.description %>
+  <small>(<%= @dropin.id.ordinalize %> dropin)</small>
+</h1>
 
 <div class="row">
   <%= render 'dropin_aside' %>
