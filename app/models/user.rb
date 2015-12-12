@@ -313,7 +313,6 @@ class User < ActiveRecord::Base
     params = {
       account_id: self.wepay_account_id
     }
-    debugger
     wepay_call('/account', params)
   end
 

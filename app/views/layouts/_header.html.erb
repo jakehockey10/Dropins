@@ -71,7 +71,7 @@
 
             <li class="dropdown">
               <a href="#" style="padding-top: 10px; padding-bottom: 10px;" class="dropdown-toggle" data-toggle="dropdown">
-                <%= avatar_for(current_user, { circle: true, size: 30 }) %>
+                <%= avatar_for(current_user, { circle: true, size: :small, style: 'width: 30px; height: 30px;' }) %>
                 <span class="if-mobile-text vcenter" style="font-size: 24px;"><%= current_user.first_name %></span>
               </a>
               <!--<a href="#" class="dropdown-toggle animate-caret" data-toggle="dropdown">-->
