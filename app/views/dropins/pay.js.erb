@@ -1,6 +1,2 @@
-<% if @error %>
-  $('.modal-body').html('<%= j render 'dropins/wepay_pay_error' %>')
-<% else %>
-  $('.modal-body').html('<%= j render 'dropins/wepay_pay_iframe' %>');
-<% end %>
 $('#pay_modal').modal('show');
+$('#pay_modal > div > div > div.modal-body').html('<%= j render @error ? 'dropins/wepay_pay_error' : 'dropins/wepay_pay_iframe' %>');

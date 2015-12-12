@@ -1,5 +1,10 @@
 <div id="wepay-iframe-div" style="text-align: center;">
-  <script type="text/javascript">
-    WePay.iframe_checkout("wepay-iframe-div", "<%= @checkout['checkout_uri'] %>");
-  </script>
+  <% if @checkout %>
+      <script type="text/javascript">
+        WePay.iframe_checkout("wepay-iframe-div", "<%= @checkout['hosted_checkout']['checkout_uri'] %>");
+        $('#pay_modal').on('hidden.bs.modal', function (e) {
+          $('.above_skaters_table').html('<%= j render 'dropins/above_skaters_table' %>').fadeIn(2000);
+        })
+      </script>
+  <% end %>
 </div>

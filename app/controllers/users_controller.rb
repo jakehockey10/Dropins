@@ -73,6 +73,7 @@ class UsersController < ApplicationController
       flash[:success] = 'Profile updated'
       redirect_to @user
     else
+      @account = current_user.get_wepay_account if current_user.has_wepay_account?
       render 'edit'
     end
   end

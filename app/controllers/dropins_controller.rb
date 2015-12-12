@@ -1,14 +1,13 @@
 class DropinsController < ApplicationController
   require 'will_paginate/array'
 
-  before_filter :set_dropins, only: [:index]
+  before_filter :set_dropins, only: [:index, :create]
   before_action :logged_in_user
   before_action :set_dropin, only: [:show, :edit, :update, :destroy, :email_attendees]
   before_action :admin_user, only: [:edit, :update, :new, :create, :destroy]
   before_action :set_contacts, only: [:show]
 
   def index
-
   end
 
   def show
@@ -29,7 +28,6 @@ class DropinsController < ApplicationController
     the_dropin_params[:date] = Time.strptime(the_dropin_params[:date], '%m/%d/%Y %I:%M %p') || Time.now - 100.years
     @dropin                  = Dropin.new(the_dropin_params)
     @dropin.user             = current_user
-
     if @dropin.save
       respond_to do |format|
         format.html do
@@ -63,7 +61,6 @@ class DropinsController < ApplicationController
     redirect_to dropins_url
   end
 
-  # GET /dropins/pay/1
   def pay
     redirect_uri = url_for(controller: 'dropins', action: 'payment_success', user_id: params[:user_id], host: request.host_with_port)
     @dropin      = Dropin.find(params[:id])
@@ -82,7 +79,6 @@ class DropinsController < ApplicationController
     end
   end
 
-  #GET /dropins/payment_success/1
   def payment_success
     @dropin = Dropin.find(params[:id])
     unless params[:checkout_id]
@@ -114,6 +110,7 @@ class DropinsController < ApplicationController
 
   # Scope dropins index page using current_user
   def set_dropins
+    @dropins = Dropin.all
     @current_user_dropins = (current_user.dropins + Dropin.where(user_id: current_user.id)).sort_by { |d| d[:date] }.paginate(page: params[:page], per_page: 8)
     @public_dropins       = Dropin.select { |d| d.groups.count == 0 }.sort_by { |d| d[:date] }.paginate(page: params[:page], per_page: 8)
     @group_dropins        = Dropin.shares_any_group(current_user).sort_by { |d| d[:date] }.paginate(page: params[:page], per_page: 8)
@@ -130,6 +127,6 @@ class DropinsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def dropin_params
-    params.require(:dropin).permit(:date, :price, :rink_id, :user_id, :limit)
+    params.require(:dropin).permit(:date, :price, :rink_id, :user_id, :limit, :description)
   end
 end

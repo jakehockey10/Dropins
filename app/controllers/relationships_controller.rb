@@ -10,6 +10,10 @@ class RelationshipsController < ApplicationController
   def create
     @user = User.find(params[:followed_id])
     current_user.follow(@user)
+    payload = { this: :data }
+    ActiveSupport::Notifications.instrument 'follow.user', payload do
+      # do your custom stuff here
+    end
     respond_to do |format|
       format.html { redirect_to @user }
       format.js

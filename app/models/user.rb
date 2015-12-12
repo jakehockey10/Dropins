@@ -255,12 +255,17 @@ class User < ActiveRecord::Base
     params = {
       account_id: self.wepay_account_id,
       short_description: 'Dropin paid for',
-      type: :EVENT,
+      type: 'event',
+      currency: 'USD',
       amount: dropin_amount,
-      app_fee: app_fee,
-      fee_payer: :payee,
-      mode: :iframe,
-      redirect_uri: redirect_uri
+      fee: {
+        app_fee: app_fee,
+        fee_payer: 'payee',
+      },
+      hosted_checkout: {
+        mode: 'iframe',
+        redirect_uri: redirect_uri
+      }
     }
     wepay_call('/checkout/create', params)
   end
@@ -308,6 +313,7 @@ class User < ActiveRecord::Base
     params = {
       account_id: self.wepay_account_id
     }
+    debugger
     wepay_call('/account', params)
   end
 

@@ -95,6 +95,8 @@ def remove_invalid_relationships
   end
 end
 
+
+## TODO: STILL NEED TO RUN THIS IN PRODUCTION!
 def populate_existing_dropin_descriptions
   Dropin.all.each do |d|
     d.update_attribute(:description, d.user.name + "'s dropin!")

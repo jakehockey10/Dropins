@@ -13,7 +13,7 @@ class MicropostsInterfaceTest < ActionDispatch::IntegrationTest
     assert_select 'input[type=file]'
     # Invalid submission
     assert_no_difference 'Micropost.count' do
-      post microposts_path, micropost: { content: ''}
+      post microposts_path, micropost: { content: '' }
     end
     assert_select 'div#error_explanation'
     # Valid submission

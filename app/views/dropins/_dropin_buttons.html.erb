@@ -1,7 +1,7 @@
 <%= button_tag fa_icon('user', text: 'Email creator'),
                class: 'email-dropin-creator btn btn-sm btn-default' if current_user_attending %>
 <%= render 'dropins/request_removal' if current_user_attending %>
-<%= button_tag fa_icon('send', text: 'Invite skaters'),
+<%# button_tag fa_icon('send', text: 'Invite skaters'),
                class: 'invite-skaters btn btn-sm btn-default' if current_user_can_invite_skaters %>
 <%= button_tag fa_icon('users', text: 'Email attendees'),
                class: 'email-attendees btn btn-sm btn-default' if current_user_is_owner %>

@@ -10,7 +10,6 @@ class ConversationsController < ApplicationController
       redirect_to new_conversation_path
     else
       recipients = User.where(email: recipient_emails)
-
       conversation = current_user.send_message(recipients, *conversation_params(:body, :subject)).conversation
       redirect_to conversation_path(conversation)
     end
