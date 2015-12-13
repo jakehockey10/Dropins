@@ -24,10 +24,10 @@ class DropinsController < ApplicationController
   end
 
   def create
-    the_dropin_params        = dropin_params
-    the_dropin_params[:date] = Time.strptime(the_dropin_params[:date], '%m/%d/%Y %I:%M %p') || Time.now - 100.years
-    @dropin                  = Dropin.new(the_dropin_params)
-    @dropin.user             = current_user
+    the_dropin_params = dropin_params
+    the_dropin_params[:date] = Time.strptime(the_dropin_params[:date], '%m/%d/%Y %I:%M %p') rescue the_dropin_params[:date]
+    @dropin      = Dropin.new(the_dropin_params)
+    @dropin.user = current_user
     if @dropin.save
       respond_to do |format|
         format.html do
@@ -37,13 +37,14 @@ class DropinsController < ApplicationController
         format.js
       end
     else
-      flash[:danger] = 'Watch yourself.'
-      render 'index'
+      respond_to do |format|
+        format.js
+      end
     end
   end
 
   def update
-    the_dropin_params        = dropin_params
+    the_dropin_params = dropin_params
     unless the_dropin_params[:date].empty?
       the_dropin_params[:date] = Time.strptime(the_dropin_params[:date], '%m/%d/%Y %I:%M %p')
     end
@@ -110,7 +111,7 @@ class DropinsController < ApplicationController
 
   # Scope dropins index page using current_user
   def set_dropins
-    @dropins = Dropin.all
+    @dropins              = Dropin.all
     @current_user_dropins = (current_user.dropins + Dropin.where(user_id: current_user.id)).sort_by { |d| d[:date] }.paginate(page: params[:page], per_page: 8)
     @public_dropins       = Dropin.select { |d| d.groups.count == 0 }.sort_by { |d| d[:date] }.paginate(page: params[:page], per_page: 8)
     @group_dropins        = Dropin.shares_any_group(current_user).sort_by { |d| d[:date] }.paginate(page: params[:page], per_page: 8)
