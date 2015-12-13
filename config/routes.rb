@@ -44,7 +44,8 @@ Rails.application.routes.draw do
   resources :attendances, only: [:create, :destroy]
   resources :dropins do
     member do
-      get :pay, :payment_success, :email_attendees
+      get :pay, :payment_success
+      post :email_attendees
     end
   end
   resources :rinks
