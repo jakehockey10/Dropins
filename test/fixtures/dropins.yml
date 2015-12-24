@@ -4,6 +4,7 @@ llua:
   rink: promenade
   user: jake
   limit: 20
+  description: This used to be a weekly thing.
 
 silly_dropin:
   date: <%= Time.zone.now %>
