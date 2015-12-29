@@ -112,9 +112,11 @@ class DropinsController < ApplicationController
   # Scope dropins index page using current_user
   def set_dropins
     @dropins              = Dropin.all
-    @current_user_dropins = current_user.dropins.sort_by { |d| d[:date] }.paginate(page: params[:page], per_page: 8)
-    @public_dropins       = Dropin.select { |d| d.groups.count == 0 }.sort_by { |d| d[:date] }.paginate(page: params[:page], per_page: 8)
-    @group_dropins        = Dropin.shares_any_group(current_user).sort_by { |d| d[:date] }.paginate(page: params[:page], per_page: 8)
+    if current_user
+      @current_user_dropins = current_user.dropins.sort_by { |d| d[:date] }.paginate(page: params[:page], per_page: 8)
+      @public_dropins       = Dropin.select { |d| d.groups.count == 0 }.sort_by { |d| d[:date] }.paginate(page: params[:page], per_page: 8)
+      @group_dropins        = Dropin.shares_any_group(current_user).sort_by { |d| d[:date] }.paginate(page: params[:page], per_page: 8)
+    end
   end
 
   # Use callbacks to share common setup or constraints between actions.
