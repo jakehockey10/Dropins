@@ -25,6 +25,25 @@ namespace :db do
 
 end
 
+namespace :tools do
+
+  task send_activation_email_to_inactive_users: :environment do
+    send_activation_email_to_inactive_users
+  end
+
+  desc 'switch rails logger to stdout'
+  task :verbose => [:environment] do
+    Rails.logger = Logger.new(STDOUT)
+  end
+
+  desc 'switch rails logger log level to debug'
+  task :debug => [:environment, :verbose] do
+    Rails.logger.level = Logger::DEBUG
+  end
+
+end
+
+
 def make_jake_admin
   User.create!(first_name: 'Jake',
                second_name: 'Smith',
@@ -95,10 +114,16 @@ def remove_invalid_relationships
   end
 end
 
-
-## TODO: STILL NEED TO RUN THIS IN PRODUCTION!
 def populate_existing_dropin_descriptions
   Dropin.all.each do |d|
     d.update_attribute(:description, d.user.name + "'s dropin!")
+  end
+end
+
+def send_activation_email_to_inactive_users
+  User.where(activated: false).each do |u|
+    u.create_activation_digest
+    u.save # need to save the digest to match later.
+    u.send_activation_email
   end
 end
