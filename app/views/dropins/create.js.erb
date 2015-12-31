@@ -3,7 +3,7 @@
 <% unless @dropin.errors %>
 <% @dropin = Dropin.new %>
 <% end %>
-$('aside').html('<h1>Create a new dropin:</h1><%= j render 'dropins/form', dropin: @dropin || Dropin.new, remote: true %>');
+$('aside').html('<%= j render 'dropins/index_aside' %>');
 $('#dropins').html('<%= j render Dropin.order('date asc').paginate(page: params[:page], per_page: 8) %>');
 $('#datetimepicker1').datetimepicker({sideBySide: true});
 $('btn').button('reset');

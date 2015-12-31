@@ -1,0 +1,18 @@
+<% if current_user.admin? %>
+    <h1>Create a new dropin:</h1>
+    <hr>
+    <%= render 'dropins/form', dropin: Dropin.new, remote: true %>
+    <hr>
+<% end %>
+<!-- Nav tabs -->
+<ul class="nav nav-pills nav-stacked" id="dropin_tabs">
+  <li role="presentation" class="active">
+    <a href="#my_dropins">My dropins</a>
+  </li>
+  <li role="presentation" class="">
+    <a href="#other_dropins">Other dropins</a>
+  </li>
+  <li role="presentation" class="">
+    <a href="#public_dropins">Public dropins</a>
+  </li>
+</ul>
