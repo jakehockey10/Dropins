@@ -29,3 +29,5 @@ npm-debug.log
 
 vendor/assets/components
 public/uploads
+
+.byebug_history
