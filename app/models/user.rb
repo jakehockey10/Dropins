@@ -13,20 +13,20 @@ class User < ActiveRecord::Base
   has_many :dropins, through: :attendances
   has_many :gmail_contacts
   has_attached_file :avatar,
-                    path: ':attachment/:id/:style.:extension',
-                    storage: :s3,
-                    url: ':s3_domain_url',
-                    bucket: Proc.new { |a| a.instance.s3_bucket },
-                    s3_protocol: :https,
+                    path:           ':attachment/:id/:style.:extension',
+                    storage:        :s3,
+                    url:            ':s3_domain_url',
+                    bucket:         Proc.new { |a| a.instance.s3_bucket },
+                    s3_protocol:    :https,
                     s3_credentials: { access_key_id: ENV['AWS_ACCESS_KEY_ID'], secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'] },
-                    styles: { large: '500x500', medium: '250x250', thumb: '100x100', small: '60' }
+                    styles:         { large: '500x500', medium: '250x250', thumb: '100x100', small: '60' }
 
   # From http://stackoverflow.com/questions/20533925/why-is-attr-accessor-necessary-in-rails-4:
   # About attr_accessor:
   # "If you declare an `attr_accessor` then you can use it as a `virtual attribute`,
   # which is basically an attribute on the model that isn't persisted to the database."
   attr_accessor :remember_token, :activation_token, :reset_token, :help_token, :dropin_removal_token
-  before_save   :downcase_email
+  before_save :downcase_email
   before_create :create_activation_digest
 
   validates :first_name, presence: true, length: { maximum: 20 }
@@ -61,7 +61,7 @@ class User < ActiveRecord::Base
     update_attribute(:remember_digest, User.digest(remember_token))
   end
 
-  # Returns true i the given token matches the digest
+  # Returns true if the given token matches the digest
   def authenticated?(attribute, token)
     digest = send("#{attribute}_digest")
     return false if digest.nil?
@@ -148,14 +148,14 @@ class User < ActiveRecord::Base
   end
 
   def create_gmail_contact?(user, followed_id, follower_id)
-    user.admin? && ! Relationship.where(followed_id: followed_id, follower_id: follower_id).empty?
+    user.admin? && !Relationship.where(followed_id: followed_id, follower_id: follower_id).empty?
   end
 
   def create_gmail_contact(name, email, user_id, other_user_id, profile_picture)
-    GmailContact.create!(name: name,
-                         email: email,
-                         user_id: user_id,
-                         other_user_id: other_user_id,
+    GmailContact.create!(name:            name,
+                         email:           email,
+                         user_id:         user_id,
+                         other_user_id:   other_user_id,
                          profile_picture: profile_picture)
   end
 
@@ -216,7 +216,7 @@ class User < ActiveRecord::Base
   # creates a WePay account for this user with the user's name
   def create_wepay_account
     if self.has_wepay_access_token? && !self.has_wepay_account?
-      params = { name: self.name, description: 'dropin payment' }
+      params   = { name: self.name, description: 'dropin payment' }
       response = WEPAY.call('/account/create', self.wepay_access_token, params)
 
       if response['account_id']
@@ -252,46 +252,46 @@ class User < ActiveRecord::Base
   # creates a checkout object using WePay API for this user
   def create_checkout(redirect_uri, dropin_amount)
     app_fee = 0
-    params = {
-      account_id: self.wepay_account_id,
-      short_description: 'Dropin paid for',
-      type: 'event',
-      currency: 'USD',
-      amount: dropin_amount,
-      fee: {
-        app_fee: app_fee,
-        fee_payer: 'payee',
-      },
-      hosted_checkout: {
-        mode: 'iframe',
-        redirect_uri: redirect_uri
-      }
+    params  = {
+        account_id:        self.wepay_account_id,
+        short_description: 'Dropin paid for',
+        type:              'event',
+        currency:          'USD',
+        amount:            dropin_amount,
+        fee:               {
+            app_fee:   app_fee,
+            fee_payer: 'payee',
+        },
+        hosted_checkout:   {
+            mode:         'iframe',
+            redirect_uri: redirect_uri
+        }
     }
     wepay_call('/checkout/create', params)
   end
 
   def make_withdrawal(redirect_uri, description = nil)
     params = {
-      account_id: self.wepay_account_id,
-      redirect_uri: redirect_uri,
-      fallback_uri: redirect_uri,
-      note:         description ||= "User: #{self.email}",
-      mode:         'iframe'
+        account_id:   self.wepay_account_id,
+        redirect_uri: redirect_uri,
+        fallback_uri: redirect_uri,
+        note:         description ||= "User: #{self.email}",
+        mode:         'iframe'
     }
     wepay_call('/withdrawal/create', params)
   end
 
   def get_withdrawal(withdrawal_id)
     params = {
-      withdrawal_id: withdrawal_id
+        withdrawal_id: withdrawal_id
     }
     wepay_call('/withdrawal', params)
   end
 
   def get_withdrawals(state)
     params = {
-      account_id: self.wepay_account_id,
-      state: state
+        account_id: self.wepay_account_id,
+        state:      state
     }
     wepay_call('/withdrawal/find', params)
   end
@@ -299,28 +299,28 @@ class User < ActiveRecord::Base
   def get_withdrawal_counts
     account_id = self.wepay_account_id
     # TODO: use wepay batch call for this
-    counts = {
-      new:      wepay_call('/withdrawal/find', { account_id: account_id, state: 'new' }).count,
-      started:  wepay_call('/withdrawal/find', { account_id: account_id, state: 'started' }).count,
-      captured: wepay_call('/withdrawal/find', { account_id: account_id, state: 'captured' }).count,
-      expired:  wepay_call('/withdrawal/find', { account_id: account_id, state: 'expired' }).count,
-      failed:   wepay_call('/withdrawal/find', { account_id: account_id, state: 'failed' }).count
+    counts     = {
+        new:      wepay_call('/withdrawal/find', { account_id: account_id, state: 'new' }).count,
+        started:  wepay_call('/withdrawal/find', { account_id: account_id, state: 'started' }).count,
+        captured: wepay_call('/withdrawal/find', { account_id: account_id, state: 'captured' }).count,
+        expired:  wepay_call('/withdrawal/find', { account_id: account_id, state: 'expired' }).count,
+        failed:   wepay_call('/withdrawal/find', { account_id: account_id, state: 'failed' }).count
     }
     counts
   end
 
   def get_wepay_account
     params = {
-      account_id: self.wepay_account_id
+        account_id: self.wepay_account_id
     }
     wepay_call('/account', params)
   end
 
   def get_update_uri(redirect_uri)
     params = {
-      account_id: self.wepay_account_id,
-      mode: :iframe,
-      redirect_uri: redirect_uri
+        account_id:   self.wepay_account_id,
+        mode:         :iframe,
+        redirect_uri: redirect_uri
     }
     wepay_call('/account/get_update_uri', params)
   end
@@ -337,6 +337,12 @@ class User < ActiveRecord::Base
     nil
   end
 
+  # Creates and assigns the activation token and digest.
+  def create_activation_digest
+    self.activation_token  = User.new_token
+    self.activation_digest = User.digest(activation_token)
+  end
+
   private
 
     # Converts email to all lower-case
@@ -344,9 +350,4 @@ class User < ActiveRecord::Base
       self.email = email.downcase
     end
 
-    # Creates and assigns the activation token and digest.
-    def create_activation_digest
-      self.activation_token = User.new_token
-      self.activation_digest = User.digest(activation_token)
-    end
 end
