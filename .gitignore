@@ -34,3 +34,6 @@ public/uploads
 
 # Ignore application configuration
 /config/application.yml
+
+# Ignore test output
+public/uploads/micropost/picture/
