@@ -18,44 +18,44 @@
 <div class="row">
 
   <% if current_user.admin? %>
-    <div class="col-xs-9 col-sm-9 col-md-9 thumbnail">
-      <!-- I don't know why, but this extra div around the map and search bar
-           is the only way to get the map to resize with the thumbnail border
-           and keep everything responsive. -->
-      <div>
-        <input id="pac-input" class="controls" type="text" placeholder="Search Box"/>
-        <div id="map"></div>
+      <div class="col-md-9 thumbnail">
+        <!-- I don't know why, but this extra div around the map and search bar
+             is the only way to get the map to resize with the thumbnail border
+             and keep everything responsive. -->
+        <div>
+          <input id="pac-input" class="controls" type="text" placeholder="Search Box"/>
+          <div id="map"></div>
+        </div>
       </div>
-    </div>
-    <aside class="col-xs-3 col-sm-3 col-md-3" style="overflow: visible;">
-      <section style="overflow: visible;">
-        <h1>Add a rink:</h1>
-        <%= render 'rinks/form' %>
-      </section>
-      <section style="overflow: visible">
-        <h1>Rinks in the system:</h1>
-        <ul class="media-list" style="margin-top: 20px">
-          <%= render @rinks %>
-        </ul>
-      </section>
-    </aside>
+      <aside class="col-md-3" style="overflow: visible;">
+        <section style="overflow: visible;">
+          <h1>Add a rink:</h1>
+          <%= render 'rinks/form' %>
+        </section>
+        <section style="overflow: visible">
+          <h1>Rinks in the system:</h1>
+          <ul class="media-list" style="margin-top: 20px">
+            <%= render @rinks %>
+          </ul>
+        </section>
+      </aside>
   <% else %>
-    <div class="col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-xs-10 col-sm-10 col-md-10 thumbnail">
-      <!-- I don't know why, but this extra div around the map and search bar
-           is the only way to get the map to resize with the thumbnail border
-           and keep everything responsive. -->
-      <div>
-        <input id="pac-input" class="controls" type="text" placeholder="Search Box"/>
-        <div id="map"></div>
+      <div class="col-md-offset-1 col-md-10 thumbnail">
+        <!-- I don't know why, but this extra div around the map and search bar
+             is the only way to get the map to resize with the thumbnail border
+             and keep everything responsive. -->
+        <div>
+          <input id="pac-input" class="controls" type="text" placeholder="Search Box"/>
+          <div id="map"></div>
+        </div>
       </div>
-    </div>
   <% end %>
 </div>
 
 <script type="text/javascript">
   var makeMap = function () {
     var handler = Gmaps.build('Google');
-    handler.buildMap({ provider: {}, internal: {id: 'map'}}, function() {
+    handler.buildMap({provider: {}, internal: {id: 'map'}}, function () {
       var markers = handler.addMarkers(<%= raw @hash.to_json %>);
       handler.bounds.extendWith(markers);
       handler.fitMapToBounds();
@@ -70,7 +70,7 @@
 
     // Listen for the event fired when the user selects an item from the
     // pick list.  Retrieve the matching places for that item.
-    google.maps.event.addListener(searchBox, 'places_changed', function() {
+    google.maps.event.addListener(searchBox, 'places_changed', function () {
       var markers = [];
       var places = searchBox.getPlaces();
 
@@ -138,20 +138,20 @@
   };
 
   $(document).on('ready page:load', function () {
-    setTimeout(function() {
+    setTimeout(function () {
       makeMap();
     }, 1000);
   });
 
-  $(document).on('page:resize', function() {
-    setTimeout(function() {
+  $(document).on('page:resize', function () {
+    setTimeout(function () {
       makeMap();
     }, 1000);
   });
 
   var mapParent = $('#map').parent('.thumbnail');
   var width = mapParent.width();
-//  var height = mapParent.height() - 8;
+  //  var height = mapParent.height() - 8;
   $('#map').css('width', width + 'px');
   $('#map').css('height', 500 + 'px');
 </script>
