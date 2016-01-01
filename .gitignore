@@ -22,8 +22,6 @@ doc/
 .secret
 .bowerrc
 public/assets/
-application.yml
-secrets.yml
 bower.json
 npm-debug.log
 
@@ -34,6 +32,9 @@ public/uploads
 
 # Ignore application configuration
 /config/application.yml
+
+/config/secrets.yml
+/config/database.yml
 
 # Ignore test output
 public/uploads/micropost/picture/
