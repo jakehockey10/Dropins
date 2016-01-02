@@ -101,8 +101,8 @@ class DropinsController < ApplicationController
     DropinAttendeeMailer.email_attendees(current_user.id,
                                          @dropin.skaters.pluck(:email),
                                          @dropin.id,
-                                         params[:subject],
-                                         params[:message]).deliver
+                                         params[:email_attendees_dropin][:subject],
+                                         params[:email_attendees_dropin][:message]).deliver
     flash[:success] = 'Emails sent!'
     redirect_to @dropin
   end
@@ -111,7 +111,7 @@ class DropinsController < ApplicationController
 
   # Scope dropins index page using current_user
   def set_dropins
-    @dropins              = Dropin.all
+    @dropins = Dropin.all
     if current_user
       @current_user_dropins = current_user.dropins.sort_by { |d| d[:date] }.paginate(page: params[:page], per_page: 8)
       @public_dropins       = Dropin.select { |d| d.groups.count == 0 }.sort_by { |d| d[:date] }.paginate(page: params[:page], per_page: 8)
