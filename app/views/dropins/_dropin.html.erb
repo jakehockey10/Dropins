@@ -11,8 +11,7 @@
       <p><%= dropin.date.strftime('%A, %b %e at %I:%M %p') %></p>
     </small>
     <small class="text-info">
-      <%= fa_icon('flag-o', text: 'You created this dropin!') if dropin.user == current_user %>
-      <%= fa_icon('flag-o', text: 'You are skating in this dropin!') if dropin.skaters.include? current_user %>
+      <%= fa_icon('flag-o', text: dropin.context(current_user)) %>
     </small>
 
   </h2>

@@ -81,4 +81,16 @@ class Dropin < ActiveRecord::Base
     end
   end
 
+  def context(user)
+    if self.user == user
+      'You created this dropin!'
+    elsif self.skaters.include? user
+      if self.is_in_the_future?
+        'You are skating in this dropin!'
+      else
+        'You skated in this dropin!'
+      end
+    end
+  end
+
 end
