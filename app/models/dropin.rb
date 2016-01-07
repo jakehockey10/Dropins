@@ -90,6 +90,12 @@ class Dropin < ActiveRecord::Base
       else
         'You skated in this dropin!'
       end
+    else
+      if self.is_in_the_future?
+        'You can sign up to this dropin!'
+      else
+        'You missed out!'
+      end
     end
   end
 

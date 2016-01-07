@@ -7,7 +7,8 @@ class DropinTest < ActiveSupport::TestCase
                          rink:        rinks(:promenade),
                          limit:       20,
                          price:       20,
-                         description: "Jake's Dropin")
+                         description: "Jake's Dropin",
+                         user: users(:jake))
   end
 
   test 'should be valid' do
@@ -73,4 +74,10 @@ class DropinTest < ActiveSupport::TestCase
     @dropin.description = 'a' * 141
     assert_not @dropin.valid?
   end
+
+  # test 'context is correct' do
+  #   assert_equal @dropin.context(@dropin.user), 'You created this dropin!'
+  #   assert_equal @dropin.context(users(:michael)), 'You are skating in this dropin!'
+  #   assert_equal @dropin.context(users(:archer)), 'You skated in this dropin!'
+  # end
 end
