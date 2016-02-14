@@ -23,7 +23,7 @@
 <script type="text/javascript" charset="utf-8">
     $('input.tokenize-recipients').tokenfield({
         autocomplete: {
-            source: <%= tokenfield_source %>,
+            source: <%= tokenfield_source(current_user) %>,
             delay: 100,
             create: function () {
                 $(this).data('ui-autocomplete')._renderItem = function (ul, item) {

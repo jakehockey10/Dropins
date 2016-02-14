@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
+ruby '2.2.2'
 
-gem 'rails', '4.2.1'
+gem 'rails', '4.2.5.1'
 gem 'bcrypt'
 gem 'faker'
 gem 'carrierwave'
@@ -46,9 +47,12 @@ gem 'bootstrap_tokenfield_rails'
 gem 'font-awesome-rails'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+group :development do
+  gem 'web-console'
+end
+
 group :development, :test do
   gem 'byebug'
-  gem 'web-console'
   gem 'spring'
 end
 
@@ -57,6 +61,7 @@ group :test do
   gem 'mini_backtrace'
   gem 'guard-minitest'
   gem 'guard'
+  gem 'simplecov', require: false
 end
 
 group :production do

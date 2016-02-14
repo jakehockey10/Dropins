@@ -5,7 +5,7 @@ class DropinShowTest < ActionDispatch::IntegrationTest
   def setup
     @dropin = dropins(:llua)
     @user = users(:jake)
-    @other_user = users(:michael)
+    @other_user = users(:mallory)
   end
 
   test 'dropin show shows correct buttons for dropin creators' do
@@ -19,7 +19,6 @@ class DropinShowTest < ActionDispatch::IntegrationTest
 
   test 'dropin show shows correct buttons for dropin skaters html' do
     assert_buttons_before_attending
-    # join dropin
     post attendances_path,
          attendance: { dropin_id: @dropin.id,
                        user_id: @other_user.id }
@@ -30,8 +29,6 @@ class DropinShowTest < ActionDispatch::IntegrationTest
 
   test 'dropin show shows correct buttons for dropin skaters ajax' do
     assert_buttons_before_attending
-    # join dropin
-
     xhr :post, attendances_path,
          attendance: { dropin_id: @dropin.id,
                        user_id: @other_user.id }

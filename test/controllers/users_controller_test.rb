@@ -77,4 +77,10 @@ class UsersControllerTest < ActionController::TestCase
     assert_redirected_to login_url
   end
 
+  # TODO: Move to separate controller.  Action can't be found :(
+  # test 'should redirect delete_avatar if not logged in' do
+  #   xhr :delete, delete_avatar_user_path(@user)
+  #   assert @user.avatar.nil?
+  # end
+
 end

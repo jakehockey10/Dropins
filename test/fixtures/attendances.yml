@@ -10,6 +10,6 @@ one:
   paid: false
 
 two:
-  user_id: michael.id
-  dropin_id: llua.id
+  user: michael
+  dropin: llua
   paid: true

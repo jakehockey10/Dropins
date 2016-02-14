@@ -12,7 +12,7 @@ class DropinRemovalRequestsController < ApplicationController
       # TODO: put a parameter in that link to use for better support from the start.
       # TODO: the %Q[] syntax is so that you can put ruby syntax in for a parameter.
       # See http://stackoverflow.com/questions/2249431/put-a-link-in-a-flashnotice
-      flash[:danger] = %Q[Something went wrong.  Could you let me know about it <a href="/help_requests/new">here</a>.]
+      flash[:danger] = 'Something went wrong.  Could you let me know about it <a href="/help_requests/new">here</a>.'
     end
   end
 
@@ -25,7 +25,7 @@ class DropinRemovalRequestsController < ApplicationController
       flash[:success] = 'Skater successfully removed from the dropin!'
       redirect_to dropin_path(dropin)
     else
-      flash[:danger] = 'Invalid activation link'
+      flash[:danger] = 'Invalid activation link.  Could you let me know about it <a href="/help_requests/new">here</a>.'
       redirect_to dropin_path(dropin)
     end
   end

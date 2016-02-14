@@ -81,7 +81,7 @@ class Dropin < ActiveRecord::Base
     end
   end
 
-  def context(user)
+  def skater_context(user)
     if self.user == user
       'You created this dropin!'
     elsif self.skaters.include? user

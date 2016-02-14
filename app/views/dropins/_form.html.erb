@@ -17,7 +17,8 @@
       <div class='input-group date col-sm-10' id="datetimepicker1" style="padding-left: 15px; padding-right: 15px;">
         <%= f.text_field :date,
                          class:       'form-control',
-                         placeholder: 'Date' %>
+                         placeholder: 'Date',
+                         value: f.object.date.try(:strftime, '%m/%d/%Y %I:%M %p') %>
         <span class="input-group-addon"><%= fa_icon 'calendar' %></span>
       </div>
     </div>

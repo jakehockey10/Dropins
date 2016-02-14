@@ -9,6 +9,12 @@ class DropinTest < ActiveSupport::TestCase
                          price:       20,
                          description: "Jake's Dropin",
                          user: users(:jake))
+    @small_dropin = Dropin.new(date: Time.now + 2.days,
+                               rink: rinks(:promenade),
+                               limit: 0,
+                               price: 20,
+                               description: 'Already full',
+                               user: users(:jake))
   end
 
   test 'should be valid' do
@@ -75,9 +81,26 @@ class DropinTest < ActiveSupport::TestCase
     assert_not @dropin.valid?
   end
 
+  test 'is_not_full' do
+    assert @dropin.is_not_full
+  end
+
+  test 'is_full' do
+    assert @small_dropin.is_full
+  end
+
+  test 'user_is_not_attending' do
+    assert @dropin.user_is_not_attending(users(:jake))
+  end
+
+  test 'name is description' do
+    assert_equal @dropin.name, @dropin.description
+  end
+
+  # TODO: Move to integration or helper
   # test 'context is correct' do
-  #   assert_equal @dropin.context(@dropin.user), 'You created this dropin!'
-  #   assert_equal @dropin.context(users(:michael)), 'You are skating in this dropin!'
-  #   assert_equal @dropin.context(users(:archer)), 'You skated in this dropin!'
+  #   assert_equal @dropin.skater_context(@dropin.user), 'You created this dropin!'
+  #   assert_equal @dropin.skater_context(users(:michael)), 'You are skating in this dropin!'
+  #   assert_equal @dropin.skater_context(users(:archer)), 'You skated in this dropin!'
   # end
 end

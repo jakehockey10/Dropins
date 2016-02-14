@@ -37,3 +37,6 @@ public/uploads
 
 # Ignore test output
 public/uploads/micropost/picture/
+
+# ignore SimpleCov
+coverage

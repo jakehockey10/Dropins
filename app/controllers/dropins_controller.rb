@@ -38,17 +38,22 @@ class DropinsController < ApplicationController
       end
     else
       respond_to do |format|
+        format.html do
+          flash[:danger] = 'Something went wrong.  Could you let me know about it <a href="/help_requests/new">here</a>.'
+          redirect_to 'index'
+        end
         format.js
       end
     end
   end
 
   def update
-    the_dropin_params = dropin_params
-    unless the_dropin_params[:date].empty?
-      the_dropin_params[:date] = Time.strptime(the_dropin_params[:date], '%m/%d/%Y %I:%M %p')
-    end
-    if @dropin.update(the_dropin_params)
+    parse_datetime
+    # the_dropin_params = dropin_params
+    # unless the_dropin_params[:date].empty?
+    #   the_dropin_params[:date] = Time.strptime(the_dropin_params[:date], '%m/%d/%Y %I:%M %p')
+    # end
+    if @dropin.update(dropin_params)
       flash[:success] = 'Dropin was successfully updated.'
       redirect_to @dropin
     else
@@ -109,27 +114,33 @@ class DropinsController < ApplicationController
 
   private
 
-  # Scope dropins index page using current_user
-  def set_dropins
-    @dropins = Dropin.all
-    if current_user
-      @current_user_dropins = current_user.dropins.sort_by { |d| d[:date] }.paginate(page: params[:page], per_page: 8)
-      @public_dropins       = Dropin.select { |d| d.groups.count == 0 }.sort_by { |d| d[:date] }.paginate(page: params[:page], per_page: 8)
-      @group_dropins        = Dropin.shares_any_group(current_user).sort_by { |d| d[:date] }.paginate(page: params[:page], per_page: 8)
+    # Scope dropins index page using current_user
+    def set_dropins
+      @dropins = Dropin.all
+      if current_user
+        @current_user_dropins = current_user.dropins.sort_by { |d| d[:date] }.paginate(page: params[:page], per_page: 8)
+        @public_dropins       = Dropin.select { |d| d.groups.count == 0 }.sort_by { |d| d[:date] }.paginate(page: params[:page], per_page: 8)
+        @group_dropins        = Dropin.shares_any_group(current_user).sort_by { |d| d[:date] }.paginate(page: params[:page], per_page: 8)
+      end
     end
+
+    # Use callbacks to share common setup or constraints between actions.
+    def set_dropin
+      @dropin = Dropin.find(params[:id])
+    end
+
+    def set_contacts
+      @contacts = GmailContact.where(user_id: current_user.id)
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def dropin_params
+      params.require(:dropin).permit(:date, :price, :rink_id, :user_id, :limit, :description)
+    end
+
+
+  def parse_datetime
+    params[:dropin][:date] = Time.strptime(dropin_params[:date], '%m/%d/%Y %I:%M %p') if dropin_params[:date].present?
   end
 
-  # Use callbacks to share common setup or constraints between actions.
-  def set_dropin
-    @dropin = Dropin.find(params[:id])
-  end
-
-  def set_contacts
-    @contacts = GmailContact.where(user_id: current_user.id)
-  end
-
-  # Never trust parameters from the scary internet, only allow the white list through.
-  def dropin_params
-    params.require(:dropin).permit(:date, :price, :rink_id, :user_id, :limit, :description)
-  end
 end

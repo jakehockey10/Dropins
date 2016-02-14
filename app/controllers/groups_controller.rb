@@ -3,6 +3,7 @@ class GroupsController < ApplicationController
   before_action :admin_user,     only: [:new, :create, :edit, :update, :destroy]
 
   def index
+    @groups = Group.all
   end
 
   def show

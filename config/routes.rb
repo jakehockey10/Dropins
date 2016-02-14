@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       get :following, :followers
       get :show_avatar
       get :upload_avatar
-      match :delete_avatar, via: :delete
+      delete :delete_avatar
     end
   end
   get '/users/:action(/:user_id)', controller: 'users' # For WePay:
