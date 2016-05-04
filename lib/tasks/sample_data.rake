@@ -47,9 +47,9 @@ end
 def make_jake_admin
   User.create!(first_name: 'Jake',
                second_name: 'Smith',
-               email: ENV['GMAIL_USERNAME'].dup,
-               password: ENV['GMAIL_PASSWORD'],
-               password_confirmation: ENV['GMAIL_PASSWORD'],
+               email: ENV['SENDGRID_USERNAME'].dup,
+               password: ENV['SENDGRID_PASSWORD'],
+               password_confirmation: ENV['SENDGRID_PASSWORD'],
                state: 1,
                admin: true)
 end

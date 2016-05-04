@@ -13,7 +13,7 @@ class UserMailer < ApplicationMailer
   def help_request(user, message)
     @user = user
     @message = message
-    mail to: ENV['GMAIL_USERNAME'], from: user.email, subject: 'Dropins: User needs help'
+    mail to: ENV['SENDGRID_USERNAME'], from: user.email, subject: 'Dropins: User needs help'
   end
 
   def dropin_creator_email(dropin, user, message)

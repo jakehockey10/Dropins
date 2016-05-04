@@ -1,5 +1,5 @@
 class DropinAttendeeMailer < ActionMailer::Base
-  default from: ENV['GMAIL_USERNAME']
+  default from: ENV['SENDGRID_USERNAME']
 
   def email_attendees(user_id, users, dropin_id, subject, message)
     @owner = User.find(user_id)

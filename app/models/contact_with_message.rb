@@ -9,7 +9,7 @@ class ContactWithMessage < MailForm::Base
   def headers
     {
         subject: 'Message from Contact page',
-        to: ENV['GMAIL_USERNAME'],
+        to: ENV['SENDGRID_USERNAME'],
         from: %("#{name} #{email}")
     }
   end
