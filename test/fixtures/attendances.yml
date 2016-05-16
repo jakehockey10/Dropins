@@ -5,8 +5,8 @@
 # below each fixture, per the syntax in the comments below
 #
 one:
-  user_id: jake.id
-  dropin_id: llua.id
+  user: jake
+  dropin: llua
   paid: false
 
 two:

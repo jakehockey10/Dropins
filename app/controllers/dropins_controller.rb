@@ -49,10 +49,6 @@ class DropinsController < ApplicationController
 
   def update
     parse_datetime
-    # the_dropin_params = dropin_params
-    # unless the_dropin_params[:date].empty?
-    #   the_dropin_params[:date] = Time.strptime(the_dropin_params[:date], '%m/%d/%Y %I:%M %p')
-    # end
     if @dropin.update(dropin_params)
       flash[:success] = 'Dropin was successfully updated.'
       redirect_to @dropin
@@ -74,10 +70,7 @@ class DropinsController < ApplicationController
     begin
       @checkout = @user.create_checkout(redirect_uri, @dropin.price)
     rescue Exception => e
-      error = e.message
-    end
-    if error
-      @error = error
+      @error = e.message
     end
 
     respond_to do |format|
@@ -96,7 +89,7 @@ class DropinsController < ApplicationController
       return redirect_to @dropin
     end
     flash[:success] = 'Thanks for the payment!  You should receive a confirmation email shortly.'
-    current_user.join_dropin!(@dropin)
+    current_user.join_dropin!(@dropin) unless @dropin.skaters.include? current_user
     attendance = Attendance.where(user_id: current_user, dropin_id: @dropin.id).first
     attendance.update(paid: true) if attendance
     redirect_to @dropin
@@ -138,9 +131,8 @@ class DropinsController < ApplicationController
       params.require(:dropin).permit(:date, :price, :rink_id, :user_id, :limit, :description)
     end
 
-
-  def parse_datetime
-    params[:dropin][:date] = Time.strptime(dropin_params[:date], '%m/%d/%Y %I:%M %p') if dropin_params[:date].present?
-  end
+    def parse_datetime
+      params[:dropin][:date] = Time.strptime(dropin_params[:date], '%m/%d/%Y %I:%M %p') if dropin_params[:date].present?
+    end
 
 end

@@ -2,7 +2,7 @@
     <%= render 'shared/error_messages', object: f.object %>
 
     <div class="form-group">
-      <%= f.label :description, class: 'control-label col-sm-3' %>
+      <%= f.label :description, hidden: true, class: 'control-label col-sm-3' %>
       <div class="col-sm-12">
         <%= f.text_area :description,
                         class:       'form-control',
@@ -28,7 +28,7 @@
         <span class="input-group-addon"><%= fa_icon 'usd' %></span>
         <%= f.number_field :price,
                            class:       'form-control',
-                           placeholder: 'Price-per-player' %>
+                           placeholder: 'Price' %>
         <span class="input-group-addon"><span>.00 / player</span></span>
       </div>
     </div>

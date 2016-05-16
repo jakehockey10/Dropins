@@ -17,6 +17,15 @@
   <% elsif @dropin.user_is_attending(current_user.id) %>
       <p class="card">
         You are signed up for this dropin!
+        <% unless @dropin.user_paid(current_user) %>
+            Cash is a hassle.  Feel free to pay online :)
+            <%= link_to fa_icon('credit-card') + ' / ' + fa_icon('university', text: 'Pay online'),
+                        pay_dropin_path(@dropin),
+                        # class:  'btn btn-primary btn-lg btn-block',
+                        id:     'pay-now-button',
+                        data:   {'loading-text' => "#{fa_icon 'spinner pulse'} Loading..."},
+                        remote: true %>
+        <% end %>
       </p>
   <% else %>
       <%= render 'attendances/form' if logged_in? %>

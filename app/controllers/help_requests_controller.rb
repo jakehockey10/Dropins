@@ -6,10 +6,10 @@ class HelpRequestsController < ApplicationController
   end
 
   def create
-    @user = User.find_by(email: params[:help_request][:email].downcase)
+    @user = User.find_by(email: help_request_params[:email].downcase)
     if @user
       @user.create_help_request_digest
-      @user.send_help_request_email(params[:help_request][:message])
+      @user.send_help_request_email(help_request_params[:message])
       flash[:info] = 'Email sent to site administrator.  Help is on its way!'
       redirect_to root_url
     else
@@ -19,6 +19,10 @@ class HelpRequestsController < ApplicationController
   end
 
   private
+
+    def help_request_params
+      params.require(:help_request).permit(:email, :message)
+    end
 
     def no_blank_messages
       # TODO: Does this type of validation belong in a model class?

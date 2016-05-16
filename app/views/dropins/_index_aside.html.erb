@@ -1,16 +1,24 @@
 <% if current_user.admin? %>
-    <h1>Create a new dropin:</h1>
-    <hr>
-    <%= render 'dropins/form', dropin: Dropin.new, remote: true %>
-    <hr>
+    <h1>
+      <%= button_tag fa_icon('chevron-up'),
+                     class: 'btn',
+                     data:  { toggle: 'collapse', target: '#dropin_admin_aside' } %>
+      Create a new dropin:
+    </h1>
+      <hr>
+    <div id="dropin_admin_aside" class="collapse">
+      <%= render 'dropins/form', dropin: Dropin.new, remote: true %>
+      <hr>
+    </div>
 <% end %>
+
 <!-- Nav tabs -->
 <ul class="nav nav-pills nav-stacked" id="dropin_tabs">
   <li role="presentation" class="active">
     <a href="#my_dropins">My dropins</a>
   </li>
   <li role="presentation" class="">
-    <a href="#other_dropins">Other dropins</a>
+    <a href="#group_dropins">Group dropins</a>
   </li>
   <li role="presentation" class="">
     <a href="#public_dropins">Public dropins</a>

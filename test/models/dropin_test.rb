@@ -97,6 +97,16 @@ class DropinTest < ActiveSupport::TestCase
     assert_equal @dropin.name, @dropin.description
   end
 
+  test 'user_paid' do
+    dropin = dropins(:llua)
+    assert dropin.user_paid(users(:michael))
+    assert_not dropin.user_paid(users(:jake))
+    assert_not dropin.user_paid(nil)
+    assert_not dropin.user_paid(User.new)
+    Attendance.new(user_id: users(:archer).id, dropin_id: dropin.id).save
+    assert_not dropin.user_paid(users(:archer))
+  end
+
   # TODO: Move to integration or helper
   # test 'context is correct' do
   #   assert_equal @dropin.skater_context(@dropin.user), 'You created this dropin!'

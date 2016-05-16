@@ -11,7 +11,7 @@ class Dropin < ActiveRecord::Base
             presence: true,
             date:     { after:  Proc.new { Time.now - 1.minute },
                         before: Proc.new { Time.now + 1.year } },
-            on: :create
+            on:       :create
 
   validates :price,
             presence:     true,
@@ -39,6 +39,15 @@ class Dropin < ActiveRecord::Base
 
   def user_is_attending(user_id)
     attendances.count > 0 && attendances.find_by(user_id: user_id)
+  end
+
+  def user_paid(user)
+    if user
+      attendance = attendances.find_by(user_id: user.id)
+      attendance && attendance.paid
+    else
+      false
+    end
   end
 
   def name
