@@ -1,5 +1,5 @@
 
-<%= link_to fa_icon('plus', text: 'Create new dropin'), new_dropin_path %>
+<%= link_to fa_icon('plus', text: 'Create new dropin'), new_dropin_path if current_user.admin? %>
 <hr>
 <!-- Nav tabs -->
 <ul class="nav nav-pills nav-stacked" id="dropin_tabs">
