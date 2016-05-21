@@ -1,9 +1,10 @@
-// TODO: This should not render all the dropins like this.  This is stupid.
-// TODO: This was an easy way to keep them sorted...
-<% unless @dropin.errors %>
+<% unless @dropin.errors.any? %>
 <% @dropin = Dropin.new %>
 <% end %>
 $('aside').html('<%= j render 'dropins/index_aside' %>');
+<% if @dropin.errors %>
+$('#dropin_admin_aside').collapse('show');
+<% end %>
 $('#dropins').html('<%= j render Dropin.order('date asc').paginate(page: params[:page], per_page: 8) %>');
 $('#datetimepicker1').datetimepicker({sideBySide: true});
 $('btn').button('reset');

@@ -39,8 +39,8 @@ class DropinsController < ApplicationController
     else
       respond_to do |format|
         format.html do
-          flash[:danger] = 'Something went wrong.  Could you let me know about it <a href="/help_requests/new">here</a>.'
-          redirect_to 'index'
+          # flash[:danger] = 'Something went wrong.  Could you let me know about it <a href="/help_requests/new">here</a>.'.html_safe
+          render :new
         end
         format.js
       end
