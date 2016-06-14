@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg 12">
+    <h2>WePay Account information:</h2>
+    <p><strong>Account state:</strong> <%= @account['state'] %></p>
+    <% if @account['action_reasons'].any? %>
+        <p><strong>Actions required:</strong> <%= @account['action_reasons'].to_sentence %></p>
+    <% end %>
+    <p><strong>Account balance:</strong> <%= @account['balances'][0]['balance'] %></p>
+    <p><strong>Pending income:</strong> <%= @account['balances'][0]['incoming_pending_amount'] %></p>
+    <p>
+      <strong>Withdrawal frequency:</strong>
+      <%= @account['balances'][0]['withdrawal_period'] %>
+      (<%= link_to 'change', "/users/make_withdrawal/#{@user.id}", remote: true %>)
+    </p>
+  </div>
+</div>
