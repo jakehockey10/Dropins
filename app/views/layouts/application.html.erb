@@ -19,12 +19,10 @@
 
   <!-- Main Content -->
   <% flash.each do |message_type, message| %>
-      <%= content_tag(:div, message, class: "alert alert-#{message_type} alert-dismissable card-alert") do %>
-          <%= message %>
-          <br>
-          If you have the time, please let me know what went wrong <%= link_to 'here', new_contact_with_message_path %>.
-          <button type="button" class="close">&times</button>
-      <% end %>
+    <%= content_tag(:div, message, class: "alert alert-#{message_type} alert-dismissable card-alert") do %>
+      <%= message %>
+      <button type="button" class="close">&times</button>
+    <% end %>
   <% end %>
 
   <%= yield %>

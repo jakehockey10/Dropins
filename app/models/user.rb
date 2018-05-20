@@ -2,8 +2,9 @@ class User < ActiveRecord::Base
   include Merchantable
 
   acts_as_messageable
-  groupify :group_member
+  acts_as_target email: :email, email_allowed: :activated_at
   groupify :named_group_member
+  groupify :group_member
 
   has_many :microposts, dependent: :destroy
   has_many :active_relationships, class_name: 'Relationship', foreign_key: 'follower_id', dependent: :destroy
@@ -18,7 +19,7 @@ class User < ActiveRecord::Base
                     path:           ':attachment/:id/:style.:extension',
                     storage:        :s3,
                     url:            ':s3_domain_url',
-                    bucket:         Proc.new { |a| a.instance.s3_bucket },
+                    bucket:         proc { |a| a.instance.s3_bucket },
                     s3_protocol:    :https,
                     s3_credentials: { access_key_id: ENV['AWS_ACCESS_KEY_ID'], secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'] },
                     styles:         { large: '500x500', medium: '250x250', thumb: '100x100', small: '60' }
@@ -40,7 +41,7 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 6 }, allow_blank: true
   has_secure_password
 
-  validates_attachment :avatar, content_type: { content_type: %w(image/jpeg image/gif image/png) }
+  validates_attachment :avatar, content_type: { content_type: %w[image/jpeg image/gif image/png] }
   validates_attachment_content_type :avatar, content_type: /\Aimage/
   validates_attachment_file_name :avatar, matches: [/png\Z/, /jpe?g\Z/]
 
@@ -185,7 +186,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  def mailboxer_email(object)
+  def mailboxer_email(_object)
     nil
   end
 
@@ -197,9 +198,8 @@ class User < ActiveRecord::Base
 
   private
 
-    # Converts email to all lower-case
-    def downcase_email
-      self.email = email.downcase
-    end
-
+  # Converts email to all lower-case
+  def downcase_email
+    self.email = email.downcase
+  end
 end

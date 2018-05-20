@@ -1,25 +1,25 @@
 class UsersController < ApplicationController
   before_action :logged_in_user, only: [:index, :edit, :update, :destroy, :following, :followers]
-  before_action :correct_user,   only: [:edit, :update]
-  before_action :admin_user,     only: [:destroy, :make_withdrawal]
+  before_action :correct_user, only: [:edit, :update]
+  before_action :admin_user, only: [:destroy, :make_withdrawal]
 
   autocomplete :gmail_contact,
                :name,
-               full: true,
-               extra_data: [:email, :name, :profile_picture],
-               display_value: :get_email_from_name
+               full:          true,
+               extra_data:    [:email, :name, :profile_picture],
+               display_value: :email_from_name
 
-  def get_autocomplete_items(params)
+  def autocomplete_items(params)
     super(params).where(user_id: current_user.id)
   end
 
   def index
-    @q = User.where(activated: true).ransack(params[:q])
+    @q     = User.where(activated: true).ransack(params[:q])
     @users = @q.result.paginate(page: params[:page])
   end
 
   def show
-    @user = User.find(params[:id])
+    @user       = User.find(params[:id])
     @microposts = @user.microposts.paginate(page: params[:page])
     redirect_to root_url and return unless @user.activated?
   end
@@ -41,8 +41,8 @@ class UsersController < ApplicationController
 
   def edit
     if current_user.has_wepay_account?
-      @withdrawal_counts = current_user.get_withdrawal_counts
-      @account           = current_user.get_wepay_account
+      @withdrawal_counts = current_user.withdrawal_counts
+      @account           = current_user.wepay_account
     end
   end
 
@@ -73,7 +73,7 @@ class UsersController < ApplicationController
       flash[:success] = 'Profile updated'
       redirect_to @user
     else
-      @account = current_user.get_wepay_account if current_user.has_wepay_account?
+      @account = current_user.wepay_account if current_user.has_wepay_account?
       render 'edit'
     end
   end
@@ -86,14 +86,14 @@ class UsersController < ApplicationController
 
   def following
     @title = 'Following'
-    @user = User.find(params[:id])
+    @user  = User.find(params[:id])
     @users = @user.following.paginate(page: params[:page])
     render 'show_follow'
   end
 
   def followers
     @title = 'Followers'
-    @user = User.find(params[:id])
+    @user  = User.find(params[:id])
     @users = @user.followers.paginate(page: params[:page])
     render 'show_follow'
   end
@@ -105,7 +105,7 @@ class UsersController < ApplicationController
     end
 
     redirect_uri = url_for(controller: 'users', action: 'oauth', user_id: params[:user_id], host: request.host_with_port)
-    @user = User.find(params[:user_id])
+    @user        = User.find(params[:user_id])
     begin
       @user.request_wepay_access_token(params[:code], redirect_uri)
     rescue Exception => e
@@ -119,7 +119,7 @@ class UsersController < ApplicationController
   def make_withdrawal
 
     redirect_uri = url_for(controller: 'users', action: 'edit', id: params[:user_id], host: request.host_with_port)
-    @user = User.find(params[:user_id])
+    @user        = User.find(params[:user_id])
     begin
       @withdrawal = @user.make_withdrawal(redirect_uri)
     rescue Exception => e
@@ -137,22 +137,22 @@ class UsersController < ApplicationController
 
   private
 
-    def user_params
-      params.require(:user).permit(:first_name,
-                                   :second_name,
-                                   :email,
-                                   :password,
-                                   :password_confirmation,
-                                   :wepay_access_token,
-                                   :wepay_account_id,
-                                   :avatar)
-    end
+  def user_params
+    params.require(:user).permit(:first_name,
+                                 :second_name,
+                                 :email,
+                                 :password,
+                                 :password_confirmation,
+                                 :wepay_access_token,
+                                 :wepay_account_id,
+                                 :avatar)
+  end
 
-    # Before filters
+  # Before filters
 
-    # Confirms the correct user.
-    def correct_user
-      @user = User.find(params[:id])
-      redirect_to(root_url) unless current_user?(@user)
-    end
+  # Confirms the correct user.
+  def correct_user
+    @user = User.find(params[:id])
+    redirect_to(root_url) unless current_user?(@user)
+  end
 end

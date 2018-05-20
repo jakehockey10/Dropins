@@ -1,21 +1,37 @@
 <li class="dropdown">
   <% if unread_count.to_i > 0 %>
-      <a href="#" style="padding-top: 10px; padding-bottom: 10px;" class="dropdown-toggle" data-toggle="dropdown">
-        <%= fa_icon 'bell 2x', class: 'new-notification', text: raw("<span class='badge'>#{unread_count}</span>") %>
-      </a>
-      <ul class="dropdown-menu notification-menu">
-        <% mailbox.inbox.unread(current_user).each do |m| %>
-            <li>
-              <%= link_to render('conversations/menu_conversation', conversation: m), conversation_path(m) %>
-            </li>
-        <% end %>
-      </ul>
+
+    <a href="#" style="padding-top: 10px; padding-bottom: 10px;" class="dropdown-toggle" data-toggle="dropdown">
+      <%= fa_icon 'bell 2x', class: 'new-notification', text: raw("<span class='badge'>#{unread_count}</span>") %>
+    </a>
+    <ul class="dropdown-menu notification-menu">
+      <% mailbox.inbox.unread(current_user).each do |m| %>
+        <li>
+          <%= link_to render('conversations/menu_conversation', conversation: m), conversation_path(m) %>
+        </li>
+      <% end %>
+    </ul>
+
+  <% elsif current_user.notifications.unopened_only.any? %>
+
+    <a href="#" style="padding-top: 10px; padding-bottom: 10px;" class="dropdown-toggle" data-toggle="dropdown">
+      <%= fa_icon 'bell-o 2x' %>
+    </a>
+    <ul class="dropdown-menu notification-menu">
+      <% current_user.notifications.unopened_only.each do |notification| %>
+        <li><%= link_to notification.key, user_notification_path(current_user, notification) %></li>
+      <% end %>
+      <li><%= link_to 'Notifications', user_notifications_path(current_user) %></li>
+    </ul>
+
   <% else %>
-      <a href="#" style="padding-top: 10px; padding-bottom: 10px;" class="dropdown-toggle" data-toggle="dropdown">
-          <%= fa_icon 'bell-o 2x' %>
-      </a>
-      <ul class="dropdown-menu notification-menu">
-        <li><%= link_to 'There are no new notifications...', '#' %></li>
-      </ul>
+
+    <a href="#" style="padding-top: 10px; padding-bottom: 10px;" class="dropdown-toggle" data-toggle="dropdown">
+      <%= fa_icon 'bell-o 2x' %>
+    </a>
+    <ul class="dropdown-menu notification-menu">
+      <li><%= link_to 'There are no new notifications...', '#' %></li>
+    </ul>
+
   <% end %>
 </li>

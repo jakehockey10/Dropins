@@ -1,18 +1,18 @@
 class DropinsController < ApplicationController
   require 'will_paginate/array'
 
-  before_filter :set_dropins, only: [:index, :create]
+  before_action :set_dropins, only: %i[index create]
   before_action :logged_in_user
-  before_action :set_dropin, only: [:show, :edit, :update, :destroy, :email_attendees]
-  before_action :admin_user, only: [:edit, :update, :new, :create, :destroy]
+  before_action :set_dropin, only: %i[show edit update destroy email_attendees]
+  before_action :admin_user, only: %i[edit update new create destroy]
   before_action :set_contacts, only: [:show]
 
-  def index
+  def index;
   end
 
   def show
     @skaters                        = @dropin.skaters.paginate(page: params[:page])
-    @gmail_contacts, @user_contacts = @dropin.user.gmail_contacts.partition { |contact| contact.other_user_id == 0 }
+    @gmail_contacts, @user_contacts = @dropin.user.gmail_contacts.partition {|contact| contact.other_user_id == 0}
   end
 
   def new
@@ -24,10 +24,14 @@ class DropinsController < ApplicationController
   end
 
   def create
-    the_dropin_params = dropin_params
-    the_dropin_params[:date] = Time.strptime(the_dropin_params[:date], '%m/%d/%Y %I:%M %p') rescue the_dropin_params[:date]
-    @dropin      = Dropin.new(the_dropin_params)
-    @dropin.user = current_user
+    the_dropin_params        = dropin_params
+    the_dropin_params[:date] = begin
+      formatted_date(the_dropin_params[:date])
+    rescue StandardError
+      the_dropin_params[:date]
+    end
+    @dropin                  = Dropin.new(the_dropin_params)
+    @dropin.user             = current_user
     if @dropin.save
       respond_to do |format|
         format.html do
@@ -38,10 +42,7 @@ class DropinsController < ApplicationController
       end
     else
       respond_to do |format|
-        format.html do
-          # flash[:danger] = 'Something went wrong.  Could you let me know about it <a href="/help_requests/new">here</a>.'.html_safe
-          render :new
-        end
+        format.html {render :new}
         format.js
       end
     end
@@ -64,7 +65,10 @@ class DropinsController < ApplicationController
   end
 
   def pay
-    redirect_uri = url_for(controller: 'dropins', action: 'payment_success', user_id: params[:user_id], host: request.host_with_port)
+    redirect_uri = url_for(controller: 'dropins',
+                           action:     'payment_success',
+                           user_id:    params[:user_id],
+                           host:       request.host_with_port)
     @dropin      = Dropin.find(params[:id])
     @user        = User.find(@dropin.user.id)
     begin
@@ -91,7 +95,7 @@ class DropinsController < ApplicationController
     flash[:success] = 'Thanks for the payment!  You should receive a confirmation email shortly.'
     current_user.join_dropin!(@dropin) unless @dropin.skaters.include? current_user
     attendance = Attendance.where(user_id: current_user, dropin_id: @dropin.id).first
-    attendance.update(paid: true) if attendance
+    attendance&.update(paid: true)
     redirect_to @dropin
   end
 
@@ -100,39 +104,53 @@ class DropinsController < ApplicationController
                                          @dropin.skaters.pluck(:email),
                                          @dropin.id,
                                          params[:email_attendees_dropin][:subject],
-                                         params[:email_attendees_dropin][:message]).deliver
+                                         params[:email_attendees_dropin][:message])
+        .deliver
     flash[:success] = 'Emails sent!'
     redirect_to @dropin
   end
 
   private
 
-    # Scope dropins index page using current_user
-    def set_dropins
-      @dropins = Dropin.all
-      if current_user
-        @current_user_dropins = current_user.dropins.sort_by { |d| d[:date] }.paginate(page: params[:page], per_page: 8)
-        @public_dropins       = Dropin.select { |d| d.groups.count == 0 }.sort_by { |d| d[:date] }.paginate(page: params[:page], per_page: 8)
-        @group_dropins        = Dropin.shares_any_group(current_user).sort_by { |d| d[:date] }.paginate(page: params[:page], per_page: 8)
-      end
+  # Scope dropins index page using current_user
+  def set_dropins
+    @dropins = Dropin.all
+    if current_user
+      @current_user_dropins = current_user.dropins.sort_by {|d| d[:date]}
+                                  .paginate(page: params[:page], per_page: 8)
+      @public_dropins       = Dropin.select {|d| d.groups.count == 0}
+                                  .sort_by {|d| d[:date]}
+                                  .paginate(page: params[:page], per_page: 8)
+      @group_dropins        = Dropin.shares_any_group(current_user)
+                                  .sort_by {|d| d[:date]}
+                                  .paginate(page: params[:page], per_page: 8)
     end
+  end
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_dropin
-      @dropin = Dropin.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_dropin
+    @dropin = Dropin.find(params[:id])
+  end
 
-    def set_contacts
-      @contacts = GmailContact.where(user_id: current_user.id)
-    end
+  def set_contacts
+    @contacts = GmailContact.where(user_id: current_user.id)
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def dropin_params
-      params.require(:dropin).permit(:date, :price, :rink_id, :user_id, :limit, :description)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def dropin_params
+    params.require(:dropin).permit(:date,
+                                   :price,
+                                   :rink_id,
+                                   :user_id,
+                                   :limit,
+                                   :description)
+  end
 
-    def parse_datetime
-      params[:dropin][:date] = Time.strptime(dropin_params[:date], '%m/%d/%Y %I:%M %p') if dropin_params[:date].present?
-    end
+  def parse_datetime
+    params[:dropin][:date] = formatted_date dropin_params[:date] if dropin_params[:date].present?
+  end
 
+  def formatted_date(date)
+    Time.strptime(date, '%m/%d/%Y %I:%M %p')
+  end
 end

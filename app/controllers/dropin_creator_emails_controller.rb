@@ -1,6 +1,6 @@
 class DropinCreatorEmailsController < ApplicationController
   before_action :logged_in_user
-  before_action :is_skater
+  before_action :skater?
 
   def create
     if @user && @dropin

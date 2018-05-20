@@ -1,19 +1,14 @@
 //# Place all the behaviors and hooks related to the matching controller here.
 //# All this logic will automatically be available in application.js.
 //# You can use CoffeeScript in this file: http://coffeescript.org/
-$(document).on('change', '.avatar_submit input:file', function () {
+$(document).on('turbolinks:load', '.avatar_submit input:file', function () {
     var file_value = $('#avatar_file').val();
     if ( file_value.length > 0 ) {
         $('#avatar_submit_button').removeAttr('disabled');
     }
 });
 
-$(function() {
-//    $('#calendar').fullCalendar({
-//        events: '/dropins.json'
-//    });
-    initCalendar();
-});
+$(document).on('turbolinks:load', initCalendar);
 
 var popoverClicked = false;
 

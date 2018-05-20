@@ -5,15 +5,15 @@ module DropinsHelper
   end
 
   def current_user_can_invite_skaters
-    @dropin.is_in_the_future? && @dropin.is_not_full && current_user.id == @dropin.user_id
+    @dropin.in_the_future? && @dropin.not_full? && current_user.id == @dropin.user_id
   end
 
   def current_user_attending
-    @dropin.is_in_the_future? && current_user.id != @dropin.user_id && @dropin.skaters.include?(current_user)
+    @dropin.in_the_future? && current_user.id != @dropin.user_id && @dropin.skaters.include?(current_user)
   end
 
   def current_user_attending_dropin(dropin)
-    dropin.is_in_the_future? && current_user.id != dropin.user_id && dropin.skaters.include?(current_user)
+    dropin.in_the_future? && current_user.id != dropin.user_id && dropin.skaters.include?(current_user)
   end
 
   def skater_has_paid(skater_id, dropin_id)
@@ -28,7 +28,7 @@ module DropinsHelper
   end
 
   def show_join_button(dropin, user_id)
-    dropin.is_not_full && dropin.user_is_not_attending(user_id)
+    dropin.not_full? && dropin.user_is_not_attending(user_id)
   end
 
   def followers_attending(dropin, user)

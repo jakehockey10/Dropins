@@ -1,5 +1,5 @@
 <li class="media card
-  <% unless dropin.is_in_the_future? %> card-older
+  <% unless dropin.in_the_future? %> card-older
   <% end %>">
   <h2 class="card-header">
     <span class="pull-right text-success">
@@ -16,7 +16,7 @@
 
   </h2>
   <hr class="card-break"/>
-  <% if dropin.is_in_the_future? %>
+  <% if dropin.in_the_future? %>
       <p><%= dropin.limit - dropin.skaters.count %> spots are left.</p>
 
       <p>Followers attending dropin: <%= followers_attending(dropin, current_user) %></p>

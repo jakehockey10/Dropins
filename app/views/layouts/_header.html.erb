@@ -83,6 +83,8 @@
                 <% if current_user.admin? %>
                     <li><%= link_to fa_icon('users', text: 'Users'), users_path %></li>
                 <% end %>
+                <li><%= link_to fa_icon('bell', text: 'Notifications'), user_notifications_path(current_user) %></li>
+                <li><%= link_to fa_icon('clipboard', text: 'Subscriptions'), user_subscriptions_path(current_user) %></li>
                 <li><%= link_to fa_icon('comments-o', text: 'Conversations'), conversations_path %> </li>
                 <li class="divider"></li>
                 <li><%= link_to fa_icon('sign-out', text: 'Log out'), logout_path, method: :delete %></li>

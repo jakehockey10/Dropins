@@ -7,7 +7,7 @@ class GmailContact < ActiveRecord::Base
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }
   validates :user_id, presence: true
 
-  def get_email_from_name
-    self.email
+  def email_from_name
+    email
   end
 end

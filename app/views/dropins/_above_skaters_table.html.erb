@@ -6,7 +6,7 @@
         form <%= link_to 'here', contact_path %> to let
         me know
       </p>
-  <% elsif @dropin.is_full %>
+  <% elsif @dropin.full? %>
       <p class="card">
         The dropin is currently full.  Use the contact
         page <%= link_to 'here', contact_path %>

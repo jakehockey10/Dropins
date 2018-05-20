@@ -1,6 +1,6 @@
 class DropinRemovalRequestsController < ApplicationController
   before_action :logged_in_user
-  before_action :is_skater, only: :create
+  before_action :skater?, only: :create
 
   def create
     if @user && @dropin

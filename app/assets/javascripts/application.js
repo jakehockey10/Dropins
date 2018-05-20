@@ -3,7 +3,6 @@
 // very last thing
 
 //= require jquery
-//= require jquery.turbolinks
 //= require jquery_ujs
 //= require jquery-ui
 //= require autocomplete-rails
@@ -33,76 +32,79 @@
 //  init();
 //});
 
-$(function () {
-    init();
+$(document).on('turbolinks:load', handleEvent);
+$(document).on('turbolinks:before-cache', handleEvent);
 
-    $('.toggle-menu').jPushMenu({closeOnClickLink: false});
-    $('.dropdown-toggle').dropdown();
-    $('[data-toggle="tooltip"]').tooltip();
+function handleEvent () {
+  init();
 
-    $('.cog-spin').mouseover(function (e) {
-        $('.fa-cog').addClass('fa-spin');
-        setTimeout(function () {
-            $('.fa-cog').removeClass('fa-spin');
-        }, 1000)
-    }).mouseout(function (e) {
-        $('.fa-cog').removeClass('fa-spin');
-    });
+  $('.toggle-menu').jPushMenu({closeOnClickLink: false});
+  $('.dropdown-toggle').dropdown();
+  $('[data-toggle="tooltip"]').tooltip();
 
-    // Add an event listener
-    document.addEventListener("need-a-selectpicker", function (e) {
-        console.log(e.detail); // Prints "Example of an event"
-    });
-});
+  $('.cog-spin').mouseover(function (e) {
+    $('.fa-cog').addClass('fa-spin');
+    setTimeout(function () {
+      $('.fa-cog').removeClass('fa-spin');
+    }, 1000)
+  }).mouseout(function (e) {
+    $('.fa-cog').removeClass('fa-spin');
+  });
 
-function init() {
-    $(".selectpicker").selectpicker();
-    $('.alert button.close').click(function () {
-        $(this).parent().fadeOut('fast');
-    });
+  // Add an event listener
+  document.addEventListener("need-a-selectpicker", function (e) {
+    console.log(e.detail); // Prints "Example of an event"
+  });
+}
+
+function init () {
+  $(".selectpicker").selectpicker();
+  $('.alert button.close').click(function () {
+    $(this).parent().fadeOut('fast');
+  });
 //    $(this).parent().animate({ height: 0, opacity: 0 }, 'fast');
 
-    //var count = 0;
-    //$('.help-block').each(function () {
-    //  count++;
-    //  var placement;
-    //  if (count % 2 == 0) {
-    //      placement = "left";
-    //  } else {
-    //      placement = "right";
-    //  }
-    //  var help_block = $(this).html();
-    //  var control = $(this).prev();
-    //  var control_id = control.attr('id');
-    //  control.popover({
-    //      html: true,
-    //      trigger: "manual",
-    //      content: help_block,
-    //      placement: placement,
-    //      title: 'uh oh :(' + '<button type="button" class="close" onclick="$(\'#' + control_id + '\').popover(\'hide\')">&times</button>',
-    //      container: "body"
-    //  });
-    //  control.popover("show");
-    //  $(this).remove();
-    //  control.on('focus', function () {
-    //      control.popover('show');
-    //  });
-    //});
+  //var count = 0;
+  //$('.help-block').each(function () {
+  //  count++;
+  //  var placement;
+  //  if (count % 2 == 0) {
+  //      placement = "left";
+  //  } else {
+  //      placement = "right";
+  //  }
+  //  var help_block = $(this).html();
+  //  var control = $(this).prev();
+  //  var control_id = control.attr('id');
+  //  control.popover({
+  //      html: true,
+  //      trigger: "manual",
+  //      content: help_block,
+  //      placement: placement,
+  //      title: 'uh oh :(' + '<button type="button" class="close" onclick="$(\'#' + control_id + '\').popover(\'hide\')">&times</button>',
+  //      container: "body"
+  //  });
+  //  control.popover("show");
+  //  $(this).remove();
+  //  control.on('focus', function () {
+  //      control.popover('show');
+  //  });
+  //});
 
-    // Temp Fix: Remove after Bootstrap does the right thing and removes touchstart (see issue https://github.com/twitter/bootstrap/issues/6488)
-    $('a.dropdown-toggle, .dropdown-menu, .dropdown-menu a, .dropdown-menu .dropdown-submenu a').on('touchstart.dropdown.data-api', function (e) {
-        e.stopPropagation();
-    });
+  // Temp Fix: Remove after Bootstrap does the right thing and removes touchstart (see issue https://github.com/twitter/bootstrap/issues/6488)
+  $('a.dropdown-toggle, .dropdown-menu, .dropdown-menu a, .dropdown-menu .dropdown-submenu a').on('touchstart.dropdown.data-api', function (e) {
+    e.stopPropagation();
+  });
 }
 
 var updateCountdown = function (idSelector) {
-    // 140 is the max character length and 10 is the minimum
-    var description = $(idSelector);
-    if (description.length == 0) {
-        return;
-    }
-    if (description.val() != null) {
-        var remaining = 140 - description.val().length;
-    }
-    $('.countdown').text(remaining + ' characters remaining');
+  // 140 is the max character length and 10 is the minimum
+  var description = $(idSelector);
+  if (description.length == 0) {
+    return;
+  }
+  if (description.val() != null) {
+    var remaining = 140 - description.val().length;
+  }
+  $('.countdown').text(remaining + ' characters remaining');
 };

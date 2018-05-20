@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(document).on('turbolinks:load', () => {
     //$(".jcarousel").jcarousel({
     //    animation: 'slow'
     //});
