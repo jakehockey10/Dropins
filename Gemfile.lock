@@ -501,6 +501,7 @@ DEPENDENCIES
   faker
   figaro
   fog
+  fog-aws
   font-awesome-rails
   fullcalendar-rails
   geocoder
