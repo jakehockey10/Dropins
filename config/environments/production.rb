@@ -58,7 +58,7 @@ Rails.application.configure do
   # config.cache_store = :mem_cache_store
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
-  config.assets.precompile += %w( jPushMenu.js )
+  # config.assets.precompile += %w[  ]
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
@@ -66,18 +66,18 @@ Rails.application.configure do
 
   # Change mail delivery to either :smtp, :sendmail, :file, :test
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-      user_name: ENV['SENDGRID_USERNAME'],
-      password: ENV['SENDGRID_PASSWORD'],
-      domain: 'heroku.com',
-      address: 'smtp.sendgrid.net',
-      port: 587,
-      authentication: :plain,
+  config.action_mailer.smtp_settings   = {
+      user_name:            ENV['SENDGRID_USERNAME'],
+      password:             ENV['SENDGRID_PASSWORD'],
+      domain:               'heroku.com',
+      address:              'smtp.sendgrid.net',
+      port:                 587,
+      authentication:       :plain,
       enable_starttls_auto: true
   }
 
   # specify what domain to use for mailer URLs
-  config.action_mailer.default_url_options = { host: 'https://dropins.herokuapp.com'}
+  config.action_mailer.default_url_options = { host: 'https://dropins.herokuapp.com' }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
@@ -93,9 +93,9 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # Wepay
-  WEPAY_CLIENT_ID = ENV['WEPAY_CLIENT_ID']
+  WEPAY_CLIENT_ID     = ENV['WEPAY_CLIENT_ID']
   WEPAY_CLIENT_SECRET = ENV['WEPAY_CLIENT_SECRET']
-  USE_STAGE = false
-  WEPAY = WePay::Client.new(WEPAY_CLIENT_ID, WEPAY_CLIENT_SECRET, USE_STAGE)
+  USE_STAGE           = false
+  WEPAY               = WePay::Client.new(WEPAY_CLIENT_ID, WEPAY_CLIENT_SECRET, USE_STAGE)
 
 end
