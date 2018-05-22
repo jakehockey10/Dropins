@@ -48,6 +48,7 @@ gem 'omnicontacts', '~> 0.3.5', git: 'git://github.com/Diego81/omnicontacts.git'
 gem 'paperclip'
 gem 'rails4-autocomplete'
 gem 'ransack'
+gem 'record_tag_helper'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'twitter_cldr'
 gem 'underscore-rails'
