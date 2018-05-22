@@ -41,7 +41,7 @@ html {
 }
 
 body {
-  //  padding-top: 60px;
+    padding-top: 70px;
   background-color: rgb(236, 236, 236);
 }
 
@@ -295,6 +295,9 @@ nav {
   -moz-box-shadow:    0 0 4px rgba(0, 0, 0, .14), 0 4px 8px rgba(0, 0, 0, .28);
   box-shadow:         0 0 4px rgba(0, 0, 0, .14), 0 4px 8px rgba(0, 0, 0, .28);
 }
+.navbar-fixed-top .navbar-collapse {
+  max-height: 500px;
+}
 
 .if-mobile {
   display: none !important;
@@ -406,22 +409,22 @@ nav {
       right:               0;
       top:                 0;
     }
-    &:before {
-      background:            #363636;
-      bottom:                -8px;
-      content:               '';
-      left:                  -8px;
-      position:              absolute;
-      right:                 -8px;
-      top:                   -8px;
-      z-index:               -1;
-      -webkit-border-radius: 6px;
-      -moz-border-radius:    6px;
-      border-radius:         6px;
-      -webkit-box-shadow:    0 1px 1px hsla(0, 0%, 100%, .3), inset 0 1px 1px hsla(0, 0%, 0%, .4), inset 0 0 5px hsla(0, 0%, 0%, .2);
-      -moz-box-shadow:       0 1px 1px hsla(0, 0%, 100%, .3), inset 0 1px 1px hsla(0, 0%, 0%, .4), inset 0 0 5px hsla(0, 0%, 0%, .2);
-      box-shadow:            0 1px 1px hsla(0, 0%, 100%, .3), inset 0 1px 1px hsla(0, 0%, 0%, .4), inset 0 0 5px hsla(0, 0%, 0%, .2);
-    }
+    //&:before {
+    //  background:            #363636;
+    //  bottom:                -8px;
+    //  content:               '';
+    //  left:                  -8px;
+    //  position:              absolute;
+    //  right:                 -8px;
+    //  top:                   -8px;
+    //  z-index:               -1;
+    //  -webkit-border-radius: 6px;
+    //  -moz-border-radius:    6px;
+    //  border-radius:         6px;
+    //  -webkit-box-shadow:    0 1px 1px hsla(0, 0%, 100%, .3), inset 0 1px 1px hsla(0, 0%, 0%, .4), inset 0 0 5px hsla(0, 0%, 0%, .2);
+    //  -moz-box-shadow:       0 1px 1px hsla(0, 0%, 100%, .3), inset 0 1px 1px hsla(0, 0%, 0%, .4), inset 0 0 5px hsla(0, 0%, 0%, .2);
+    //  box-shadow:            0 1px 1px hsla(0, 0%, 100%, .3), inset 0 1px 1px hsla(0, 0%, 0%, .4), inset 0 0 5px hsla(0, 0%, 0%, .2);
+    //}
     &:active {
       background-color:   #202020;
       color:              #b6b6b6;
