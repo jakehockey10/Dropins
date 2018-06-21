@@ -1,5 +1,5 @@
 class Dropin < ActiveRecord::Base
-  has_many :attendances
+  has_many :attendances, dependent: :destroy
   has_many :skaters, through: :attendances, source: :user
   belongs_to :rink
   belongs_to :user
