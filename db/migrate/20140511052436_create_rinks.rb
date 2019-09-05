@@ -1,4 +1,4 @@
-class CreateRinks < ActiveRecord::Migration
+class CreateRinks < ActiveRecord::Migration[4.2]
   def change
     create_table :rinks do |t|
       t.float :latitude

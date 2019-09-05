@@ -1,4 +1,4 @@
-class CreateGmailContacts < ActiveRecord::Migration
+class CreateGmailContacts < ActiveRecord::Migration[4.2]
   def change
     create_table :gmail_contacts do |t|
       t.string :name

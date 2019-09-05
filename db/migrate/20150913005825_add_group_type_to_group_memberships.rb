@@ -1,4 +1,4 @@
-class AddGroupTypeToGroupMemberships < ActiveRecord::Migration
+class AddGroupTypeToGroupMemberships < ActiveRecord::Migration[4.2]
   def change
     add_column :group_memberships, :group_type, :string
     GroupMembership.reset_column_information

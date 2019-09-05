@@ -1,4 +1,4 @@
-class AddLimitToDropins < ActiveRecord::Migration
+class AddLimitToDropins < ActiveRecord::Migration[4.2]
   def up
     add_column :dropins, :limit, :integer
   end

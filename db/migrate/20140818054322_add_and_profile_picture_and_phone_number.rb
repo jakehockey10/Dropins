@@ -1,4 +1,4 @@
-class AddAndProfilePictureAndPhoneNumber < ActiveRecord::Migration
+class AddAndProfilePictureAndPhoneNumber < ActiveRecord::Migration[4.2]
   def up
     add_column :gmail_contacts, :profile_picture, :string
     add_column :gmail_contacts, :phone_number, :string

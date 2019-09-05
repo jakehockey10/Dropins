@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/Diego81/omnicontacts.git
+  remote: https://github.com/Diego81/omnicontacts.git
   revision: 105b40f79cac5c2686561a0fe29e907fdc13bb9a
   specs:
     omnicontacts (0.3.10)
@@ -544,7 +544,7 @@ DEPENDENCIES
   yard
 
 RUBY VERSION
-   ruby 2.3.3p222
+   ruby 2.6.3p62
 
 BUNDLED WITH
-   1.16.1
+   1.17.3

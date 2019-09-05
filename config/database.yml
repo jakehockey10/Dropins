@@ -3,8 +3,6 @@ development:
   encoding: utf8
   database: dropins_development
   pool: 5
-  username: jake
-  password:
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -14,5 +12,3 @@ test:
   encoding: utf8
   database: dropins_test
   pool: 5
-  username: jake
-  password:

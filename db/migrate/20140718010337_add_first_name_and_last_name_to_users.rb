@@ -1,4 +1,4 @@
-class AddFirstNameAndLastNameToUsers < ActiveRecord::Migration
+class AddFirstNameAndLastNameToUsers < ActiveRecord::Migration[4.2]
   def up
     unless column_exists? :users, :first_name
       add_column :users, :first_name, :string

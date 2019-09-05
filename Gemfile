@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 source 'https://rubygems.org'
-ruby '2.3.3'
+ruby '2.6.3'
 
 gem 'autoprefixer-rails'
 gem 'bcrypt'
@@ -44,7 +44,7 @@ gem 'mail'
 gem 'mail_form'
 gem 'mailboxer'
 gem 'momentjs-rails'
-gem 'omnicontacts', '~> 0.3.5', git: 'git://github.com/Diego81/omnicontacts.git'
+gem 'omnicontacts', '~> 0.3.5', git: 'https://github.com/Diego81/omnicontacts.git'
 gem 'paperclip'
 gem 'rails4-autocomplete'
 gem 'ransack'

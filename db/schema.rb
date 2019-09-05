@@ -66,8 +66,8 @@ ActiveRecord::Schema.define(version: 20180519205201) do
   end
 
   create_table "mailboxer_conversation_opt_outs", id: :serial, force: :cascade do |t|
-    t.integer "unsubscriber_id"
     t.string "unsubscriber_type"
+    t.integer "unsubscriber_id"
     t.integer "conversation_id"
     t.index ["conversation_id"], name: "index_mailboxer_conversation_opt_outs_on_conversation_id"
     t.index ["unsubscriber_id", "unsubscriber_type"], name: "index_mailboxer_conversation_opt_outs_on_unsubscriber_id_type"
@@ -83,13 +83,13 @@ ActiveRecord::Schema.define(version: 20180519205201) do
     t.string "type"
     t.text "body"
     t.string "subject", default: ""
-    t.integer "sender_id"
     t.string "sender_type"
+    t.integer "sender_id"
     t.integer "conversation_id"
     t.boolean "draft", default: false
     t.string "notification_code"
-    t.integer "notified_object_id"
     t.string "notified_object_type"
+    t.integer "notified_object_id"
     t.string "attachment"
     t.datetime "updated_at", null: false
     t.datetime "created_at", null: false
@@ -102,8 +102,8 @@ ActiveRecord::Schema.define(version: 20180519205201) do
   end
 
   create_table "mailboxer_receipts", id: :serial, force: :cascade do |t|
-    t.integer "receiver_id"
     t.string "receiver_type"
+    t.integer "receiver_id"
     t.integer "notification_id", null: false
     t.boolean "is_read", default: false
     t.boolean "trashed", default: false

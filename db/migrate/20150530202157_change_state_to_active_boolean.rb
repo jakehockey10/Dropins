@@ -1,4 +1,4 @@
-class ChangeStateToActiveBoolean < ActiveRecord::Migration
+class ChangeStateToActiveBoolean < ActiveRecord::Migration[4.2]
   def change
     add_column :users, :activated, :boolean, default: false
 
