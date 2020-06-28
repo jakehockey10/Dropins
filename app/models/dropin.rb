@@ -4,9 +4,6 @@ class Dropin < ActiveRecord::Base
   belongs_to :rink
   belongs_to :user
 
-  acts_as_notifiable :users,
-                     targets: ->(_dropin, _key) {User.all.to_a},
-                     tracked: true
   acts_as_messageable
   groupify :group_member
 
